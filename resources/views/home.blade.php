@@ -9,6 +9,8 @@
 
                 <div class="panel-body">
                     You are logged in!
+
+                    Dustin edited this page!
                 </div>
             </div>
         </div>

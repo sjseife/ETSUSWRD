@@ -8,7 +8,8 @@
                     <div class="panel-heading">Welcome</div>
 
                     <div class="panel-body">
-                        Team Test Page
+                        Team Test Page for us to test merging
+
                     </div>
                 </div>
             </div>

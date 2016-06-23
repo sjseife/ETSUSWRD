@@ -22,3 +22,7 @@ Route::get('/home', 'HomeController@index');
 Route::get('/team', function () {
    return view('team'); 
 });
+
+Route::get('resource/create', 'ResourceController@create');
+Route::post('resource/createResource', 'ResourceController@createResource');
+

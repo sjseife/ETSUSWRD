@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Resource;
+use Illuminate\Support\Facades\DB;
 
 class ResourceController extends Controller
 {
@@ -27,5 +28,21 @@ class ResourceController extends Controller
         $resource = new Resource(request()->all());
         $resource->save();
         return redirect('/home');
+    }
+
+    public function delete(Resource $id)
+    {
+        return view('resource.delete', compact('id'));
+    }
+
+    public function destroy($id)
+    {
+        try{
+            DB::delete('delete from resource where id = "' . $id . '"');
+            return redirect('/home');
+        }
+        catch (Exeption $e) {
+            return $e;
+        }
     }
 }

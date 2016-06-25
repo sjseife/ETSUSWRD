@@ -26,3 +26,5 @@ Route::get('/team', function () {
 Route::get('resource/create', 'ResourceController@create');
 Route::post('resource/createResource', 'ResourceController@createResource');
 
+Route::get('resource/delete/{id}', 'ResourceController@delete');
+Route::delete('resource/destroy/{id}', 'ResourceController@destroy');

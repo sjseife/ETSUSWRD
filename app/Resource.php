@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Resource extends  Model
 {
+    protected $table = 'resource';
     /**
      * The attributes that are mass assignable.
      *

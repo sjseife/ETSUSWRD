@@ -45,4 +45,9 @@ class ResourceController extends Controller
             return $e;
         }
     }
+
+    public function view(Resource $id)
+    {
+        return view('resource.view', compact('id'));
+    }
 }

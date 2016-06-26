@@ -28,3 +28,5 @@ Route::post('resource/createResource', 'ResourceController@createResource');
 
 Route::get('resource/delete/{id}', 'ResourceController@delete');
 Route::delete('resource/destroy/{id}', 'ResourceController@destroy');
+
+Route::get('resource/view/{id}', 'ResourceController@view');

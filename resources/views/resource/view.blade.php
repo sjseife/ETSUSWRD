@@ -22,8 +22,10 @@
                             <dd>{{ $id->State }}</dd>
                             <dt>Zipcode</dt>
                             <dd>{{ $id->Zipcode }}</dd>
-                            <dt>ContactName</dt>
-                            <dd>{{ $id->ContactName }}</dd>
+                            <dt>ContactFirstName</dt>
+                            <dd>{{ $id->ContactFirstName }}</dd>
+                            <dt>ContactLastName</dt>
+                            <dd>{{ $id->ContactLastName }}</dd>
                             <dt>ContactPhone</dt>
                             <dd>{{ $id->ContactPhone }}</dd>
                             <dt>OpeningHours</dt>

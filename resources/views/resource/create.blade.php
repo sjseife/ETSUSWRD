@@ -28,6 +28,12 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="col-md-2 control-label" for="County">County</label>
+                <div class="col-md-4">
+                    <input id="County" name="County" type="text" placeholder="Washington" class="form-control input-md">
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="col-md-2 control-label" for="State">State</label>
                 <div class="col-md-4">
                     <select name="State" class="form-control">
@@ -93,9 +99,15 @@
             </div>
             <hr />
             <div class="form-group">
-                <label class="col-md-2 control-label" for="ContactName">Contact</label>
+                <label class="col-md-2 control-label" for="ContactFirstName">Contact First Name</label>
                 <div class="col-md-4">
-                    <input id="ContactName" name="ContactName" type="text" placeholder="Jon Doe" class="form-control input-md">
+                    <input id="ContactFirstName" name="ContactFirstName" type="text" placeholder="Jon" class="form-control input-md">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="ContactLastName">Contact Last Name</label>
+                <div class="col-md-4">
+                    <input id="ContactLastName" name="ContactLastName" type="text" placeholder="Snow" class="form-control input-md">
                 </div>
             </div>
             <div class="form-group">
@@ -120,6 +132,13 @@
                 <label class="col-md-2 control-label" for="Comments">Comments</label>
                 <div class="col-md-4">
                     <textarea name="Comments" id="Comments" cols="30" rows="4" class="form-control input-md"> </textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
         </form>

@@ -16,4 +16,5 @@ class Resource extends  Model
         'Name', 'StreetAddress', 'StreetAddress2', 'City', 'County', 'State', 'Zipcode', 'ContactName', 'ContactPhone','OpeningHours','ClosingHours','Comments'
     ];
 
+    public $timestamps = false;
 }

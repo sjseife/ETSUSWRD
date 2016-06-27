@@ -46,6 +46,22 @@ class ResourceController extends Controller
         }
     }
 
+    public function update(Resource $id)
+    {
+        return view('resource.update', compact('id'));
+    }
+    
+    public function updateConfirm($id)
+    {
+        try{
+            //TODO: Make it actually update.
+            return redirect('/home');
+        }
+        catch (Exception $e) {
+            return $e
+        }
+    }    
+
     public function view(Resource $id)
     {
         return view('resource.view', compact('id'));

@@ -54,11 +54,14 @@ class ResourceController extends Controller
     public function updateConfirm($id)
     {
         try{
-            //TODO: Make it actually update.
+            $resourceOld = Resource::findorFail($id);
+            //$resourceNew = new Resource(request()->all());
+            //$resourceOld->name = $resourceNew->name;
+            $resourceOld->save();
             return redirect('/home');
         }
         catch (Exception $e) {
-            return $e
+            return $e;
         }
     }    
 

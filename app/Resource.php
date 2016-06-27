@@ -13,7 +13,7 @@ class Resource extends  Model
      * @var array
      */
     protected $fillable = [
-        'Name', 'StreetAddress', 'StreetAddress2', 'City', 'County', 'State', 'Zipcode', 'ContactName', 'ContactPhone','OpeningHours','ClosingHours','Comments'
+        'Name', 'StreetAddress', 'StreetAddress2', 'City', 'County', 'State', 'Zipcode', 'ContactFirstName', 'ContactLastName', 'ContactPhone','OpeningHours','ClosingHours','Comments'
     ];
 
 }

@@ -55,8 +55,7 @@ class ResourceController extends Controller
     
     public function updateConfirm(Request $request, Resource $resource)
     {
-        $updateArray = array("Name" => $request->Name);
-           $resource->update($updateArray);
+           $resource->update($request->all());
             return back();
     }    
 

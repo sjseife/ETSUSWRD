@@ -3,7 +3,7 @@
 @section('content')
     <div class="content">
         <form class="form-horizontal" method="POST" action="/resource/{{$id->Id}}">
-            {{ method_field('PATCH') }}
+            {{ method_field('PATCH')
             {{ csrf_field() }}
             <div class="form-group">
                 <label class="col-md-2 control-label" for="Name">Name</label>

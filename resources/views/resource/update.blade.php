@@ -3,36 +3,42 @@
 @section('content')
     <div class="content">
         <form class="form-horizontal" method="POST" action="/resource/{{$id->Id}}">
-            {{ method_field('PATCH')
+            {{ method_field('PATCH') }}
             {{ csrf_field() }}
             <div class="form-group">
                 <label class="col-md-2 control-label" for="Name">Name</label>
                 <div class="col-md-4">
-                    <input id="name" name="Name" type="text" class="form-control input-md" value="{{ $id->Name }}">
+                    <input id="Name" name="Name" type="text" class="form-control input-md" value="{{ $id->Name }}">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label" for="StreetAddress">Street Address</label>
                 <div class="col-md-4">
-                    <input id="streetaddress" name="StreetAddress" type="text" class="form-control input-md" value="{{ $id->StreetAddress }}">
+                    <input id="StreetAddress" name="StreetAddress" type="text" class="form-control input-md" value="{{ $id->StreetAddress }}">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label" for="StreetAddress2">Street Address 2</label>
                 <div class="col-md-4">
-                    <input id="streetaddress2" name="StreetAddress2" type="text" class="form-control input-md" value="{{ $id->StreetAddress2 }}">
+                    <input id="StreetAddress2" name="StreetAddress2" type="text" class="form-control input-md" value="{{ $id->StreetAddress2 }}">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label" for="City">City</label>
                 <div class="col-md-4">
-                    <input id="city" name="City" type="text" class="form-control input-md" value="{{ $id->City }}">
+                    <input id="City" name="City" type="text" class="form-control input-md" value="{{ $id->City }}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="County">County</label>
+                <div class="col-md-4">
+                    <input id="county" name="County" type="text" class="form-control input-md" value="{{ $id->County }}">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label" for="State">State</label>
                 <div class="col-md-4">
-                    <select name="State" class="form-control">
+                    <select id="State" name="State" class="form-control">
                         <option value="AL">Alabama</option>
                         <option value="AK">Alaska</option>
                         <option value="AZ">Arizona</option>
@@ -91,12 +97,6 @@
                 <label class="col-md-2 control-label" for="Zipcode">Zipcode</label>
                 <div class="col-md-4">
                     <input id="Zipcode" name="Zipcode" type="text" class="form-control input-md" value="{{ $id->Zipcode }}">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label" for="County">County</label>
-                <div class="col-md-4">
-                    <input id="county" name="County" type="text" class="form-control input-md" value="{{ $id->County }}">
                 </div>
             </div>
             <hr />

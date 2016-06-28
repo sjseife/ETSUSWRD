@@ -11,6 +11,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Resource;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+
 
 class ResourceController extends Controller
 {
@@ -51,18 +53,11 @@ class ResourceController extends Controller
         return view('resource.update', compact('id'));
     }
     
-    public function updateConfirm($id)
+    public function updateConfirm(Request $request, Resource $resource)
     {
-        try{
-            $resourceOld = Resource::findorFail($id);
-            //$resourceNew = new Resource(request()->all());
-            //$resourceOld->name = $resourceNew->name;
-            $resourceOld->save();
-            return redirect('/home');
-        }
-        catch (Exception $e) {
-            return $e;
-        }
+        $updateArray = array("Name" => $request->Name);
+           $resource->update($updateArray);
+            return back();
     }    
 
     public function view(Resource $id)

@@ -31,4 +31,4 @@ Route::delete('resource/destroy/{id}', 'ResourceController@destroy');
 
 Route::get('resource/view/{id}', 'ResourceController@view');
 Route::get('resource/update/{id}', 'ResourceController@update');
-Route::get('resource/updateConfirm/{id}', 'ResourceController@updateConfirm');
+Route::patch('resource/{id}', 'ResourceController@updateConfirm');

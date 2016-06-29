@@ -37,6 +37,6 @@ class CreateResourceTable extends Migration
      */
     public function down()
     {
-        Schema::Drop('Resource');
+        Schema::drop('Resource');
     }
 }

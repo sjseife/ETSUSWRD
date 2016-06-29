@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePasswordResetsTable extends Migration
+class CreateCategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,9 @@ class CreatePasswordResetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('password_resets', function (Blueprint $table) {
-            $table->string('Email')->index();
-            $table->string('token')->index();
-            $table->timestamp('created_at');
+        Schema::create('Category', function (Blueprint $table) {
+            $table->increments('Id');
+            $table->string('Name', 150);
         });
     }
 
@@ -26,6 +25,6 @@ class CreatePasswordResetsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('password_resets');
+        Schema::drop('Category');
     }
 }

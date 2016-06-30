@@ -11,6 +11,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Resource;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+
 
 class ResourceController extends Controller
 {
@@ -45,6 +47,22 @@ class ResourceController extends Controller
             return $e;
         }
     }
+
+    public function edit(Resource $id)
+    {
+        return view('resource.edit', compact('id'));
+    }
+    
+    public function update(Request $request, Resource $id)
+    {
+        unset($request['_method']);
+        unset($request['_token']);
+        Resource::where('Id', $id->Id)
+                ->update($request->all());
+        //The below line is broken as fuck, but should have been the one line needed to make this work.
+         //  $id->whereupdate($request->all());
+            return back();
+    }    
 
     public function view(Resource $id)
     {

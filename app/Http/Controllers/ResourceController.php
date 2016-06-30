@@ -48,14 +48,19 @@ class ResourceController extends Controller
         }
     }
 
-    public function update(Resource $id)
+    public function edit(Resource $id)
     {
-        return view('resource.update', compact('id'));
+        return view('resource.edit', compact('id'));
     }
     
-    public function updateConfirm(Request $request, Resource $resource)
+    public function update(Request $request, Resource $id)
     {
-           $resource->update($request->all());
+        unset($request['_method']);
+        unset($request['_token']);
+        Resource::where('Id', $id->Id)
+                ->update($request->all());
+        //The below line is broken as fuck, but should have been the one line needed to make this work.
+         //  $id->whereupdate($request->all());
             return back();
     }    
 

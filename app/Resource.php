@@ -12,6 +12,9 @@ class Resource extends  Model
      *
      * @var array
      */
+    
+    public $timestamps = false;
+    
     protected $fillable = [
         'Name', 'StreetAddress', 'StreetAddress2', 'City', 'County', 'State', 'Zipcode', 'ContactFirstName', 'ContactLastName', 'ContactPhone','OpeningHours','ClosingHours','Comments'
     ];

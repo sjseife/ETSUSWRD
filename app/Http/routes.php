@@ -20,15 +20,27 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 Route::get('/team', function () {
-   return view('team'); 
+    return view('team');
 });
 
 Route::get('resource/create', 'ResourceController@create');
 Route::post('resource/createResource', 'ResourceController@createResource');
 
-Route::get('resource/delete/{id}', 'ResourceController@delete');
-Route::delete('resource/destroy/{id}', 'ResourceController@destroy');
-
 Route::get('resource/view/{id}', 'ResourceController@view');
-Route::get('resource/edit/{id}', 'ResourceController@edit');
-Route::patch('resource/{id}', 'ResourceController@update');
+
+//if Admin is required, place route in this group
+Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
+{
+    Route::get('resource/delete/{id}', 'ResourceController@delete');
+    Route::delete('resource/destroy/{id}', 'ResourceController@destroy');
+});
+
+//if GA is required, place route in this group
+Route::group(['middleware' => 'App\Http\Middleware\GAMiddleware'], function()
+{
+    Route::get('resource/create', 'ResourceController@create');
+    Route::post('resource/createResource', 'ResourceController@createResource');
+    Route::get('resource/edit/{id}', 'ResourceController@edit');
+    Route::patch('resource/{id}', 'ResourceController@update');
+
+});

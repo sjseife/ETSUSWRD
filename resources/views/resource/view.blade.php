@@ -1,4 +1,4 @@
-                         @extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
     <div class="container">
@@ -10,9 +10,9 @@
                         <dl class="dl-horizontal">
                             <dt>Name</dt>
                             <dd>{{ $id->Name }}</dd>
-                            <dt>Street Address</dt>
+                            <dt>StreetAddress</dt>
                             <dd>{{ $id->StreetAddress }}</dd>
-                            <dt>Street Address 2</dt>
+                            <dt>StreetAddress2</dt>
                             <dd>{{ $id->StreetAddress2 }}</dd>
                             <dt>City</dt>
                             <dd>{{ $id->City }}</dd>
@@ -20,17 +20,17 @@
                             <dd>{{ $id->County }}</dd>
                             <dt>State</dt>
                             <dd>{{ $id->State }}</dd>
-                            <dt>Zip code</dt>
+                            <dt>Zipcode</dt>
                             <dd>{{ $id->Zipcode }}</dd>
-                            <dt>Contact First Name</dt>
+                            <dt>ContactFirstName</dt>
                             <dd>{{ $id->ContactFirstName }}</dd>
-                            <dt>Contact Last Name</dt>
+                            <dt>ContactLastName</dt>
                             <dd>{{ $id->ContactLastName }}</dd>
-                            <dt>Contact Phone</dt>
+                            <dt>ContactPhone</dt>
                             <dd>{{ $id->ContactPhone }}</dd>
-                            <dt>Opening Hours</dt>
+                            <dt>OpeningHours</dt>
                             <dd>{{ $id->OpeningHours }}</dd>
-                            <dt>Closing Hours</dt>
+                            <dt>ClosingHours</dt>
                             <dd>{{ $id->ClosingHours }}</dd>
                             <dt>Comments</dt>
                             <dd>{{ $id->Comments }}</dd>

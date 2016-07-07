@@ -16,6 +16,15 @@ use Illuminate\Http\Request;
 
 class ResourceController extends Controller
 {
+    public function index()
+    {
+        $resources = Resource::all();
+
+        // load the view and pass the resources
+        return view('resource.index')
+            ->with('resources', $resources);
+    }
+
     public function __construct()
     {
         $this->middleware('auth');

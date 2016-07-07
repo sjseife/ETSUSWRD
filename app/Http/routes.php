@@ -33,6 +33,7 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 {
     Route::get('resource/delete/{id}', 'ResourceController@delete');
     Route::delete('resource/destroy/{id}', 'ResourceController@destroy');
+    Route::get('/users', 'UserController@index');
 });
 
 //if GA is required, place route in this group

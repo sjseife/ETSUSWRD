@@ -68,9 +68,7 @@ class ResourceController extends Controller
         unset($request['_token']);
         Resource::where('Id', $id->Id)
                 ->update($request->all());
-        //The below line is broken as fuck, but should have been the one line needed to make this work.
-         //  $id->whereupdate($request->all());
-            return back();
+        return back();
     }    
 
     public function view(Resource $id)

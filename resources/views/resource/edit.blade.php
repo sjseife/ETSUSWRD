@@ -4,6 +4,9 @@
 @section('content')
 
     <div class="content">
+        <div class="col-md-11 text-center">
+            <a href="/resource" class="btn btn-link" type="link">Back to Resources</a>
+        </div>
         <form class="form-horizontal" method="POST" action="/resource/{{$id->Id}}">
             {{ method_field('PATCH') }}
             {{ csrf_field() }}

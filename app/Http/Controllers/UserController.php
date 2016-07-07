@@ -34,8 +34,6 @@ class UserController extends Controller
         unset($request['_token']);
         User::where('Id', $id->id)
             ->update($request->all());
-        //The below line is broken as fuck, but should have been the one line needed to make this work.
-        //  $id->update($request->all());
         return back();
     }
 }

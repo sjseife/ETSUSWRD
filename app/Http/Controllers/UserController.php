@@ -22,4 +22,20 @@ class UserController extends Controller
         return view('user.index')
             ->with('users', $users);
     }
+    
+    public function edit(User $id)
+    {
+        return view('user.edit', compact('id'));
+    }
+
+    public function update(Request $request, User $id)
+    {
+        unset($request['_method']);
+        unset($request['_token']);
+        User::where('Id', $id->id)
+            ->update($request->all());
+        //The below line is broken as fuck, but should have been the one line needed to make this work.
+        //  $id->update($request->all());
+        return back();
+    }
 }

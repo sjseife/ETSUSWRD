@@ -28,13 +28,13 @@
                     <td class="text-center col-md-3">
 
                         <!-- show the user (uses the show method found at GET /user/view/{id} -->
-                        <a class="btn btn-small btn-success" href="{{ URL::to('user/view' . $value->id) }}">View</a>
+                        <a class="btn btn-small btn-success" href="{{ URL::to('user/view/' . $value->id) }}">View</a>
 
                         <!-- edit this user (uses the edit method found at GET /user/edit/{id} -->
-                        <a class="btn btn-small btn-info" href="{{ URL::to('user/edit' . $value->id) }}">Edit</a>
+                        <a class="btn btn-small btn-info" href="{{ URL::to('user/edit/' . $value->id) }}">Edit</a>
 
                         <!-- delete the user (uses the delete method found at GET /user/{id} -->
-                        <a class="btn btn-small btn-warning" href="{{ URL::to('user/delete' . $value->id) }}">Delete</a>
+                        <a class="btn btn-small btn-warning" href="{{ URL::to('user/delete/' . $value->id) }}">Delete</a>
                     </td>
                 </tr>
             @endforeach

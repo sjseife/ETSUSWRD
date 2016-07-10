@@ -13,7 +13,7 @@ class Flag extends Model
      * @var array
      */
     protected $fillable = [
-        'Date', 'Flagged', 'Comments',
+        'Date', 'Level', 'Comments', 'user_id', 'resource_id',
     ];
 
 }

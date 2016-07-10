@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Flag;
 use App\Http\Requests;
 use App\Resource;
 use Illuminate\Support\Facades\DB;
@@ -19,10 +20,10 @@ class ResourceController extends Controller
     public function index()
     {
         $resources = Resource::all();
-
+        $flags = Flag::all();
         // load the view and pass the resources
         return view('resource.index')
-            ->with('resources', $resources);
+            ->with('resources', $resources)->with('flag', $flags);
     }
 
     public function __construct()

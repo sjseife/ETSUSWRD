@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
     <h1 class="text-center">All Resources</h1>
 
@@ -15,10 +14,12 @@
                     <td><b>Phone</b></td>
                     <td><b>Opening Hours</b></td>
                     <td><b>Closing Hours</b></td>
+                    <td><b>Status</b></td>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($resources as $key => $value)
+                    <?php $link = false; ?>
                     <tr>
                         <td>{{ $value->Name }}</td>
                         <td>{{ $value->County }}</td>
@@ -27,6 +28,14 @@
                         <td>{{ $value->ContactPhone }}</td>
                         <td>{{ $value->OpeningHours }}</td>
                         <td>{{ $value->ClosingHours }}</td>
+                        <td>
+                            @foreach($flag as $f)
+                                @if($f->resource_id == $value->Id && $link == false)
+                                    <a href="flag/resourceview/{{$value->Id}}" class="btn btn-danger btn-sm">Flagged</a>
+                                    <?php $link = true; ?>
+                                @endif
+                            @endforeach
+                        </td>
                         <td class="text-center col-md-3">
 
                             <!-- show the resource (uses the show method found at GET /resource/view/{id} -->

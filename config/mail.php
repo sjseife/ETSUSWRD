@@ -16,7 +16,8 @@ return [
     |
     */
 
-    'driver' => 'smtp',
+    /* Make sure you change this for production*/
+    'driver' => 'log',
 
     /*
     |--------------------------------------------------------------------------
@@ -55,6 +56,8 @@ return [
     |
     */
 
+
+    /* Make sure you change this for production*/
     'from' => ['address' => 'humphreymg@etsu.edu', 'name' => 'Matthew Humphrey'],
 
     /*

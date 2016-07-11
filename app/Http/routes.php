@@ -19,11 +19,13 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/auth' . '/newPassword', function(){
+Route::get('/auth/newPassword',function(){
     return view('/auth/newPassword');
 });
 
-Route::get('/team','PasswordController@view');
+Route::get('/team', function () {
+    return view('team');
+});
 
 //resource view link doesn't redirect to login page is no one is logged in
 Route::get('resource/view/{id}', 'ResourceController@view');

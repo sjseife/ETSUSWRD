@@ -79,9 +79,9 @@ return [
     | set it here. This will get used to authenticate with your server on
     | connection. You may also set the "password" value below this one.
     |
-    */
 
-    'username' => env('MAIL_USERNAME'),
+
+    'username' =>
 
     /*
     |--------------------------------------------------------------------------
@@ -92,10 +92,10 @@ return [
     | messages from your application. This will be given to the server on
     | connection so that the application will be able to send messages.
     |
+
+
+    'password' => '';
     */
-
-    'password' => env('MAIL_PASSWORD'),
-
     /*
     |--------------------------------------------------------------------------
     | Sendmail System Path

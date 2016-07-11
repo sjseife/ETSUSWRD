@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => humphreymg@etsu.edu, 'name' => Matthew Humphrey],
+    'from' => ['address' => 'humphreymg@etsu.edu', 'name' => 'Matthew Humphrey'],
 
     /*
     |--------------------------------------------------------------------------

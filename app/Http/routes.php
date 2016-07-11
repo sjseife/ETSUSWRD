@@ -19,7 +19,9 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/auth/newPassword', 'HomeController@index');
+Route::get('/auth/newPassword', function(){
+    return view('auth/newPassword');
+});
 
 Route::get('/team', function () {
     return view('team');

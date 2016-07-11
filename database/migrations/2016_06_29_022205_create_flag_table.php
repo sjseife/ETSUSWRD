@@ -15,10 +15,14 @@ class CreateFlagTable extends Migration
         Schema::create('flag', function (Blueprint $table) {
             $table->increments('Id');
             $table->date('Date');
-            $table->boolean('Flagged');
+            //0-addressed, 1-GA, 2-Admin
+            $table->integer('Level');
             $table->text('Comments');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('resource_id')->unsigned();
+            $table->foreign('resource_id')->references('Id')->on('Resource');
+            $table->timestamps();
         });
     }
 

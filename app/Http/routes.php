@@ -20,7 +20,7 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 Route::get('/auth/newPassword',function(){
-    return view('/auth/newPassword');
+    return view('/auth/newPassword')->share('user', $auth->user);
 });
 
 Route::get('/team', function () {

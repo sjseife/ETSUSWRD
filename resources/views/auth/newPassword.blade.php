@@ -10,7 +10,7 @@
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('auth/newPassword') }}">
                             {{ csrf_field() }}
 
-                            {{--<input type="hidden" name="token" value="{{ $token }}">--}}
+
 
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                 <label for="password" class="col-md-4 control-label">Current Password</label>

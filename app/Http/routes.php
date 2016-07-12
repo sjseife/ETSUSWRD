@@ -20,8 +20,9 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 Route::get('/auth/newPassword',function(){
-    return view('/auth/newPassword')->share('user', $auth->user);
+    return view('/auth/newPassword')->with('user', Auth::user());
 });
+Route::patch('auth/newPassword/{id}', 'Auth\AuthController@updatePass');
 
 Route::get('/team', function () {
     return view('team');

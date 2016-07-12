@@ -7,27 +7,29 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Change Password</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('auth/newPassword') }}">
+                        <form class="form-horizontal" role="form" method="POST" action="/auth/newPassword/{{$user->id}}">
+                            {{ method_field('PATCH') }}
                             {{ csrf_field() }}
 
-
+                            <input type="hidden" id="email" name="email" value="{{ $user->email }}">
+                            <input type="hidden" id="name" name="name" value="{{ $user->name }}">
 
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                 <label for="password" class="col-md-4 control-label">Current Password</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password" value="{{ $password or old('password') }}">
+                                    <input type="password" id="oldPassword" class="form-control" name="oldPassword">
 
-                                    @if ($errors->has('password'))
+                                    @if ($user->password != $_POST['oldPassword'])
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
+                                            <strong>That password is incorrect</strong>
+                                        </span>
                                     @endif
                                 </div>
                             </div>
 
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label for="password" class="col-md-4 control-label">Password</label>
+                                <label for="password" class="col-md-4 control-label">New Password</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control" name="password">
@@ -56,7 +58,7 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
-                                        <i class="fa fa-btn fa-refresh"></i> Change Password
+                                        <i class="fa fa-btn fa-refresh"></i> Reset Password
                                     </button>
                                 </div>
                             </div>

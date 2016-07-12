@@ -7,23 +7,23 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Change Password</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="/auth/newPassword/{{$user->id}}">
+                        <form class="form-horizontal" role="form" method="POST" action="/auth/newPassword/"{{$user->id}}>
                             {{ method_field('PATCH') }}
                             {{ csrf_field() }}
 
-                            <input type="hidden" id="email" name="email" value="{{ $user->email }}">
-                            <input type="hidden" id="name" name="name" value="{{ $user->name }}">
+                            <input type="hidden" id="email" name="email" value="{{ $user->email }}" required>
+                            <input type="hidden" id="name" name="name" value="{{ $user->name }}" required>
 
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label for="password" class="col-md-4 control-label">Current Password</label>
+                                <label for="oldPassword" class="col-md-4 control-label" required>Current Password</label>
 
                                 <div class="col-md-6">
                                     <input type="password" id="oldPassword" class="form-control" name="oldPassword">
 
-                                    @if ($user->password != $_POST['oldPassword'])
+                                    @if ($errors->has('oldPassword'))
                                         <span class="help-block">
-                                            <strong>That password is incorrect</strong>
-                                        </span>
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
                                     @endif
                                 </div>
                             </div>

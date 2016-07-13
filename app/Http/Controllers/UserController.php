@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Yajra\Datatables\Datatables;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -13,16 +13,15 @@ class UserController extends Controller
     {
         $this->middleware('auth');
     }
-
+    
     public function index()
-    {
+   {
         $users = User::all();
 
         // load the view and pass the users
         return view('user.index')
             ->with('users', $users);
     }
-    
     public function edit(User $id)
     {
         return view('user.edit', compact('id'));

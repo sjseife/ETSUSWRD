@@ -45,7 +45,6 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
     Route::get('/users', 'UserController@index');
     Route::get('/user/edit/{id}', 'UserController@edit');
     Route::patch('user/{id}', 'UserController@update');
-
 });
 
 //if GA or Admin is required, place route in this group

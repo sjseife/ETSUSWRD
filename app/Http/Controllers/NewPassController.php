@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Http\Controllers\Auth\AuthController;
 use App\User;
 use Validator;
@@ -25,8 +26,8 @@ class NewPassController extends Controller
     }
     
     protected function updatePass(Request $request, User $user)
-    {/*
-        dd($id);*/
+    {
+
         $errors = array(
             'oldPassword' =>'',
             'password' => '',
@@ -38,26 +39,26 @@ class NewPassController extends Controller
             'password' => $request['oldPassword']
         );
 
-        if(Auth::attempt($auth)) {
-            $errors['oldPassword'] = 'That was not the correct password.';
-           return view('/auth/newPassword')->with('user',Auth::user)->with('errors',$errors);
-        }
-    
-        elseif ($request['password'] != $request['password_confirmation']){
+        if ($request['password'] != $request['password_confirmation']){
             $errors['password_confirmation'] = 'That password was not the same.';
-            return view('/auth/newPassword')->with('user',Auth::user)->with('errors',$errors);
+            return view('/auth/newPassword')->with('user',Auth::user())->with('errors',$errors);
         }
 
-        else {
+        elseif(Auth::attempt($auth)) {
             unset($request['oldPassword']);
             unset($request['password_confirmation']);
             unset($request['_method']);
             unset($request['_token']);
             $request['password'] = bcrypt($request['password']);
-            User::where('id', $user->id)
+            User::where('email', $request['email'])
                 ->update($request->all());
             return view('home');
         }
-        return view('home');
+
+        else {
+            $errors['oldPassword'] = 'That was not the correct password.';
+            return view('/auth/newPassword')->with('user',Auth::user())->with('errors',$errors);
+        }
+
     }
 }

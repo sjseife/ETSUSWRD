@@ -16,8 +16,6 @@
 
 
                             <div class="form-group">
-                                {{$user['password']}}
-
                                 <label for="oldPassword" class="col-md-4 control-label">Current Password</label>
 
                                 <div class="col-md-6">

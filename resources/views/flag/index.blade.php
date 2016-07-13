@@ -1,18 +1,20 @@
-@extends('layouts.app')
+@extends('layouts.dataTables')
 
 @section('content')
     <h1 class="text-center">All Flags</h1>
 
     <div class="container">
+        <a class="btn btn-small btn-primary pull-right" href="{{ URL::to('flag/create') }}" style="margin-bottom: 20px;">Create New</a>
         <div class="row">
-            <table class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered" id="FlagTable">
                 <thead>
                 <tr>
-                    <td><b>ID</b></td>
-                    <td><b>Resource</b></td>
-                    <td><b>Flagged For</b></td>
-                    <td><b>Submitted By</b></td>
-                    <td><b>Date Created</b></td>
+                    <th>ID</th>
+                    <th>Resource</th>
+                    <th>Flagged For</th>
+                    <th>Submitted By</th>
+                    <th>Date Created</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -50,6 +52,14 @@
                 </tbody>
             </table>
         </div>
-        <a class="btn btn-small btn-primary pull-right" href="{{ URL::to('flag/create') }}">Create New</a>
+
     </div>
-@endsection
+@stop
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $('#FlagTable').DataTable();
+    });
+</script>
+@endpush

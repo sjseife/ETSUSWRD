@@ -42,15 +42,10 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
     Route::post('flag/createFlag', 'FlagController@createFlag');
 
     //user
-    //Route::get('/users', 'UserController@index');
+    Route::get('/users', 'UserController@index');
     Route::get('/user/edit/{id}', 'UserController@edit');
     Route::patch('user/{id}', 'UserController@update');
-//    Route::get('users', 'UserController@getIndex');
-//    Route::get('users/data', 'UserController@anyData');
-    Route::controller('users', 'UserController', [
-        'anyData'  => 'users.data',
-        'getIndex' => 'users',
-    ]);
+
 });
 
 //if GA or Admin is required, place route in this group

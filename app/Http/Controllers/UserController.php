@@ -13,27 +13,7 @@ class UserController extends Controller
     {
         $this->middleware('auth');
     }
-
-    /**
-     * Displays datatables front end view
-     *
-     * @return \Illuminate\View\View
-     */
-    public function getIndex()
-    {
-        return view('user.index2');
-    }
-
-    /**
-     * Process datatables ajax request.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function anyData()
-    {
-        return Datatables::of(User::query())->make(true);
-    }
-
+    
     public function index()
    {
         $users = User::all();

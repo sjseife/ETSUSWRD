@@ -1,20 +1,24 @@
-@extends('layouts.app')
+@extends('layouts.dataTables')
+
 @section('content')
     <h1 class="text-center">All Resources</h1>
 
     <div class="container">
+        <!-- create a new resource (uses the create method found at GET /resource/create -->
+        <a class="btn btn-small btn-primary pull-right" href="{{ URL::to('resource/create') }}" style="margin-bottom: 20px;">Create New Resource</a>
         <div class="row">
-            <table class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered" id="ResourceTable">
                 <thead>
                 <tr>
-                    <td><b>Name</b></td>
-                    <td><b>County</b></td>
-                    <td><b>Contact First Name</b></td>
-                    <td><b>Contact Last Name</b></td>
-                    <td><b>Phone</b></td>
-                    <td><b>Opening Hours</b></td>
-                    <td><b>Closing Hours</b></td>
-                    <td><b>Status</b></td>
+                    <th>Name</th>
+                    <th>County</th>
+                    <th>Contact First Name</th>
+                    <th>Contact Last Name</th>
+                    <th>Phone</th>
+                    <th>Opening Hours</th>
+                    <th>Closing Hours</th>
+                    <th>Status</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -52,7 +56,14 @@
                 </tbody>
             </table>
         </div>
-        <!-- create a new resource (uses the create method found at GET /resource/create -->
-        <a class="btn btn-small btn-primary pull-right" href="{{ URL::to('resource/create') }}">Create New Resource</a>
+
     </div>
-@endsection
+@stop
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $('#ResourceTable').DataTable();
+    });
+</script>
+@endpush

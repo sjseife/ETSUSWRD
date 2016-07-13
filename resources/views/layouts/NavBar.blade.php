@@ -19,8 +19,9 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li><a href="{{ url('/resource/create') }}">Create</a></li>
-                <li><a href="{{ url('/resource/view') }}">View</a></li>
+                <li><a href="{{ url('/resource') }}">Resources</a></li>
+                <li><a href="{{ url('/users') }}">Users</a></li>
+                <li><a href="{{ url('/flag') }}">Flags</a></li>
 
             </ul>
 

@@ -19,6 +19,11 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('/auth/newPassword',function(){
+    return view('/auth/newPassword')->with('user', Auth::user())->with('errors',null);
+});
+Route::patch('auth/newPassword', 'NewPassController@updatePass');
+
 Route::get('/team', function () {
     return view('team');
 });

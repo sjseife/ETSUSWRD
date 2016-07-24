@@ -79,10 +79,17 @@ class ResourceController extends Controller
     
     public function generateReport()
     {
-        //This will be replaced with session cart data -> $data = Session::all();
+        //This will be replaced with session cart data -> $resources = Session::all();
         $resources = Resource::all();
         
         return view('resource.generateReport')
             ->with('resources', $resources);
     }
+
+    public function generatePDF()
+    {
+        return view('resource.view');
+    }
+
+
 }

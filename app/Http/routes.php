@@ -32,6 +32,8 @@ Route::get('/team', function () {
 Route::get('resource/view/{id}', 'ResourceController@view');
 
 Route::get('/resource', 'ResourceController@index');
+Route::get('/resource/generateReport', 'ResourceController@generateReport');
+Route::get('/resource/generatePDF', 'ResourceController@generatePDF');
 
 //if Admin is required, place route in this group
 Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()

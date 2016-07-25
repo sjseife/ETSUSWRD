@@ -13,6 +13,8 @@ use App\Http\Requests;
 use App\Resource;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\View;
 
 
 class ResourceController extends Controller
@@ -91,8 +93,13 @@ class ResourceController extends Controller
         //This will be replaced with session cart data -> $resources = Session::all();
         $resources = Resource::all();
 
-        return view('resource.generateReport')
-            ->with('resources', $resources);
+        $pdf = App::make('dompdf.wrapper');
+
+        $view = View::make('resource.pdfLayout')->with('resources', $resources);
+        $contents = $view->render();
+
+        $pdf->loadHTML($contents);
+        return $pdf->stream();
     }
 
 

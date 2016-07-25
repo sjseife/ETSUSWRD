@@ -63,6 +63,6 @@
             </div>
 
         </div><!-- /.row -->
-        <hr>
+        <hr><br><br>
     </div><!-- /.container -->
     @endforeach

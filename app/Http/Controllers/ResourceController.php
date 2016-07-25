@@ -95,7 +95,7 @@ class ResourceController extends Controller
 
         $pdf = App::make('dompdf.wrapper');
 
-        $view = View::make('resource.pdfLayout')->with('resources', $resources);
+        $view = View::make('resource.pdfHeader')->with('resources', $resources);
         $contents = $view->render();
 
         $pdf->loadHTML($contents);

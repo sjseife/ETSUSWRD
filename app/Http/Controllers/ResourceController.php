@@ -76,6 +76,7 @@ class ResourceController extends Controller
 
     public function view(Resource $id)
     {
+        dd($id->categories);
         return view('resource.view', compact('id'));
     }
     

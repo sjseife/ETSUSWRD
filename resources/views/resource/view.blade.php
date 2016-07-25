@@ -35,6 +35,9 @@
                             <dt>Comments</dt>
                             <dd>{{ $id->Comments }}</dd>
                         </dl>
+                            @foreach ((array) $id->catergories as $category)
+                                {{ $category->name }}
+                            @endforeach
                         <div class="col-lg-6"><br/><br/>
                             <div class="text-center"><a href="{{'/home'}}">Go Back to Home Page</a></br></br>
                             </div>

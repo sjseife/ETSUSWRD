@@ -24,4 +24,8 @@ class Resource extends  Model
         return $this->hasMany(Contact::class);
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }

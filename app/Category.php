@@ -22,7 +22,7 @@ class Category extends Model
      */
     public function resources()
     {
-        return $this->belongsToMany('App\Resource');
+        return $this->belongsToMany(Resource::class);
     }
 
 }

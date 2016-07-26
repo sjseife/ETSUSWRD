@@ -13,11 +13,9 @@ class CategoryResource extends Migration
     public function up()
     {
         Schema::create('category_resource', function (Blueprint $table) {
-            $table->integer('category_id')->unsigned()->index();
-            $table->integer('resource_id')->unsigned()->index();
-
-            $table->foreign('category_id')->references('Id')->on('category')->onDelete('cascade');
-            $table->foreign('resource_id')->references('Id')->on('resource')->onDelete('cascade');
+            $table->integer('category_id');
+            $table->integer('resource_id');
+            $table->primary(['resource_id', 'category_id']);
 
             $table->timestamps();
         });

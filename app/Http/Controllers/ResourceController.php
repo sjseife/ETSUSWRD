@@ -79,12 +79,11 @@ class ResourceController extends Controller
         return back();
     }    
 
-    public function view(Resource $id)
+    public function view(Resource $resource)
     {
-        /*$id = Resource::where('Id', $id->Id);
-        $categories = $id->categories->name;
-        dd($categories);*/
-        return view('resource.view', compact('id'));
+        $categories = Resource::where('id', $resource->id)->get();
+        dd($categories);
+        return view('resource.view', compact('resource'), compact('categories'));
     }
     
     public function generateReport()

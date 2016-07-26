@@ -51,7 +51,7 @@ class ResourceController extends Controller
 
     public function add(Resource $id)
     {
-        session()->put($id);
+        session()->put($id->id);
 
         $resources = Resource::all();
         $flags = Flag::all();
@@ -94,7 +94,7 @@ class ResourceController extends Controller
     public function generateReport()
     {
         //This will be replaced with session cart data -> $resources = Session::all();
-        $resources = Resource::all();
+        $resources = Session()->all();
 
         return view('resource.generateReport')
             ->with('resources', $resources);
@@ -103,7 +103,7 @@ class ResourceController extends Controller
     public function generatePDF()
     {
         //This will be replaced with session cart data -> $resources = Session::all();
-        $resources = Resource::all();
+        $resources = Session()->all();
 
         $pdf = App::make('dompdf.wrapper');
 

@@ -31,9 +31,6 @@ Route::get('/team', function () {
 //resource view link doesn't redirect to login page is no one is logged in
 Route::get('resource/view/{id}', 'ResourceController@view');
 
-Route::get('/resource', 'ResourceController@index');
-Route::get('/resource/generateReport', 'ResourceController@generateReport');
-Route::get('/resource/generatePDF', 'ResourceController@generatePDF');
 
 //if Admin is required, place route in this group
 Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
@@ -58,6 +55,9 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 Route::group(['middleware' => 'App\Http\Middleware\GAMiddleware'], function()
 {
     //resource
+    Route::get('/resource', 'ResourceController@index');
+    Route::get('/resource/generateReport', 'ResourceController@generateReport');
+    Route::get('/resource/generatePDF', 'ResourceController@generatePDF');
     Route::get('resource/create', 'ResourceController@create');
     Route::post('resource/createResource', 'ResourceController@createResource');
     Route::get('resource/edit/{id}', 'ResourceController@edit');

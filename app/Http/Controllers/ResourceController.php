@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Flag;
 use App\Http\Requests;
 use App\Resource;
@@ -34,13 +35,17 @@ class ResourceController extends Controller
     }
     public function create()
     {
-        return view('resource.create');
+        $categoryList = Category::lists('name', 'id');
+        return view('resource.create', compact('categoryList'));
     }
 
     public function createResource()
     {
         $resource = new Resource(request()->all());
         $resource->save();
+        $categoryIds = request()->input('categories');
+        $resource->categories()->attach($categoryIds);
+
         return redirect('/home');
     }
 
@@ -76,6 +81,9 @@ class ResourceController extends Controller
 
     public function view(Resource $id)
     {
+        /*$id = Resource::where('Id', $id->Id);
+        $categories = $id->categories->name;
+        dd($categories);*/
         return view('resource.view', compact('id'));
     }
     

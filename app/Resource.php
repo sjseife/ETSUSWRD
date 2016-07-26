@@ -30,7 +30,7 @@ class Resource extends  Model
      */
     public function categories()
     {
-        return $this->belongsToMany('app\Category');
+        return $this->belongsToMany('App\Category');
     }
 
 }

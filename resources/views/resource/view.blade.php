@@ -34,6 +34,10 @@
                             <dd>{{ $id->ClosingHours }}</dd>
                             <dt>Comments</dt>
                             <dd>{{ $id->Comments }}</dd>
+                            <dt>Categories</dt>
+                            @foreach ($id->categories as $category)
+                                <dd>{{ $category->name }}</dd>
+                            @endforeach
                         </dl>
                         <div class="col-lg-6"><br/><br/>
                             <div class="text-center"><a href="{{'/home'}}">Go Back to Home Page</a></br></br>

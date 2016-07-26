@@ -1,21 +1,19 @@
-@extends('layouts.dataTables')
+@extends('layouts.app')
 
 @section('content')
 <h1 class="text-center">All Users</h1>
-<!-- create a new user (uses the create method found at GET /user/create -->
-<a class="btn btn-small btn-primary pull-right" href="{{ URL::to('user/create')  }}" style="margin-bottom: 20px;">Create New User</a>
+
 <div class="container">
     <div class="row">
-        <table class="table table-striped table-bordered" id="UserTable">
+        <table class="table table-striped table-bordered">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Created</th>
-                <th>Updated</th>
-                <th></th>
+                <td><b>ID</b></td>
+                <td><b>Name</b></td>
+                <td><b>Email</b></td>
+                <td><b>Role</b></td>
+                <td><b>Created</b></td>
+                <td><b>Updated</b></td>
             </tr>
             </thead>
             <tbody>
@@ -43,14 +41,7 @@
             </tbody>
         </table>
     </div>
-
+    <!-- create a new user (uses the create method found at GET /user/create -->
+    <a class="btn btn-small btn-primary pull-right" href="{{ URL::to('user/create') }}">Create New</a>
 </div>
-@stop
-
-@push('scripts')
-    <script>
-        $(document).ready(function() {
-            $('#UserTable').DataTable();
-        });
-    </script>
-@endpush
+@endsection

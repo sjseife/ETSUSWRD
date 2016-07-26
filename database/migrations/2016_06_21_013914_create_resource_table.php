@@ -21,9 +21,9 @@ class CreateResourceTable extends Migration
            $table->string('County', 15);
            $table->string('State', 2);
            $table->string('Zipcode', 5);
-           $table->string('ContactFirstName', 150);
-           $table->string('ContactLastName', 150);
-           $table->string('ContactPhone', 150);
+           $table->string('ContactFirstName', 50);
+            $table->string('ContactLastName', 50);
+           $table->string('ContactPhone', 15);
            $table->time('OpeningHours');
            $table->time('ClosingHours');
            $table->text('Comments');

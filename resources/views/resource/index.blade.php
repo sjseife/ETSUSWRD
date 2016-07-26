@@ -1,24 +1,20 @@
-@extends('layouts.dataTables')
-
+@extends('layouts.app')
 @section('content')
     <h1 class="text-center">All Resources</h1>
 
     <div class="container">
-        <!-- create a new resource (uses the create method found at GET /resource/create -->
-        <a class="btn btn-small btn-primary pull-right" href="{{ URL::to('resource/create') }}" style="margin-bottom: 20px;">Create New Resource</a>
         <div class="row">
-            <table class="table table-striped table-bordered" id="ResourceTable">
+            <table class="table table-striped table-bordered">
                 <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>County</th>
-                    <th>Contact First Name</th>
-                    <th>Contact Last Name</th>
-                    <th>Phone</th>
-                    <th>Opening Hours</th>
-                    <th>Closing Hours</th>
-                    <th>Status</th>
-                    <th></th>
+                    <td><b>Name</b></td>
+                    <td><b>County</b></td>
+                    <td><b>Contact First Name</b></td>
+                    <td><b>Contact Last Name</b></td>
+                    <td><b>Phone</b></td>
+                    <td><b>Opening Hours</b></td>
+                    <td><b>Closing Hours</b></td>
+                    <td><b>Status</b></td>
                 </tr>
                 </thead>
                 <tbody>
@@ -45,6 +41,11 @@
                             <!-- show the resource (uses the show method found at GET /resource/view/{id} -->
                             <a class="btn btn-small btn-success" href="{{ URL::to('resource/view/' . $value->Id) }}">View</a>
 
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-btn fa-refresh"></i> Add to PDF
+                            </button>
+
+
                             <!-- edit this resource (uses the edit method found at GET /resource/edit/{id} -->
                             <a class="btn btn-small btn-info" href="{{ URL::to('resource/edit/' . $value->Id) }}">Edit</a>
 
@@ -56,14 +57,7 @@
                 </tbody>
             </table>
         </div>
-
+        <!-- create a new resource (uses the create method found at GET /resource/create -->
+        <a class="btn btn-small btn-primary pull-right" href="{{ URL::to('resource/create') }}">Create New Resource</a>
     </div>
-@stop
-
-@push('scripts')
-<script>
-    $(document).ready(function() {
-        $('#ResourceTable').DataTable();
-    });
-</script>
-@endpush
+@endsection

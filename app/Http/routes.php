@@ -20,7 +20,7 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 Route::get('/auth/newPassword',function(){
-    return view('/auth/newPassword')->with('user', Auth::user());
+    return view('/auth/newPassword')->with('user', Auth::user())->with('errors',null);
 });
 Route::patch('auth/newPassword/{id}', 'Auth\AuthController@updatePass');
 
@@ -32,6 +32,8 @@ Route::get('/team', function () {
 Route::get('resource/view/{id}', 'ResourceController@view');
 
 Route::get('/resource', 'ResourceController@index');
+Route::get('/resource/generateReport', 'ResourceController@generateReport');
+Route::get('/resource/generatePDF', 'ResourceController@generatePDF');
 
 //if Admin is required, place route in this group
 Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
@@ -60,6 +62,7 @@ Route::group(['middleware' => 'App\Http\Middleware\GAMiddleware'], function()
     Route::post('resource/createResource', 'ResourceController@createResource');
     Route::get('resource/edit/{id}', 'ResourceController@edit');
     Route::patch('resource/{id}', 'ResourceController@update');
+    Route::get('resource/add/{id}', 'ResourceController@add');
 
     //flag
     Route::get('flag/view/{id}', 'FlagController@view');

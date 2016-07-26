@@ -13,6 +13,8 @@ use App\Http\Requests;
 use App\Resource;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\View;
 
 
 class ResourceController extends Controller
@@ -47,6 +49,18 @@ class ResourceController extends Controller
         return view('resource.delete', compact('id'));
     }
 
+    public function add(Resource $id)
+    {
+        session()->put($id);
+
+        $resources = Resource::all();
+        $flags = Flag::all();
+        // load the view and pass the resources
+        return view('resource.index')
+            ->with('resources', $resources)->with('flag', $flags);
+
+    }
+
     public function destroy($id)
     {
         try{
@@ -76,4 +90,29 @@ class ResourceController extends Controller
     {
         return view('resource.view', compact('id'));
     }
+
+    public function generateReport()
+    {
+        //This will be replaced with session cart data -> $resources = Session::all();
+        $resources = Resource::all();
+
+        return view('resource.generateReport')
+            ->with('resources', $resources);
+    }
+
+    public function generatePDF()
+    {
+        //This will be replaced with session cart data -> $resources = Session::all();
+        $resources = Resource::all();
+
+        $pdf = App::make('dompdf.wrapper');
+
+        $view = View::make('resource.pdfHeader')->with('resources', $resources);
+        $contents = $view->render();
+
+        $pdf->loadHTML($contents);
+        return $pdf->stream();
+    }
+
+
 }

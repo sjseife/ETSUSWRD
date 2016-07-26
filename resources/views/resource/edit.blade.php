@@ -88,22 +88,11 @@
                 </div>
             </div>
             <hr />
+
             <div class="form-group">
-                <label class="col-md-2 control-label" for="ContactFirstName">Contact First Name</label>
+                <label class="col-md-2 control-label" for="PhoneNumber">Phone Number</label>
                 <div class="col-md-4">
-                    <input id="ContactFirstName" name="ContactFirstName" type="text" class="form-control input-md" value="{{ $id->ContactFirstName }}">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label" for="ContactLastName">Contact Last Name</label>
-                <div class="col-md-4">
-                    <input id="ContactLastName" name="ContactLastName" type="text" class="form-control input-md" value="{{ $id->ContactLastName }}">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label" for="ContactPhone">Phone Number</label>
-                <div class="col-md-4">
-                    <input id="ContactPhone" name="ContactPhone" type="tel" class="form-control input-md" value="{{ $id->ContactPhone }}">
+                    <input id="PhoneNumber" name="PhoneNumber" type="tel" class="form-control input-md" value="{{ $id->ContactPhone }}">
                 </div>
             </div>
             <div class="form-group">

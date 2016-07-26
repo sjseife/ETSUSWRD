@@ -99,21 +99,9 @@
             </div>
             <hr />
             <div class="form-group">
-                <label class="col-md-2 control-label" for="ContactFirstName">Contact First Name</label>
+                <label class="col-md-2 control-label" for="PhoneNumber">Phone Number</label>
                 <div class="col-md-4">
-                    <input id="ContactFirstName" name="ContactFirstName" type="text" placeholder="Jon" class="form-control input-md">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label" for="ContactLastName">Contact Last Name</label>
-                <div class="col-md-4">
-                    <input id="ContactLastName" name="ContactLastName" type="text" placeholder="Snow" class="form-control input-md">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label" for="ContactPhone">Phone Number</label>
-                <div class="col-md-4">
-                    <input id="ContactPhone" name="ContactPhone" type="tel" placeholder="(123) 456-7890" class="form-control input-md">
+                    <input id="PhoneNumber" name="PhoneNumber" type="tel" placeholder="(123) 456-7890" class="form-control input-md">
                 </div>
             </div>
             <div class="form-group">

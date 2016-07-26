@@ -16,4 +16,13 @@ class Category extends Model
         'Name',
     ];
 
+    /**
+     * Get the resources associated with the given categories
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function resources()
+    {
+        return $this->belongsToMany('App\Resource');
+    }
+
 }

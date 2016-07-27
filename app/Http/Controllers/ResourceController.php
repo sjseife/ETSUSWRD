@@ -81,9 +81,7 @@ class ResourceController extends Controller
 
     public function view(Resource $resource)
     {
-        $categories = Resource::where('id', $resource->id)->get();
-        dd($categories);
-        return view('resource.view', compact('resource'), compact('categories'));
+        return view('resource.view', compact('resource'));
     }
     
     public function generateReport()

@@ -35,7 +35,7 @@
                             <dt>Comments</dt>
                             <dd>{{ $resource->Comments }}</dd>
                             <dt>Categories</dt>
-                            @foreach ($categories as $category)
+                            @foreach ($resource->categories() as $category)
                                 <dd>{{ $category->name }}</dd>
                             @endforeach
                         </dl>

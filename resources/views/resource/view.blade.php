@@ -22,12 +22,6 @@
                             <dd>{{ $resource->State }}</dd>
                             <dt>Zip code</dt>
                             <dd>{{ $resource->Zipcode }}</dd>
-                            <dt>Contact First Name</dt>
-                            <dd>{{ $resource->ContactFirstName }}</dd>
-                            <dt>Contact Last Name</dt>
-                            <dd>{{ $resource->ContactLastName }}</dd>
-                            <dt>Contact Phone</dt>
-                            <dd>{{ $resource->ContactPhone }}</dd>
                             <dt>Opening Hours</dt>
                             <dd>{{ $resource->OpeningHours }}</dd>
                             <dt>Closing Hours</dt>

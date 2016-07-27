@@ -8,7 +8,7 @@
                     <div class="panel-heading">Welcome</div>
 
                     <div class="panel-body">
-                        I editing this stuff
+
                     </div>
                 </div>
             </div>

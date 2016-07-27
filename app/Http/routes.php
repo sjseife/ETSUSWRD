@@ -31,6 +31,11 @@ Route::get('/team', function () {
 //resource view link doesn't redirect to login page is no one is logged in
 Route::get('resource/view/{resource}', 'ResourceController@view');
 
+Route::get('/resource', 'ResourceController@index');
+Route::get('/resource/generateReport', 'ResourceController@generateReport');
+Route::get('/resource/generatePDF', 'ResourceController@generatePDF');
+Route::get('resource/view/{resource}', 'ResourceController@view');
+
 //if Admin is required, place route in this group
 Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 {
@@ -60,6 +65,14 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 //if GA or Admin is required, place route in this group
 Route::group(['middleware' => 'App\Http\Middleware\GAMiddleware'], function()
 {
+    //category
+    Route::get('/category', 'CategoryController@index');
+    Route::get('category/create', 'CategoryController@create');
+    Route::post('category/store', 'CategoryController@store');
+    Route::get('category/edit/{category}', 'CategoryController@edit');
+    Route::patch('category/{category}', 'CategoryController@update');
+    Route::get('category/view/{category}', 'CategoryController@view');
+
     //resource
     Route::get('/resource/generateReport', 'ResourceController@generateReport');
     Route::get('/resource', 'ResourceController@index');

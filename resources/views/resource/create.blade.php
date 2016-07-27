@@ -126,7 +126,7 @@
                 {!! Form::label('categories', 'Categories:', ['class' => 'col-md-2']) !!}
                 <div class="col-md-4">
                     {!! Form::select('categories[]', $categoryList, null, ['class' => 'form-control', 'multiple']) !!}
-                </div>
+                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-2"></div>

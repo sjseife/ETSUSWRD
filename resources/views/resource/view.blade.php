@@ -21,17 +21,7 @@
                             <dt>State</dt>
                             <dd>{{ $resource->State }}</dd>
                             <dt>Zip code</dt>
-<<<<<<< .merge_file_a16176
-                            <dd>{{ $id->Zipcode }}</dd>
-=======
                             <dd>{{ $resource->Zipcode }}</dd>
-                            <dt>Contact First Name</dt>
-                            <dd>{{ $resource->ContactFirstName }}</dd>
-                            <dt>Contact Last Name</dt>
-                            <dd>{{ $resource->ContactLastName }}</dd>
-                            <dt>Contact Phone</dt>
-                            <dd>{{ $resource->ContactPhone }}</dd>
->>>>>>> .merge_file_a06032
                             <dt>Opening Hours</dt>
                             <dd>{{ $resource->OpeningHours }}</dd>
                             <dt>Closing Hours</dt>
@@ -39,7 +29,7 @@
                             <dt>Comments</dt>
                             <dd>{{ $resource->Comments }}</dd>
                             <dt>Categories</dt>
-                            @foreach ($categories as $category)
+                            @foreach ($resource->categories() as $category)
                                 <dd>{{ $category->name }}</dd>
                             @endforeach
                         </dl>

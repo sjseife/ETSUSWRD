@@ -6,7 +6,7 @@
             <div class="editContent">
                 <h1 class="img-rounded" style="background-color: #f6f6f7; padding: 5px; padding-left: 20px">
                     {{$r->Name}}
-                    <!-- <div class="pull-right"><h3>{{$r->ContactPhone}}</h3> -->
+                    <!--<div class="pull-right"><h3>{{$r->ContactPhone}}</h3> </div> -->
                 </h1>
             </div>
         </div>

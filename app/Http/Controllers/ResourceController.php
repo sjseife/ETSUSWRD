@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
+use Mockery\CountValidator\Exception;
 
 
 class ResourceController extends Controller
@@ -56,7 +57,8 @@ class ResourceController extends Controller
 
     public function add(Resource $id)
     {
-        session()->put($id->id, $id);
+        session()->put($id->Id, $id->Id);
+        session()->save();
 
         $resources = Resource::all();
         $flags = Flag::all();
@@ -98,15 +100,36 @@ class ResourceController extends Controller
 
     public function generateReport()
     {
-        $resources = Session()->all();
+        $resources = [];
+
+        foreach (Resource::all() as $r) {
+            $num = ($r->Id);
+            foreach (session()->all() as $s) {
+
+                if ($s == (string)$num) {
+                    $resources[$num] = $r;
+
+                }
+            }
+        }
 
         return view('resource.generateReport')
             ->with('resources', $resources);
+
     }
 
     public function generatePDF()
     {
-        $resources = Session()->all();
+        $resources = [];
+
+        foreach (Resource::all() as $r) {
+            if (session()->all()->has($r->Id))
+            {
+                $resources += $r;
+            }
+
+
+        }
 
         $pdf = App::make('dompdf.wrapper');
 

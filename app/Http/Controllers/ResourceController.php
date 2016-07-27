@@ -56,7 +56,7 @@ class ResourceController extends Controller
 
     public function add(Resource $id)
     {
-        session()->put($id->id);
+        session()->put($id->id, $id);
 
         $resources = Resource::all();
         $flags = Flag::all();

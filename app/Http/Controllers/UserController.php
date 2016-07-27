@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Yajra\Datatables\Datatables;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -22,7 +22,6 @@ class UserController extends Controller
         return view('user.index')
             ->with('users', $users);
     }
-    
     public function edit(User $id)
     {
         return view('user.edit', compact('id'));

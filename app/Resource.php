@@ -19,4 +19,9 @@ class Resource extends  Model
         'Name', 'StreetAddress', 'StreetAddress2', 'City', 'County', 'State', 'Zipcode', 'ContactFirstName', 'ContactLastName', 'ContactPhone','OpeningHours','ClosingHours','Comments'
     ];
 
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class);
+    }
+
 }

@@ -26,7 +26,7 @@
     </style>
 </head>
 <body id="app-layout">
-@include('layouts.NavBar')
+    @include('layouts.NavBar')
 
     @yield('content')
 

@@ -1,4 +1,5 @@
 @extends('layouts.dataTables')
+
 @section('content')
     <h1 class="text-center">All Resources</h1>
 
@@ -58,8 +59,6 @@
                 </tbody>
             </table>
         </div>
-        <!-- create a new resource (uses the create method found at GET /resource/create -->
-        <a class="btn btn-small btn-primary pull-right" href="{{ URL::to('resource/create') }}">Create New Resource</a>
 
     </div>
 @stop

@@ -1,12 +1,12 @@
 
-@foreach($resources as $r)
+    @foreach($resources as $r)
     <div class="container">
 
         <div class="underlined-title">
             <div class="editContent">
                 <h1 class="img-rounded" style="background-color: #f6f6f7; padding: 5px; padding-left: 20px">
-                {{$r->Name}}
-                <!-- <div class="pull-right"><h3>{{$r->ContactPhone}}</h3> -->
+                    {{$r->Name}}
+                    <!-- <div class="pull-right"><h3>{{$r->ContactPhone}}</h3> -->
                 </h1>
             </div>
         </div>
@@ -65,4 +65,4 @@
         </div><!-- /.row -->
         <hr><br><br>
     </div><!-- /.container -->
-@endforeach
+    @endforeach

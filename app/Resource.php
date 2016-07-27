@@ -16,7 +16,7 @@ class Resource extends  Model
     public $timestamps = false;
     
     protected $fillable = [
-        'Name', 'StreetAddress', 'StreetAddress2', 'City', 'County', 'State', 'Zipcode', 'ContactFirstName', 'ContactLastName', 'ContactPhone','OpeningHours','ClosingHours','Comments'
+        'Name', 'StreetAddress', 'StreetAddress2', 'City', 'County', 'State', 'Zipcode', 'OpeningHours','ClosingHours','Comments'
     ];
 
     public function contacts()
@@ -30,7 +30,7 @@ class Resource extends  Model
      */
     public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class)->withTimestamps();
     }
 
 }

@@ -55,10 +55,7 @@ class ResourceController extends Controller
 
         $resources = Resource::all();
         $flags = Flag::all();
-        // load the view and pass the resources
-        return view('resource.index')
-            ->with('resources', $resources)->with('flag', $flags);
-
+        return back();
     }
 
     public function destroy($id)
@@ -93,7 +90,6 @@ class ResourceController extends Controller
 
     public function generateReport()
     {
-        //This will be replaced with session cart data -> $resources = Session::all();
         $resources = Session()->all();
 
         return view('resource.generateReport')
@@ -102,7 +98,6 @@ class ResourceController extends Controller
 
     public function generatePDF()
     {
-        //This will be replaced with session cart data -> $resources = Session::all();
         $resources = Session()->all();
 
         $pdf = App::make('dompdf.wrapper');

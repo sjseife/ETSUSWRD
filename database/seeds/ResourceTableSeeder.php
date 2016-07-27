@@ -19,9 +19,7 @@ class ResourceTableSeeder extends Seeder
             'County' => 'Washington',
             'State' => 'TN',
             'ZipCode' => '37601',
-            'ContactFirstName' => 'First',
-            'ContactLastName' => 'Last',
-            'ContactPhone' => '423-123-3244',
+            'PhoneNumber' => '423-123-3244',
             'OpeningHours' => '12:00:00',
             'ClosingHours' => '20:00:00',
             'Comments' => 'Surprise! The site does not exist!'
@@ -33,9 +31,7 @@ class ResourceTableSeeder extends Seeder
             'County' => 'Washington',
             'State' => 'TN',
             'ZipCode' => '37604',
-            'ContactFirstName' => 'Notta',
-            'ContactLastName' => 'Person',
-            'ContactPhone' => '423-234-3944',
+            'PhoneNumber' => '423-234-3944',
             'OpeningHours' => '07:00:00',
             'ClosingHours' => '21:00:00',
             'Comments' => 'Surprise! The site does not exist!'
@@ -48,9 +44,7 @@ class ResourceTableSeeder extends Seeder
             'County' => 'Washington',
             'State' => 'TN',
             'ZipCode' => '37615',
-            'ContactFirstName' => 'Pants',
-            'ContactLastName' => 'McGee',
-            'ContactPhone' => '423-954-3774',
+            'PhoneNumber' => '423-954-3774',
             'OpeningHours' => '00:00:00',
             'ClosingHours' => '00:00:00',
             'Comments' => 'Surprise! The site does not exist!'

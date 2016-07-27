@@ -1,4 +1,4 @@
-                @extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
     <div class="container">
@@ -9,25 +9,29 @@
                     <div class="panel-body">
                         <dl class="dl-horizontal">
                             <dt>Name</dt>
-                            <dd>{{ $id->Name }}</dd>
+                            <dd>{{ $resource->Name }}</dd>
                             <dt>Street Address</dt>
-                            <dd>{{ $id->StreetAddress }}</dd>
+                            <dd>{{ $resource->StreetAddress }}</dd>
                             <dt>Street Address 2</dt>
-                            <dd>{{ $id->StreetAddress2 }}</dd>
+                            <dd>{{ $resource->StreetAddress2 }}</dd>
                             <dt>City</dt>
-                            <dd>{{ $id->City }}</dd>
+                            <dd>{{ $resource->City }}</dd>
                             <dt>County</dt>
-                            <dd>{{ $id->County }}</dd>
+                            <dd>{{ $resource->County }}</dd>
                             <dt>State</dt>
-                            <dd>{{ $id->State }}</dd>
+                            <dd>{{ $resource->State }}</dd>
                             <dt>Zip code</dt>
-                            <dd>{{ $id->Zipcode }}</dd>
+                            <dd>{{ $resource->Zipcode }}</dd>
                             <dt>Opening Hours</dt>
-                            <dd>{{ $id->OpeningHours }}</dd>
+                            <dd>{{ $resource->OpeningHours }}</dd>
                             <dt>Closing Hours</dt>
-                            <dd>{{ $id->ClosingHours }}</dd>
+                            <dd>{{ $resource->ClosingHours }}</dd>
                             <dt>Comments</dt>
-                            <dd>{{ $id->Comments }}</dd>
+                            <dd>{{ $resource->Comments }}</dd>
+                            <dt>Categories</dt>
+                            @foreach ($resource->categories() as $category)
+                                <dd>{{ $category->name }}</dd>
+                            @endforeach
                         </dl>
                         <div class="col-lg-6"><br/><br/>
                             <div class="text-center"><a href="{{'/home'}}">Go Back to Home Page</a></br></br>

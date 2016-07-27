@@ -1,4 +1,4 @@
-@extends('layouts.app')
+                @extends('layouts.app')
 
 @section('content')
     <div class="container">
@@ -9,29 +9,31 @@
                     <div class="panel-body">
                         <dl class="dl-horizontal">
                             <dt>Name</dt>
-                            <dd>{{ $resource->Name }}</dd>
+                            <dd>{{ $id->Name }}</dd>
                             <dt>Street Address</dt>
-                            <dd>{{ $resource->StreetAddress }}</dd>
+                            <dd>{{ $id->StreetAddress }}</dd>
                             <dt>Street Address 2</dt>
-                            <dd>{{ $resource->StreetAddress2 }}</dd>
+                            <dd>{{ $id->StreetAddress2 }}</dd>
                             <dt>City</dt>
-                            <dd>{{ $resource->City }}</dd>
+                            <dd>{{ $id->City }}</dd>
                             <dt>County</dt>
-                            <dd>{{ $resource->County }}</dd>
+                            <dd>{{ $id->County }}</dd>
                             <dt>State</dt>
-                            <dd>{{ $resource->State }}</dd>
+                            <dd>{{ $id->State }}</dd>
                             <dt>Zip code</dt>
-                            <dd>{{ $resource->Zipcode }}</dd>
+                            <dd>{{ $id->Zipcode }}</dd>
+                            <dt>Contact First Name</dt>
+                            <dd>{{ $id->ContactFirstName }}</dd>
+                            <dt>Contact Last Name</dt>
+                            <dd>{{ $id->ContactLastName }}</dd>
+                            <dt>Contact Phone</dt>
+                            <dd>{{ $id->ContactPhone }}</dd>
                             <dt>Opening Hours</dt>
-                            <dd>{{ $resource->OpeningHours }}</dd>
+                            <dd>{{ $id->OpeningHours }}</dd>
                             <dt>Closing Hours</dt>
-                            <dd>{{ $resource->ClosingHours }}</dd>
+                            <dd>{{ $id->ClosingHours }}</dd>
                             <dt>Comments</dt>
-                            <dd>{{ $resource->Comments }}</dd>
-                            <dt>Categories</dt>
-                            @foreach ($resource->categories() as $category)
-                                <dd>{{ $category->name }}</dd>
-                            @endforeach
+                            <dd>{{ $id->Comments }}</dd>
                         </dl>
                         <div class="col-lg-6"><br/><br/>
                             <div class="text-center"><a href="{{'/home'}}">Go Back to Home Page</a></br></br>

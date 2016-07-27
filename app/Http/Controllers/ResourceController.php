@@ -55,7 +55,8 @@ class ResourceController extends Controller
 
         $resources = Resource::all();
         $flags = Flag::all();
-        return back();
+        return view('resource.index')
+            ->with('resources', $resources)->with('flag', $flags);
     }
 
     public function destroy($id)

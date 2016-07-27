@@ -29,11 +29,18 @@ Route::get('/team', function () {
 });
 
 //resource view link doesn't redirect to login page is no one is logged in
-Route::get('resource/view/{id}', 'ResourceController@view');
+Route::get('resource/view/{resource}', 'ResourceController@view');
 
 //if Admin is required, place route in this group
 Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 {
+    //category
+    //Route::get('category/create', 'CategoryController@create');
+    //Route::post('category/store', 'CategoryController@store');
+    //Route::get('category/edit/{category}', 'CategoryController@edit');
+    //Route::patch('category/{category}', 'CategoryController@update');
+    Route::get('category/view/{category}', 'CategoryController@view');
+    
     //resource
     Route::get('resource/delete/{id}', 'ResourceController@delete');
     Route::delete('resource/destroy/{id}', 'ResourceController@destroy');

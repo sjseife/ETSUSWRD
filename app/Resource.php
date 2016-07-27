@@ -24,4 +24,13 @@ class Resource extends  Model
         return $this->hasMany(Contact::class);
     }
 
+    /**
+     * Get the categories associated with a given resource
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
 }

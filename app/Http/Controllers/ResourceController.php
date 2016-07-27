@@ -123,12 +123,14 @@ class ResourceController extends Controller
         $resources = [];
 
         foreach (Resource::all() as $r) {
-            if (session()->all()->has($r->Id))
-            {
-                $resources += $r;
+            $num = ($r->Id);
+            foreach (session()->all() as $s) {
+
+                if ($s == (string)$num) {
+                    $resources[$num] = $r;
+
+                }
             }
-
-
         }
 
         $pdf = App::make('dompdf.wrapper');

@@ -70,4 +70,14 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    protected function updatePass(Request $request, User $id)
+    {
+        dd($id);
+        unset($request['_method']);
+        unset($request['_token']);
+        User::where('id', $id->id)
+            ->update($request->all());
+        return view('index');
+    }
 }

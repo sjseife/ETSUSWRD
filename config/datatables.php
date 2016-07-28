@@ -25,7 +25,7 @@ return [
     ],
 
     /**
-     * DataTables default fractal serializer.
+     * DataTables fractal configurations.
      */
     'fractal'         => [
         'serializer' => 'League\Fractal\Serializer\DataArraySerializer',
@@ -74,5 +74,5 @@ return [
      * Snappy package: barryvdh/laravel-snappy
      * Excel package: maatwebsite/excel
      */
-    'pdf_generator' => 'excel'
+    'pdf_generator'   => 'excel'
 ];

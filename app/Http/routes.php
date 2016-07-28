@@ -22,7 +22,7 @@ Route::get('/home', 'HomeController@index');
 Route::get('/auth/newPassword',function(){
     return view('/auth/newPassword')->with('user', Auth::user())->with('errors',null);
 });
-Route::patch('auth/newPassword', 'NewPassController@updatePass');
+Route::patch('auth/newPassword/{id}', 'Auth\AuthController@updatePass');
 
 Route::get('/team', function () {
     return view('team');
@@ -34,13 +34,22 @@ Route::get('resource/view/{resource}', 'ResourceController@view');
 Route::get('/resource', 'ResourceController@index');
 Route::get('/resource/generateReport', 'ResourceController@generateReport');
 Route::get('/resource/generatePDF', 'ResourceController@generatePDF');
+Route::get('resource/view/{resource}', 'ResourceController@view');
 
 //if Admin is required, place route in this group
 Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 {
+    //category
+    //Route::get('category/create', 'CategoryController@create');
+    //Route::post('category/store', 'CategoryController@store');
+    //Route::get('category/edit/{category}', 'CategoryController@edit');
+    //Route::patch('category/{category}', 'CategoryController@update');
+    Route::get('category/view/{category}', 'CategoryController@view');
+    
     //resource
     Route::get('resource/delete/{id}', 'ResourceController@delete');
     Route::delete('resource/destroy/{id}', 'ResourceController@destroy');
+    Route::get('/resource', 'ResourceController@index');
 
     //flag
     Route::get('/flag', 'FlagController@index');
@@ -65,10 +74,14 @@ Route::group(['middleware' => 'App\Http\Middleware\GAMiddleware'], function()
     Route::get('category/view/{category}', 'CategoryController@view');
 
     //resource
+    Route::get('/resource/generateReport', 'ResourceController@generateReport');
+    Route::get('/resource', 'ResourceController@index');
+    Route::get('/resource/generatePDF', 'ResourceController@generatePDF');
     Route::get('resource/create', 'ResourceController@create');
     Route::post('resource/createResource', 'ResourceController@createResource');
     Route::get('resource/edit/{id}', 'ResourceController@edit');
     Route::patch('resource/{id}', 'ResourceController@update');
+    Route::get('resource/add/{id}', 'ResourceController@add');
 
     //flag
     Route::get('flag/view/{id}', 'FlagController@view');

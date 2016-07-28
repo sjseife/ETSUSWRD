@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
+use Mockery\CountValidator\Exception;
 
 
 class ResourceController extends Controller
@@ -54,6 +55,17 @@ class ResourceController extends Controller
         return view('resource.delete', compact('id'));
     }
 
+    public function add(Resource $id)
+    {
+        session()->put($id->Id, $id->Id);
+        session()->save();
+
+        $resources = Resource::all();
+        $flags = Flag::all();
+        return view('resource.index')
+            ->with('resources', $resources)->with('flag', $flags);
+    }
+
     public function destroy($id)
     {
         try{
@@ -81,22 +93,45 @@ class ResourceController extends Controller
 
     public function view(Resource $resource)
     {
-        return view('resource.view', compact('resource'));
+        $categories = Resource::where('id', $resource->id)->get();
+        dd($categories);
+        return view('resource.view', compact('resource'), compact('categories'));
     }
-    
+
     public function generateReport()
     {
-        //This will be replaced with session cart data -> $resources = Session::all();
-        $resources = Resource::all();
-        
+        $resources = [];
+
+        foreach (Resource::all() as $r) {
+            $num = ($r->Id);
+            foreach (session()->all() as $s) {
+
+                if ($s == (string)$num) {
+                    $resources[$num] = $r;
+
+                }
+            }
+        }
+
         return view('resource.generateReport')
             ->with('resources', $resources);
+
     }
 
     public function generatePDF()
     {
-        //This will be replaced with session cart data -> $resources = Session::all();
-        $resources = Resource::all();
+        $resources = [];
+
+        foreach (Resource::all() as $r) {
+            $num = ($r->Id);
+            foreach (session()->all() as $s) {
+
+                if ($s == (string)$num) {
+                    $resources[$num] = $r;
+
+                }
+            }
+        }
 
         $pdf = App::make('dompdf.wrapper');
 

@@ -50,6 +50,9 @@
 
                             <!-- delete the resource (uses the delete method found at GET /resource/{id} -->
                             <a class="btn btn-small btn-warning" href="{{ URL::to('resource/delete/' . $value->Id) }}">Delete</a>
+
+                            <a class="btn btn-small btn-primary" href="{{ URL::to('resource/add/' . $value->Id) }}">Add to Cart</a>
+
                         </td>
                     </tr>
                 @endforeach
@@ -58,8 +61,11 @@
         </div>
 
     </div>
-@stop
 
+@stop
+<?php
+echo session()->all()[1];
+?>
 @push('scripts')
 <script>
     $(document).ready(function() {

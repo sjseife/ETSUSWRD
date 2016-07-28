@@ -13,9 +13,9 @@ class UserController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
-   {
+    {
         $users = User::all();
 
         // load the view and pass the users

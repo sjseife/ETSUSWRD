@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Resource extends  Model
+class Resource extends Model
 {
     protected $table = 'Resource';
     /**
@@ -30,7 +30,7 @@ class Resource extends  Model
      */
     public function categories()
     {
-        return $this->belongsToMany(Category::class)->withTimestamps();
+        return $this->belongsToMany('App\Category', 'category_resource');
     }
 
 }

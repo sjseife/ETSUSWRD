@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CategoryResource extends Migration
+class CreateCategoryResourceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,8 +16,6 @@ class CategoryResource extends Migration
             $table->integer('category_id');
             $table->integer('resource_id');
             $table->primary(['resource_id', 'category_id']);
-
-            $table->timestamps();
         });
     }
 
@@ -31,3 +29,4 @@ class CategoryResource extends Migration
         Schema::drop('category_resource');
     }
 }
+

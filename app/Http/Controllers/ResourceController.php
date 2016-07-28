@@ -81,6 +81,7 @@ class ResourceController extends Controller
 
     public function view(Resource $resource)
     {
+        dd(Resource::find(4)->categories()->get());
         return view('resource.view', compact('resource'));
     }
     

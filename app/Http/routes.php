@@ -92,7 +92,7 @@ Route::group(['middleware' => 'App\Http\Middleware\GAMiddleware'], function()
     Route::delete('flag/destroy/{id}', 'FlagController@destroy');
 
     //contact
-    Route::get('/contacts', 'ContactController@index');
+    Route::get('/contact', 'ContactController@index');
     Route::get('contact/create', 'ContactController@create');
     Route::post('contact/createContact', 'ContactController@createContact');
 });

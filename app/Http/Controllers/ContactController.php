@@ -8,27 +8,44 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Contact;
+use App\Resource;
+use App\Http\Requests;
+use Illuminate\Support\Facades\DB;
 
 class ContactController extends Controller
 {
     public function index()
     {
         $contacts = Contact::all();
+        return view('contact.index', compact('contacts'));
+    }
 
-        // load the view and pass the contacts
-        return view('contact.index')
-            ->with('contacts', $contacts);
+    public function viewForResource($id)
+    {
+        $contactsAll = Contact::all();
+        $contacts = null;
+        foreach ($contactsAll as $con) {
+            if ($con->resourceId == $id)
+            {
+                $contacts += $con;
+            }
+        }
+        return view('contact.index', compact('contacts'));
     }
 
     public function create()
     {
-        return view('contact.create');
+        $resource = Resource::all();
+        return view('contact.create',compact('resource'));
     }
     
     public function createContact()
     {
-        $contact = new Contact(request()->all());
-        $contact->save();
+        $category = new Contact(request()->all());
+        $category->save();
+
         return redirect('/home');
     }
 }

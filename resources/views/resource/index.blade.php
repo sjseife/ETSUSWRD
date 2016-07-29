@@ -63,9 +63,6 @@
     </div>
 
 @stop
-<?php
-echo session()->all()[1];
-?>
 @push('scripts')
 <script>
     $(document).ready(function() {

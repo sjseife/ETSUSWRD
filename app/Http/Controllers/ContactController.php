@@ -29,6 +29,23 @@ class ContactController extends Controller
         return view('contact.view', compact('id', 'resource'));
     }
 
+    public function edit(Contact $id)
+    {
+        $resource = Resource::all();
+        return view('contact.edit', compact('id', 'resource'));
+    }
+
+    public function update(Request $request, Contact $id)
+    {
+        unset($request['_method']);
+        unset($request['_token']);
+        $id->setUpdatedAt(null);
+        $id->setCreatedAt(null);
+        Contact::where('id', $id->id)
+            ->update($request->all());
+        return redirect('/contact');
+    }
+
     public function create()
     {
         $resource = Resource::all();

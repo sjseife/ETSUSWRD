@@ -92,6 +92,8 @@ Route::group(['middleware' => 'App\Http\Middleware\GAMiddleware'], function()
     Route::delete('flag/destroy/{id}', 'FlagController@destroy');
 
     //contact
+    Route::get('/contact/edit/{id}', 'ContactController@edit');
+    Route::patch('/contact/{id}', 'ContactController@update');
     Route::get('/contact/view/{id}', 'ContactController@view');
     Route::get('/contact', 'ContactController@index');
     Route::get('contact/create', 'ContactController@create');

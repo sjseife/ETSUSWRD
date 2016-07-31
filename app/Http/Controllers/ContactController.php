@@ -8,11 +8,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Contact;
 use App\Resource;
-use App\Http\Requests;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
+use App\Http\Requests;
 
 class ContactController extends Controller
 {
@@ -22,17 +23,10 @@ class ContactController extends Controller
         return view('contact.index', compact('contacts'));
     }
 
-    public function viewForResource($id)
+    public function view(Contact $id)
     {
-        $contactsAll = Contact::all();
-        $contacts = null;
-        foreach ($contactsAll as $con) {
-            if ($con->resourceId == $id)
-            {
-                $contacts += $con;
-            }
-        }
-        return view('contact.index', compact('contacts'));
+        $resource = Resource::all();
+        return view('contact.view', compact('id', 'resource'));
     }
 
     public function create()
@@ -46,6 +40,6 @@ class ContactController extends Controller
         $category = new Contact(request()->all());
         $category->save();
 
-        return redirect('/home');
+        return redirect('/contact');
     }
 }

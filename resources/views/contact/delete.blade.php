@@ -8,7 +8,7 @@
                     <div class="panel-heading">Delete</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="post" action="/flag/destroy/{{$id->Id}}" accept-charset="UTF-8">
+                        <form class="form-horizontal" method="post" action="/contact/destroy/{{$id->id}}" accept-charset="UTF-8">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
                             <dl class="dl-horizontal">
@@ -20,31 +20,17 @@
                                         @endif
                                     @endforeach
                                 </dd>
-                                <dt>Submitted By</dt>
-                                <dd>
-                                    @foreach($user as $u)
-                                        @if($u->id == $id->user_id)
-                                            {{$u->email}}
-                                        @endif
-                                    @endforeach
-                                </dd>
-                                <dt>Level</dt>
-                                <dd>
-                                    @if($id->Level == 0)
-                                        Resolved
-                                    @elseif($id->Level == 1)
-                                        GA
-                                    @else
-                                        Admin
-                                    @endif
-                                </dd>
-                                <dt>Date</dt>
-                                <dd>{{ $id->Date }}</dd>
-                                <dt>Comments</dt>
-                                <dd>{{ $id->Comments }}</dd>
+                                <dt>First Name</dt>
+                                <dd>{{ $id->firstName }}</dd>
+                                <dt>Last Name</dt>
+                                <dd>{{ $id->lastName }}</dd>
+                                <dt>Phone Number</dt>
+                                <dd>{{ $id->phoneNumber }}</dd>
+                                <dt>Email</dt>
+                                <dd>{{ $id->email}}</dd>
                             </dl>
-                            <div class="col-lg-6"><br/><br/>
-                                <div class="text-center">Delete this flag from the database?</br></br>
+                            <div class="col-lg-6"><br><br>
+                                <div class="text-center">Delete this contact from the database?<br><br>
                                     <div class="col-md-5 text-center">
                                         <input class="btn btn-primary" type="submit" value="Yes!">
                                     </div>
@@ -55,6 +41,5 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 @endsection

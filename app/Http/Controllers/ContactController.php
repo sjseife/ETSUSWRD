@@ -46,6 +46,23 @@ class ContactController extends Controller
         return redirect('/contact');
     }
 
+    public function delete(Contact $id)
+    {
+        $resource = Resource::all();
+        return view('contact.delete', compact('id', 'resource'));
+    }
+
+    public function destroy($id)
+    {
+        try{
+            DB::delete('delete from contact where id = "' . $id . '"');
+            return redirect('/contact');
+        }
+        catch (Exeption $e) {
+            return $e;
+        }
+    }
+
     public function create()
     {
         $resource = Resource::all();

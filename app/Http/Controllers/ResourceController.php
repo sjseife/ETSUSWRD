@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Flag;
+use App\Contact;
 use App\Http\Requests;
 use App\Resource;
 use Illuminate\Support\Facades\DB;
@@ -25,9 +26,9 @@ class ResourceController extends Controller
     {
         $resources = Resource::all();
         $flags = Flag::all();
+        $contacts = Contact::all();
         // load the view and pass the resources
-        return view('resource.index')
-            ->with('resources', $resources)->with('flag', $flags);
+        return view('resource.index', compact('resources','flags','contacts'));
     }
 
     public function __construct()

@@ -30,7 +30,16 @@
                     <input id="phoneNumber" name="phoneNumber" type="text" placeholder="4238576545" class="form-control input-md">
                 </div>
             </div>
-
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="resource_id">Resource</label>
+                <div class="col-md-4">
+                    <select id="resource_id" name="resource_id" class="form-control input-md">
+                        @foreach($resource as $r)
+                            <option value="{{$r->Id}}">{{$r->Name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <div class="form-group">
                 <div class="col-md-2"></div>
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -38,6 +47,7 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
+
         </form>
     </div>
 @endsection

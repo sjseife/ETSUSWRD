@@ -4,9 +4,6 @@
 @section('content')
 
     <div class="content">
-        <div class="col-md-11 text-center">
-            <a href="/users" class="btn btn-link" type="link">Back to Users</a>
-        </div>
         <form class="form-horizontal" method="POST" action="/user/{{$id->id}}">
             {{ method_field('PATCH') }}
             {{ csrf_field() }}
@@ -50,6 +47,7 @@
             </div>
             <div class="col-md-5 text-center">
                 <input class="btn btn-primary" type="submit" value="Update">
+                <a class="btn btn-small btn-info" href="{{'/users'}}">Go Back to Users Page</a>
             </div>
         </form>
     </div>

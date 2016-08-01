@@ -68,6 +68,10 @@
     </div>
 
 @stop
+<<<<<<< HEAD
+
+=======
+>>>>>>> 3788ba697b338a037178a2e96b528c0368e9bf2b
 @push('scripts')
 <script>
     $(document).ready(function() {

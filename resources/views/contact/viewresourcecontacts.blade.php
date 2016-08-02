@@ -8,7 +8,6 @@
             <table class="table table-striped table-bordered">
                 <thead>
                 <tr>
-                    <td><b>Contact ID</b></td>
                     <td><b>First Name</b></td>
                     <td><b>Last Name</b></td>
                     <td><b>Email</b></td>
@@ -19,7 +18,6 @@
                 @foreach($contacts as $c)
                     @if($c->resource_id == $id->Id)
                         <tr>
-                            <td>{{ $c->id }}</td>
                             <td>{{ $c->firstName }} </td>
                             <td>{{ $c->lastName }}</td>
                             <td>{{ $c->email }}</td>

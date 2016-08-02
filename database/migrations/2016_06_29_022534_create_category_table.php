@@ -12,10 +12,20 @@ class CreateCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('Category', function (Blueprint $table) {
-            $table->increments('Id');
-            $table->string('Name', 150);
-            //$table->timestamps();
+        Schema::create('categories', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name', 150);
+            $table->timestamps();
+        });
+
+        Schema::create('category_resource', function (Blueprint $table) {
+            $table->integer('category_id')->unsigned()->index();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+
+            $table->integer('resource_id')->unsigned()->index();
+            $table->foreign('resource_id')->references('Id')->on('resource')->onDelete('cascade');
+
+            $table->timestamps();
         });
     }
 
@@ -26,6 +36,8 @@ class CreateCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::drop('Category');
+        Schema::drop('category_resource');
+        Schema::drop('categories');
+        
     }
 }

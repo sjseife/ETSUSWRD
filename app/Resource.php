@@ -2,23 +2,19 @@
 
 namespace App;
 
+namespace App;
+
+
 use Illuminate\Database\Eloquent\Model;
 
-class Resource extends  Model
+class Resource extends Model
 {
-    protected $table = 'Resource';
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    
-    public $timestamps = false;
-    
-    protected $fillable = [
-        'Name', 'StreetAddress', 'StreetAddress2', 'City', 'County', 'State', 'Zipcode', 'OpeningHours','ClosingHours','Comments'
-    ];
 
+    protected $table = 'resource';
+    protected $fillable = [
+        'Name', 'StreetAddress', 'StreetAddress2', 'City', 'County', 'State', 'Zipcode', 'PhoneNumber', 'OpeningHours','ClosingHours','Comments'
+    ];
+    
     public function contacts()
     {
         return $this->hasMany(Contact::class);
@@ -30,7 +26,15 @@ class Resource extends  Model
      */
     public function categories()
     {
-        return $this->belongsToMany(Category::class)->withTimestamps();
+        return $this->belongsToMany('App\Category', 'category_resource')->withTimestamps();
     }
 
+    /**
+     * Get a list of category ids associated with the current resource
+     * @return array
+     */
+    public function getCategoryListAttribute()
+    {
+        return $this->categories->lists('id')->all();
+    }
 }

@@ -19,6 +19,7 @@ class GAMiddleware
         {
             if($request->user()->role == 'GA' || $request->user()->role == 'Admin')
             {
+                dd('hit');
                 return $next($request);
             }
             else

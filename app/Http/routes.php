@@ -140,7 +140,7 @@ Route::group(['middleware' => 'App\Http\Middleware\GAMiddleware'], function()
 	Route::get('/resource/generatePDF', 'ResourceController@generatePDF');
 	Route::get('resources/create', 'ResourceController@create');
 	Route::post('resources', 'ResourceController@store');
-	Route::get('resources/{resource}/edit', 'ResourceController@edit');
+	Route::get('resources/edit/{resource}', 'ResourceController@edit');
 	Route::patch('resources/{resource}', 'ResourceController@update');
 	Route::get('resource/add/{resource}', 'ResourceController@add');
 

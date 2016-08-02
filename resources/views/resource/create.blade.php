@@ -11,7 +11,7 @@
     @include('resource._form', ['submitButtonText' => 'Create Resource'])
     {!! Form::close() !!}
 
-    {{--If user does not enter required field.--}}
+    <!-- If user does not enter required field.-->
     @include('errors.list')
 
 

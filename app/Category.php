@@ -12,6 +12,6 @@ class Category extends Model
 
     public function resources()
     {
-        return $this->belongsToMany('App\Resource', 'category_resource')->withTimestamps();
+        return $this->belongsToMany(Resource::class, 'category_resource')->withTimestamps();
     }
 }

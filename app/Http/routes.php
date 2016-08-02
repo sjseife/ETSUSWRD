@@ -1,5 +1,5 @@
 <?php
-
+use App\Flag;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -13,7 +13,8 @@
 
 Route::get('/', function()
 {
-	return View::make('home');
+	$flags = count(Flag::all());
+	return View::make('home', compact('flags'));
 });
 
 Route::get('/charts', function()

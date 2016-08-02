@@ -1,4 +1,4 @@
-@extends('layouts.dataTables')
+@extends('layouts.dashboard')
 
 @section('content')
     <h1 class="text-center">All Resources</h1>
@@ -12,12 +12,13 @@
                 <tr>
                     <th>Name</th>
                     <th>County</th>
+                    <th>Contact First Name</th>
+                    <th>Contact Last Name</th>
+                    <th>Phone</th>
                     <th>Opening Hours</th>
                     <th>Closing Hours</th>
                     <th>Status</th>
-                    <th>Contacts</th>
-                    <th>Add to Report</th>
-                    <th>Actions</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -26,27 +27,18 @@
                     <tr>
                         <td>{{ $value->Name }}</td>
                         <td>{{ $value->County }}</td>
+                        <td>{{ $value->ContactFirstName }}</td>
+                        <td>{{ $value->ContactLastName }}</td>
+                        <td>{{ $value->ContactPhone }}</td>
                         <td>{{ $value->OpeningHours }}</td>
                         <td>{{ $value->ClosingHours }}</td>
                         <td>
-                            @foreach($flags as $f)
+                            @foreach($flag as $f)
                                 @if($f->resource_id == $value->Id && $link == false)
                                     <a href="flag/resourceview/{{$value->Id}}" class="btn btn-danger btn-sm">Flagged</a>
                                     <?php $link = true; ?>
                                 @endif
                             @endforeach
-                        </td>
-                        <td>
-                            @foreach($contacts as $c)
-                                @if($c->resource_id == $value->Id)
-                                    <a href="contact/view/{{$c->id}}" class="btn btn-warning btn-sm">{{$c->firstName}} {{$c->lastName}}</a>
-                                    <?php $link = true; ?>
-                                @endif
-                            @endforeach
-                        </td>
-                        <td>
-                            <a class="btn btn-small btn-primary" href="{{ URL::to('resource/add/' . $value->Id) }}">Add to Cart</a>
-
                         </td>
                         <td class="text-center col-md-3">
 
@@ -58,6 +50,9 @@
 
                             <!-- delete the resource (uses the delete method found at GET /resource/{id} -->
                             <a class="btn btn-small btn-warning" href="{{ URL::to('resource/delete/' . $value->Id) }}">Delete</a>
+
+                            <a class="btn btn-small btn-primary" href="{{ URL::to('resource/add/' . $value->Id) }}">Add to Cart</a>
+
                         </td>
                     </tr>
                 @endforeach
@@ -68,10 +63,6 @@
     </div>
 
 @stop
-<<<<<<< HEAD
-
-=======
->>>>>>> 3788ba697b338a037178a2e96b528c0368e9bf2b
 @push('scripts')
 <script>
     $(document).ready(function() {

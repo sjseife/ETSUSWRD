@@ -22,7 +22,7 @@
                 <li><a href="{{ url('/resource') }}">Resources</a></li>
                 <li><a href="{{ url('/users') }}">Users</a></li>
                 <li><a href="{{ url('/flag') }}">Flags</a></li>
-                <li><a href="{{ url('/contact') }}">Contacts</a></li>
+
             </ul>
 
             <!-- Right Side Of Navbar -->

@@ -1,4 +1,4 @@
-@extends('layouts.dataTables')
+@extends('layouts.dashboard')
 
 @section('content')
 

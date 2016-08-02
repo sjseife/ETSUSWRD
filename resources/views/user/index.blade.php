@@ -1,4 +1,4 @@
-@extends('layouts.dataTables')
+@extends('layouts.dashboard')
 
 @section('content')
 <h1 class="text-center">All Users</h1>
@@ -13,6 +13,8 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Role</th>
+                <th>Created</th>
+                <th>Updated</th>
                 <th></th>
             </tr>
             </thead>
@@ -23,6 +25,8 @@
                     <td>{{ $value->name }}</td>
                     <td>{{ $value->email }}</td>
                     <td>{{ $value->role }}</td>
+                    <td>{{ $value->created_at }}</td>
+                    <td>{{ $value->updated_at }}</td>
                     <td class="text-center col-md-3">
 
                         <!-- show the user (uses the show method found at GET /user/view/{id} -->

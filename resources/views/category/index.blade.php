@@ -1,4 +1,4 @@
-@extends('layouts.dataTables')
+@extends('layouts.dashboard')
 
 @section('content')
     <h1 class="text-center">All Categories</h1>

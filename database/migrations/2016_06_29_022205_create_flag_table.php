@@ -22,7 +22,7 @@ class CreateFlagTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('resource_id')->unsigned();
             $table->foreign('resource_id')->references('Id')->on('Resource');
-            $table->timestamps();
+            //$table->timestamps();
         });
     }
 

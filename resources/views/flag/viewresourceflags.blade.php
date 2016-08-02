@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('content')
     <h1 class="text-center">All Flags for {{$id->Name}}</h1>

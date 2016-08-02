@@ -6,23 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $table = 'category';
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'Name',
+        'name'
     ];
 
-    /**
-     * Get the resources associated with the given categories
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
     public function resources()
     {
-        return $this->belongsToMany(Resource::class)->withTimestamps();
+        return $this->belongsToMany('App\Resource', 'category_resource')->withTimestamps();
     }
-
 }

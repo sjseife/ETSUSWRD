@@ -7,14 +7,13 @@
  */
 
 namespace App\Http\Controllers;
-
 use App\Category;
 use App\Flag;
 use App\Contact;
-use App\Http\Requests;
+use App\Http\Requests\ResourceRequest;
+use App\Http\Requests\Request;
 use App\Resource;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
 use Mockery\CountValidator\Exception;
@@ -43,58 +42,66 @@ class ResourceController extends Controller
         return view('resource.create', compact('categoryList'));
     }
 
-    public function createResource()
+    public function store(ResourceRequest $request)
     {
-        $resource = new Resource(request()->all());
+        $syncCategories = $this->checkForNewCategories($request->input('category_list'));
+        $resource = new Resource($request->all());
         $resource->save();
-        $categoryIds = request()->input('categories');
-        $resource->categories()->attach($categoryIds);
+        $resource->categories()->attach($syncCategories);
 
-        return redirect('/home');
+        \Session::flash('flash_message', 'Resource Created Successfully!');
+
+        return redirect('resources');
     }
 
-    public function delete(Resource $id)
+    protected function checkForNewCategories(array $requestCategories)
     {
-        return view('resource.delete', compact('id'));
+        //all categories, and requested categories
+        $allCategories = Category::lists('id')->toArray();
+        //seperated
+        $newCategories = array_diff($requestCategories, $allCategories); //categories to be added to DB
+        $syncCategories = array_diff($requestCategories, $newCategories); //categories already in DB
+
+        foreach ($newCategories as $newCategory)
+        {
+            $newCategoryModel = Category::create(['name' => $newCategory]);
+            $syncCategories[] = "".$newCategoryModel->id;
+        }
+
+        return $syncCategories;
     }
 
-    public function add(Resource $id)
+    public function delete(Resource $resource)
     {
-        Cache::put($id->Id, $id->Id, 160);
+        return view('resource.delete', compact('resource'));
+    }
+
+    public function add(Resource $resource)
+    {
+        Cache::put($resource->Id, $resource->Id, 160);
 
         return redirect('/resource');
     }
 
-    public function destroy($id)
+    public function edit(Resource $resource)
     {
-        try{
-            DB::delete('delete from resource where id = "' . $id . '"');
-            return redirect('/home');
-        }
-        catch (Exeption $e) {
-            return $e;
-        }
+        $categoryList = Category::lists('name', 'id');
+        return view('resource.edit', compact('resource'), compact('categoryList'));
     }
 
-    public function edit(Resource $id)
+    public function update(Resource $resource, ResourceRequest $request)
     {
-        return view('resource.edit', compact('id'));
+        $syncCategories = $this->checkForNewCategories($request->input('category_list'));
+        $resource->update($request->all());
+        $resource->categories()->sync($syncCategories);
+        \Session::flash('flash_message', 'Resource Updated Successfully!');
+        return redirect('/resources/' . $resource->id);
     }
-    
-    public function update(Request $request, Resource $id)
-    {
-        unset($request['_method']);
-        unset($request['_token']);
-        Resource::where('Id', $id->Id)
-                ->update($request->all());
-        return back();
-    }    
 
-    public function view(Resource $resource)
+    public function show(Resource $resource)
     {
-
-        $categories = Resource::where('id', $resource->id)->get();
-        return view('resource.view', compact('resource'), compact('categories'));
+        //$resource = Resource::findOrFail($id);
+        return view('resource.show', compact('resource'));
     }
 
     public function generateReport()

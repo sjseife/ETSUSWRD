@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Flag;
+use App\Contact;
 use App\Http\Requests;
 use App\Resource;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +18,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
 use Mockery\CountValidator\Exception;
-
+use Illuminate\Contracts\Cache\Factory;
+use Illuminate\Contracts\Cache\Repository;
+use Illuminate\Support\Facades\Cache;
 
 class ResourceController extends Controller
 {
@@ -25,9 +28,9 @@ class ResourceController extends Controller
     {
         $resources = Resource::all();
         $flags = Flag::all();
+        $contacts = Contact::all();
         // load the view and pass the resources
-        return view('resource.index')
-            ->with('resources', $resources)->with('flag', $flags);
+        return view('resource.index', compact('resources','flags','contacts'));
     }
 
     public function __construct()
@@ -57,13 +60,9 @@ class ResourceController extends Controller
 
     public function add(Resource $id)
     {
-        session()->put($id->Id, $id->Id);
-        session()->save();
+        Cache::put($id->Id, $id->Id, 160);
 
-        $resources = Resource::all();
-        $flags = Flag::all();
-        return view('resource.index')
-            ->with('resources', $resources)->with('flag', $flags);
+        return redirect('/resource');
     }
 
     public function destroy($id)
@@ -93,6 +92,7 @@ class ResourceController extends Controller
 
     public function view(Resource $resource)
     {
+
         $categories = Resource::where('id', $resource->id)->get();
         return view('resource.view', compact('resource'), compact('categories'));
     }
@@ -103,19 +103,23 @@ class ResourceController extends Controller
 
         foreach (Resource::all() as $r) {
             $num = ($r->Id);
-            foreach (session()->all() as $s) {
-
-                if ($s == (string)$num) {
-                    $resources[$num] = $r;
-
-                }
+            if (cache::has($num))
+            {
+                $resources[$num] = $r;
             }
         }
 
-        return view('resource.generateReport')
-            ->with('resources', $resources);
+        return view('resource.generateReport', compact('resources'));
+    }
+
+    public function removeCart($id)
+    {
+        cache::forget($id);
+
+        return redirect('/resource/generateReport');
 
     }
+
 
     public function generatePDF()
     {
@@ -123,12 +127,9 @@ class ResourceController extends Controller
 
         foreach (Resource::all() as $r) {
             $num = ($r->Id);
-            foreach (session()->all() as $s) {
-
-                if ($s == (string)$num) {
-                    $resources[$num] = $r;
-
-                }
+            if (cache::has($num))
+            {
+                $resources[$num] = $r;
             }
         }
 

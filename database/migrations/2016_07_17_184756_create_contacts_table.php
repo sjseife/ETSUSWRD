@@ -18,6 +18,8 @@ class CreateContactsTable extends Migration
             $table->string('lastName', 30);
             $table->string('email')->unique();
             $table->string('phoneNumber', 15);
+            $table->integer('resource_id')->unsigned();
+            $table->foreign('resource_id')->references('Id')->on('Resource');
             $table->timestamps();
         });
     }

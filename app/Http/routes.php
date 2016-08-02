@@ -84,9 +84,9 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 Route::get('/auth/newPassword',function(){
-	return view('/auth/newPassword')->with('user', Auth::user())->with('errors',null);
+    return view('/auth/newPassword')->with('user', Auth::user())->with('errors',null);
 });
-Route::patch('auth/newPassword/{id}', 'Auth\AuthController@updatePass');
+Route::patch('auth/newPassword', 'NewPassController@updatePass');
 
 Route::get('/team', function () {
 	return view('team');
@@ -99,6 +99,7 @@ Route::get('/resource', 'ResourceController@index');
 Route::get('/resource/generateReport', 'ResourceController@generateReport');
 Route::get('/resource/generatePDF', 'ResourceController@generatePDF');
 Route::get('resource/view/{resource}', 'ResourceController@view');
+Route::get('resource/removeReport/{id}', 'ResourceController@removeCart');
 
 //if Admin is required, place route in this group
 Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
@@ -155,8 +156,13 @@ Route::group(['middleware' => 'App\Http\Middleware\GAMiddleware'], function()
 	Route::get('flag/delete/{id}', 'FlagController@delete');
 	Route::delete('flag/destroy/{id}', 'FlagController@destroy');
 
-	//contact
-	Route::get('/contacts', 'ContactController@index');
-	Route::get('contact/create', 'ContactController@create');
-	Route::post('contact/createContact', 'ContactController@createContact');
+    //contact
+    Route::get('/contact/edit/{id}', 'ContactController@edit');
+    Route::patch('/contact/{id}', 'ContactController@update');
+    Route::get('/contact/view/{id}', 'ContactController@view');
+    Route::get('/contact', 'ContactController@index');
+    Route::get('contact/create', 'ContactController@create');
+    Route::post('contact/createContact', 'ContactController@createContact');
+    Route::get('contact/delete/{id}', 'ContactController@delete');
+    Route::delete('contact/destroy/{id}', 'ContactController@destroy');
 });

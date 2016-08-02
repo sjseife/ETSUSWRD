@@ -22,7 +22,7 @@
                 <li><a href="{{ url('/resource') }}">Resources</a></li>
                 <li><a href="{{ url('/users') }}">Users</a></li>
                 <li><a href="{{ url('/flag') }}">Flags</a></li>
-
+                <li><a href="{{ url('/contact') }}">Contacts</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -32,6 +32,7 @@
                     <li><a href="{{ url('/login') }}">Login</a></li>
                     <li><a href="{{ url('/register') }}">Register</a></li>
                 @else
+                    <li><a class="btn btn-small" href="{{ URL::to('resource/generateReport' . Auth::user()->Id) }}">View Cart</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ Auth::user()->name }} <span class="caret"></span>

@@ -21,6 +21,7 @@ Route::get('/charts', function()
 	return View::make('mcharts');
 });
 
+
 Route::get('/tables', function()
 {
 	return View::make('table');
@@ -93,12 +94,6 @@ Route::get('/team', function () {
 });
 
 
-Route::get('resources', 'ResourceController@index');
-Route::get('/resource/generateReport', 'ResourceController@generateReport');
-Route::get('/resource/generatePDF', 'ResourceController@generatePDF');
-Route::get('resources/{resource}', 'ResourceController@show');
-Route::get('resource/removeReport/{id}', 'ResourceController@removeCart');
-
 //if Admin is required, place route in this group
 Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 {
@@ -162,3 +157,11 @@ Route::group(['middleware' => 'App\Http\Middleware\GAMiddleware'], function()
     Route::get('contact/delete/{id}', 'ContactController@delete');
     Route::delete('contact/destroy/{id}', 'ContactController@destroy');
 });
+
+
+Route::get('resources', 'ResourceController@index');
+Route::get('/resource/generateReport', 'ResourceController@generateReport');
+Route::get('/resource/generatePDF', 'ResourceController@generatePDF');
+Route::get('resource/removeReport/{id}', 'ResourceController@removeCart');
+Route::get('resources/{resource}', 'ResourceController@show');
+

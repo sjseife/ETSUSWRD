@@ -11,6 +11,6 @@
     @include('resource._form', ['submitButtonText' => 'Update Resource'])
     {!! Form::close() !!}
 
-    {{--If user does not enter required field.--}}
+    <!-- incase user does not enter required field.-->
     @include('errors.list')
 @stop

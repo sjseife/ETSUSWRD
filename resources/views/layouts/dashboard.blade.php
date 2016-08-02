@@ -237,8 +237,8 @@
                         <li {{ (Request::is('/') ? 'class="active"' : '') }}>
                             <a href="{{ url ('') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
-                        <li {{ (Request::is('*resource') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('resource') }}"><i class="fa fa-bar-chart-o fa-fw"></i> Resources</a>
+                        <li {{ (Request::is('*resources') ? 'class="active"' : '') }}>
+                            <a href="{{ url ('resources') }}"><i class="fa fa-bar-chart-o fa-fw"></i> Resources</a>
                             <!-- /.nav-second-level -->
                         </li>
                         <li {{ (Request::is('*users') ? 'class="active"' : '') }}>

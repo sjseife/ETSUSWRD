@@ -31,7 +31,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-md-4 col-sm-12 col-xs-12 pad25">
                 <div class="col-xs-2">
                 </div>

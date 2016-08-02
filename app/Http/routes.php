@@ -35,6 +35,7 @@ Route::get('/resource', 'ResourceController@index');
 Route::get('/resource/generateReport', 'ResourceController@generateReport');
 Route::get('/resource/generatePDF', 'ResourceController@generatePDF');
 Route::get('resource/view/{resource}', 'ResourceController@view');
+Route::get('resource/removeReport/{id}', 'ResourceController@removeCart');
 
 //if Admin is required, place route in this group
 Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()

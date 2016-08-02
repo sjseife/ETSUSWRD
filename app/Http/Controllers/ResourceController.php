@@ -12,7 +12,7 @@ use App\Flag;
 use App\Contact;
 use App\Http\Requests\ResourceRequest;
 use App\Http\Requests\Request;
-//use App\Resource;
+use App\Resource;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;

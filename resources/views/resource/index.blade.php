@@ -24,6 +24,7 @@
                 <tbody>
                 @foreach($resources as $key => $resource)
                     <?php $link = false; ?>
+                    <?php $link2 = false; ?>
                     <tr>
                         <td>{{ $resource->Name }}</td>
                         <td>{{ $resource->County }}</td>
@@ -40,12 +41,11 @@
                         </td>
                         <td>
                             @foreach($contacts as $c)
-                                @if($c->resource_id == $resource->Id)
-                                    <a href="contact/view/{{$c->id}}" class="btn btn-warning btn-sm">{{$c->firstName}} {{$c->lastName}}</a>
-                                    <?php $link = true; ?>
+                                @if($c->resource_id == $resource->Id && $link2 == false)
+                                    <a href="contact/resourceview/{{$resource->Id}}" class="btn btn-warning btn-sm">View Contacts</a>
+                                    <?php $link2 = true; ?>
                                 @endif
                             @endforeach
-                        </td>
                         <td>
                             @foreach ($resource->categories as $category)
                                 {{ $category->name }}

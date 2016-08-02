@@ -23,6 +23,12 @@ class ContactController extends Controller
         return view('contact.index', compact('contacts'));
     }
 
+    public function resourceView(Resource $id)
+    {
+        $contacts = Contact::all();
+        return view('contact.viewresourcecontacts', compact('id', 'contacts'));
+    }
+
     public function view(Contact $id)
     {
         $resource = Resource::all();

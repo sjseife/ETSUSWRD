@@ -9,7 +9,7 @@ class Contact extends Model
     protected $table = 'contacts';
 
     protected $fillable = [
-        'firstName','lastName','email','phoneNumber','resourceId',
+        'firstName','lastName','email','phoneNumber','resource_id',
     ];
 
     public function resources()

@@ -6,7 +6,7 @@
             <div class="editContent">
                 <h1 class="img-rounded" style="background-color: #f6f6f7; padding: 5px; padding-left: 20px">
                     {{$r->Name}}
-                    <!--<div class="pull-right"><h3>{{$r->ContactPhone}}</h3> </div> -->
+                    <a class="btn btn-small btn-primary pull-right" href="{{ URL::to('resource/removeReport/' . $r->Id) }}">Remove from Cart</a>
                 </h1>
             </div>
         </div>
@@ -31,7 +31,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-md-4 col-sm-12 col-xs-12 pad25">
                 <div class="col-xs-2">
                 </div>

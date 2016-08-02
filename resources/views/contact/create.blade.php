@@ -3,7 +3,7 @@
 @section('content')
     <div class="content">
         <form class="form-horizontal" method="post" action="{{ action('ContactController@createContact') }}" accept-charset="UTF-8">
-
+            {{ csrf_field() }}
             <div class="form-group">
                 <label class="col-md-2 control-label" for="firstName">Contact First Name</label>
                 <div class="col-md-4">
@@ -32,12 +32,23 @@
             </div>
 
             <div class="form-group">
+                <label class="col-md-2 control-label" for="resource_id">Resource</label>
+                <div class="col-md-4">
+                    <select id="resource_id" name="resource_id" class="form-control input-md">
+                        @foreach($resource as $r)
+                            <option value="{{$r->Id}}">{{$r->Name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
                 <div class="col-md-2"></div>
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="col-md-4">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
+
         </form>
     </div>
 @endsection

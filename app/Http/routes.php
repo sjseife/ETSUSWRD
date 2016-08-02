@@ -157,6 +157,7 @@ Route::group(['middleware' => 'App\Http\Middleware\GAMiddleware'], function()
     Route::post('contact/createContact', 'ContactController@createContact');
     Route::get('contact/delete/{id}', 'ContactController@delete');
     Route::delete('contact/destroy/{id}', 'ContactController@destroy');
+    Route::get('contact/resourceview/{id}', 'ContactController@resourceView');
 });
 
 

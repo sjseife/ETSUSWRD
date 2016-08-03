@@ -17,7 +17,7 @@
                         </dl>
                         <div class="col-lg-6"><br/><br/>
                             <a class="btn btn-small btn-info" href="{{'/users'}}">Go Back to Users Page</a>
-                            <a class="btn btn-small btn-info" href="{{'/home'}}">Go Back to Home Page</a>
+                            <a class="btn btn-small btn-info" href="{{'/'}}">Go Back to Home Page</a>
 
                         </div>
                         </div>

@@ -107,7 +107,6 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 	//Route::post('category/store', 'CategoryController@store');
 	//Route::get('category/edit/{category}', 'CategoryController@edit');
 	//Route::patch('category/{category}', 'CategoryController@update');
-	Route::get('category/view/{category}', 'CategoryController@view');
 
 	//resource
 	Route::get('resource/delete/{id}', 'ResourceController@delete');

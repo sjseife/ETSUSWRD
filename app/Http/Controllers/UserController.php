@@ -56,4 +56,22 @@ class UserController extends Controller
             return $e;
         }
     }
+
+    public function create()
+    {
+        return view('user.create');
+    }
+    
+    public function createUser()
+    {
+        $user = new User(array(
+            'name' => request()->get('name'),
+            'email' => request()->get('email'),
+            'password' => bcrypt(request()->get('password')),
+            'role' => request()->get('role')
+        ));
+        $user->save();
+
+        return redirect('/users');
+    }
 }

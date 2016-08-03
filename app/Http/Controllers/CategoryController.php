@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
-
+use App\Resource;
 use App\Http\Requests;
 
 class CategoryController extends Controller
 {
-    public function view(Category $category)
+    public function view(Category $id)
     {
-        return view('Category.view', compact('category'));
+        return view('Category.view', compact('id'));
     }
     
     public function create()
@@ -27,18 +27,18 @@ class CategoryController extends Controller
         return redirect('/category');
     }
     
-    public function edit(Category $category)
+    public function edit(Category $id)
     {
-        return view('Category.edit', compact('category'));
+        return view('Category.edit', compact('id'));
     }
     
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Category $id)
     {
         unset($request['_method']);
         unset($request['_token']);
-        Category::where('Id', $category->Id)
+        Category::where('id', $id->id)
             ->update($request->all());
-        return back();
+        return redirect('category');
     }
     
     public function index()

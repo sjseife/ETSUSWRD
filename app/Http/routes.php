@@ -90,9 +90,9 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 Route::get('/auth/newPassword',function(){
-    return view('/auth/newPassword')->with('user', Auth::user())->with('errors',null);
+    return view('/auth/newPassword', array('user' => Auth::user(), 'errors' => array()));
 });
-Route::patch('auth/newPassword', 'NewPassController@updatePass');
+Route::patch('auth/newPassword/{user}', 'NewPassController@updatePass');
 
 Route::get('/team', function () {
 	return view('team');
@@ -107,7 +107,6 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 	//Route::post('category/store', 'CategoryController@store');
 	//Route::get('category/edit/{category}', 'CategoryController@edit');
 	//Route::patch('category/{category}', 'CategoryController@update');
-	Route::get('category/view/{category}', 'CategoryController@view');
 
 	//resource
 	Route::get('resource/delete/{id}', 'ResourceController@delete');
@@ -121,6 +120,8 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 	//user
 	Route::get('/users', 'UserController@index');
 	Route::get('/user/view/{id}', 'UserController@view');
+	Route::get('user/create', 'UserController@create');
+	Route::post('user/createUser', 'UserController@createUser');
 	Route::get('/user/edit/{id}', 'UserController@edit');
 	Route::patch('user/{id}', 'UserController@update');
 	Route::get('user/delete/{id}', 'UserController@delete');
@@ -144,9 +145,9 @@ Route::group(['middleware' => 'App\Http\Middleware\GAMiddleware'], function()
 	Route::get('/category', 'CategoryController@index');
 	Route::get('category/create', 'CategoryController@create');
 	Route::post('category/store', 'CategoryController@store');
-	Route::get('category/edit/{category}', 'CategoryController@edit');
-	Route::patch('category/{category}', 'CategoryController@update');
-	Route::get('category/view/{category}', 'CategoryController@view');
+	Route::get('category/edit/{id}', 'CategoryController@edit');
+	Route::patch('category/{id}', 'CategoryController@update');
+	Route::get('category/view/{id}', 'CategoryController@view');
 
 	//resource
 	Route::get('/resources/generateReport', 'ResourceController@generateReport');

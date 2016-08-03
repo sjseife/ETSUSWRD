@@ -33,7 +33,7 @@ class UserController extends Controller
         unset($request['_token']);
         User::where('Id', $id->id)
             ->update($request->all());
-        return back();
+        return redirect('/users');
     }
 
     public function view(User $id)
@@ -55,5 +55,23 @@ class UserController extends Controller
         catch (Exeption $e) {
             return $e;
         }
+    }
+
+    public function create()
+    {
+        return view('user.create');
+    }
+    
+    public function createUser()
+    {
+        $user = new User(array(
+            'name' => request()->get('name'),
+            'email' => request()->get('email'),
+            'password' => bcrypt(request()->get('password')),
+            'role' => request()->get('role')
+        ));
+        $user->save();
+
+        return redirect('/users');
     }
 }

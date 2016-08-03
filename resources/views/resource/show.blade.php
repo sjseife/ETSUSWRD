@@ -42,7 +42,7 @@
                     </dl>
                     <div class="col-lg-6"><br/><br/>
                         <div class="text-center">
-                            <a href="{{'/home'}}">Go Back to Home Page</a></br></br>
+                            <a href="{{'/resources'}}">Go Back to Resources</a></br></br>
                         </div>
                     </div>
                 </div>

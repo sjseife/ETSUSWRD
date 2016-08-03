@@ -24,7 +24,7 @@ class CategoryController extends Controller
         $category = new Category(request()->all());
         $category->save();
 
-        return redirect('/home');
+        return redirect('/category');
     }
     
     public function edit(Category $category)

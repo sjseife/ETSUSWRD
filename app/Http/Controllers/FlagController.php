@@ -38,7 +38,7 @@ class FlagController extends Controller
     {
         $flag = new Flag(request()->all());
         $flag->save();
-        return redirect('/resource');
+        return redirect('/flag');
     }
 
     public function view(Flag $id)
@@ -70,7 +70,7 @@ class FlagController extends Controller
         $id->setCreatedAt(null);
         Flag::where('Id', $id->Id)
             ->update($request->all());
-        return redirect('/resource');
+        return redirect('/flag');
     }
 
     public function delete(Flag $id)
@@ -84,7 +84,7 @@ class FlagController extends Controller
     {
         try{
             DB::delete('delete from flag where id = "' . $id . '"');
-            return redirect('/resource');
+            return redirect('/flag');
         }
         catch (Exeption $e) {
             return $e;

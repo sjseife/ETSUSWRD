@@ -11,7 +11,9 @@
                             <!-- edit this resource (uses the edit method found at GET /resource/edit/{id} -->
                             <a class="btn btn-small btn-info" href="{{ URL::to('resources/edit/' . $resource->Id) }}">Edit</a>
                             <!-- delete the resource (uses the delete method found at GET /resource/{id} -->
-                            <a class="btn btn-small btn-warning" href="{{ URL::to('resources/delete/' . $resource->Id) }}">Delete</a>
+                            <!-- delete the resource -->
+                            <!-- Trigger the modal with a button -->
+                            <button type="button" class="btn btn-warning btn-small" data-toggle="modal" data-target="#deleteModal">Delete</button>
                             <br/>
                             <br/>
                         </div>
@@ -49,4 +51,6 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    @include('resource._deleteModal')
 @endsection

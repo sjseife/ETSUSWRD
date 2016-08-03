@@ -76,6 +76,18 @@ class ResourceController extends Controller
         return view('resource.delete', compact('resource'));
     }
 
+    public function destroy(Resource $resource)
+    {
+        try{
+            DB::delete('delete from resource where id = "' . $resource->Id . '"');
+            \Session::flash('flash_message', 'Resource Deleted');
+            return redirect('/resources');
+        }
+        catch (Exeption $e) {
+            return $e;
+        }
+    }
+
     public function add(Resource $resource)
     {
         Cache::put($resource->Id, $resource->Id, 160);

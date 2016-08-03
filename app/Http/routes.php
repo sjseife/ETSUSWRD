@@ -116,8 +116,12 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 
 	//user
 	Route::get('/users', 'UserController@index');
+	Route::get('/user/view/{id}', 'UserController@view');
 	Route::get('/user/edit/{id}', 'UserController@edit');
 	Route::patch('user/{id}', 'UserController@update');
+	Route::get('user/delete/{id}', 'UserController@delete');
+	Route::delete('user/destroy/{id}', 'UserController@destroy');
+
 
 	Route::get('/contact/edit/{id}', 'ContactController@edit');
 	Route::patch('/contact/{id}', 'ContactController@update');

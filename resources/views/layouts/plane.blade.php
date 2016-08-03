@@ -41,7 +41,7 @@
 </head>
 <body>
 	@yield('body')
-	<script src="{{ asset("assets/scripts/frontend.js") }}" type="text/javascript"></script>
+	<script src="" type="text/javascript"></script>
 	<!-- jQuery -->
 	<script src="//code.jquery.com/jquery.js"></script>
 	<!-- DataTables -->

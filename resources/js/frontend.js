@@ -24,7 +24,7 @@ var lineChartData = {
         }
     ]
 
-}
+};
 
 
     var cline = document.getElementById("cline").getContext("2d");

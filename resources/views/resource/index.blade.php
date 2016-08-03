@@ -64,7 +64,7 @@
         </div>
 
     </div>
-
+    <a href="{{ URL::to('resource/generateReport') }}" class="btn btn-link pull-right">Generate Report</a>
 @stop
 @push('scripts')
 <script>

@@ -244,8 +244,8 @@
                         <li {{ (Request::is('*users') ? 'class="active"' : '') }}>
                             <a href="{{ url ('users') }}"><i class="fa fa-table fa-fw"></i> Users</a>
                         </li>
-                        <li {{ (Request::is('*contacts') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('contacts') }}"><i class="fa fa-envelope"></i>  Contacts</a>
+                        <li {{ (Request::is('*contact') ? 'class="active"' : '') }}>
+                            <a href="{{ url ('contact') }}"><i class="fa fa-envelope"></i>  Contacts</a>
                         </li>
                         <li {{ (Request::is('*category') ? 'class="active"' : '') }}>
                             <a href="{{ url ('category') }}"><i class="fa fa-edit fa-fw"></i> Categories</a>

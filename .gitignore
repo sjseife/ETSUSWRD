@@ -1,7 +1,7 @@
 /vendor
 /bower_components
 /node_modules
-.idea/
 config/database.php
+.idea/
 bootstrap/cache
 

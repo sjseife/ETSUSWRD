@@ -117,6 +117,8 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 	//user
 	Route::get('/users', 'UserController@index');
 	Route::get('/user/view/{id}', 'UserController@view');
+	Route::get('user/create', 'UserController@create');
+	Route::post('user/createUser', 'UserController@createUser');
 	Route::get('/user/edit/{id}', 'UserController@edit');
 	Route::patch('user/{id}', 'UserController@update');
 	Route::get('user/delete/{id}', 'UserController@delete');

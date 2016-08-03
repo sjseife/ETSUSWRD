@@ -13,6 +13,10 @@ use App\Flag;
 
 Route::get('/', function()
 {
+	if(Auth::guest())
+	{
+		return redirect(url('/login'));
+	}
 	$flags = count(Flag::all());
 	return View::make('home', compact('flags'));
 });

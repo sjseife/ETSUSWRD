@@ -146,9 +146,9 @@ Route::group(['middleware' => 'App\Http\Middleware\GAMiddleware'], function()
 	Route::get('/category', 'CategoryController@index');
 	Route::get('category/create', 'CategoryController@create');
 	Route::post('category/store', 'CategoryController@store');
-	Route::get('category/edit/{category}', 'CategoryController@edit');
-	Route::patch('category/{category}', 'CategoryController@update');
-	Route::get('category/view/{category}', 'CategoryController@view');
+	Route::get('category/edit/{id}', 'CategoryController@edit');
+	Route::patch('category/{id}', 'CategoryController@update');
+	Route::get('category/view/{id}', 'CategoryController@view');
 
 	//resource
 	Route::get('/resources/generateReport', 'ResourceController@generateReport');

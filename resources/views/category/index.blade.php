@@ -17,14 +17,14 @@
                 <tbody>
                 @foreach($categories as $key => $value)
                     <tr>
-                        <td>{{ $value->Name }}</td>
+                        <td>{{ $value->name }}</td>
                         <td class="text-center col-md-3">
 
                             <!-- show the category (uses the show method found at GET /category/view/{id} -->
-                            <a class="btn btn-small btn-success" href="{{ URL::to('category/view/' . $value->Id) }}">View</a>
+                            <a class="btn btn-small btn-success" href="{{ URL::to('category/view/' . $value->id) }}">View</a>
 
                             <!-- edit this category (uses the edit method found at GET /category/edit/{id} -->
-                            <a class="btn btn-small btn-info" href="{{ URL::to('category/edit/' . $value->Id) }}">Edit</a>
+                            <a class="btn btn-small btn-info" href="{{ URL::to('category/edit/' . $value->id) }}">Edit</a>
                         </td>
                     </tr>
                 @endforeach

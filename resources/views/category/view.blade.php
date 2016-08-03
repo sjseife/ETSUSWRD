@@ -9,18 +9,14 @@
                     <div class="panel-body">
                         <dl class="dl-horizontal">
                             <dt>Name</dt>
-                            <dd>{{ $category->Name }}</dd>
+                            <dd>{{ $id->name }}</dd>
                             <dt>Created At</dt>
-                            <dd>{{ $category->created_at }}</dd>
+                                <dd>{{ $id->created_at }}</dd>
                             <dt>Updated At</dt>
-                            <dd>{{ $category->updated_at }}</dd>
-                            <dt>Resources</dt>
-                            @foreach ($category->resources() as $resource)
-                                <dd>{{ $resource->name }}</dd>
-                            @endforeach
+                            <dd>{{ $id->updated_at }}</dd>
                         </dl>
                         <div class="col-lg-6"><br/><br/>
-                            <div class="text-center"><a href="{{'/home'}}">Go Back to Home Page</a></br></br>
+                            <div class="text-center"><a href="{{'/category'}}">Go Back to Categories Page</a></br></br>
                             </div>
                         </div>
                     </div>

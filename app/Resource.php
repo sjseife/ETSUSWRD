@@ -14,6 +14,8 @@ class Resource extends Model
     protected $fillable = [
         'Name', 'StreetAddress', 'StreetAddress2', 'City', 'County', 'State', 'Zipcode', 'PhoneNumber', 'OpeningHours','ClosingHours','Comments'
     ];
+
+    public $timestamps = false;
     
     public function contacts()
     {

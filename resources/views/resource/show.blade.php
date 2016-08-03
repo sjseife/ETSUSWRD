@@ -9,9 +9,9 @@
                     <dl class="dl-horizontal">
                         <div class="col-md-offset-2">
                             <!-- edit this resource (uses the edit method found at GET /resource/edit/{id} -->
-                            <a class="btn btn-small btn-info" href="{{ URL::to('resources/' . $resource->id. '/edit') }}">Edit</a>
+                            <a class="btn btn-small btn-info" href="{{ URL::to('resources/edit/' . $resource->Id) }}">Edit</a>
                             <!-- delete the resource (uses the delete method found at GET /resource/{id} -->
-                            <a class="btn btn-small btn-warning" href="{{ URL::to('resources/delete/' . $resource->id) }}">Delete</a>
+                            <a class="btn btn-small btn-warning" href="{{ URL::to('resources/delete/' . $resource->Id) }}">Delete</a>
                             <br/>
                             <br/>
                         </div>

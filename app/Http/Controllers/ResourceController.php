@@ -44,11 +44,13 @@ class ResourceController extends Controller
 
     public function store(ResourceRequest $request)
     {
-        $syncCategories = $this->checkForNewCategories($request->input('category_list'));
         $resource = new Resource($request->all());
         $resource->save();
-        $resource->categories()->attach($syncCategories);
-
+        if(!is_null($request->input('category_list')))
+        {
+            $syncCategories = $this->checkForNewCategories($request->input('category_list'));
+            $resource->categories()->attach($syncCategories);
+        }
         \Session::flash('flash_message', 'Resource Created Successfully!');
 
         return redirect('resources');
@@ -103,11 +105,18 @@ class ResourceController extends Controller
 
     public function update(Resource $resource, ResourceRequest $request)
     {
-        $syncCategories = $this->checkForNewCategories($request->input('category_list'));
         $resource->update($request->all());
-        $resource->categories()->sync($syncCategories);
+        if(!is_null($request->input('category_list')))
+        {
+            $syncCategories = $this->checkForNewCategories($request->input('category_list'));
+            $resource->categories()->sync($syncCategories);
+        }
+        else
+        {
+            $resource->categories()->sync([]);
+        }
         \Session::flash('flash_message', 'Resource Updated Successfully!');
-        return redirect('/resources/' . $resource->id);
+        return redirect('/resources/' . $resource->Id);
     }
 
     public function show(Resource $resource)

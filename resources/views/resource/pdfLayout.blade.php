@@ -37,7 +37,7 @@
                 </div>
                 <div class="col-xs-10">
                     <div class="editContent">
-                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Contact</h4>
+                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Hours</h4>
                     </div>
                     <div class="editContent">
                         <p>

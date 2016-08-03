@@ -116,8 +116,12 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 
 	//user
 	Route::get('/users', 'UserController@index');
+	Route::get('/user/view/{id}', 'UserController@view');
 	Route::get('/user/edit/{id}', 'UserController@edit');
 	Route::patch('user/{id}', 'UserController@update');
+	Route::get('user/delete/{id}', 'UserController@delete');
+	Route::delete('user/destroy/{id}', 'UserController@destroy');
+
 
 	Route::get('/contact/edit/{id}', 'ContactController@edit');
 	Route::patch('/contact/{id}', 'ContactController@update');
@@ -141,13 +145,13 @@ Route::group(['middleware' => 'App\Http\Middleware\GAMiddleware'], function()
 	Route::get('category/view/{category}', 'CategoryController@view');
 
 	//resource
-	Route::get('/resource/generateReport', 'ResourceController@generateReport');
-	Route::get('/resource/generatePDF', 'ResourceController@generatePDF');
+	Route::get('/resources/generateReport', 'ResourceController@generateReport');
+	Route::get('/resources/generatePDF', 'ResourceController@generatePDF');
 	Route::get('resources/create', 'ResourceController@create');
 	Route::post('resources', 'ResourceController@store');
 	Route::get('resources/edit/{resource}', 'ResourceController@edit');
 	Route::patch('resources/{resource}', 'ResourceController@update');
-	Route::get('resource/add/{resource}', 'ResourceController@add');
+	Route::get('resources/add/{resource}', 'ResourceController@add');
 
 	//flag
 	Route::get('flag/view/{id}', 'FlagController@view');

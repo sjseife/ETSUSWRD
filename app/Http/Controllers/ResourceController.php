@@ -135,7 +135,7 @@ class ResourceController extends Controller
     {
         cache::forget($id);
 
-        return redirect('/resource/generateReport');
+        return redirect('/resources/generateReport');
 
     }
 

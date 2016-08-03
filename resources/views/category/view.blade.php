@@ -11,16 +11,12 @@
                             <dt>Name</dt>
                             <dd>{{ $id->name }}</dd>
                             <dt>Created At</dt>
-                            <dd>{{ $id->created_at }}</dd>
+                                <dd>{{ $id->created_at }}</dd>
                             <dt>Updated At</dt>
                             <dd>{{ $id->updated_at }}</dd>
-                            <dt>Resources</dt>
-                            @foreach ($id->resources() as $resource)
-                                <dd>{{ $resource->Name }}</dd>
-                            @endforeach
                         </dl>
                         <div class="col-lg-6"><br/><br/>
-                            <div class="text-center"><a href="{{'/home'}}">Go Back to Home Page</a></br></br>
+                            <div class="text-center"><a href="{{'/category'}}">Go Back to Categories Page</a></br></br>
                             </div>
                         </div>
                     </div>

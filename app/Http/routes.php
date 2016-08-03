@@ -90,9 +90,9 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 Route::get('/auth/newPassword',function(){
-    return view('/auth/newPassword')->with('user', Auth::user())->with('errors',null);
+    return view('/auth/newPassword', array('user' => Auth::user(), 'errors' => array()));
 });
-Route::patch('auth/newPassword', 'NewPassController@updatePass');
+Route::patch('auth/newPassword/{user}', 'NewPassController@updatePass');
 
 Route::get('/team', function () {
 	return view('team');

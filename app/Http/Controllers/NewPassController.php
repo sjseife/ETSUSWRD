@@ -25,7 +25,7 @@ class NewPassController extends Controller
         ]);
     }
     
-    protected function updatePass(Request $request, User $user)
+    protected function updatePass(User $user)
     {
 
         $errors = array(
@@ -35,24 +35,20 @@ class NewPassController extends Controller
         );
 
         $auth = array(
-            'email' => $request['email'],
-            'password' => $request['oldPassword']
+            'email' => request()->get('email'),
+            'password' => request()->get('oldPassword')
         );
 
-        if ($request['password'] != $request['password_confirmation']){
+        if (request()->get('password') != request()->get('password_confirmation')){
             $errors['password_confirmation'] = 'That password was not the same.';
             return view('/auth/newPassword')->with('user',Auth::user())->with('errors',$errors);
         }
 
         elseif(Auth::attempt($auth)) {
-            unset($request['oldPassword']);
-            unset($request['password_confirmation']);
-            unset($request['_method']);
-            unset($request['_token']);
-            $request['password'] = bcrypt($request['password']);
-            User::where('email', $request['email'])
-                ->update($request->all());
-            return view('home');
+            $newPassword = bcrypt(request()->get('password'));
+            User::where('email', request()->get('email'))
+                ->update(array('password' => $newPassword));
+            return redirect(url('/'));
         }
 
         else {

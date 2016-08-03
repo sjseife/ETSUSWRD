@@ -33,7 +33,7 @@ class UserController extends Controller
         unset($request['_token']);
         User::where('Id', $id->id)
             ->update($request->all());
-        return back();
+        return redirect('/users');
     }
 
     public function view(User $id)

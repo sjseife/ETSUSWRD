@@ -55,7 +55,7 @@
                             <!-- show the resource (uses the show method found at GET /resource/view/{id} -->
                             <a class="btn btn-small btn-success" href="{{ URL::to('resources/' . $resource->Id) }}">View</a>
                             <!-- add resource to cart-->
-                            <a class="btn btn-small btn-primary" href="{{ URL::to('resource/add/' . $resource->Id) }}">Add to Cart</a>
+                            <a class="btn btn-small btn-primary" href="{{ URL::to('resources/add/' . $resource->Id) }}">Add to Cart</a>
                         </td>
                     </tr>
                 @endforeach

@@ -118,6 +118,15 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 	Route::get('/users', 'UserController@index');
 	Route::get('/user/edit/{id}', 'UserController@edit');
 	Route::patch('user/{id}', 'UserController@update');
+
+	Route::get('/contact/edit/{id}', 'ContactController@edit');
+	Route::patch('/contact/{id}', 'ContactController@update');
+	Route::get('/contact/view/{id}', 'ContactController@view');
+	Route::get('/contact', 'ContactController@index');
+	Route::get('contact/create', 'ContactController@create');
+	Route::post('contact/createContact', 'ContactController@createContact');
+	Route::get('contact/delete/{id}', 'ContactController@delete');
+	Route::delete('contact/destroy/{id}', 'ContactController@destroy');
 });
 
 //if GA or Admin is required, place route in this group

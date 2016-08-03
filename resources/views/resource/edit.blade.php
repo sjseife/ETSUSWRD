@@ -7,9 +7,14 @@
 
     <hr/>
 
-    {{ Form::model($resource, [ 'method' => 'PATCH', 'class'=>'form-horizontal', 'url' => 'resources/' . $resource->id]) }}
-    @include('resource._form', ['submitButtonText' => 'Update Resource'])
-    {{ Form::close() }}
+    <form class="form-horizontal" method="POST" action="/resources/{{$resource->Id}}">
+        {{ method_field('PATCH') }}
+        {{ csrf_field() }}
+        <?php echo Form::model($resource); ?>
+        @include('resource._form', ['submitButtonText' => 'Update Resource'])
+    </form>
+
+
 
     <!-- incase user does not enter required field.-->
     @include('errors.list')

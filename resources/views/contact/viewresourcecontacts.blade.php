@@ -24,11 +24,14 @@
                             <td>{{ $c->phoneNumber }}</td>
                             <td class="text-center col-md-3">
 
-                                <a class="btn btn-small btn-success" href="{{ URL::to('contact/view/' . $c->Id) }}">View</a>
+                                <!-- show the contact (uses the show method found at GET /contact/view/{id} -->
+                                <a class="btn btn-small btn-success" href="{{ URL::to('contact/view/' . $c->id) }}">View</a>
 
-                                <a class="btn btn-small btn-info" href="{{ URL::to('contact/edit/' . $c->Id) }}">Edit</a>
+                                <!-- edit this contact (uses the edit method found at GET /contact/edit/{id} -->
+                                <a class="btn btn-small btn-info" href="{{ URL::to('contact/edit/' . $c->id) }}">Edit</a>
 
-                                <a class="btn btn-small btn-warning" href="{{ URL::to('contact/delete/' . $c->Id) }}">Delete</a>
+                                <!-- delete the contact (uses the delete method found at GET /contact/{id} -->
+                                <a class="btn btn-small btn-warning" href="{{ URL::to('contact/delete/' . $c->id) }}">Delete</a>
                             </td>
                         @endif
                 @endforeach

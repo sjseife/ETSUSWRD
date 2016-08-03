@@ -80,7 +80,7 @@ class ResourceController extends Controller
     {
         Cache::put($resource->Id, $resource->Id, 160);
 
-        return redirect('/resource');
+        return redirect('/resources');
     }
 
     public function edit(Resource $resource)
@@ -123,7 +123,7 @@ class ResourceController extends Controller
     {
         cache::forget($id);
 
-        return redirect('/resource/generateReport');
+        return redirect('/resources/generateReport');
 
     }
 

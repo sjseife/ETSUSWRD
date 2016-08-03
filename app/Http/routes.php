@@ -141,13 +141,13 @@ Route::group(['middleware' => 'App\Http\Middleware\GAMiddleware'], function()
 	Route::get('category/view/{category}', 'CategoryController@view');
 
 	//resource
-	Route::get('/resource/generateReport', 'ResourceController@generateReport');
-	Route::get('/resource/generatePDF', 'ResourceController@generatePDF');
+	Route::get('/resources/generateReport', 'ResourceController@generateReport');
+	Route::get('/resources/generatePDF', 'ResourceController@generatePDF');
 	Route::get('resources/create', 'ResourceController@create');
 	Route::post('resources', 'ResourceController@store');
 	Route::get('resources/edit/{resource}', 'ResourceController@edit');
 	Route::patch('resources/{resource}', 'ResourceController@update');
-	Route::get('resource/add/{resource}', 'ResourceController@add');
+	Route::get('resources/add/{resource}', 'ResourceController@add');
 
 	//flag
 	Route::get('flag/view/{id}', 'FlagController@view');

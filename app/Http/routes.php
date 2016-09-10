@@ -110,7 +110,7 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 
 	//resource
 	Route::get('resource/delete/{id}', 'ResourceController@delete');
-	Route::delete('resource/destroy/{id}', 'ResourceController@destroy');
+	Route::delete('resources/{resource}', 'ResourceController@destroy');
 
 	//flag
 	Route::get('/flag', 'FlagController@index');

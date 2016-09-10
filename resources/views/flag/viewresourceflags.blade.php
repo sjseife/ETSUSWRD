@@ -13,6 +13,7 @@
                     <td><b>Flagged For</b></td>
                     <td><b>Submitted By</b></td>
                     <td><b>Date Created</b></td>
+                    <td></td>
                 </tr>
                 </thead>
                 <tbody>

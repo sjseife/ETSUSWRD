@@ -19,7 +19,7 @@
                             <dt>Submitted By</dt>
                             <dd>
                                 @foreach($user as $u)
-                                    @if($u->id == $id->user_id)
+                                    @if($u->id == $id->submitted_by)
                                         {{$u->email}}
                                     @endif
                                 @endforeach

@@ -34,7 +34,7 @@
                             <td> Admin </td>
                         @endif
                         @foreach($users as $u)
-                            @if($u->id == $f->user_id)
+                            @if($u->id == $f->submitted_by)
                                 <td>{{ $u->email }} </td>
                             @endif
                         @endforeach

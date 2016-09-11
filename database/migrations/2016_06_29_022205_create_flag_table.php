@@ -18,7 +18,7 @@ class CreateFlagTable extends Migration
             //0-addressed, 1-GA, 2-Admin
             $table->integer('Level');
             $table->text('Comments');
-            $table->integer('submitted_by')->unsigned();
+            $table->integer('submitted_by')->default(NULL);
             $table->foreign('submitted_by')->references('id')->on('users');
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');

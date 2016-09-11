@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Contact;
 use App\Flag;
 use App\Resource;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
-use App\Http\Requests;
 
 class FlagController extends Controller
 {
@@ -22,7 +21,6 @@ class FlagController extends Controller
         $flags = Flag::all();
         $resources = Resource::all();
         $users = User::all();
-
         // load the view and pass the flags, users, resources
         return view('flag.index', compact('flags', 'resources', 'users'));
     }
@@ -31,7 +29,8 @@ class FlagController extends Controller
     {
         $resource = Resource::all();
         $user = User::all();
-        return view('flag.create', compact('resource', 'user'));
+        $contact = Contact::all();
+        return view('flag.create', compact('resource', 'user', 'contact'))->with('currentUser', \Auth::user());
     }
 
     public function createFlag()

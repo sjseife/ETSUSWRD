@@ -35,7 +35,26 @@ class FlagController extends Controller
 
     public function createFlag()
     {
-        $flag = new Flag(request()->all());
+        $results = request()->all();
+
+        $radio = $results['radio'];
+        if($radio == "resource"){
+            unset($results['radio']);
+            $results += array('resource_id' => $results['item_id']);
+            unset($results['item_id']);
+        }
+        if($radio == "user"){
+            unset($results['radio']);
+            $results += array('user_id' => $results['item_id']);
+            unset($results['item_id']);
+        }
+        if($radio == "contact"){
+            unset($results['radio']);
+            $results += array('contact_id' => $results['item_id']);
+            unset($results['item_id']);
+        }
+
+        $flag = new Flag($results);
         $flag->save();
         return redirect('/flag');
     }

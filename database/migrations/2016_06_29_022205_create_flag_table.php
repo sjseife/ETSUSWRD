@@ -18,10 +18,14 @@ class CreateFlagTable extends Migration
             //0-addressed, 1-GA, 2-Admin
             $table->integer('Level');
             $table->text('Comments');
-            $table->integer('user_id')->unsigned();
+            $table->integer('submitted_by')->unsigned();
+            $table->foreign('submitted_by')->references('id')->on('users');
+            $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('resource_id')->unsigned();
+            $table->integer('resource_id')->unsigned()->nullable();
             $table->foreign('resource_id')->references('Id')->on('Resource');
+            $table->integer('contacts_id')->unsigned()->nullable();
+            $table->foreign('contacts_id')->references('id')->on('contacts');
             $table->timestamps();
         });
     }

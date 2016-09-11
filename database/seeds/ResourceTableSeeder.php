@@ -27,6 +27,7 @@ class ResourceTableSeeder extends Seeder
         DB::table('resource')->insert([
             'Name' => 'Test1',
             'StreetAddress' => '987 MLK Blv',
+            'StreetAddress2' => 'Apt 3',
             'City' => 'Johnson City',
             'County' => 'Washington',
             'State' => 'TN',

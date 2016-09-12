@@ -10,7 +10,8 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Resource</th>
+                    <th>Type</th>
+                    <th>Name</th>
                     <th>Flagged For</th>
                     <th>Submitted By</th>
                     <th>Date Created</th>
@@ -21,11 +22,30 @@
                 @foreach($flags as $f)
                     <tr>
                         <td>{{ $f->Id }}</td>
-                        @foreach($resources as $r)
-                            @if($r->Id == $f->resource_id)
-                                <td>{{ $r->Name }} </td>
-                            @endif
-                        @endforeach
+                        @if(isset($f->resource_id))
+                            @foreach($resources as $r)
+                                @if($r->Id == $f->resource_id)
+                                    <td>Resource</td>
+                                    <td>{{ $r->Name }}</td>
+                                @endif
+                            @endforeach
+                        @endif
+                        @if(isset($f->user_id))
+                            @foreach($users as $u)
+                                @if($u->id == $f->user_id)
+                                    <td>User</td>
+                                    <td>{{ $u->email }}</td>
+                                @endif
+                            @endforeach
+                        @endif
+                        @if(isset($f->contacts_id))
+                            @foreach($contacts as $c)
+                                @if($c->id == $f->contacts_id)
+                                    <td>Contact</td>
+                                    <td>{{ $c->firstName }} {{$c->lastName}}</td>
+                                @endif
+                            @endforeach
+                        @endif
                         @if($f->Level == 0)
                             <td> Resolved </td>
                         @elseif($f->Level == 1)

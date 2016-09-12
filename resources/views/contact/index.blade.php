@@ -14,16 +14,26 @@
                     <th>Last Name</th>
                     <th>Email</th>
                     <th>Phone Number</th>
-                    <th></th>
+                    <th>Status</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($contacts as $key => $value)
+                    <?php $link = false; ?>
                     <tr>
                         <td>{{ $value->firstName }}</td>
                         <td>{{ $value->lastName }}</td>
                         <td>{{ $value->email }}</td>
                         <td>{{ $value->phoneNumber }}</td>
+                        <td class="text-center">
+                            @foreach($flags as $f)
+                                @if($f->contacts_id == $value->id && $link == false)
+                                    <a href="flag/resourceview/{{$value->id}}" class="btn btn-danger btn-sm">Flagged</a>
+                                    <?php $link = true; ?>
+                                @endif
+                            @endforeach
+                        </td>
                         <td class="text-center col-md-3">
 
                             <!-- show the contact (uses the show method found at GET /contact/view/{id} -->

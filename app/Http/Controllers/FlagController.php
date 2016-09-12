@@ -21,8 +21,9 @@ class FlagController extends Controller
         $flags = Flag::all();
         $resources = Resource::all();
         $users = User::all();
+        $contacts = Contact::all();
         // load the view and pass the flags, users, resources
-        return view('flag.index', compact('flags', 'resources', 'users'));
+        return view('flag.index', compact('flags', 'resources', 'users', 'contacts'));
     }
 
     public function create()
@@ -50,7 +51,7 @@ class FlagController extends Controller
         }
         if($radio == "contact"){
             unset($results['radio']);
-            $results += array('contact_id' => $results['item_id']);
+            $results += array('contacts_id' => $results['item_id']);
             unset($results['item_id']);
         }
 
@@ -63,7 +64,8 @@ class FlagController extends Controller
     {
         $resource = Resource::all();
         $user = User::all();
-        return view('flag.view', compact('id', 'resource', 'user'));
+        $contact = Contact::all();
+        return view('flag.view', compact('id', 'resource', 'user', 'contact'));
     }
 
     public function resourceView(Resource $id)

@@ -8,13 +8,23 @@
                     <div class="panel-heading">View Flag</div>
                     <div class="panel-body">
                         <dl class="dl-horizontal">
-                            <dt>Resource Name</dt>
+                            <dt>Name</dt>
                             <dd>
                                 @foreach($resource as $r)
                                     @if($r->Id == $id->resource_id)
                                         {{$r->Name}}
                                     @endif
                                 @endforeach
+                                @foreach($user as $u)
+                                    @if($u->id == $id->user_id)
+                                        {{$u->email}}
+                                    @endif
+                                @endforeach
+                                @foreach($contact as $c)
+                                @if($c->id == $id->contacts_id)
+                                      {{$c->firstName}} {{$c->lastName}}
+                                @endif
+                                    @endforeach
                             </dd>
                             <dt>Submitted By</dt>
                             <dd>

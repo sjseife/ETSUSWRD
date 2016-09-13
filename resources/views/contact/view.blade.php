@@ -30,9 +30,8 @@
                             <dd>{{ $id->email}}</dd>
                         </dl>
                         <div class="col-lg-6"><br/><br/>
-                            <div class="text-center"><a href="{{'/contact'}}">Go To Contact Index</a></br></br>
-                            </div>
-                            <div class="text-center"><a href="{{'/resource'}}">Go To Resource Index</a></br></br>
+                            <div class="text-center"><a href="{{'/contact'}}">
+                                    Go To Contact Index</a></br></br>
                             </div>
                         </div>
                     </div>

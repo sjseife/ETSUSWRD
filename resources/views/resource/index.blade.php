@@ -9,17 +9,17 @@
         <div class="row">
             <table class="table table-striped table-bordered" id="ResourceTable">
                 <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>County</th>
-                    <th>Phone</th>
-                    <th>Opening Hours</th>
-                    <th>Closing Hours</th>
-                    <th>Status</th>
-                    <th>Contacts</th>
-                    <th>Category</th>
-                    <th>Actions</th>
-                </tr>
+                    <tr>
+                        <th>Name</th>
+                        <th>County</th>
+                        <th>Phone</th>
+                        <th>Opening Hours</th>
+                        <th>Closing Hours</th>
+                        <th>Contacts</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
                 </thead>
                 <tbody>
                 @foreach($resources as $key => $resource)
@@ -32,23 +32,23 @@
                         <td>{{ $resource->OpeningHours }}</td>
                         <td>{{ $resource->ClosingHours }}</td>
                         <td>
-                            @foreach($flags as $f)
-                                @if($f->resource_id == $resource->Id && $link == false)
-                                    <a href="flag/resourceview/{{$resource->Id}}" class="btn btn-danger btn-sm">Flagged</a>
-                                    <?php $link = true; ?>
-                                @endif
-                            @endforeach
-                        </td>
-                        <td>
                             @foreach($contacts as $c)
                                 @if($c->resource_id == $resource->Id && $link2 == false)
-                                    <a href="contact/resourceview/{{$resource->Id}}" class="btn btn-warning btn-sm">View Contacts</a>
+                                    <a href="contact/resourceview/{{$resource->Id}}" class="btn btn-link">View Contacts</a>
                                     <?php $link2 = true; ?>
                                 @endif
                             @endforeach
                         <td>
                             @foreach ($resource->categories as $category)
                                 {{ $category->name }}
+                            @endforeach
+                        </td>
+                        <td>
+                            @foreach($flags as $f)
+                                @if($f->resource_id == $resource->Id && $link == false)
+                                    <a href="flag/resourceview/{{$resource->Id}}" class="btn btn-danger btn-sm">Flagged</a>
+                                    <?php $link = true; ?>
+                                @endif
                             @endforeach
                         </td>
                         <td class="text-center col-md-3">

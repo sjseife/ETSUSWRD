@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Contact;
+use App\Flag;
 use App\Resource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +21,8 @@ class ContactController extends Controller
     public function index()
     {
         $contacts = Contact::all();
-        return view('contact.index', compact('contacts'));
+        $flags = Flag::all();
+        return view('contact.index', compact('contacts', 'flags'));
     }
 
     public function resourceView(Resource $id)

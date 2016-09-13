@@ -12,6 +12,7 @@
                     <td><b>Last Name</b></td>
                     <td><b>Email</b></td>
                     <td><b>Phone Number</b></td>
+                    <td></td>
                 </tr>
                 </thead>
                 <tbody>

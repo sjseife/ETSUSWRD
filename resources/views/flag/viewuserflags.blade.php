@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <h1 class="text-center">All Flags for {{$id->Name}}</h1>
+    <h1 class="text-center">All Flags for {{$id->email}}</h1>
 
     <div class="container">
         <div class="row">
@@ -18,7 +18,7 @@
                 </thead>
                 <tbody>
                 @foreach($flag as $f)
-                    @if($f->resource_id == $id->Id)
+                    @if($f->user_id == $id->id)
                         <tr>
                             <td>{{ $f->Id }}</td>
                             <td>{{ $f->Comments }} </td>

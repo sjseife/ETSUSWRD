@@ -75,6 +75,23 @@ class FlagController extends Controller
         return view('flag.viewresourceflags', compact('id', 'flag', 'user'));
     }
 
+    //fix
+    public function userView(User $id)
+    {
+        $flag = Flag::all();
+        $user = User::all();
+        return view('flag.viewuserflags', compact('id', 'flag', 'user'));
+    }
+
+    //fix
+    public function contactView(Contact $id)
+    {
+        $flag = Flag::all();
+        $user = User::all();
+        return view('flag.viewcontactflags', compact('id', 'flag', 'user'));
+    }
+
+    //fix
     public function edit(Flag $id)
     {
         $resource = Resource::all();

@@ -32,7 +32,7 @@
                     <td class="text-center">
                         @foreach($flags as $f)
                             @if($f->user_id == $value->id && $link == false)
-                                <a href="flag/resourceview/{{$value->id}}" class="btn btn-danger btn-sm">Flagged</a>
+                                <a href="flag/userview/{{$value->id}}" class="btn btn-danger btn-sm">Flagged</a>
                                 <?php $link = true; ?>
                             @endif
                         @endforeach

@@ -161,6 +161,8 @@ Route::group(['middleware' => 'App\Http\Middleware\GAMiddleware'], function()
 	//flag
 	Route::get('flag/view/{id}', 'FlagController@view');
 	Route::get('flag/resourceview/{id}', 'FlagController@resourceView');
+    Route::get('flag/userview/{id}', 'FlagController@userView');
+    Route::get('flag/contactview/{id}', 'FlagController@contactView');
 	Route::get('flag/edit/{id}', 'FlagController@edit');
 	Route::patch('flag/{id}', 'FlagController@update');
 	Route::get('flag/delete/{id}', 'FlagController@delete');

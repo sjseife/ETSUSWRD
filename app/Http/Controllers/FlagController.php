@@ -96,7 +96,8 @@ class FlagController extends Controller
     {
         $resource = Resource::all();
         $user = User::all();
-        return view('flag.edit', compact('id', 'resource', 'user'));
+        $contact = Contact::all();
+        return view('flag.edit', compact('id', 'resource', 'user', 'contact'))->with('currentUser', \Auth::user());
     }
 
     public function update(Request $request, Flag $id)
@@ -114,7 +115,8 @@ class FlagController extends Controller
     {
         $resource = Resource::all();
         $user = User::all();
-        return view('flag.delete', compact('id', 'resource', 'user'));
+        $contact = Contact::all();
+        return view('flag.delete', compact('id', 'resource', 'user', 'contact'))->with('currentUser', \Auth::user());
     }
 
     public function destroy($id)

@@ -58,6 +58,9 @@
                         <li {{ (Request::is('*category') ? 'class="active"' : '') }}>
                             <a href="{{ url ('category') }}"><i class="fa fa-edit fa-fw"></i> Categories</a>
                         </li>
+                        <li {{ (Request::is('*category') ? 'class="active"' : '') }}>
+                            <a href="{{ url ('flag') }}"><i class="fa fa-edit fa-warning"></i> Flags</a>
+                        </li>
                         @endif
                     </ul>
                 </div>

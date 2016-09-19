@@ -11,6 +11,27 @@
 |
 */
 
+$factory->define(App\Contact::class, function (Faker\Generator $faker) {
+    return [
+        'firstName' => $faker->firstName,
+        'lastName' => $faker->lastName,
+        'email' => $faker->safeEmail,
+        'phoneNumber' => $faker->phoneNumber
+    ];
+});
+
+$factory->define(App\Resource::class, function (Faker\Generator $faker) {
+    return [
+        'Name' => $faker->company,
+        'StreetAddress' => $faker->streetAddress,
+        'City' => $faker->city,
+        'County' => $faker->city,
+        'State' => 'TN',
+        'Zipcode' => $faker->postcode,
+        'PhoneNumber' => $faker->phoneNumber,
+    ];
+});
+
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
@@ -19,3 +40,4 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'password' => bcrypt(str_random(10)),
     ];
 });
+

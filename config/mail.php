@@ -16,8 +16,7 @@ return [
     |
     */
 
-    /* Make sure you change this for production*/
-    'driver' => 'log',
+    'driver' => env('MAIL_DRIVER', 'smtp'),
 
     /*
     |--------------------------------------------------------------------------
@@ -30,7 +29,7 @@ return [
     |
     */
 
-    'host' => 'smtp.mailgun.org',
+    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
 
     /*
     |--------------------------------------------------------------------------
@@ -43,7 +42,7 @@ return [
     |
     */
 
-    'port' => 587,
+    'port' => env('MAIL_PORT', 587),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,9 +55,7 @@ return [
     |
     */
 
-
-    /* Make sure you change this for production*/
-    'from' => ['address' => 'humphreymg@etsu.edu', 'name' => 'Matthew Humphrey'],
+    'from' => ['address' => null, 'name' => null],
 
     /*
     |--------------------------------------------------------------------------
@@ -71,7 +68,7 @@ return [
     |
     */
 
-    'encryption' => 'tls',
+    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
 
     /*
     |--------------------------------------------------------------------------
@@ -82,9 +79,9 @@ return [
     | set it here. This will get used to authenticate with your server on
     | connection. You may also set the "password" value below this one.
     |
+    */
 
-
-    'username' =>
+    'username' => env('MAIL_USERNAME'),
 
     /*
     |--------------------------------------------------------------------------
@@ -95,10 +92,10 @@ return [
     | messages from your application. This will be given to the server on
     | connection so that the application will be able to send messages.
     |
-
-
-    'password' => '';
     */
+
+    'password' => env('MAIL_PASSWORD'),
+
     /*
     |--------------------------------------------------------------------------
     | Sendmail System Path

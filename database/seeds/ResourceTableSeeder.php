@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Resource;
+use Illuminate\Database\Schema;
+use Illuminate\Support\Facades;
 
 class ResourceTableSeeder extends Seeder
 {
@@ -11,7 +14,7 @@ class ResourceTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('resource')->insert([
+        DB::table('resources')->insert([
             'Name' => 'Test',
             'StreetAddress' => '123 Test Way',
             'StreetAddress2' => 'Apt 3',
@@ -24,10 +27,9 @@ class ResourceTableSeeder extends Seeder
             'ClosingHours' => '20:00:00',
             'Comments' => 'Surprise! The site does not exist!'
         ]);
-        DB::table('resource')->insert([
+        DB::table('resources')->insert([
             'Name' => 'Test1',
             'StreetAddress' => '987 MLK Blv',
-            'StreetAddress2' => 'Apt 3',
             'City' => 'Johnson City',
             'County' => 'Washington',
             'State' => 'TN',
@@ -37,7 +39,7 @@ class ResourceTableSeeder extends Seeder
             'ClosingHours' => '21:00:00',
             'Comments' => 'Surprise! The site does not exist!'
         ]);
-        DB::table('resource')->insert([
+        DB::table('resources')->insert([
             'Name' => 'Test2',
             'StreetAddress' => '234 No Longer Care Ave',
             'StreetAddress2' => 'Apt 209',
@@ -50,5 +52,6 @@ class ResourceTableSeeder extends Seeder
             'ClosingHours' => '00:00:00',
             'Comments' => 'Surprise! The site does not exist!'
         ]);
+        factory(App\Resource::class, 50)->create();
     }
 }

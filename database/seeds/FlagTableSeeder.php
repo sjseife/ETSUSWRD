@@ -1,6 +1,8 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class FlagTableSeeder extends Seeder
 {
@@ -11,27 +13,32 @@ class FlagTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('flag')->insert([
-            'Date' => '2016-07-09',
-            'Level' => '1',
-            'Comments' => 'Flag for resource 1',
-            'submitted_by' => '2',
-            'resource_id' => '1'
-        ]);
-        DB::table('flag')->insert([
-            'Date' => '2016-03-12',
-            'Level' => '0',
-            'Comments' => 'Flag for contact 2',
-            'submitted_by' => '2',
-            'contacts_id' => '2'
-        ]);
-        DB::table('flag')->insert([
-            'Date' => '2016-05-05',
-            'Level' => '2',
-            'Comments' => 'Flag for user 2',
+        DB::table('flags')->insert([
+            'level' => 'Admin',
+            'comments' => 'User is a stupid idiot! >:(',
+            'resolved' => '0',
             'submitted_by' => '3',
-            'user_id' => '2'
+            'user_id' => '6',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('flags')->insert([
+            'level' => 'Admin',
+            'comments' => 'Resource went bankrupt and no longer provides services. :(',
+            'resolved' => '0',
+            'submitted_by' => '2',
+            'resource_id' => '6',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('flags')->insert([
+            'level' => 'GA',
+            'comments' => 'Contact got Married! Last name is now Fitzgerald. :)',
+            'resolved' => '0',
+            'submitted_by' => '2',
+            'contact_id' => '6',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
     }
-
 }

@@ -6,14 +6,50 @@ use Illuminate\Database\Eloquent\Model;
 
 class Flag extends Model
 {
-    protected $table = 'flag';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'Date', 'Level', 'Comments', 'user_id', 'resource_id', 'submitted_by', 'contacts_id'
+        'date', 'level', 'comments', 'resolved', 'submitted_by', 'user_id', 'resource_id', 'contact_id'
     ];
 
+    /**
+     * Get a list of resource associated with the current flag
+     * @return array
+     */
+    public function resource()
+    {
+        return $this->belongsTo('App\Resource');
+    }
+
+    /**
+     * Get a list of contact associated with the current flag
+     * @return array
+     */
+    public function contact()
+    {
+        return $this->belongsTo('App\Contact');
+    }
+
+    /**
+     * Get a list of user associated with the current flag
+     * NOTE: This is the user that is being flagged
+     * @return array
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    /**
+     * Get a list of user associated with the current flag
+     * NOTE: This is the user that submitted the flag
+     * @return array
+     */
+    public function submitter()
+    {
+        return $this->belongsTo('App\User', 'submitted_by');
+    }
 }

@@ -58,7 +58,8 @@ class ResourcesController extends Controller
     {
         $categoryList = Category::lists('name', 'id');
         $passedContacts = $this->getAllContactsFullName();
-        return view('resources.edit', compact('resource', 'categoryList', 'passedContacts'));
+        $resourceList = Resource::lists('name', 'id');
+        return view('resources.edit', compact('resource', 'categoryList', 'passedContacts', 'resourceList'));
     }
 
     public function update(Resource $resource, ResourceRequest $request)

@@ -29,6 +29,7 @@ return array(
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'SuperClosure\\' => array($vendorDir . '/jeremeamia/SuperClosure/src'),
     'Psy\\' => array($vendorDir . '/psy/psysh/src/Psy'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'League\\Fractal\\' => array($vendorDir . '/league/fractal/src'),

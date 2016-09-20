@@ -487,46 +487,6 @@
         "homepage": "https://symfony.com"
     },
     {
-        "name": "psr/log",
-        "version": "1.0.0",
-        "version_normalized": "1.0.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/php-fig/log.git",
-            "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
-            "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
-            "shasum": ""
-        },
-        "time": "2012-12-21 11:40:51",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Psr\\Log\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "PHP-FIG",
-                "homepage": "http://www.php-fig.org/"
-            }
-        ],
-        "description": "Common interface for logging libraries",
-        "keywords": [
-            "log",
-            "psr",
-            "psr-3"
-        ]
-    },
-    {
         "name": "symfony/debug",
         "version": "v3.0.9",
         "version_normalized": "3.0.9.0",
@@ -962,59 +922,6 @@
             "MIT"
         ],
         "description": "implementation of xdg base directory specification for php"
-    },
-    {
-        "name": "nikic/php-parser",
-        "version": "v2.1.0",
-        "version_normalized": "2.1.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/nikic/PHP-Parser.git",
-            "reference": "47b254ea51f1d6d5dc04b9b299e88346bf2369e3"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/47b254ea51f1d6d5dc04b9b299e88346bf2369e3",
-            "reference": "47b254ea51f1d6d5dc04b9b299e88346bf2369e3",
-            "shasum": ""
-        },
-        "require": {
-            "ext-tokenizer": "*",
-            "php": ">=5.4"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "~4.0"
-        },
-        "time": "2016-04-19 13:41:41",
-        "bin": [
-            "bin/php-parse"
-        ],
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.1-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "PhpParser\\": "lib/PhpParser"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Nikita Popov"
-            }
-        ],
-        "description": "A PHP parser written in PHP",
-        "keywords": [
-            "parser",
-            "php"
-        ]
     },
     {
         "name": "psy/psysh",
@@ -3460,75 +3367,6 @@
         ]
     },
     {
-        "name": "maatwebsite/excel",
-        "version": "2.1.4",
-        "version_normalized": "2.1.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Maatwebsite/Laravel-Excel.git",
-            "reference": "b5c91156f6bd29f68f4f2c51186faae4310a5a68"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/b5c91156f6bd29f68f4f2c51186faae4310a5a68",
-            "reference": "b5c91156f6bd29f68f4f2c51186faae4310a5a68",
-            "shasum": ""
-        },
-        "require": {
-            "illuminate/cache": "5.0.*|5.1.*|5.2.*|5.3.*",
-            "illuminate/config": "5.0.*|5.1.*|5.2.*|5.3.*",
-            "illuminate/filesystem": "5.0.*|5.1.*|5.2.*|5.3.*",
-            "illuminate/support": "5.0.*|5.1.*|5.2.*|5.3.*",
-            "nesbot/carbon": "~1.0",
-            "php": ">=5.5",
-            "phpoffice/phpexcel": "1.8.*",
-            "tijsverkoyen/css-to-inline-styles": "~1.5"
-        },
-        "require-dev": {
-            "mockery/mockery": "~0.9",
-            "orchestra/testbench": "3.1.*",
-            "phpseclib/phpseclib": "~1.0",
-            "phpunit/phpunit": "~4.0"
-        },
-        "suggest": {
-            "illuminate/http": "5.0.*|5.1.*|5.2.*|5.3.*",
-            "illuminate/queue": "5.0.*|5.1.*|5.2.*|5.3.*",
-            "illuminate/routing": "5.0.*|5.1.*|5.2.*|5.3.*",
-            "illuminate/view": "5.0.*|5.1.*|5.2.*|5.3.*"
-        },
-        "time": "2016-08-28 20:25:51",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "src/Maatwebsite/Excel"
-            ],
-            "psr-0": {
-                "Maatwebsite\\Excel\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "LGPL"
-        ],
-        "authors": [
-            {
-                "name": "Maatwebsite.nl",
-                "email": "patrick@maatwebsite.nl"
-            }
-        ],
-        "description": "An eloquent way of importing and exporting Excel and CSV in Laravel 4 with the power of PHPExcel",
-        "keywords": [
-            "PHPExcel",
-            "batch",
-            "csv",
-            "excel",
-            "export",
-            "import",
-            "laravel"
-        ]
-    },
-    {
         "name": "league/fractal",
         "version": "0.14.0",
         "version_normalized": "0.14.0.0",
@@ -3862,6 +3700,177 @@
             "assert",
             "check",
             "validate"
+        ]
+    },
+    {
+        "name": "psr/log",
+        "version": "1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-fig/log.git",
+            "reference": "5277094ed527a1c4477177d102fe4c53551953e0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/php-fig/log/zipball/5277094ed527a1c4477177d102fe4c53551953e0",
+            "reference": "5277094ed527a1c4477177d102fe4c53551953e0",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2016-09-19 16:02:08",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Psr\\Log\\": "Psr/Log/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "PHP-FIG",
+                "homepage": "http://www.php-fig.org/"
+            }
+        ],
+        "description": "Common interface for logging libraries",
+        "homepage": "https://github.com/php-fig/log",
+        "keywords": [
+            "log",
+            "psr",
+            "psr-3"
+        ]
+    },
+    {
+        "name": "nikic/php-parser",
+        "version": "v2.1.1",
+        "version_normalized": "2.1.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/nikic/PHP-Parser.git",
+            "reference": "4dd659edadffdc2143e4753df655d866dbfeedf0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/4dd659edadffdc2143e4753df655d866dbfeedf0",
+            "reference": "4dd659edadffdc2143e4753df655d866dbfeedf0",
+            "shasum": ""
+        },
+        "require": {
+            "ext-tokenizer": "*",
+            "php": ">=5.4"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.0"
+        },
+        "time": "2016-09-16 12:04:44",
+        "bin": [
+            "bin/php-parse"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.1-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "PhpParser\\": "lib/PhpParser"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Nikita Popov"
+            }
+        ],
+        "description": "A PHP parser written in PHP",
+        "keywords": [
+            "parser",
+            "php"
+        ]
+    },
+    {
+        "name": "maatwebsite/excel",
+        "version": "2.1.6",
+        "version_normalized": "2.1.6.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Maatwebsite/Laravel-Excel.git",
+            "reference": "700eba02f76f2971c81726a4f6a04121c1977e64"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/700eba02f76f2971c81726a4f6a04121c1977e64",
+            "reference": "700eba02f76f2971c81726a4f6a04121c1977e64",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/cache": "5.0.*|5.1.*|5.2.*|5.3.*",
+            "illuminate/config": "5.0.*|5.1.*|5.2.*|5.3.*",
+            "illuminate/filesystem": "5.0.*|5.1.*|5.2.*|5.3.*",
+            "illuminate/support": "5.0.*|5.1.*|5.2.*|5.3.*",
+            "nesbot/carbon": "~1.0",
+            "php": ">=5.5",
+            "phpoffice/phpexcel": "1.8.*",
+            "tijsverkoyen/css-to-inline-styles": "~1.5"
+        },
+        "require-dev": {
+            "mockery/mockery": "~0.9",
+            "orchestra/testbench": "3.1.*",
+            "phpseclib/phpseclib": "~1.0",
+            "phpunit/phpunit": "~4.0"
+        },
+        "suggest": {
+            "illuminate/http": "5.0.*|5.1.*|5.2.*|5.3.*",
+            "illuminate/queue": "5.0.*|5.1.*|5.2.*|5.3.*",
+            "illuminate/routing": "5.0.*|5.1.*|5.2.*|5.3.*",
+            "illuminate/view": "5.0.*|5.1.*|5.2.*|5.3.*"
+        },
+        "time": "2016-09-15 21:03:21",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/Maatwebsite/Excel"
+            ],
+            "psr-0": {
+                "Maatwebsite\\Excel\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL"
+        ],
+        "authors": [
+            {
+                "name": "Maatwebsite.nl",
+                "email": "patrick@maatwebsite.nl"
+            }
+        ],
+        "description": "An eloquent way of importing and exporting Excel and CSV in Laravel 4 with the power of PHPExcel",
+        "keywords": [
+            "PHPExcel",
+            "batch",
+            "csv",
+            "excel",
+            "export",
+            "import",
+            "laravel"
         ]
     }
 ]

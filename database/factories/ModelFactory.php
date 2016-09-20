@@ -29,6 +29,8 @@ $factory->define(App\Resource::class, function (Faker\Generator $faker) {
         'State' => 'TN',
         'Zipcode' => $faker->postcode,
         'PhoneNumber' => $faker->phoneNumber,
+        'OpeningHours' => $faker->time('H:i:s'),
+        'ClosingHours' => $faker->time('H:i:s')
     ];
 });
 

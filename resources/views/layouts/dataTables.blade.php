@@ -32,18 +32,24 @@
     </style>
 </head>
 <body>
-@include('layouts.NavBar')
-<div class="container">
-    @yield('content')
-</div>
+    @include('layouts.NavBar')
+    <div class="container">
+        @if (Session::has('flash_message'))
+            <div class="alert alert-success">
+                {{ Session::get('flash_message') }}
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            </div>
+        @endif
+        @yield('content')
+    </div>
 
-<!-- jQuery -->
-<script src="//code.jquery.com/jquery.js"></script>
-<!-- DataTables -->
-<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-<!-- Bootstrap JavaScript -->
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<!-- App scripts -->
-@stack('scripts')
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- DataTables -->
+    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- App scripts -->
+    @stack('scripts')
 </body>
 </html>

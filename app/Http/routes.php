@@ -1,5 +1,5 @@
 <?php
-use App\Flag;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -7,183 +7,95 @@ use App\Flag;
 |
 | Here is where you can register all of the routes for an application.
 | It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
+| and give it the controller to call when that URI is requested.
 |
 */
 
-Route::get('/', function()
+Route::get('/', function () {
+    if(Auth::guest())
+    {
+        return redirect(url('/login'));
+    }
+});
+/*Route::controllers([
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController'
+]);*/
+
+
+//if Admin is required, place route in this group
+Route::group(['middleware' => 'App\Http\Middleware\AdminAccessMiddleware'], function()
 {
-	if(Auth::guest())
-	{
-		return redirect(url('/login'));
-	}
-	$flags = count(Flag::all());
-	return View::make('home', compact('flags'));
+    //resource
+    Route::delete('resources/{resource}', 'ResourcesController@destroy');\
+
+    //user
+    Route::get('users', 'UsersController@index');
+    Route::get('users/create', 'UsersController@create');
+    Route::get('users/{user}', 'UsersController@show');
+    Route::get('users/{user}/edit', 'UsersController@edit');
+    Route::get('users/{user}/flag', 'UsersController@flag');
+    Route::post('users/flag/{user}', 'UsersController@storeFlag');
+    Route::post('users', 'UsersController@store');
+    Route::patch('users/{user}', 'UsersController@update');
+    Route::delete('users/{user}', 'UsersController@destroy');
+
 });
 
-Route::get('/charts', function()
+//if GA or Admin is required, place route in this group
+Route::group(['middleware' => 'App\Http\Middleware\GAAccessMiddleware'], function()
 {
-	return View::make('mcharts');
+    //resource
+    Route::get('resources/create', 'ResourcesController@create');//resource creation form
+    Route::post('resources', 'ResourcesController@store');//save a new resource
+    Route::get('resources/{resource}/edit', 'ResourcesController@edit');//resource edit form
+    Route::patch('resources/{resource}', 'ResourcesController@update');//resource edit save
+
+    //contacts
+    Route::get('contacts', 'ContactsController@index');
+    Route::get('contacts/create', 'ContactsController@create');
+    Route::get('contacts/{contact}', 'ContactsController@show');
+    Route::get('contacts/{contact}/edit', 'ContactsController@edit');
+    Route::get('contacts/{contact}/flag', 'contactsController@flag');
+    Route::post('contacts/flag/{contact}', 'contactsController@storeFlag');
+    Route::post('contactsJSON', 'ContactsController@storeJSON');
+    Route::post('contacts', 'ContactsController@store');
+    Route::patch('contacts/{contact}', 'ContactsController@update');
+    Route::delete('contacts/{contact}', 'ContactsController@destroy');
+
+    //categories
+    Route::get('categories', 'CategoryController@index');
+    Route::get('categories/create', 'CategoryController@create');
+    Route::get('categories/{category}', 'CategoryController@show');
+    Route::get('categories/{category}/edit', 'CategoryController@edit');
+    Route::post('categories', 'CategoryController@store');
+    Route::patch('categories/{category}', 'CategoryController@update');
+    Route::delete('categories/{category}', 'CategoryController@destroy');
 });
 
+//if gerneral user is required, leave it below.
 
-Route::get('/tables', function()
-{
-	return View::make('table');
-});
-
-Route::get('/forms', function()
-{
-	return View::make('form');
-});
-
-Route::get('/grid', function()
-{
-	return View::make('grid');
-});
-
-Route::get('/buttons', function()
-{
-	return View::make('buttons');
-});
+//resource
+Route::get('resources', 'ResourcesController@index');
+Route::get('resources/add/{resource}', 'ResourcesController@add'); //add resource to report
+Route::get('resources/generateReport', 'ResourcesController@generateReport');
+Route::get('resources/generatePDF', 'ResourcesController@generatePDF');
+Route::get('resources/removeReport/{id}', 'ResourcesController@removeCart');
+Route::get('resources/{resource}', 'ResourcesController@show');
+Route::get('resources/{resource}/flag', 'ResourcesController@flag');
+Route::post('resources/flag/{resource}', 'ResourcesController@storeFlag');
 
 
-Route::get('/icons', function()
-{
-	return View::make('icons');
-});
-
-Route::get('/panels', function()
-{
-	return View::make('panel');
-});
-
-Route::get('/typography', function()
-{
-	return View::make('typography');
-});
-
-Route::get('/notifications', function()
-{
-	return View::make('notifications');
-});
-
-Route::get('/blank', function()
-{
-	return View::make('blank');
-});
-
-
-Route::get('/documentation', function()
-{
-	return View::make('documentation');
-});
-
-
+//flags
+Route::get('flags', 'FlagsController@index');
+Route::get('flags/{flag}', 'FlagsController@show');
+Route::get('flags/{flag}/edit', 'FlagsController@edit');
+Route::post('flags/{flag}/resolve', 'FlagsController@resolve');
+Route::patch('flags/{flag}', 'FlagsController@update');
+Route::delete('flags/{flag}', 'FlagsController@destroy');
 
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-Route::group(['middleware' => ['web']], function () {
-	// your routes here
-});
-
-Route::get('/auth/newPassword',function(){
-    return view('/auth/newPassword', array('user' => Auth::user(), 'errors' => array()));
-});
-Route::patch('auth/newPassword/{user}', 'NewPassController@updatePass');
-
-Route::get('/team', function () {
-	return view('team');
-});
-
-
-//if Admin is required, place route in this group
-Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
-{
-	//category
-	//Route::get('category/create', 'CategoryController@create');
-	//Route::post('category/store', 'CategoryController@store');
-	//Route::get('category/edit/{category}', 'CategoryController@edit');
-	//Route::patch('category/{category}', 'CategoryController@update');
-
-	//resource
-	Route::get('resource/delete/{id}', 'ResourceController@delete');
-	Route::delete('resources/{resource}', 'ResourceController@destroy');
-
-	//flag
-	Route::get('/flag', 'FlagController@index');
-	Route::get('flag/create', 'FlagController@create');             //admin specific
-	Route::post('flag/createFlag', 'FlagController@createFlag');
-
-	//user
-	Route::get('/users', 'UserController@index');
-	Route::get('/user/view/{id}', 'UserController@view');
-	Route::get('user/create', 'UserController@create');
-	Route::post('user/createUser', 'UserController@createUser');
-	Route::get('/user/edit/{id}', 'UserController@edit');
-	Route::patch('user/{id}', 'UserController@update');
-	Route::get('user/delete/{id}', 'UserController@delete');
-	Route::delete('user/destroy/{id}', 'UserController@destroy');
-
-
-	Route::get('/contact/edit/{id}', 'ContactController@edit');
-	Route::patch('/contact/{id}', 'ContactController@update');
-	Route::get('/contact/view/{id}', 'ContactController@view');
-	Route::get('/contact', 'ContactController@index');
-	Route::get('contact/create', 'ContactController@create');
-	Route::post('contact/createContact', 'ContactController@createContact');
-	Route::get('contact/delete/{id}', 'ContactController@delete');
-	Route::delete('contact/destroy/{id}', 'ContactController@destroy');
-});
-
-//if GA or Admin is required, place route in this group
-Route::group(['middleware' => 'App\Http\Middleware\GAMiddleware'], function()
-{
-	//category
-	Route::get('/category', 'CategoryController@index');
-	Route::get('category/create', 'CategoryController@create');
-	Route::post('category/store', 'CategoryController@store');
-	Route::get('category/edit/{id}', 'CategoryController@edit');
-	Route::patch('category/{id}', 'CategoryController@update');
-	Route::get('category/view/{id}', 'CategoryController@view');
-
-	//resource
-	Route::get('/resources/generateReport', 'ResourceController@generateReport');
-	Route::get('/resources/generatePDF', 'ResourceController@generatePDF');
-	Route::get('resources/create', 'ResourceController@create');
-	Route::post('resources', 'ResourceController@store');
-	Route::get('resources/edit/{resource}', 'ResourceController@edit');
-	Route::patch('resources/{resource}', 'ResourceController@update');
-	Route::get('resources/add/{resource}', 'ResourceController@add');
-
-	//flag
-	Route::get('flag/view/{id}', 'FlagController@view');
-	Route::get('flag/resourceview/{id}', 'FlagController@resourceView');
-    Route::get('flag/userview/{id}', 'FlagController@userView');
-    Route::get('flag/contactview/{id}', 'FlagController@contactView');
-	Route::get('flag/edit/{id}', 'FlagController@edit');
-	Route::patch('flag/{id}', 'FlagController@update');
-	Route::get('flag/delete/{id}', 'FlagController@delete');
-	Route::delete('flag/destroy/{id}', 'FlagController@destroy');
-
-    //contact
-    Route::get('/contact/edit/{id}', 'ContactController@edit');
-    Route::patch('/contact/{id}', 'ContactController@update');
-    Route::get('/contact/view/{id}', 'ContactController@view');
-    Route::get('/contact', 'ContactController@index');
-    Route::get('contact/create', 'ContactController@create');
-    Route::post('contact/createContact', 'ContactController@createContact');
-    Route::get('contact/delete/{id}', 'ContactController@delete');
-    Route::delete('contact/destroy/{id}', 'ContactController@destroy');
-    Route::get('contact/resourceview/{id}', 'ContactController@resourceView');
-});
-
-
-Route::get('resources', 'ResourceController@index');
-Route::get('/resource/generateReport', 'ResourceController@generateReport');
-Route::get('/resource/generatePDF', 'ResourceController@generatePDF');
-Route::get('resource/removeReport/{id}', 'ResourceController@removeCart');
-Route::get('resources/{resource}', 'ResourceController@show');
-
+Route::get('/', 'HomeController@index');

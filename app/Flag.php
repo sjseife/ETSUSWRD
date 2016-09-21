@@ -52,4 +52,46 @@ class Flag extends Model
     {
         return $this->belongsTo('App\User', 'submitted_by');
     }
+
+    /**
+     * Allows for the use of Flag->userIdNumber
+     * @return null if not set
+     * @return integer if set
+     */
+    public function getUserIdNumberAttribute()
+    {
+        if(!isSet($this->user))
+        {
+            return Null;
+        }
+        return $this->user->id;
+    }
+
+    /**
+     * Allows for the use of Flag->resourceIdNumber
+     * @return null if not set
+     * @return integer if set
+     */
+    public function getResourceIdNumberAttribute()
+    {
+        if(!isSet($this->resource))
+        {
+            return Null;
+        }
+        return $this->resource->id;
+    }
+
+    /**
+     * Allows for the use of Flag->userIdNumber
+     * @return null if not set
+     * @return integer if set
+     */
+    public function getContactIdNumberAttribute()
+    {
+        if(!isSet($this->contact))
+        {
+            return Null;
+        }
+        return $this->contact->id;
+    }
 }

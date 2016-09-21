@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Resource;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -65,6 +67,26 @@ class CategoryController extends Controller
     
     public function destroy(Category $category)
     {
+        foreach($category->resources as $resource)
+        {
+            DB::table('archive_category_resource')->insert(
+            [
+                'category_id' => $category->id,
+                'resource_id' => $resource->pivot->resource_id,
+                'created_at' => $resource->pivot->created_at,
+                'updated_at' => $resource->pivot->updated_at,
+                'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ]
+            );
+        }
+        DB::table('archive_categories')->insert(
+            ['id' => $category->id,
+                'name' => $category->name,
+                'created_at' => $category->created_at,
+                'updated_at' => $category->updated_at,
+                'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
+        );
+
         $category->delete();
         \Session::flash('flash_message', 'Category Deleted');
         return redirect('/categories');

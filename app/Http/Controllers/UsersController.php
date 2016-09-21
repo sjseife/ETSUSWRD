@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 use App\Flag;
 use App\Http\Requests\FlagRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\User;
 use App\Http\Requests;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
@@ -57,16 +59,32 @@ class UsersController extends Controller
 
     public function destroy(User $user)
     {
-        DB::table('users_archive')->insert(
+        foreach($user->flags as $flag)
+        {
+            DB::table('archive_flags')->insert(
+                ['id' => $flag->id,
+                    'level' => $flag->level,
+                    'comments' => $flag->comments,
+                    'resolved' => $flag->resolved,
+                    'submitted_by' => $flag->submitter->id,
+                    'user_id' => $flag->userIdNumber,
+                    'resource_id' => $flag->resourceIdNumber,
+                    'contact_id' => $flag->contactIdNumber,
+                    'created_at' => $flag->created_at,
+                    'updated_at' => $flag->updated_at,
+                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
+            );
+        }
+
+        DB::table('archive_users')->insert(
             ['id' => $user->id,
                 'name' => $user->name,
                 'email' => $user->email,
                 'password' => $user->password,
                 'role' => $user->role,
-                'remember_token' => $user->getRememberToken(),
-                'created_at' => $user->create_at,
-                'updated_at' => $user->update_at,
-                'archved_at' => Carbon::now()->format('Y-m-d H:i:s')]
+                'created_at' => $user->created_at,
+                'updated_at' => $user->updated_at,
+                'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
         );
         $user->delete();
         \Session::flash('flash_message', 'User Deleted');

@@ -13,6 +13,7 @@ use App\Resource;
 use App\Category;
 use App\Contact;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Cache;
 use Auth;
@@ -89,7 +90,47 @@ class ResourcesController extends Controller
     
     public function destroy(Resource $resource)
     {
-        DB::table('resources_archive')->insert(
+        foreach($resource->flags as $flag)
+        {
+            DB::table('archive_flags')->insert(
+                ['id' => $flag->id,
+                    'level' => $flag->level,
+                    'comments' => $flag->comments,
+                    'resolved' => $flag->resolved,
+                    'submitted_by' => $flag->submitter->id,
+                    'user_id' => $flag->userIdNumber,
+                    'resource_id' => $flag->resourceIdNumber,
+                    'contact_id' => $flag->contactIdNumber,
+                    'created_at' => $flag->created_at,
+                    'updated_at' => $flag->updated_at,
+                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
+            );
+        }
+        foreach($resource->contacts as $contact)
+        {
+            DB::table('archive_contact_resource')->insert(
+                [
+                    'contact_id' => $contact->pivot->contact_id,
+                    'resource_id' => $resource->id,
+                    'created_at' => $contact->pivot->created_at,
+                    'updated_at' => $contact->pivot->updated_at,
+                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
+                ]
+            );
+        }
+        foreach($resource->categories as $category)
+        {
+            DB::table('archive_category_resource')->insert(
+                [
+                    'category_id' => $category->pivot->category_id,
+                    'resource_id' => $resource->id,
+                    'created_at' => $category->pivot->created_at,
+                    'updated_at' => $category->pivot->updated_at,
+                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
+                ]
+            );
+        }
+        DB::table('archive_resources')->insert(
           ['id' => $resource->id,
             'Name' => $resource->Name,
             'StreetAddress' => $resource->StreetAddress,
@@ -102,9 +143,9 @@ class ResourcesController extends Controller
             'OpeningHours' => $resource->OpeningHours,
               'ClosingHours' => $resource->ClosingHours,
               'Comments' => $resource->Comments,
-              'created_at' => $resource->create_at,
-              'updated_at' => $resource->update_at,
-              'archved_at' => Carbon::now()->format('Y-m-d H:i:s')]
+              'created_at' => $resource->created_at,
+              'updated_at' => $resource->updated_at,
+              'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
         );
         $resource->delete();
         \Session::flash('flash_message', 'Resource Deleted');

@@ -12,18 +12,17 @@ class CreateArchiveTables extends Migration
      */
     public function up()
     {
-        Schema::create('users_archive', function (Blueprint $table) {
+        Schema::create('archive_users', function (Blueprint $table) {
             $table->integer('id')->unsigned();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('role');
-            $table->rememberToken();
             $table->timestamps();
             $table->timestamp('archived_at');
         });
 
-        Schema::create('resources_archive', function (Blueprint $table) {
+        Schema::create('archive_resources', function (Blueprint $table) {
             $table->integer('id')->unsigned();
             $table->string('Name', 150);
             $table->string('StreetAddress', 50);
@@ -40,21 +39,21 @@ class CreateArchiveTables extends Migration
             $table->timestamp('archived_at');
         });
 
-        Schema::create('categories_archive', function (Blueprint $table) {
+        Schema::create('archive_categories', function (Blueprint $table) {
             $table->integer('id')->unsigned();
             $table->string('name', 150);
             $table->timestamps();
             $table->timestamp('archived_at');
         });
 
-        Schema::create('category_resource_archive', function (Blueprint $table) {
+        Schema::create('archive_category_resource', function (Blueprint $table) {
             $table->integer('category_id')->unsigned();
             $table->integer('resource_id')->unsigned();
             $table->timestamps();
             $table->timestamp('archived_at');
         });
 
-        Schema::create('contacts_archive', function (Blueprint $table) {
+        Schema::create('archive_contacts', function (Blueprint $table) {
             $table->integer('id')->unsigned();
             $table->string('firstName', 25);
             $table->string('lastName', 30);
@@ -64,21 +63,21 @@ class CreateArchiveTables extends Migration
             $table->timestamp('archived_at');
         });
 
-        Schema::create('contact_resource_archive', function (Blueprint $table) {
+        Schema::create('archive_contact_resource', function (Blueprint $table) {
             $table->integer('contact_id')->unsigned();
             $table->integer('resource_id')->unsigned();
             $table->timestamps();
             $table->timestamp('archived_at');
         });
 
-        Schema::create('flags_archive', function (Blueprint $table) {
+        Schema::create('archive_flags', function (Blueprint $table) {
             $table->integer('id')->unsigned();
             $table->string('level');
             $table->text('comments');
             $table->boolean('resolved');
             $table->integer('submitted_by')
                 ->unsigned()
-                ->default(NULL);
+                ->nullable();
             $table->integer('user_id')
                 ->unsigned()
                 ->nullable();
@@ -100,12 +99,12 @@ class CreateArchiveTables extends Migration
      */
     public function down()
     {
-        Schema::drop('users_archive');
-        Schema::drop('resources_archive');
-        Schema::drop('categories_archive');
-        Schema::drop('category_resource_archive');
-        Schema::drop('contacts_archive');
-        Schema::drop('contact_resource_archive');
-        Schema::drop('flags_archive');
+        Schema::drop('archive_users');
+        Schema::drop('archive_resources');
+        Schema::drop('archive_categories');
+        Schema::drop('archive_category_resource');
+        Schema::drop('archive_contacts');
+        Schema::drop('archive_contact_resource');
+        Schema::drop('archive_flags');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Flag;
 use App\Http\Requests\FlagRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -88,6 +89,23 @@ class ResourcesController extends Controller
     
     public function destroy(Resource $resource)
     {
+        DB::table('resources_archive')->insert(
+          ['id' => $resource->id,
+            'Name' => $resource->Name,
+            'StreetAddress' => $resource->StreetAddress,
+            'StreetAddress2' => $resource->StreetAddress2,
+            'City' => $resource->City,
+            'County' => $resource->County,
+            'State' => $resource->State,
+            'Zipcode' => $resource->Zipcode,
+            'PhoneNumber' => $resource->PhoneNumber,
+            'OpeningHours' => $resource->OpeningHours,
+              'ClosingHours' => $resource->ClosingHours,
+              'Comments' => $resource->Comments,
+              'created_at' => $resource->create_at,
+              'updated_at' => $resource->update_at,
+              'archved_at' => Carbon::now()->format('Y-m-d H:i:s')]
+        );
         $resource->delete();
         \Session::flash('flash_message', 'Resource Deleted');
         return redirect('/resources');

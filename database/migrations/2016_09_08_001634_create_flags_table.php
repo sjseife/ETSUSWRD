@@ -30,8 +30,6 @@ class CreateFlagsTable extends Migration
                     ->unsigned()
                     ->nullable();
             $table->timestamps();
-
-
         });
 
         Schema::table('flags', function(Blueprint $table){

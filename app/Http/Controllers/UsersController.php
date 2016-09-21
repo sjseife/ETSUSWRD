@@ -57,6 +57,17 @@ class UsersController extends Controller
 
     public function destroy(User $user)
     {
+        DB::table('users_archive')->insert(
+            ['id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'password' => $user->password,
+                'role' => $user->role,
+                'remember_token' => $user->getRememberToken(),
+                'created_at' => $user->create_at,
+                'updated_at' => $user->update_at,
+                'archved_at' => Carbon::now()->format('Y-m-d H:i:s')]
+        );
         $user->delete();
         \Session::flash('flash_message', 'User Deleted');
         return redirect('/users');

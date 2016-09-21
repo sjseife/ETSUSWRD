@@ -65,6 +65,14 @@ class CategoryController extends Controller
     
     public function destroy(Category $category)
     {
+        DB::table('categories_archive')->insert(
+            ['id' => $category->id,
+                'name' => $category->name,
+                'created_at' => $category->create_at,
+                'updated_at' => $category->update_at,
+                'archved_at' => Carbon::now()->format('Y-m-d H:i:s')]
+        );
+
         $category->delete();
         \Session::flash('flash_message', 'Category Deleted');
         return redirect('/categories');

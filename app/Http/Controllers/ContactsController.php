@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Flag;
 use App\Http\Requests\FlagRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -11,6 +12,7 @@ use App\Http\Requests\ContactRequest;
 use App\Contact;
 use App\Resource;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 class ContactsController extends Controller
 {
@@ -90,6 +92,44 @@ class ContactsController extends Controller
 
     public function destroy(Contact $contact)
     {
+        foreach($contact->flags as $flag)
+        {
+            DB::table('archive_flags')->insert(
+                ['id' => $flag->id,
+                    'level' => $flag->level,
+                    'comments' => $flag->comments,
+                    'resolved' => $flag->resolved,
+                    'submitted_by' => $flag->submitter->id,
+                    'user_id' => $flag->userIdNumber,
+                    'resource_id' => $flag->resourceIdNumber,
+                    'contact_id' => $flag->contactIdNumber,
+                    'created_at' => $flag->created_at,
+                    'updated_at' => $flag->updated_at,
+                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
+            );
+        }
+        foreach($contact->resources as $resource)
+        {
+            DB::table('archive_contact_resource')->insert(
+                [
+                    'contact_id' => $contact->id,
+                    'resource_id' => $resource->pivot->resource_id,
+                    'created_at' => $resource->pivot->created_at,
+                    'updated_at' => $resource->pivot->updated_at,
+                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
+                ]
+            );
+        }
+        DB::table('archive_contacts')->insert(
+            ['id' => $contact->id,
+                'firstName' => $contact->firstName,
+                'lastName' => $contact->lastName,
+                'email' => $contact->email,
+                'phoneNumber' => $contact->phoneNumber,
+                'created_at' => $contact->created_at,
+                'updated_at' => $contact->updated_at,
+                'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
+        );
         $contact->delete();
         \Session::flash('flash_message', 'Contact Deleted');
         return redirect('/contacts');

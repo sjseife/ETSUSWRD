@@ -10,6 +10,16 @@
             <table class="display dt-responsive nowrap" cellspacing="0" width="100%" id="ResourceTable">
                 <thead>
                 <tr>
+                    <th>Filters:</th>
+                    <th>County</th>
+                    <th>Phone</th>
+                    <th>Opening Hours</th>
+                    <th>Closing Hours</th>
+                    <th>Category</th>
+                    <th></th>
+                </tr>
+
+                <tr>
                     <th>Name</th>
                     <th>County</th>
                     <th>Phone</th>
@@ -59,7 +69,27 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-        $('#ResourceTable').DataTable();
-    });
+
+        var table = $('#ResourceTable').DataTable();
+
+        $("#ResourceTable thead th").each( function ( i ) {
+                if (i < 6 && i!= 0) {
+                    var select = $('<select class=' + i + '><option value=""></option></select>')
+                            .appendTo($(this).empty())
+                            .on('change', function () {
+
+                                var val = $(this).val();
+
+                                table.column(i) //Only the first column
+                                        .search(val ? '^' + $(this).val() + '$' : val, true, false)
+                                        .draw();
+                            });
+
+                    table.column(i).data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>');
+                    });
+                }
+        });
+    } );
 </script>
 @endpush

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Requests\Request;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -69,4 +70,65 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    /*
+     * This is the code to login with ETSU authentication (LDAP)
+     *
+     * Currently, this should be commented out as we do not host on
+     * ETSU's server, so it requires being on campus to actually login.
+     *
+     * Also, ensure you have your user account stored in the local/AWS database
+     * with your exact ETSU credentials, or you will not be able to login.
+     */
+
+    /*public function login(Request $request)
+    {
+        //Validate credentials
+        $this->validate($request, [
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+
+        $ldap = ldap_connect('ldap://etsu.edu');
+        ldap_set_option($ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
+
+        if($ldap)
+        {
+            $status = @ldap_bind($ldap, $request->get('username') . "@ETSU", $request->get('password'));
+
+            if($status)
+            {
+                ldap_unbind($ldap);
+                $user = User::where('email', $request->get('username'))->first();
+                if($user)
+                {
+                    Auth::login($user);
+                }
+                else
+                {
+                    return redirect()->back->withErrors(
+                        'Username and/or Password are not matching!'
+                    );
+                }
+
+                return redirect()->intended('/');
+            }
+            else
+            {
+                return redirect()->back->withErrors(
+                        'Username and/or Password are not matching!'
+                    );
+            }
+        }
+        else
+        {
+            return redirect()->back->withErrors(
+                        'Unable to connect to ETSU LDAP server.  Please contact an Administrator.'
+                    );
+        }
+
+        return redirect()->back()->withErrors(
+            'Username and/or Password are not matching!'
+        );
+    }*/
 }

@@ -29,6 +29,9 @@ class ResourcesController extends Controller
     public function show(Resource $resource)
     {
         //$resource = Resource::findOrFail($id);
+        //Incrementing view count when viewed
+        app('App\Http\Controllers\ViewsController')->resourceView($resource);
+
         return view('resources.show', compact('resource'));
     }
 

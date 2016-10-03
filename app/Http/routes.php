@@ -97,6 +97,8 @@ Route::delete('flags/{flag}', 'FlagsController@destroy');
 
 Route::auth();
 
+Route::get('/home/errorAdmin', 'HomeController@errorAdmin');
+Route::get('/home/errorGA', 'HomeController@errorGA');
 Route::get('/home', 'HomeController@index');
 
 Route::get('/', 'HomeController@index');

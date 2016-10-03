@@ -50,7 +50,6 @@ class ResourcesController extends Controller
             $syncCategories = $this->checkForNewCategories($request->input('category_list'));
             $resource->categories()->attach($syncCategories);
         }
-        dd($request->input('contact_list'));
         $resource->contacts()->attach($request->input('contact_list'));
 
         \Session::flash('flash_message', 'Resource Created Successfully!');

@@ -10,11 +10,10 @@
             <table class="display dt-responsive nowrap" cellspacing="0" width="100%" id="ResourceTable">
                 <thead>
                 <tr>
-                    <th>Filters:</th>
+                    <th>Name</th>
                     <th>County</th>
-                    <th>Phone</th>
-                    <th>Opening Hours</th>
-                    <th>Closing Hours</th>
+                    <th></th>
+                    <th>Hours of Operation</th>
                     <th>Category</th>
                     <th></th>
                 </tr>
@@ -23,21 +22,21 @@
                     <th>Name</th>
                     <th>County</th>
                     <th>Phone</th>
-                    <th>Opening Hours</th>
-                    <th>Closing Hours</th>
+                    <th>Hours of Operation</th>
                     <th>Category</th>
                     <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($resources as $key => $resource)
-                    <?php $link = false; ?>
+                    <?php
+                        $link = false;
+                    ?>
                     <tr>
                         <td>{{ $resource->Name }}</td>
                         <td>{{ $resource->County }}</td>
                         <td>{{ $resource->PhoneNumber }}</td>
-                        <td>{{ $resource->OpeningHours }}</td>
-                        <td>{{ $resource->ClosingHours }}</td>
+                        <td>{{ date('g:i A', strtotime($resource->OpeningHours)) }} - {{ date('g:i A', strtotime($resource->ClosingHours)) }}</td>
                         <td>
                             @foreach ($resource->categories as $category)
                                 {{ $category->name }}
@@ -68,26 +67,49 @@
 @stop
 @push('scripts')
 <script>
+
     $(document).ready(function() {
 
         var table = $('#ResourceTable').DataTable();
 
-        $("#ResourceTable thead th").each( function ( i ) {
-                if (i < 6 && i!= 0) {
-                    var select = $('<select class=' + i + '><option value=""></option></select>')
-                            .appendTo($(this).empty())
-                            .on('change', function () {
+        $("#ResourceTable thead th").each( function ( i )
+        {
+                if (i < 5 )
+                {
+                    if (i != 0 && i != 2) {
+                        var select = $('<select class=' + i + '><option value=""></option></select>')
+                                .appendTo($(this).empty())
+                                .on('change', function () {
 
-                                var val = $(this).val();
+                                    var val = $(this).val();
 
-                                table.column(i) //Only the first column
-                                        .search(val ? '^' + $(this).val() + '$' : val, true, false)
-                                        .draw();
-                            });
+                                    table.column(i) //all columns except those excluded by the if statement
+                                            .search(val ? '^' + $(this).val() + '$' : val, true, false)
+                                            .draw();
+                                });
+                        table.column(i).data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>');
+                        });
+                    }
+                    if(i == 0)
+                    {
+                        var select = $('<select class=' + i + '><option value=""></option></select>')
+                                .appendTo($(this).empty())
+                                .on('change', function () {
 
-                    table.column(i).data().unique().sort().each(function (d, j) {
-                        select.append('<option value="' + d + '">' + d + '</option>');
-                    });
+                                    var val = $(this).val();
+
+                                    table.column(i) //Only the name column
+                                            .search(val ? '^' + $(this).val() : val, true, false)
+                                            .draw();
+                                });
+                        var letter = 'A';
+                        for(y = 0; y < 26; y ++)
+                        {
+                            letter = String.fromCharCode('A'.charCodeAt() + y);
+                            select.append('<option value="' + letter + '">' + letter + '</option>');
+                        }
+                    }
                 }
         });
     } );

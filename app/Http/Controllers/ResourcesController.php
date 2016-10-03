@@ -13,10 +13,11 @@ use App\Resource;
 use App\Category;
 use App\Contact;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Cache;
-use Auth;
 
 class ResourcesController extends Controller
 {
@@ -49,6 +50,7 @@ class ResourcesController extends Controller
             $syncCategories = $this->checkForNewCategories($request->input('category_list'));
             $resource->categories()->attach($syncCategories);
         }
+        dd($request->input('contact_list'));
         $resource->contacts()->attach($request->input('contact_list'));
 
         \Session::flash('flash_message', 'Resource Created Successfully!');
@@ -156,7 +158,7 @@ class ResourcesController extends Controller
     {
         //all categories, and requested categories
         $allCategories = Category::lists('id')->toArray();
-        //seperated
+        //Categorize the Categories
         $newCategories = array_diff($requestCategories, $allCategories); //categories to be added to DB
         $syncCategories = array_diff($requestCategories, $newCategories); //categories already in DB
 
@@ -184,45 +186,38 @@ class ResourcesController extends Controller
 
     public function add(Resource $resource)
     {
-        Cache::put($resource->id, $resource->id, 160);
-        return redirect('/resources');
+        Auth::user()->resources()->syncWithoutDetaching([$resource->id]);
+        \Session::flash('flash_message', 'Resource Added to Report');
+        return Redirect::back();
     }
 
     public function generateReport()
     {
-        $resources = [];
-        foreach (Resource::all() as $r)
-        {
-            $num = ($r->id);
-            if (cache::has($num))
-            {
-                $resources[$num] = $r;
-            }
-        }        return view('resources.generateReport', compact('resources'));
+        $resources = Auth::user()->resources;
+        return view('resources.generateReport', compact('resources'));
     }
 
-    public function removeCart($id)
+    public function removeReport(Resource $resource)
     {
-        cache::forget($id);
+        Auth::user()->resources()->detach($resource);
         return redirect('/resources/generateReport');
+    }
+
+    public function emptyReport()
+    {
+        Auth::user()->resources()->detach();
+        return Redirect::back();
     }
 
     public function generatePDF()
     {
-        $resources = [];
-        foreach (Resource::all() as $r) {
-            $num = ($r->id);
-            if (cache::has($num))
-            {
-                $resources[$num] = $r;
-            }
-        }
         $pdf = App::make('dompdf.wrapper');
-        $view = View::make('resources.pdfHeader')->with('resources', $resources);
+        $view = View::make('resources.pdfHeader')->with('resources', Auth::user()->resources);
         $contents = $view->render();
         $pdf->loadHTML($contents);
         return $pdf->stream();
     }
+
 
     /*
      * This method takes in a resource, compacts it into a "common flag format" and sends it to the flag.create view

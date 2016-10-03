@@ -59,6 +59,22 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-4 col-sm-12 col-xs-12 pad25">
+                <div class="col-xs-2">
+                </div>
+                <div class="col-xs-10">
+                    <div class="editContent">
+                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Contacts</h4>
+                    </div>
+                    <div class="editContent">
+                        <ul>
+                            @foreach($r->contacts as $contact)
+                                <li> {{$contact->full_name}}: {{$contact->phoneNumber}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
             <div class="col-md-4 col-sm-12 col-xs-12 pad25">
                 <div class="col-xs-2">

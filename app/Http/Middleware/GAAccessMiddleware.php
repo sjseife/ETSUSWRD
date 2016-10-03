@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Response;
 
 class GAAccessMiddleware
 {
@@ -24,7 +25,7 @@ class GAAccessMiddleware
             }
             else
             {
-                return response('Unauthorized! Please contact a GA or Admin to access this page.', 401);
+                return redirect()->action('HomeController@errorGA');
             }
         }
         catch(\Exception $e)

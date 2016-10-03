@@ -75,6 +75,18 @@ class UsersController extends Controller
                     'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
             );
         }
+        foreach($user->resources as $resource)
+        {
+            DB::table('archive_resource_user')->insert(
+                [
+                    'user_id' => $user->id,
+                    'resource_id' => $resource->pivot->resource_id,
+                    'created_at' => $resource->pivot->created_at,
+                    'updated_at' => $resource->pivot->updated_at,
+                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
+                ]
+            );
+        }
 
         DB::table('archive_users')->insert(
             ['id' => $user->id,

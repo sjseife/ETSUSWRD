@@ -73,6 +73,7 @@
                         <!-- delete the resource -->
                         <!-- Trigger the modal with a button -->
                         <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                        <a class="btn btn-small btn-primary" href="{{ URL::to('resources/add/'. $resource->id) }}">Add to Report</a>
                         <br/>
                         <br/>
                     </div>

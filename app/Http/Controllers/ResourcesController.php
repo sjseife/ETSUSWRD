@@ -132,6 +132,18 @@ class ResourcesController extends Controller
                 ]
             );
         }
+        foreach($resource->users as $user)
+        {
+            DB::table('archive_resource_user')->insert(
+                [
+                    'user_id' => $user->pivot->user_id,
+                    'resource_id' => $resource->id,
+                    'created_at' => $user->pivot->created_at,
+                    'updated_at' => $user->pivot->updated_at,
+                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
+                ]
+            );
+        }
         DB::table('archive_resources')->insert(
           ['id' => $resource->id,
             'Name' => $resource->Name,

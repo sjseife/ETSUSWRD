@@ -10,6 +10,7 @@
             <table class="display dt-responsive nowrap" cellspacing="0" width="100%" id="ResourceTable">
                 <thead>
                 <tr>
+                    <th></th>
                     <th>Name</th>
                     <th>County</th>
                     <th></th>
@@ -19,6 +20,7 @@
                 </tr>
 
                 <tr>
+                    <th></th>
                     <th>Name</th>
                     <th>County</th>
                     <th>Phone</th>
@@ -33,6 +35,7 @@
                         $link = false;
                     ?>
                     <tr>
+                        <td class="details-control"></td>
                         <td>{{ $resource->Name }}</td>
                         <td>{{ $resource->County }}</td>
                         <td>{{ $resource->PhoneNumber }}</td>
@@ -67,6 +70,23 @@
 @stop
 @push('scripts')
 <script>
+    function format ( d ) {
+        // `d` is the original data object for the row
+        return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+                '<tr>'+
+                '<td>Full name:</td>'+
+                '<td></td>'+
+                '</tr>'+
+                '<tr>'+
+                '<td>Extension number:</td>'+
+                '<td></td>'+
+                '</tr>'+
+                '<tr>'+
+                '<td>Extra info:</td>'+
+                '<td>And any further details here (images etc)...</td>'+
+                '</tr>'+
+                '</table>';
+    }
 
     $(document).ready(function() {
 
@@ -74,9 +94,9 @@
 
         $("#ResourceTable thead th").each( function ( i )
         {
-                if (i < 5 )
+                if (i < 6 )
                 {
-                    if (i != 0 && i != 2 && i != 4) {
+                    if (i!= 0 && i != 1 && i != 3 && i != 5) {
                         var select = $('<select class=' + i + '><option value=""></option></select>')
                                 .appendTo($(this).empty())
                                 .on('change', function () {
@@ -91,7 +111,7 @@
                             select.append('<option value="' + d + '">' + d + '</option>');
                         });
                     }
-                    if(i == 0)
+                    if(i == 1)
                     {
                         var select = $('<select class=' + i + '><option value=""></option></select>')
                                 .appendTo($(this).empty())
@@ -110,7 +130,7 @@
                             select.append('<option value="' + letter + '">' + letter + '</option>');
                         }
                     }
-                    if(i == 4)
+                    if(i == 5)
                     {
                         var select = $('<select class=' + i + '><option value=""></option></select>')
                                 .appendTo($(this).empty())
@@ -132,6 +152,22 @@
                     }
                 }
         });
+
+        $('#ResourceTable tbody').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = table.row( tr );
+
+            if ( row.child.isShown() ) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child( format(row.data()) ).show();
+                tr.addClass('shown');
+            }
+        } );
     } );
 </script>
 @endpush

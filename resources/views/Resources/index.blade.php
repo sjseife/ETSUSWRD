@@ -17,6 +17,12 @@
                     <th>Hours of Operation</th>
                     <th>Category</th>
                     <th></th>
+                    <th>Street Address:</th>
+                    <th>City:</th>
+                    <th>State:</th>
+                    <th>Zip Code:</th>
+                    <th>Contact:</th>
+                    <th>Comments:</th>
                 </tr>
 
                 <tr>
@@ -27,6 +33,12 @@
                     <th>Hours of Operation</th>
                     <th>Category</th>
                     <th>Action</th>
+                    <th>Street Address:</th>
+                    <th>City:</th>
+                    <th>State:</th>
+                    <th>Zip Code:</th>
+                    <th>Contact:</th>
+                    <th>Comments:</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -59,6 +71,14 @@
                             <a class="btn btn-small btn-primary" href="{{ URL::to('resources/add/'. $resource->id) }}">Add to Report</a>
 
                         </td>
+                        <td>{{ $resource->StreetAddress }} <br> {{ $resource->StreetAddress2 }}</td>
+                        <td>{{ $resource->City }}</td>
+                        <td>{{ $resource->State }}</td>
+                        <td>{{ $resource->Zipcode }}</td>
+                        <td>
+                           Work in Progress
+                        </td>
+                        <td>{{ $resource->Comments }}</td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -72,23 +92,48 @@
 <script>
     function format ( d ) {
         // `d` is the original data object for the row
+
         return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
-                '<tr>'+
-                '<td>Full name:</td>'+
-                '<td></td>'+
-                '</tr>'+
-                '<tr>'+
-                '<td>Extension number:</td>'+
-                '<td></td>'+
-                '</tr>'+
-                '<tr>'+
-                '<td>Extra info:</td>'+
-                '<td>And any further details here (images etc)...</td>'+
-                '</tr>'+
+                    '<tr>'+
+                        '<td>Street Address:</td>'+
+                        '<td>'+ d[7] +'</td>'+
+                    '</tr>'+
+                    '<tr>'+
+                        '<td>City:</td>'+
+                        '<td>'+ d[8] +'</td>'+
+                    '</tr>'+
+                    '<tr>'+
+                        '<td>State:</td>'+
+                        '<td>'+ d[9] +'</td>'+
+                    '</tr>'+
+                    '<tr>'+
+                        '<td>Zip Code:</td>'+
+                        '<td>'+ d[10] +'</td>'+
+                    '</tr>'+
+                    '<tr>'+
+                        '<td>Contact:</td>'+
+                        '<td>'+ d[11] +'</td>'+
+                    '</tr>'+
+                    '<tr>'+
+                        '<td>Comments:</td>'+
+                        '<td>'+ d[12] +'</td>'+
+                    '</tr>'+
                 '</table>';
+
     }
 
     $(document).ready(function() {
+
+        $('#ResourceTable').dataTable( {
+            "columnDefs": [
+                { "visible": false, "targets": 7 },
+                { "visible": false, "targets": 8 },
+                { "visible": false, "targets": 9 },
+                { "visible": false, "targets": 10 },
+                { "visible": false, "targets": 11 },
+                { "visible": false, "targets": 12 }
+            ]
+        } );
 
         var table = $('#ResourceTable').DataTable();
 
@@ -96,7 +141,7 @@
         {
                 if (i < 6 )
                 {
-                    if (i!= 0 && i != 1 && i != 3 && i != 5) {
+                    if (i > 1 && i != 3 && i != 5) {
                         var select = $('<select class=' + i + '><option value=""></option></select>')
                                 .appendTo($(this).empty())
                                 .on('change', function () {
@@ -168,6 +213,7 @@
                 tr.addClass('shown');
             }
         } );
+
     } );
 </script>
 @endpush

@@ -24,7 +24,7 @@ class AdminAccessMiddleware
             }
             else
             {
-                return response('Unauthorized! Please contact an Admin to access this page.', 401);
+                return redirect()->action('HomeController@errorAdmin');
             }
         }
         catch(\Exception $e)

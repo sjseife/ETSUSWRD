@@ -26,4 +26,14 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function errorGA()
+    {
+        return view('errors.401GA');
+    }
+
+    public function errorAdmin()
+    {
+        return view('errors.401Admin');
+    }
 }

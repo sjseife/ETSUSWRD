@@ -76,7 +76,7 @@
         {
                 if (i < 5 )
                 {
-                    if (i != 0 && i != 2) {
+                    if (i != 0 && i != 2 && i != 4) {
                         var select = $('<select class=' + i + '><option value=""></option></select>')
                                 .appendTo($(this).empty())
                                 .on('change', function () {
@@ -109,6 +109,26 @@
                             letter = String.fromCharCode('A'.charCodeAt() + y);
                             select.append('<option value="' + letter + '">' + letter + '</option>');
                         }
+                    }
+                    if(i == 4)
+                    {
+                        var select = $('<select class=' + i + '><option value=""></option></select>')
+                                .appendTo($(this).empty())
+                                .on('change', function () {
+
+                                    var val = $(this).val();
+
+                                    table.column(i) //Only the name column
+                                            .search(val ? $(this).val() : val, true, false)
+                                            .draw();
+                                });
+                        var categories = <?php echo json_encode($categories); ?>
+
+                        for(y = 0; y < categories.length; y++)
+                        {
+                             select.append('<option value="' + categories[y] + '">' + categories[y] + '</option>');
+                        }
+
                     }
                 }
         });

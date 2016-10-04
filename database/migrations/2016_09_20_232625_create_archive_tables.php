@@ -90,6 +90,13 @@ class CreateArchiveTables extends Migration
             $table->timestamps();
             $table->timestamp('archived_at');
         });
+
+        Schema::create('archive_resource_user', function (Blueprint $table) {
+            $table->integer('user_id')->unsigned();
+            $table->integer('resource_id')->unsigned();
+            $table->timestamps();
+            $table->timestamp('archived_at');
+        });
     }
 
     /**
@@ -106,5 +113,6 @@ class CreateArchiveTables extends Migration
         Schema::drop('archive_contacts');
         Schema::drop('archive_contact_resource');
         Schema::drop('archive_flags');
+        Schema::drop('archive_resource_user');
     }
 }

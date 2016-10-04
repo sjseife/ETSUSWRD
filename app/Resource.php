@@ -54,4 +54,14 @@ class Resource extends Model
     {
         return $this->hasMany('App\Flag');
     }
+
+    /**
+     * Get a list of users associates with the current resource.
+     * Used for reports.
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users()
+    {
+        return $this->belongsToMany('App\User')->withTimestamps();
+    }
 }

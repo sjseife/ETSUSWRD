@@ -113,4 +113,5 @@
             placeholder: 'Choose a Contact',
         });
     </script>
+@section('footer')
 @endpush

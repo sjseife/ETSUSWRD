@@ -1,0 +1,67 @@
+#hidden {
+    display: none;
+}
+.main {
+    width: 950px;
+    margin: 0 auto;
+    position: relative;
+}
+ul.minornav, ul#hpicon_container, ul#hpicon_container2 {
+    margin: 0 0 5px 0;
+    padding: 0;
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+#socialicons {
+    float: right;
+    text-align: right;
+}
+
+aside#asidelinks {
+    padding-bottom: 50px;
+    background-color: #00162e;
+}
+#linksblock {
+    padding-top: 115px;
+    background: url(http://www.etsu.edu/etsuhome/templateimages/footer_logo_2014.png) no-repeat center 5%;
+}
+/*============== aside linksblock=================*/
+
+#linksblock {padding-top: 115px;background:url('http://www.etsu.edu/etsuhome/templateimages/footer_logo_2014.png') no-repeat center 5%;}
+#linksblock li { line-height: 1.7em }
+#linksblock a, #linksblock p, footer a{ color: #7790ab }
+aside h2{font-size:16px;line-height:18px;color:#e9e8e8;text-transform:uppercase;padding-bottom:32px}
+.box-aside{border-right:1px solid #322d30;margin-right:10px;}
+.box-aside.last{border:none}
+aside#asidelinks {padding-bottom: 50px;background-color:#00162e;}
+h2 a.linkheading {color:#fff !important; font-family: "sorts italic",georgia,serif; font-size: 1.2em; line-height: 1.2em; text-decoration: none; text-transform: none }
+.catlinks {margin-right: 10px; border-right: 1px solid #1c293b }
+div#linksblock article { height: 100%; min-height: 220px }
+div#linksblock article:nth-child(6) div.catlinks { border-right: none }
+
+/*================== footer =========================*/
+footer
+{
+    background-color:#00162e;
+    padding:25px 0 30px;
+    position:relative;
+    color: #7790ab;
+}
+footer ul li:nth-child(1) { padding-left: 0 }
+.minornav li {border-right: 1px solid #7790ab;padding: 0 10px;}
+.minornav li.nodivider {border:none;}
+.footerlink { color:#7790ab; text-decoration:underline;
+}
+div#infoblock {
+    height: auto;
+    background: url(http://www.etsu.edu/etsuhome/templateimages/mountains.png) no-repeat center bottom;
+    padding-bottom: 105px;
+}
+.container_24 {
+    position: relative;
+    width: 960px;
+    margin: 0 auto;
+    padding: 0;
+}

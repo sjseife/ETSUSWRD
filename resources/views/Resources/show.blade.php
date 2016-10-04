@@ -80,7 +80,7 @@
             </div>
         </div>
     </div>
-
+    @section('footer')
     <!-- Modal -->
     @include('Resources._deleteModal')
 @endsection

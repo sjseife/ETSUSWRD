@@ -2,7 +2,7 @@
 
 @section('content')
     <h1 class="text-center">All Resources</h1>
-
+    <div id="successOrFailure"></div>
     <div class="container">
         <!-- create a new resource (uses the create method found at GET /resource/create -->
         <a class="btn btn-lg btn-primary pull-right" href="{{ URL::to('resources/create') }}" style="margin-bottom: 20px;">Create New Resource</a>
@@ -76,7 +76,11 @@
 
                             <!-- show the resource (uses the show method found at GET /resource/view/{id} -->
                             <a class="btn btn-sm btn-success" href="{{ URL::to('resources/' . $resource->id) }}">View</a>
-                            <button type="button" class="btn btn-sm btn-primary addReport" name="{{$resource->id}}">Add to Report</button>
+                            <button type="button" class="btn btn-sm btn-primary addReport
+                                    @if(Auth::user()->resources->contains($resource))
+                                    disabled
+                                    @endif
+                                    " name="{{$resource->id}}">Add to Report</button>
                            {{-- <a class="btn btn-sm btn-primary" href="{{ URL::to('resources/addAjax/'. $resource->id) }}">Add to Report</a>--}}
 
                         </td>
@@ -95,7 +99,7 @@
         //Apply DataTables
         $('#ResourceTable').dataTable( {
             initComplete: function () {
-                this.api().columns([1,2,4,5,6,7,8,9]).every( function () {
+                this.api().columns([1,4,5,6,7,8,9]).every( function () {
                     var column = this;
                     var select = $('<select><option value=""></option></select>')
                             .appendTo( $(column.footer()).empty() )
@@ -107,12 +111,45 @@
                                 column
                                         .search( val ? '^'+val+'$' : '', true, false )
                                         .draw();
-                            } );
+                            });
 
                     column.data().unique().sort().each( function ( d, j ) {
                         select.append( '<option value="'+d+'">'+d+'</option>' )
                     } );
                 } );
+                this.api().columns([0]).every( function() {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $(this).val();
+                                column //Only the name column
+                                        .search(val ? '^' + $(this).val() : val, true, false)
+                                        .draw();
+                            });
+                    var letter = 'A';
+                    for(y = 0; y < 26; y ++)
+                    {
+                        letter = String.fromCharCode('A'.charCodeAt() + y);
+                        select.append('<option value="' + letter + '">' + letter + '</option>');
+                    }
+                });
+                this.api().columns([2]).every( function() {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $(this).val();
+                                column //Only the name column
+                                        .search(val ? $(this).val() : val, true, false)
+                                        .draw();
+                            });
+                    var categories = <?php echo json_encode($categories); ?>;
+                    for(y = 0; y < categories.length; y++)
+                    {
+                        select.append('<option value="' + categories[y] + '">' + categories[y] + '</option>');
+                    }
+                });
 
             },
             "fnDrawCallback":function(){
@@ -124,8 +161,8 @@
     } );
     //Ajax for add to report button
     $('.addReport').each(function() {
+        var button = $(this);
         $(this).click(function (){
-            console.log($(this).attr("name"));
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -136,38 +173,17 @@
                 url: 'resources/add/' + $(this).attr("name"),
                 dataType: 'json',
                 success: function (data) {
-                    console.log(data.status);
-                    /*//alerts users to successful creation of contact.
-                     html = '<div class="alert alert-success"><ul><li>Contact created succesfully!</li></ul></div>';
-                     $('#form-success').html(html);
-
-                     //Automatically add new contact to select box, and select them
-                     var newOption = new Option(data.firstName + ' ' + data.lastName, data.id, false, true);
-                     $("#contact_list").append(newOption).trigger('change');
-
-                     //Finally, Reset new contact form and close modal
-
-                     $('#firstName').val("");
-                     $('#lastName').val("");
-                     $('#email').val("");
-                     $('#phoneNumber').val("");
-                     $('#resource_list > option').each(function () {
-                     $(this).removeAttr("selected");
-                     });
-
-                     $('#resource_list').trigger('change');
-                     $('#createContactModal').modal('toggle');*/
-
-
-
+                    //alerts users to successful button pushing.
+                     html = '<div class="alert alert-success">Added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                     $('#successOrFailure').html(html);
+                    button.attr("disabled","disabled");
 
                 },
                 error: function (data) {
-                    console.log(data.status);
-                    /*if (data.status === 401) //redirect if not authenticated user.
+                    if (data.status === 401) //redirect if not authenticated user.
                      $(location).prop('pathname', 'auth/login');
                      if (data.status === 422) {
-                     //process validation errors here.
+                         //process validation errors here.
                      var errors = data.responseJSON; //this will get the errors response data.
                      //show them somewhere in the modal
                      errorsHtml = '<div class="alert alert-danger"><ul>';
@@ -175,14 +191,14 @@
                      $.each(errors, function (key, value) {
                      errorsHtml += '<li>' + value[0] + '</li>'; //showing only the first error.
                      });
-                     errorsHtml += '</ul></di>';
+                     errorsHtml += '</ul><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
 
-                     $('#form-errors').html(errorsHtml); //appending to a <div id="form-errors"></div> inside form
+                     $('#successOrFailure').html(errorsHtml); //appending to a <div id="form-errors"></div> inside form
                      } else {
                      html = '<div class="alert alert-danger"><ul><li>There was a problem processing your request. ' +
-                     'Please try again later.</li></ul></div>';
-                     $('#form-errors').html(html); //appending to a <div id="form-errors"></div> inside form
-                     }*/
+                     'Please try again later.</li></ul><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                     $('#successOrFailure').html(html);
+                     }
                 }
             });
         });

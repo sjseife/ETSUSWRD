@@ -85,6 +85,7 @@
     {{--<script src="//code.jquery.com/jquery.js"></script>--}}
     <!-- DataTables -->
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.6/jq-2.2.3/dt-1.10.12/r-2.1.0/datatables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <!-- Bootstrap JavaScript -->
     {{--<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>--}}
     <!-- App scripts -->

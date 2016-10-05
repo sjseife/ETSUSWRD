@@ -204,7 +204,7 @@ class ResourcesController extends Controller
         Auth::user()->resources()->syncWithoutDetaching([$resource->id]);
         if($request->ajax())
         {
-            return "AJAX"; //it doesn't really matter what is returned, so long as a status 200 makes it out. 
+            return response()->json(); //it just needs any JSON response to indicate a success.
         }
         else
         {

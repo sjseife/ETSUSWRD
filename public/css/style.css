@@ -54,14 +54,9 @@ footer ul li:nth-child(1) { padding-left: 0 }
 .minornav li.nodivider {border:none;}
 .footerlink { color:#7790ab; text-decoration:underline;
 }
-div#infoblock {
-    height: auto;
-    background: url(http://www.etsu.edu/etsuhome/templateimages/mountains.png) no-repeat center bottom;
-    padding-bottom: 105px;
-}
 .container_24 {
     position: relative;
-    width: 960px;
+    width: 100%;
     margin: 0 auto;
     padding: 0;
 }

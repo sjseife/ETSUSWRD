@@ -199,11 +199,18 @@ class ResourcesController extends Controller
         return $passedContacts;
     }
 
-    public function add(Resource $resource)
+    public function add(Resource $resource, Request $request)
     {
         Auth::user()->resources()->syncWithoutDetaching([$resource->id]);
-        \Session::flash('flash_message', 'Resource Added to Report');
-        return Redirect::back();
+        if($request->ajax())
+        {
+            return "AJAX"; //it doesn't really matter what is returned, so long as a status 200 makes it out. 
+        }
+        else
+        {
+            \Session::flash('flash_message', 'Resource Added to Report');
+            return Redirect::back();
+        }
     }
 
     public function generateReport()
@@ -232,7 +239,6 @@ class ResourcesController extends Controller
         $pdf->loadHTML($contents);
         return $pdf->stream();
     }
-
 
     /*
      * This method takes in a resource, compacts it into a "common flag format" and sends it to the flag.create view

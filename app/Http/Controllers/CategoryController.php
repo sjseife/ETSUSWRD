@@ -20,6 +20,9 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
+        //Incrementing view when called
+        app('App\Http\Controllers\ViewsController')->categoryView($category);
+
         return view('categories.show', compact('category'));
     }
 

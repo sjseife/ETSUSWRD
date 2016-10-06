@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">--}}
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.6/jq-2.2.3/dt-1.10.12/r-2.1.0/datatables.min.css"/>
     <link rel="stylesheet" href="/css/style.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -39,8 +39,10 @@
         }
     </style>
 </head>
+
 <body>
-    @include('layouts.NavBar')
+    @include('layouts._NavBar')
+
     <div class="container">
         @if (Session::has('flash_message'))
             <div class="alert alert-success">
@@ -51,19 +53,9 @@
         @yield('content')
     </div>
 
-    <!-- jQuery -->
-    <script src="//code.jquery.com/jquery.js"></script>
-    <!-- DataTables -->
-    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-    <!-- Bootstrap JavaScript -->
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <!-- App scripts -->
-    @stack('scripts')
-
     <!-- Footer -->
     <div class="container_24">
-        <div id="infoblock" class="main">
-        </div>
+        <img src="/images/mountains.png" alt="Image of Mountains" class="img-responsive center-block">
     </div>
     <aside id="asidelinks">
         <div id="linksblock" class="container_24">
@@ -87,5 +79,18 @@
         </div>
         <div id="hidden"></div>
     </footer>
+    @yield('footer')
+
+    <!-- jQuery -->
+    {{--<script src="//code.jquery.com/jquery.js"></script>--}}
+    <!-- DataTables -->
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.6/jq-2.2.3/dt-1.10.12/r-2.1.0/datatables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    {{--<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>--}}
+    <!-- App scripts -->
+    @stack('scripts')
+
+
 </body>
 </html>

@@ -2,219 +2,208 @@
 
 @section('content')
     <h1 class="text-center">All Resources</h1>
-
+    <div id="successOrFailure"></div>
     <div class="container">
         <!-- create a new resource (uses the create method found at GET /resource/create -->
-        <a class="btn btn-small btn-primary pull-right" href="{{ URL::to('resources/create') }}" style="margin-bottom: 20px;">Create New Resource</a>
-        <div class="row">
-            <table class="display dt-responsive nowrap" cellspacing="0" width="100%" id="ResourceTable">
+        <a class="btn btn-lg btn-primary pull-right" href="{{ URL::to('resources/create') }}" style="margin-bottom: 20px;">Create New Resource</a>
+        <br>
+        <br>
+        <div>
+            <table style="display:none;" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="ResourceTable">
                 <thead>
-                <tr>
-                    <th></th>
-                    <th>Name</th>
-                    <th>County</th>
-                    <th></th>
-                    <th>Hours of Operation</th>
-                    <th>Category</th>
-                    <th></th>
-                    <th>Street Address:</th>
-                    <th>City:</th>
-                    <th>State:</th>
-                    <th>Zip Code:</th>
-                    <th>Contact:</th>
-                    <th>Comments:</th>
-                </tr>
 
-                <tr>
-                    <th></th>
-                    <th>Name</th>
-                    <th>County</th>
-                    <th>Phone</th>
-                    <th>Hours of Operation</th>
-                    <th>Category</th>
-                    <th>Action</th>
-                    <th>Street Address:</th>
-                    <th>City:</th>
-                    <th>State:</th>
-                    <th>Zip Code:</th>
-                    <th>Contact:</th>
-                    <th>Comments:</th>
-                </tr>
+                    <tr>
+                        <!-- class all for always show, lower data priority numbers stay longer-->
+                        <th class="all" >Name</th>
+                        <th data-priority="1">County</th>
+                        <th data-priority="1">Category</th>
+                        <th data-priority="2">Phone</th>
+                        <th data-priority="2">Hours of Operation</th>
+                        <th data-priority="3">Street Address</th>
+                        <th data-priority="2">City</th>
+                        <th data-priority="1">State</th>
+                        <th data-priority="2">Zip Code</th>
+                        <th data-priority="3">Contact(s)</th>
+                        <th data-priority="3">Comments</th>
+                        <th class="all">Action</th>
+                    </tr>
                 </thead>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </tfoot>
                 <tbody>
                 @foreach($resources as $key => $resource)
                     <?php
                         $link = false;
                     ?>
                     <tr>
-                        <td class="details-control"></td>
                         <td>{{ $resource->Name }}</td>
                         <td>{{ $resource->County }}</td>
-                        <td>{{ $resource->PhoneNumber }}</td>
-                        <td>{{ date('g:i A', strtotime($resource->OpeningHours)) }} - {{ date('g:i A', strtotime($resource->ClosingHours)) }}</td>
                         <td>
                             @foreach ($resource->categories as $category)
                                 {{ $category->name }}
                             @endforeach
                         </td>
-                        <td class="text-center col-md-3">
-
-                            <!-- show the resource (uses the show method found at GET /resource/view/{id} -->
-                            <a class="btn btn-small btn-success" href="{{ URL::to('resources/' . $resource->id) }}">View</a>
-
-                            {{--<!-- edit this resource (uses the edit method found at GET /resource/edit/{id} -->
-                            <a class="btn btn-small btn-info" href="{{ URL::to('resources/edit/' . $resource->id) }}">Edit</a>
-
-                            <!-- delete the resource (uses the delete method found at GET /resource/{id} -->
-                            <a class="btn btn-small btn-warning" href="{{ URL::to('resources/delete/' . $resource->id) }}">Delete</a>--}}
-
-                            <a class="btn btn-small btn-primary" href="{{ URL::to('resources/add/'. $resource->id) }}">Add to Report</a>
-
-                        </td>
+                        <td>{{ $resource->PhoneNumber }}</td>
+                        <td>{{ date('g:i A', strtotime($resource->OpeningHours)) }} - {{ date('g:i A', strtotime($resource->ClosingHours)) }}</td>
                         <td>{{ $resource->StreetAddress }} <br> {{ $resource->StreetAddress2 }}</td>
                         <td>{{ $resource->City }}</td>
                         <td>{{ $resource->State }}</td>
                         <td>{{ $resource->Zipcode }}</td>
                         <td>
-                           Work in Progress
+                           <ul>
+                               @foreach($resource->contacts as $contact)
+                                   {{ $contact->full_name }}: {{$contact->phoneNumber}}
+                                   <br>
+                               @endforeach
+                           </ul>
                         </td>
                         <td>{{ $resource->Comments }}</td>
+                        <td class="text-center col-md-3">
+
+                            <!-- show the resource (uses the show method found at GET /resource/view/{id} -->
+                            <a class="btn btn-sm btn-success" href="{{ URL::to('resources/' . $resource->id) }}">View</a>
+                            <button type="button" class="btn btn-sm btn-primary addReport
+                                    @if(Auth::user()->resources->contains($resource))
+                                    disabled
+                                    @endif
+                                    " name="{{$resource->id}}">Add to Report</button>
+                           {{-- <a class="btn btn-sm btn-primary" href="{{ URL::to('resources/addAjax/'. $resource->id) }}">Add to Report</a>--}}
+
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
         </div>
-
     </div>
-
 @stop
+
 @push('scripts')
 <script>
-    function format ( d ) {
-        // `d` is the original data object for the row
-
-        return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
-                    '<tr>'+
-                        '<td>Street Address:</td>'+
-                        '<td>'+ d[7] +'</td>'+
-                    '</tr>'+
-                    '<tr>'+
-                        '<td>City:</td>'+
-                        '<td>'+ d[8] +'</td>'+
-                    '</tr>'+
-                    '<tr>'+
-                        '<td>State:</td>'+
-                        '<td>'+ d[9] +'</td>'+
-                    '</tr>'+
-                    '<tr>'+
-                        '<td>Zip Code:</td>'+
-                        '<td>'+ d[10] +'</td>'+
-                    '</tr>'+
-                    '<tr>'+
-                        '<td>Contact:</td>'+
-                        '<td>'+ d[11] +'</td>'+
-                    '</tr>'+
-                    '<tr>'+
-                        '<td>Comments:</td>'+
-                        '<td>'+ d[12] +'</td>'+
-                    '</tr>'+
-                '</table>';
-
-    }
-
     $(document).ready(function() {
 
+        //Apply DataTables
         $('#ResourceTable').dataTable( {
-            "columnDefs": [
-                { "visible": false, "targets": 7 },
-                { "visible": false, "targets": 8 },
-                { "visible": false, "targets": 9 },
-                { "visible": false, "targets": 10 },
-                { "visible": false, "targets": 11 },
-                { "visible": false, "targets": 12 }
-            ]
-        } );
+            initComplete: function () {
+                this.api().columns([1,4,5,6,7,8,9]).every( function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                            .appendTo( $(column.footer()).empty() )
+                            .on( 'change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                );
 
-        var table = $('#ResourceTable').DataTable();
+                                column
+                                        .search( val ? '^'+val+'$' : '', true, false )
+                                        .draw();
+                            });
 
-        $("#ResourceTable thead th").each( function ( i )
-        {
-                if (i < 6 )
-                {
-                    if (i > 1 && i != 3 && i != 5) {
-                        var select = $('<select class=' + i + '><option value=""></option></select>')
-                                .appendTo($(this).empty())
-                                .on('change', function () {
-
-                                    var val = $(this).val();
-
-                                    table.column(i) //all columns except those excluded by the if statement
-                                            .search(val ? '^' + $(this).val() + '$' : val, true, false)
-                                            .draw();
-                                });
-                        table.column(i).data().unique().sort().each(function (d, j) {
-                            select.append('<option value="' + d + '">' + d + '</option>');
-                        });
-                    }
-                    if(i == 1)
+                    column.data().unique().sort().each( function ( d, j ) {
+                        select.append( '<option value="'+d+'">'+d+'</option>' )
+                    } );
+                } );
+                this.api().columns([0]).every( function() {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $(this).val();
+                                column //Only the name column
+                                        .search(val ? '^' + $(this).val() : val, true, false)
+                                        .draw();
+                            });
+                    var letter = 'A';
+                    for(y = 0; y < 26; y ++)
                     {
-                        var select = $('<select class=' + i + '><option value=""></option></select>')
-                                .appendTo($(this).empty())
-                                .on('change', function () {
-
-                                    var val = $(this).val();
-
-                                    table.column(i) //Only the name column
-                                            .search(val ? '^' + $(this).val() : val, true, false)
-                                            .draw();
-                                });
-                        var letter = 'A';
-                        for(y = 0; y < 26; y ++)
-                        {
-                            letter = String.fromCharCode('A'.charCodeAt() + y);
-                            select.append('<option value="' + letter + '">' + letter + '</option>');
-                        }
+                        letter = String.fromCharCode('A'.charCodeAt() + y);
+                        select.append('<option value="' + letter + '">' + letter + '</option>');
                     }
-                    if(i == 5)
+                });
+                this.api().columns([2]).every( function() {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $(this).val();
+                                column //Only the name column
+                                        .search(val ? $(this).val() : val, true, false)
+                                        .draw();
+                            });
+                    var categories = <?php echo json_encode($categories); ?>;
+                    for(y = 0; y < categories.length; y++)
                     {
-                        var select = $('<select class=' + i + '><option value=""></option></select>')
-                                .appendTo($(this).empty())
-                                .on('change', function () {
-
-                                    var val = $(this).val();
-
-                                    table.column(i) //Only the name column
-                                            .search(val ? $(this).val() : val, true, false)
-                                            .draw();
-                                });
-                        var categories = <?php echo json_encode($categories); ?>
-
-                        for(y = 0; y < categories.length; y++)
-                        {
-                             select.append('<option value="' + categories[y] + '">' + categories[y] + '</option>');
-                        }
-
+                        select.append('<option value="' + categories[y] + '">' + categories[y] + '</option>');
                     }
-                }
-        });
+                });
 
-        $('#ResourceTable tbody').on('click', 'td.details-control', function () {
-            var tr = $(this).closest('tr');
-            var row = table.row( tr );
-
-            if ( row.child.isShown() ) {
-                // This row is already open - close it
-                row.child.hide();
-                tr.removeClass('shown');
-            }
-            else {
-                // Open this row
-                row.child( format(row.data()) ).show();
-                tr.addClass('shown');
+            },
+            "fnDrawCallback":function(){
+                $(this).show();
             }
         } );
+
 
     } );
+    //Ajax for add to report button
+    $('.addReport').each(function() {
+        var button = $(this);
+        $(this).click(function (){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "GET",
+                url: 'resources/add/' + $(this).attr("name"),
+                dataType: 'json',
+                success: function (data) {
+                    //alerts users to successful button pushing.
+                     html = '<div class="alert alert-success">Added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                     $('#successOrFailure').html(html);
+                    button.attr("disabled","disabled");
+
+                },
+                error: function (data) {
+                    if (data.status === 401) //redirect if not authenticated user.
+                     $(location).prop('pathname', 'auth/login');
+                     if (data.status === 422) {
+                         //process validation errors here.
+                     var errors = data.responseJSON; //this will get the errors response data.
+                     //show them somewhere in the modal
+                     errorsHtml = '<div class="alert alert-danger"><ul>';
+
+                     $.each(errors, function (key, value) {
+                     errorsHtml += '<li>' + value[0] + '</li>'; //showing only the first error.
+                     });
+                     errorsHtml += '</ul><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+
+                     $('#successOrFailure').html(errorsHtml); //appending to a <div id="form-errors"></div> inside form
+                     } else {
+                     html = '<div class="alert alert-danger"><ul><li>There was a problem processing your request. ' +
+                     'Please try again later.</li></ul><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                     $('#successOrFailure').html(html);
+                     }
+                }
+            });
+        });
+    });
+
 </script>
 
 @endpush

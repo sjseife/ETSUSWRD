@@ -101,8 +101,8 @@
                         $( '#form-errors' ).html( html ); //appending to a <div id="form-errors"></div> inside form
                     }
                 }
-            })
-        })
+            });
+        });
     });
 </script>
 @endpush

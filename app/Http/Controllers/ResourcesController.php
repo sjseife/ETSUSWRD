@@ -24,7 +24,8 @@ class ResourcesController extends Controller
     public function index()
     {
         $resources = Resource::all();
-        return view('resources.index', compact('resources'));
+        $categories = Category::lists('name');
+        return view('resources.index', compact('resources', 'categories'));
     }
 
     public function show(Resource $resource)
@@ -198,11 +199,18 @@ class ResourcesController extends Controller
         return $passedContacts;
     }
 
-    public function add(Resource $resource)
+    public function add(Resource $resource, Request $request)
     {
         Auth::user()->resources()->syncWithoutDetaching([$resource->id]);
-        \Session::flash('flash_message', 'Resource Added to Report');
-        return Redirect::back();
+        if($request->ajax())
+        {
+            return response()->json(); //it just needs any JSON response to indicate a success.
+        }
+        else
+        {
+            \Session::flash('flash_message', 'Resource Added to Report');
+            return Redirect::back();
+        }
     }
 
     public function generateReport()
@@ -231,7 +239,6 @@ class ResourcesController extends Controller
         $pdf->loadHTML($contents);
         return $pdf->stream();
     }
-
 
     /*
      * This method takes in a resource, compacts it into a "common flag format" and sends it to the flag.create view

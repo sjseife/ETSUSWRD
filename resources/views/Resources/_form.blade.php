@@ -105,12 +105,14 @@
 
 @push('scripts')
     <script>
-        $('#category_list').select2({
-            placeholder: 'Choose a Category',
-            tags: true
-        });
-        $('#contact_list').select2({
-            placeholder: 'Choose a Contact',
+        $(document).ready(function() {
+            $('#category_list').select2({
+                placeholder: 'Choose a Category',
+                tags: true
+            });
+            $('#contact_list').select2({
+                placeholder: 'Choose a Contact'
+            });
         });
     </script>
 @endpush

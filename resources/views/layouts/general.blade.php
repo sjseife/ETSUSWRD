@@ -27,10 +27,11 @@
         .fa-btn {
             margin-right: 6px;
         }
+
     </style>
 </head>
 
-<body id="app-layout">
+<body id="app-layout" style="height: 100%; width: 100%; position: relative;">
     @include('layouts._NavBar')
     <div class="container">
         @if (Session::has('flash_message'))
@@ -43,7 +44,7 @@
     </div>
 
     <!-- Footer -->
-    <div class="container_24">
+    <div id="footer" style="position: absolute; bottom: 0px; width: 100%;"><div class="container_24">
         <img src="/images/mountains.png" alt="Image of Mountains" class="img-responsive center-block">
     </div>
     <aside id="asidelinks">
@@ -59,7 +60,7 @@
             </article>
         </div>
     </aside>
-    <footer>
+<footer>
         <div class="main">
             <div class="privacy"><span>East Tennessee State University</span>&nbsp;<span id="directedit">
                 <!-- com.omniupdate.ob --><a id="de" href="http://a.cms.omniupdate.com/10?skin=etsu&amp;account=east-tennessee-state&amp;site=ETSU_Web_Linux&amp;action=de&amp;path=/coe/chs/humanservices/default.pcf" style="text-decoration:none;">©</a><!-- /com.omniupdate.ob -->
@@ -68,6 +69,7 @@
         </div>
         <div id="hidden"></div>
     </footer>
+        </div>
     @yield('footer')
 
     <!-- JavaScripts -->

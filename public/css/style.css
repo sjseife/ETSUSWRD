@@ -60,3 +60,8 @@ footer ul li:nth-child(1) { padding-left: 0 }
     margin: 0 auto;
     padding: 0;
 }
+
+
+body, html {
+    height: 100%;
+}

@@ -80,7 +80,8 @@ Route::get('resources', 'ResourcesController@index');
 Route::get('resources/add/{resource}', 'ResourcesController@add'); //add resource to report
 Route::get('resources/generateReport', 'ResourcesController@generateReport');
 Route::get('resources/generatePDF', 'ResourcesController@generatePDF');
-Route::get('resources/removeReport/{id}', 'ResourcesController@removeCart');
+Route::get('resources/removeReport/{resource}', 'ResourcesController@removeReport');
+Route::get('resources/emptyReport', 'ResourcesController@emptyReport');
 Route::get('resources/{resource}', 'ResourcesController@show');
 Route::get('resources/{resource}/flag', 'ResourcesController@flag');
 Route::post('resources/flag/{resource}', 'ResourcesController@storeFlag');
@@ -96,6 +97,8 @@ Route::delete('flags/{flag}', 'FlagsController@destroy');
 
 Route::auth();
 
+Route::get('/home/errorAdmin', 'HomeController@errorAdmin');
+Route::get('/home/errorGA', 'HomeController@errorGA');
 Route::get('/home', 'HomeController@index');
 
 Route::get('/', 'HomeController@index');

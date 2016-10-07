@@ -14,5 +14,4 @@
 
     {{--If user does not enter required field.--}}
     @include('errors.list')
-
 @stop

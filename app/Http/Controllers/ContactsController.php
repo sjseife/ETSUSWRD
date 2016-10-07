@@ -61,7 +61,6 @@ class ContactsController extends Controller
         $contact= new Contact($request->all());
         $contact->save();
         $contact->resources()->attach($request->input('resource_list'));
-        //\Session::flash('flash_message', 'Contact Created Successfully!');
 
         return response()->json($contact);
     }

@@ -20,6 +20,12 @@ class PivotTableSeeder extends Seeder
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
+            DB::table('contact_resource')->insert([
+                'contact_id' => '1',
+                'resource_id' => '' + $x,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ]);
         }
         for($x = 20; $x < 40; $x++)
         {
@@ -29,11 +35,23 @@ class PivotTableSeeder extends Seeder
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
+            DB::table('contact_resource')->insert([
+                'contact_id' => '2',
+                'resource_id' => '' + $x,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ]);
         }
         for($x = 30; $x < 50; $x++)
         {
             DB::table('category_resource')->insert([
                 'category_id' => '3',
+                'resource_id' => '' + $x,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ]);
+            DB::table('contact_resource')->insert([
+                'contact_id' => '3',
                 'resource_id' => '' + $x,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')

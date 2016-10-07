@@ -27,6 +27,16 @@ class CreateResourcesTable extends Migration
             $table->text('Comments');
             $table->timestamps();
         });
+
+        Schema::create('resource_user', function (Blueprint $table) {
+            $table->integer('user_id')->unsigned()->index();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->integer('resource_id')->unsigned()->index();
+            $table->foreign('resource_id')->references('id')->on('resources')->onDelete('cascade');
+
+            $table->timestamps();
+        });
     }
 
     /**
@@ -36,6 +46,7 @@ class CreateResourcesTable extends Migration
      */
     public function down()
     {
+        Schema::drop('resource_user');
         Schema::drop('resources');
     }
 }

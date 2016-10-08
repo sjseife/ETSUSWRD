@@ -15,6 +15,11 @@ class Category extends Model
         return $this->belongsToMany('App\Resource', 'category_resource')->withTimestamps();
     }
 
+    public function events()
+    {
+        return $this->belongsToMany('App\Event', 'category_event')->withTimestamps();
+    }
+
     /**
      * Get a list of resource ids associated with the current resource
      * @return array

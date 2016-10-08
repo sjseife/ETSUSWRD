@@ -7,12 +7,36 @@ use Illuminate\Database\Eloquent\Model;
 class Contact extends Model
 {
     protected $fillable = [
-        'firstName','lastName','email','phoneNumber',
+        'firstName','lastName','protectedEmail','protectedPhoneNumber',
     ];
-    
+
+    /**
+     * get the resources associated with the current contact through
+     * the provider they are both associated with
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
     public function resources()
     {
-        return $this->belongsToMany('App\Resource', 'contact_resource')->withTimestamps();
+        return $this->hasManyThrough('App\Resource', 'App\Provider');
+    }
+
+    /**
+     * get the providers associate with the current contact
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function providers()
+    {
+        return $this->belongsToMany('App\Provider')->withTimestamps();
+    }
+
+    /**
+     * get the events associated with the current contact through
+     * the provider they are both associated with
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function events()
+    {
+        return $this->hasManyThrough('App\Event', 'App\Provider');
     }
 
     /**

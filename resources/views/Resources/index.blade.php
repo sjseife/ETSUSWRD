@@ -3,7 +3,6 @@
 @section('content')
     <h1 class="text-center">All Resources</h1>
     <div id="successOrFailure"></div>
-    <div class="container">
         <!-- create a new resource (uses the create method found at GET /resource/create -->
         <a class="btn btn-lg btn-primary pull-right" href="{{ URL::to('resources/create') }}" style="margin-bottom: 20px;">Create New Resource</a>
         <br>
@@ -74,8 +73,9 @@
                         <td>{{ $resource->Comments }}</td>
                         <td class="text-center col-md-3">
 
+
                             <!-- show the resource (uses the show method found at GET /resource/view/{id} -->
-                            <a class="btn btn-sm btn-success" href="{{ URL::to('resources/' . $resource->id) }}">View</a>
+                            {{--<a class="btn btn-sm btn-success" href="{{ URL::to('resources/' . $resource->id) }}">View</a>--}}
                             <button type="button" class="btn btn-sm btn-primary addReport
                                     @if(Auth::user()->resources->contains($resource))
                                     disabled
@@ -89,7 +89,6 @@
                 </tbody>
             </table>
         </div>
-    </div>
 @stop
 
 @push('scripts')

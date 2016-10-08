@@ -43,7 +43,7 @@
 <body>
     @include('layouts._NavBar')
 
-    <div class="container">
+    <div class="container" style="padding-left: 3px; padding-right: 3px;">
         @if (Session::has('flash_message'))
             <div class="alert alert-success">
                 {{ Session::get('flash_message') }}
@@ -53,7 +53,7 @@
         @yield('content')
     </div>
 
-    <!-- Footer -->
+    {{--<!-- Footer -->
     <div class="container_24">
         <img src="/images/mountains.png" alt="Image of Mountains" class="img-responsive center-block">
     </div>
@@ -79,7 +79,7 @@
         </div>
         <div id="hidden"></div>
     </footer>
-    @yield('footer')
+    @yield('footer')--}}
 
     <!-- jQuery -->
     {{--<script src="//code.jquery.com/jquery.js"></script>--}}

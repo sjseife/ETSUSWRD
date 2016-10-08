@@ -14,17 +14,20 @@ class CreateResourcesTable extends Migration
     {
         Schema::create('resources', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Name', 150);
-            $table->string('StreetAddress', 50);
-            $table->string('StreetAddress2', 25);
-            $table->string('City', 40);
-            $table->string('County', 15);
-            $table->string('State', 2);
-            $table->string('Zipcode', 5);
-            $table->string('PhoneNumber', 150);
-            $table->time('OpeningHours');
-            $table->time('ClosingHours');
-            $table->text('Comments');
+            $table->string('name', 150);
+            $table->string('streetAddress', 50);
+            $table->string('streetAddress2', 25);
+            $table->string('city', 40);
+            $table->string('county', 15);
+            $table->string('state', 2);
+            $table->string('zipCode', 5);
+            $table->string('publicPhoneNumber', 15)->nullable();
+            $table->string('publicEmail')->nullable();
+            $table->string('website')->nullable();
+            $table->text('description');
+            $table->text('comments');
+            $table->integer('provider_id')->unsigned()->index();
+            $table->foreign('provider_id')->references('id')->on('providers')->onDelete('cascade');
             $table->timestamps();
         });
 

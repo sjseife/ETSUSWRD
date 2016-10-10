@@ -2,12 +2,13 @@
 
 @section('content')
     <h1 class="text-center">All Categories</h1>
-
     <div class="container">
         <!-- create a new category (uses the create method found at GET /categories/create -->
         <a class="btn btn-small btn-primary pull-right" href="{{ URL::to('categories/create') }}" style="margin-bottom: 20px;">Create New Category</a>
+        <br />
+        <br />
         <div class="row">
-            <table class="display dt-responsive nowrap" cellspacing="0" width="100%"id="CategoryTable">
+            <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%"id="CategoryTable">
                 <thead>
                 <tr>
                     <th>Name</th>

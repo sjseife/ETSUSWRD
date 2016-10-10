@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Event;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Resource;
@@ -29,7 +30,8 @@ class CategoryController extends Controller
     public function create()
     {
         $resourceList = Resource::lists('name', 'id');
-        return view('categories.create', compact('resourceList'));
+        $eventList = Event::lists('name', 'id');
+        return view('categories.create', compact('resourceList', 'eventList'));
     }
 
     public function store(Request $request)
@@ -39,6 +41,7 @@ class CategoryController extends Controller
         $categories = new Category($request->all());
         $categories->save();
         $categories->resources()->attach($request->input('resource_list'));
+        $categories->events()->attach($request->input('event_list'));
 
         \Session::flash('flash_message', 'Categories Created Successfully!');
 
@@ -48,7 +51,8 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         $resourceList = Resource::lists('name', 'id');
-        return view('categories.edit', compact('category', 'resourceList'));
+        $eventList = Event::lists('name', 'id');
+        return view('categories.edit', compact('category', 'resourceList', 'eventList'));
     }
 
     public function update(Category $category, Request $request)
@@ -64,6 +68,14 @@ class CategoryController extends Controller
         {
             $category->resources()->sync([]);
         }
+        if(!is_null($request->input('event_list')))
+        {
+            $category->events()->sync($request->input('event_list'));
+        }
+        else
+        {
+            $category->events()->sync([]);
+        }
         \Session::flash('flash_message', 'Category Updated Successfully!');
         return redirect('/categories/' . $category->id);
     }
@@ -73,14 +85,24 @@ class CategoryController extends Controller
         foreach($category->resources as $resource)
         {
             DB::table('archive_category_resource')->insert(
-            [
-                'category_id' => $category->id,
-                'resource_id' => $resource->pivot->resource_id,
-                'created_at' => $resource->pivot->created_at,
-                'updated_at' => $resource->pivot->updated_at,
-                'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
-            ]
-            );
+                [
+                    'category_id' => $category->id,
+                    'resource_id' => $resource->pivot->resource_id,
+                    'created_at' => $resource->pivot->created_at,
+                    'updated_at' => $resource->pivot->updated_at,
+                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
+                ]);
+        }
+        foreach($category->events as $event)
+        {
+            DB::table('archive_category_event')->insert(
+                [
+                    'category_id' => $category->id,
+                    'event_id' => $event->pivot->event_id,
+                    'created_at' => $event->pivot->created_at,
+                    'updated_at' => $event->pivot->updated_at,
+                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
+                ]);
         }
         DB::table('archive_categories')->insert(
             ['id' => $category->id,

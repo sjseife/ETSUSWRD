@@ -11,6 +11,6 @@ class DailyHoursTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\DailyHours::class, 500)->create();
+        factory(App\DailyHours::class, 200)->create();
     }
 }

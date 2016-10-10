@@ -18,7 +18,15 @@
                         @foreach($category->resources as $resource)
                             <dd>
                                 <a href="{{ URL::to('resources/' . $resource->id) }}">
-                                    {{ $resource->Name }}
+                                    {{ $resource->name }}
+                                </a>
+                            </dd>
+                        @endforeach
+                        <dt>Events</dt>
+                        @foreach($category->events as $event)
+                            <dd>
+                                <a href="{{ URL::to('events/' . $event->id) }}">
+                                    {{ $event->name }}
                                 </a>
                             </dd>
                         @endforeach

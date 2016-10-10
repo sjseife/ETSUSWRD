@@ -71,7 +71,7 @@ class Resource extends Model
      * Get the provider associated with the resource
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function providers()
+    public function provider()
     {
         return $this->belongsTo('App\Provider');
     }

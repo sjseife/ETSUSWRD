@@ -3,7 +3,7 @@
         <div class="underlined-title">
             <div class="editContent">
                 <h1 class="img-rounded" style="background-color: #f6f6f7; padding: 5px; padding-left: 20px">
-                    {{$r->Name}}
+                    {{$r->name}}
                     <a class="btn btn-small btn-primary pull-right" href="{{ URL::to('resources/removeReport/' . $r->id) }}">Remove from Cart</a>
                 </h1>
             </div>
@@ -18,11 +18,11 @@
                     </div>
                     <div class="editContent">
                         <p>
-                            {{$r->StreetAddress}}<br>
-                            @if($r->StreetAddress2 != null)
-                                {{$r->StreetAddress2}}<br>
+                            {{$r->streetAddress}}<br>
+                            @if($r->streetAddress2 != null)
+                                {{$r->streetAddress2}}<br>
                             @endif
-                            {{$r->City}}, {{$r->State}} {{$r->Zipcode}}<br>
+                            {{$r->city}}, {{$r->state}} {{$r->zipCode}}<br>
                         </p>
                     </div>
                 </div>
@@ -35,9 +35,23 @@
                         <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Hours</h4>
                     </div>
                     <div class="editContent">
-                        <p>
-                            <b>Hours:</b> {{$r->OpeningHours}} - {{$r->ClosingHours}}
-                        </p>
+                        <ul>
+                            @foreach($r->hours as $day)
+                                <li>{{ $day->day }} : {{ date('g:i A', strtotime($day->openTime)) }} - {{ date('g:i A', strtotime($day->closeTime)) }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-12 col-xs-12 pad15">
+                <div class="col-xs-2">
+                </div>
+                <div class="col-xs-10">
+                    <div class="editContent">
+                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Description</h4>
+                    </div>
+                    <div class="editContent">
+                        <p>{{$r->description}}</p>
                     </div>
                 </div>
             </div>
@@ -49,7 +63,7 @@
                         <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Comments</h4>
                     </div>
                     <div class="editContent">
-                        <p>{{$r->Comments}}</p>
+                        <p>{{$r->comments}}</p>
                     </div>
                 </div>
             </div>
@@ -58,12 +72,12 @@
                 </div>
                 <div class="col-xs-10">
                     <div class="editContent">
-                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Contacts</h4>
+                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Contact Information</h4>
                     </div>
                     <div class="editContent">
-                        @foreach($r->contacts as $contact)
-                            <p>{{$contact->full_name}}: {{$contact->phoneNumber}}</p>
-                        @endforeach
+                       <p>{{ $r->publicPhoneNumber }}</p>
+                        <p>{{ $r->publicEmail }}</p>
+                        <p>{{ $r->website }}</p>
                     </div>
                 </div>
             </div>

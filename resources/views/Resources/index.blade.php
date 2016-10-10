@@ -13,22 +13,28 @@
 
                     <tr>
                         <!-- class all for always show, lower data priority numbers stay longer-->
-                        <th class="all" >Name</th>
-                        <th data-priority="1">County</th>
-                        <th data-priority="1">Category</th>
-                        <th data-priority="2">Phone</th>
-                        <th data-priority="2">Hours of Operation</th>
-                        <th data-priority="3">Street Address</th>
-                        <th data-priority="2">City</th>
-                        <th data-priority="1">State</th>
-                        <th data-priority="2">Zip Code</th>
-                        <th data-priority="3">Contact(s)</th>
-                        <th data-priority="3">Comments</th>
-                        <th class="all">Action</th>
+                        <th class="all" >Name</th> {{--0--}}
+                        <th data-priority="1">County</th> {{--1--}}
+                        <th data-priority="1">Category</th> {{--2--}}
+                        <th data-priority="2">Hours of Operation</th> {{--3--}}
+                        <th data-priority="2">Phone</th> {{--4--}}
+                        <th data-priority="2">Email</th> {{--5--}}
+                        <th data-priority="2">Website</th> {{--6--}}
+                        <th data-priority="3">Street Address</th> {{--7--}}
+                        <th data-priority="2">City</th> {{--8--}}
+                        <th data-priority="1">State</th> {{--9--}}
+                        <th data-priority="2">Zip Code</th> {{--10--}}
+                        <th data-priority="3">Provider</th> {{--11--}}
+                        <th data-priority="3">Description</th> {{--12--}}
+                        <th data-priority="3">Comments</th> {{--13--}}
+                        <th class="all">Action</th> {{--14--}}
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -49,28 +55,30 @@
                         $link = false;
                     ?>
                     <tr>
-                        <td>{{ $resource->Name }}</td>
-                        <td>{{ $resource->County }}</td>
+                        <td>{{ $resource->name }}</td>
+                        <td>{{ $resource->county }}</td>
                         <td>
                             @foreach ($resource->categories as $category)
                                 {{ $category->name }}
                             @endforeach
                         </td>
-                        <td>{{ $resource->PhoneNumber }}</td>
-                        <td>{{ date('g:i A', strtotime($resource->OpeningHours)) }} - {{ date('g:i A', strtotime($resource->ClosingHours)) }}</td>
-                        <td>{{ $resource->StreetAddress }} <br> {{ $resource->StreetAddress2 }}</td>
-                        <td>{{ $resource->City }}</td>
-                        <td>{{ $resource->State }}</td>
-                        <td>{{ $resource->Zipcode }}</td>
                         <td>
-                           <ul>
-                               @foreach($resource->contacts as $contact)
-                                   {{ $contact->full_name }}: {{$contact->phoneNumber}}
-                                   <br>
-                               @endforeach
-                           </ul>
+                            <ul>
+                                @foreach($resource->hours as $day)
+                                    <li>{{ $day->day }} : {{ date('g:i A', strtotime($day->openTime)) }} - {{ date('g:i A', strtotime($day->closeTime)) }}</li>
+                                @endforeach
+                            </ul>
                         </td>
-                        <td>{{ $resource->Comments }}</td>
+                        <td>{{ $resource->publicPhoneNumber }}</td>
+                        <td>{{ $resource->publicEmail }}</td>
+                        <td>{{ $resource->website }}</td>
+                        <td>{{ $resource->streetAddress }} <br> {{ $resource->streetAddress2 }}</td>
+                        <td>{{ $resource->city }}</td>
+                        <td>{{ $resource->state }}</td>
+                        <td>{{ $resource->zipCode }}</td>
+                        <td>{{ $resource->provider->name }}</td>
+                        <td>{{ $resource->description }}</td>
+                        <td>{{ $resource->comments }}</td>
                         <td class="text-center col-md-3">
 
 
@@ -98,7 +106,7 @@
         //Apply DataTables
         $('#ResourceTable').dataTable( {
             initComplete: function () {
-                this.api().columns([1,4,5,6,7,8,9]).every( function () {
+                this.api().columns([1,5,8,9,10,11]).every( function () {
                     var column = this;
                     var select = $('<select><option value=""></option></select>')
                             .appendTo( $(column.footer()).empty() )

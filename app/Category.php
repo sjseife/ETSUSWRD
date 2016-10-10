@@ -28,4 +28,9 @@ class Category extends Model
     {
         return $this->resources->lists('id')->all();
     }
+
+    public function getEventListAttribute()
+    {
+        return $this->events->lists('id')->all();
+    }
 }

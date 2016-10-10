@@ -24,12 +24,11 @@ class ResourceRequest extends Request
     public function rules()
     {
         return [
-            'Name' => 'required',
-            'StreetAddress' => 'required',
-            'City' => 'required',
-            'County' => 'required',
-            'Zipcode' => 'required',
-            'PhoneNumber' => 'required'
+            'name' => 'required',
+            'streetAddress' => 'required',
+            'city' => 'required',
+            'county' => 'required',
+            'zipCode' => 'required',
         ];
     }
 }

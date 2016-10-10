@@ -75,10 +75,10 @@
 
     @yield('content')
     <!-- Footer -->
-    <div class="container_24">
-        <div id="infoblock" class="main">
+    <div class="footer">
+            <img src="/images/mountains.png" alt="Image of Mountains" class="img-responsive center-block">
+
         </div>
-    </div>
     <aside id="asidelinks">
         <div id="linksblock" class="container_24">
             <article class="grid_6"><!-- com.omniupdate.editor csspath="/_resources14/ou/editor/maincontent.css" cssmenu="/_resources14/ou/editor/maincontent.txt" -->
@@ -100,7 +100,7 @@
             </div>
         </div>
         <div id="hidden"></div>
-    </footer>
+    </footer></div>
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>

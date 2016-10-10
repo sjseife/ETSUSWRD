@@ -31,7 +31,7 @@
     </style>
 </head>
 
-<body id="app-layout" style="height: 100%; width: 100%; position: relative;">
+<body id="app-layout">
     @include('layouts._NavBar')
     <div class="container">
         @if (Session::has('flash_message'))
@@ -44,7 +44,8 @@
     </div>
 
     <!-- Footer -->
-    <div id="footer" style="position: absolute; bottom: 0px; width: 100%;"><div class="container_24">
+    <div id="footer">
+        <div class="container_24">
         <img src="/images/mountains.png" alt="Image of Mountains" class="img-responsive center-block">
     </div>
     <aside id="asidelinks">

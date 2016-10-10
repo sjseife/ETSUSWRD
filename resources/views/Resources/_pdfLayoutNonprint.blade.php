@@ -1,5 +1,4 @@
-@foreach($resources as $r)
-    <div class="container">
+    @foreach($resources as $r)
         <div class="underlined-title">
             <div class="editContent">
                 <h1 class="img-rounded" style="background-color: #f6f6f7; padding: 5px; padding-left: 20px">
@@ -87,5 +86,4 @@
         <hr/>
         <br/>
         <br/>
-    </div><!-- /.container -->
 @endforeach

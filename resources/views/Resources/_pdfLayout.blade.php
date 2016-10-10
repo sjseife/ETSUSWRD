@@ -1,96 +1,58 @@
-@foreach($resources as $r)
-    <div class="container">
-        <div class="underlined-title">
-            <div class="editContent">
-                <h1 class="img-rounded" style="background-color: #f6f6f7; padding: 5px; padding-left: 20px">
-                {{$r->Name}}
-                <!--<div class="pull-right"><h3>{{$r->ContactPhone}}</h3> </div> -->
-                </h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 col-sm-12 col-xs-12 pad25">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-10">
-                    <div class="editContent">
-                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Address</h4>
-                    </div>
-                    <div class="editContent">
-                        <p>
-                            {{$r->StreetAddress}}<br>
-                            @if($r->StreetAddress2 != null)
-                                {{$r->StreetAddress2}}<br>
-                            @endif
-                            {{$r->City}}, {{$r->State}} {{$r->Zipcode}}<br>
-                        </p>
-                    </div>
-                </div>
-            </div>
+<style>
+    @page{
+        margin-top: 180px;
+        margin-bottom: 10px;
+    }
+    #header {
+        position: fixed; display: block; margin-top: -150px;
+        width:25%; height: auto; padding-left: 38%; opacity: 0.5;
+    }
+    dl {
+        width: 800px
+    }
+    dt {
+        float: left; width: 450px; overflow: hidden; white-space: nowrap
+    }
+    dt span:after {
+        content: " ............................................................" }
+    dd span:before {
+        content: "........................................................................... " }
+    dd {
+        top: 38px;
+        position: absolute; padding-left: 249px; width: 415px; overflow: hidden; text-align: right;
+    }
+    hr{
+        opacity: 0.05;
+    }
+    * {
+        box-sizing: border-box;
+    }
+</style>
 
-            <div class="col-md-4 col-sm-12 col-xs-12 pad25">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-10">
-                    <div class="editContent">
-                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Hours</h4>
-                    </div>
-                    <div class="editContent">
-                        <p>
-                            <b>Hours:</b> {{$r->OpeningHours}} - {{$r->ClosingHours}}
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-12 col-xs-12 pad25">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-10">
-                    <div class="editContent">
-                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Services</h4>
-                    </div>
-                    <div class="editContent">
-                        <ul>
-                            @foreach($r->categories as $category)
-                                <li> {{$category->name}}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-12 col-xs-12 pad25">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-10">
-                    <div class="editContent">
-                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Contacts</h4>
-                    </div>
-                    <div class="editContent">
-                        <ul>
-                            @foreach($r->contacts as $contact)
-                                <li> {{$contact->full_name}}: {{$contact->phoneNumber}}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-12 col-xs-12 pad25">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-10">
-                    <div class="editContent">
-                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Comments</h4>
-                    </div>
-                    <div class="editContent">
-                        <p>{{$r->Comments}}</p>
-                    </div>
-                </div>
-            </div>
-        </div><!-- /.row -->
+<img id="header" src="C:\Users\Dustin\Documents\swrd-team2\public\images\sw_logo.jpg">
+<div id="resources">
+    @foreach($resources as $r)
+        <div class="container" style="page-break-inside: avoid">
+            <p>
+                <dl>
+                <b>{{$r->Name}}</b><br/>
+                {{$r->StreetAddress}}
+                @if($r->StreetAddress2 != null)
+                    {{$r->StreetAddress2}}
+                @endif
+                , {{$r->City}}, {{$r->State}} {{$r->Zipcode}}<br>
+                @foreach($r->contacts as $c)
+                    <dt><span>{{$c->firstName}} {{$c->lastName}}</span></dt><dd><span>{{$c->phoneNumber}}</span></dd>
+                    @break <!-- only listing one contact per resource because the dd element is using absolute positioning -->
+                @endforeach
+                Hours: {{$r->OpeningHours}} - {{$r->ClosingHours}}<br/>
+                @if(isset($r->Comments))
+                    {{$r->Comments}}
+                @endif
+                </dl>
+            </p>
         <hr/>
-        <br/>
-        <br/>
-    </div><!-- /.container -->
-@endforeach
+        </div><!-- /.container -->
+        <br>
+    @endforeach
+</div>

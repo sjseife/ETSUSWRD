@@ -6,15 +6,16 @@
     <div class="container">
         <!-- create a new contact (uses the create method found at GET /contact/create -->
         <a class="btn btn-small btn-primary pull-right" href="{{ URL::to('contacts/create') }}" style="margin-bottom: 20px;">Create New Contact</a>
+        <br />
+        <br />
         <div class="row">
-            <table class="display dt-responsive nowrap" cellspacing="0" width="100%"id="ContactTable">
+            <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%"id="ContactTable">
                 <thead>
                 <tr>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
                     <th>Phone Number</th>
-                    <th>Resources</th>
                     <th>View</th>
                 </tr>
                 </thead>
@@ -24,13 +25,8 @@
                     <tr>
                         <td>{{ $contact->firstName }}</td>
                         <td>{{ $contact->lastName }}</td>
-                        <td>{{ $contact->email }}</td>
-                        <td>{{ $contact->phoneNumber }}</td>
-                        <td>
-                            @foreach ($contact->resources as $resource)
-                                {{ $resource->name }}
-                            @endforeach
-                        </td>
+                        <td>{{ $contact->protectedEmail }}</td>
+                        <td>{{ $contact->protectedPhoneNumber }}</td>
                         <td class="text-center">
 
                             <!-- show the contact (uses the show method found at GET /contacts/{id} -->

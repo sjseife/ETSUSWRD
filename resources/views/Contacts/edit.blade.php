@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Edit: {!! $contact->Name !!}</h1>
+        <h1>Edit: {!! $contact->full_name !!}</h1>
     </div>
 
     <hr/>

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Requests\ContactRequest;
 use App\Contact;
-use App\Resource;
+use App\Provider;
 use Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -28,8 +28,8 @@ class ContactsController extends Controller
     }
     public function create()
     {
-        $resourceList = Resource::lists('name', 'id');
-        return view('contacts.create', compact('resourceList'));
+        $providerList = Provider::lists('name', 'id');
+        return view('contacts.create', compact('providerList'));
     }
 
     public function store(ContactRequest $request)
@@ -39,7 +39,7 @@ class ContactsController extends Controller
             ['email' => 'unique:contacts']);
         $contact= new Contact($request->all());
         $contact->save();
-        $contact->resources()->attach($request->input('resource_list'));
+        $contact->providers()->attach($request->input('provider_list'));
 
         \Session::flash('flash_message', 'Contact Created Successfully!');
 
@@ -47,6 +47,9 @@ class ContactsController extends Controller
     }
 
     /*
+     * THIS function is not longer in operation, and should be combined with a single store function if it is needed again
+     * Was updated for the provider change anyway 10/10/2016 William Kubenka
+     *
      * Same as regular store, except it returns JSON. For some reason I would get tokenmismatch exceptions if I left
      * the data input as ContactRequest. As a result, data validation now happens entirely within the method.
      * This is planned to be used when creating a new resource so that the contact can be created from the same page using aJax
@@ -56,19 +59,19 @@ class ContactsController extends Controller
         $this->validate($request,
             ['firstName' => 'required',
             'lastName' => 'required',
-            'email' => 'required|email|unique:contacts',
-            'phoneNumber' => 'required']);
+            'protectedEmail' => 'required|email|unique:contacts',
+            'protectedPhoneNumber' => 'required']);
         $contact= new Contact($request->all());
         $contact->save();
-        $contact->resources()->attach($request->input('resource_list'));
+        $contact->providers()->attach($request->input('provider_list'));
 
         return response()->json($contact);
     }
 
     public function edit(Contact $contact)
     {
-        $resourceList = Resource::lists('name', 'id');
-        return view('contacts.edit', compact('contact', 'resourceList'));
+        $providerList = Provider::lists('name', 'id');
+        return view('contacts.edit', compact('contact', 'providerList'));
     }
 
     public function update(Contact $contact, ContactRequest $request)
@@ -77,13 +80,13 @@ class ContactsController extends Controller
         $this->validate($request,
             ['email' => 'unique:contacts,email,'.$contact->id]);
         $contact->update($request->all());
-        if(!is_null($request->input('resource_list')))
+        if(!is_null($request->input('provider_list')))
         {
-            $contact->resources()->sync($request->input('resource_list'));
+            $contact->providers()->sync($request->input('provider_list'));
         }
         else
         {
-            $contact->resources()->sync([]);
+            $contact->providers()->sync([]);
         }
         \Session::flash('flash_message', 'Contact Updated Successfully!');
         return redirect('/contacts/' . $contact->id);
@@ -107,14 +110,14 @@ class ContactsController extends Controller
                     'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
             );
         }
-        foreach($contact->resources as $resource)
+        foreach($contact->providers as $provider)
         {
-            DB::table('archive_contact_resource')->insert(
+            DB::table('archive_contact_provider')->insert(
                 [
                     'contact_id' => $contact->id,
-                    'resource_id' => $resource->pivot->resource_id,
-                    'created_at' => $resource->pivot->created_at,
-                    'updated_at' => $resource->pivot->updated_at,
+                    'provider_id' => $provider->pivot->provider_id,
+                    'created_at' => $provider->pivot->created_at,
+                    'updated_at' => $provider->pivot->updated_at,
                     'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
                 ]
             );
@@ -123,8 +126,8 @@ class ContactsController extends Controller
             ['id' => $contact->id,
                 'firstName' => $contact->firstName,
                 'lastName' => $contact->lastName,
-                'email' => $contact->email,
-                'phoneNumber' => $contact->phoneNumber,
+                'protectedEmail' => $contact->protectedEmail,
+                'protectedPhoneNumber' => $contact->protectedPhoneNumber,
                 'created_at' => $contact->created_at,
                 'updated_at' => $contact->updated_at,
                 'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
@@ -141,7 +144,7 @@ class ContactsController extends Controller
     public function flag(Contact $contact)
     {
         return view('flags.create')->with('url', 'contacts/flag/' . $contact->id)
-            ->with('name', $contact->FullName);
+            ->with('name', $contact->full_name);
     }
 
     public function storeFlag(Contact $contact, FlagRequest $request)

@@ -90,6 +90,7 @@
             </div>
 
     </div>
+        </div>
     <!-- Modal -->
     @include('Resources._deleteModal')
 @endsection

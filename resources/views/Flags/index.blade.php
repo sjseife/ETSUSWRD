@@ -5,7 +5,7 @@
 
     <div class="container">
         <!-- create a new flag (uses the create method found at GET /flags/create -->
-        {{--<a class="btn btn-small btn-primary pull-right" href="{{ URL::to('flags/create') }}" style="margin-bottom: 20px;">Create New Flags</a>--}}
+       {{-- <a class="btn btn-small btn-primary pull-right" href="{{ URL::to('flags/create') }}" style="margin-bottom: 20px;">Create New Flags</a>--}}
         <div class="row">
             <table class="display dt-responsive nowrap" cellspacing="0" width="100%" id="FlagTable">
                 <thead>
@@ -25,14 +25,19 @@
                     <tr>
                         @if(isset($flag->resource))
                             <td>Resource</td>
-                            <td>{{ $flag->resource->Name }}</td>
+                            <td>{{ $flag->resource->name }}</td>
                         @elseif(isset($flag->contact))
                             <td>Contact</td>
                             <td>{{ $flag->contact->full_name }}</td>
-                        @else
+                        @elseif(isset($flag->user))
                             <td>User</td>
-                            <td></td>
-                         {{--   <td>{{ $flag->user->email }}</td>--}}
+                         <td>{{ $flag->user->email }}</td>
+                        @elseif(isset($flag->event))
+                            <td>Event</td>
+                            <td>{{ $flag->event->name }}</td>
+                        @elseif(isset($flag->provider))
+                            <td>Provider</td>
+                            <td>{{ $flag->provider->name }}</td>
                         @endif
 
                         <td>{{ $flag->level }}</td>

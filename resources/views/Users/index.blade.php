@@ -6,8 +6,10 @@
     <div class="container">
         <!-- create a new user (uses the create method found at GET /contact/create -->
         <a class="btn btn-small btn-primary pull-right" href="{{ URL::to('users/create') }}" style="margin-bottom: 20px;">Create New User</a>
+        <br />
+        <br />
         <div class="row">
-            <table class="display dt-responsive nowrap" cellspacing="0" width="100%" id="UsersTable">
+            <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="UsersTable">
                 <thead>
                 <tr>
                     <th>Name</th>

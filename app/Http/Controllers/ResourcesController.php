@@ -87,7 +87,6 @@ class ResourcesController extends Controller
         }
         else
         {
-
             $resource->contacts()->sync([]);
         }
         \Session::flash('flash_message', 'Resource Updated Successfully!');
@@ -149,18 +148,18 @@ class ResourcesController extends Controller
             );
         }
         DB::table('archive_resources')->insert(
-            ['id' => $resource->id,
-                'Name' => $resource->Name,
-                'StreetAddress' => $resource->StreetAddress,
-                'StreetAddress2' => $resource->StreetAddress2,
-                'City' => $resource->City,
-                'County' => $resource->County,
-                'State' => $resource->State,
-                'Zipcode' => $resource->Zipcode,
-                'PhoneNumber' => $resource->PhoneNumber,
-                'OpeningHours' => $resource->OpeningHours,
-                'ClosingHours' => $resource->ClosingHours,
-                'Comments' => $resource->Comments,
+          ['id' => $resource->id,
+            'Name' => $resource->Name,
+            'StreetAddress' => $resource->StreetAddress,
+            'StreetAddress2' => $resource->StreetAddress2,
+            'City' => $resource->City,
+            'County' => $resource->County,
+            'State' => $resource->State,
+            'Zipcode' => $resource->Zipcode,
+            'PhoneNumber' => $resource->PhoneNumber,
+            'OpeningHours' => $resource->OpeningHours,
+              'ClosingHours' => $resource->ClosingHours,
+              'Comments' => $resource->Comments,
               'created_at' => $resource->created_at,
               'updated_at' => $resource->updated_at,
               'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
@@ -198,7 +197,6 @@ class ResourcesController extends Controller
         }
 
         return $passedContacts;
-
     }
 
     public function add(Resource $resource, Request $request)
@@ -220,8 +218,7 @@ class ResourcesController extends Controller
         $resources = Auth::user()->resources;
         return view('resources.generateReport', compact('resources'));
     }
-
-
+    
     public function removeReport(Resource $resource)
     {
         Auth::user()->resources()->detach($resource);

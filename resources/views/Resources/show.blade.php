@@ -38,7 +38,6 @@
                 <p>Lorem ipsum dolor sit amet, qui malis vituperatoribus an, hinc tractatos facilisis an sit. Te est
                     diceret sanctus, an movet commune lobortis qui. Nobis maluisset intellegat sea ad, est liber dolor
                     in. Vel cu quodsi doctus, te eirmod deleniti eam. Mei id rebum nemore corpora, sit modo debitis
-
                     accumsan in. Ei mea quas discere, error debitis eu qui, quem antiopam dignissim id vim. Mea ut
                     aperiam accusamus.</p>
 

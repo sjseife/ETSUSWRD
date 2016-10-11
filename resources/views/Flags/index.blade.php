@@ -31,7 +31,8 @@
                             <td>{{ $flag->contact->full_name }}</td>
                         @else
                             <td>User</td>
-                            <td>{{ $flag->user->email }}</td>
+                            <td></td>
+                         {{--   <td>{{ $flag->user->email }}</td>--}}
                         @endif
 
                         <td>{{ $flag->level }}</td>

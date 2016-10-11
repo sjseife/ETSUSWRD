@@ -15,6 +15,7 @@
             margin-bottom: 20px;
             text-align: center;
         }
+
         a:link, a:visited {
             text-decoration:  none;
             cursor: auto;
@@ -30,7 +31,7 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel-body panel-primary">
-                <div class="panel-heading"><h3>Community Resource Application</h3></div>
+                <div class="panel-heading"><h3>Community Resource Allocation</h3></div>
 
                 <div class="panel-body w3-panel w3-blue w3-round-xlarge">
                     <div class="row">

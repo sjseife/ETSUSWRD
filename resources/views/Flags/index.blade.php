@@ -7,7 +7,7 @@
         <!-- create a new flag (uses the create method found at GET /flags/create -->
         {{--<a class="btn btn-small btn-primary pull-right" href="{{ URL::to('flags/create') }}" style="margin-bottom: 20px;">Create New Flags</a>--}}
         <div class="row">
-            <table class="display dt-responsive nowrap" cellspacing="0" width="100%" id="FlagTable">
+            <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="FlagTable">
                 <thead>
                     <tr>
                         <th>Type</th>
@@ -25,14 +25,14 @@
                     <tr>
                         @if(isset($flag->resource))
                             <td>Resource</td>
-                            <td>{{ $flag->resource->Name }}</td>
+                            <td>{{ $flag->resource->name }}</td>
                         @elseif(isset($flag->contact))
                             <td>Contact</td>
                             <td>{{ $flag->contact->full_name }}</td>
                         @else
                             <td>User</td>
                             <td></td>
-                         {{--   <td>{{ $flag->user->email }}</td>--}}
+                            {{--<td>{{ $flag->user->email }}</td>--}}
                         @endif
 
                         <td>{{ $flag->level }}</td>

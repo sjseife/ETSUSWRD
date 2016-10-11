@@ -26,8 +26,8 @@ class ContactRequest extends Request
         return [
             'firstName' => 'required',
             'lastName' => 'required',
-            'email' => 'required|email',
-            'phoneNumber' => 'required'
+            'protectedEmail' => 'required|email',
+            'protectedPhoneNumber' => 'required'
         ];
     }
 }

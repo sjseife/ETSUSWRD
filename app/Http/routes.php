@@ -26,8 +26,11 @@ Route::get('/', function () {
 //if Admin is required, place route in this group
 Route::group(['middleware' => 'App\Http\Middleware\AdminAccessMiddleware'], function()
 {
+    //event
+    Route::delete('events/{event}', 'EventsController@destroy');
+
     //resource
-    Route::delete('resources/{resource}', 'ResourcesController@destroy');\
+    Route::delete('resources/{resource}', 'ResourcesController@destroy');
 
     //user
     Route::get('users', 'UsersController@index');
@@ -45,6 +48,12 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminAccessMiddleware'], func
 //if GA or Admin is required, place route in this group
 Route::group(['middleware' => 'App\Http\Middleware\GAAccessMiddleware'], function()
 {
+    //event
+    Route::get('events/create', 'EventsController@create');
+    Route::post('events', 'EventsController@store');
+    Route::get('events/{event}/edit', 'EventsController@edit');
+    Route::patch('events/{event}', 'EventsController@update');
+
     //resource
     Route::get('resources/create', 'ResourcesController@create');//resource creation form
     Route::post('resources', 'ResourcesController@store');//save a new resource
@@ -75,17 +84,38 @@ Route::group(['middleware' => 'App\Http\Middleware\GAAccessMiddleware'], functio
 
 //if gerneral user is required, leave it below.
 
+//provider
+Route::get('providers', 'ProvidersController@index');
+Route::get('providers/create', 'ProvidersController@create');
+Route::get('providers/{provider}', 'ProvidersController@show');
+Route::get('providers/{provider}/edit', 'ProvidersController@edit');
+Route::get('providers/{provider}/flag', 'ProvidersController@flag');
+Route::post('providers/flag/{provider}', 'ProvidersController@storeFlag');
+Route::post('providersJSON', 'ProvidersController@storeJSON');
+Route::post('providers', 'ProvidersController@store');
+Route::patch('providers/{provider}', 'ProvidersController@update');
+Route::delete('providers/{provider}', 'ProvidersController@destroy');
+
+//event
+Route::get('events', 'EventsController@index');
+Route::get('events/{event}', 'EventsController@show');
+Route::get('events/add/{event}', 'EventsController@add'); //add resource to report
+Route::get('events/removeReport/{event}', 'EventsController@removeReport');
+Route::get('events/{event}/flag', 'EventsController@flag');
+Route::post('events/flag/{event}', 'EventsController@storeFlag');
+
 //resource
 Route::get('resources', 'ResourcesController@index');
 Route::get('resources/add/{resource}', 'ResourcesController@add'); //add resource to report
-Route::get('resources/generateReport', 'ResourcesController@generateReport');
-Route::get('resources/generatePDF', 'ResourcesController@generatePDF');
 Route::get('resources/removeReport/{resource}', 'ResourcesController@removeReport');
-Route::get('resources/emptyReport', 'ResourcesController@emptyReport');
 Route::get('resources/{resource}', 'ResourcesController@show');
 Route::get('resources/{resource}/flag', 'ResourcesController@flag');
 Route::post('resources/flag/{resource}', 'ResourcesController@storeFlag');
 
+//worklist
+Route::get('worklist/emptyReport', 'WorkListController@emptyReport');
+Route::get('worklist/generateReport', 'WorkListController@generateReport');
+Route::get('worklist/generatePDF', 'WorkListController@generatePDF');
 
 //flags
 Route::get('flags', 'FlagsController@index');

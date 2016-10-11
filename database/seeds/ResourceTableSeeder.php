@@ -15,42 +15,40 @@ class ResourceTableSeeder extends Seeder
     public function run()
     {
         DB::table('resources')->insert([
-            'Name' => 'Test',
-            'StreetAddress' => '123 Test Way',
-            'StreetAddress2' => 'Apt 3',
-            'City' => 'Johnson City',
-            'County' => 'Washington',
-            'State' => 'TN',
-            'ZipCode' => '37601',
-            'PhoneNumber' => '423-123-3244',
-            'OpeningHours' => '12:00:00',
-            'ClosingHours' => '20:00:00',
-            'Comments' => 'Surprise! The site does not exist!'
+            'name' => 'Test',
+            'streetAddress' => '123 Test Way',
+            'streetAddress2' => 'Apt 3',
+            'city' => 'Johnson City',
+            'county' => 'Washington',
+            'state' => 'TN',
+            'zipCode' => '37601',
+            'publicPhoneNumber' => '423-123-3244',
+            'description' => 'Here at Test, we firmly believe in Science!',
+            'Comments' => 'Surprise! The site does not exist!',
+            'provider_id' => '1'
         ]);
         DB::table('resources')->insert([
-            'Name' => 'Test1',
-            'StreetAddress' => '987 MLK Blv',
-            'City' => 'Johnson City',
-            'County' => 'Washington',
-            'State' => 'TN',
-            'ZipCode' => '37604',
-            'PhoneNumber' => '423-234-3944',
-            'OpeningHours' => '07:00:00',
-            'ClosingHours' => '21:00:00',
-            'Comments' => 'Surprise! The site does not exist!'
+            'name' => 'Test1',
+            'streetAddress' => '987 MLK Blv',
+            'city' => 'Johnson City',
+            'county' => 'Washington',
+            'state' => 'TN',
+            'zipCode' => '37604',
+            'publicPhoneNumber' => '423-234-3944',
+            'comments' => 'Surprise! The site does not exist!',
+            'provider_id' => '2'
         ]);
         DB::table('resources')->insert([
-            'Name' => 'Test2',
-            'StreetAddress' => '234 No Longer Care Ave',
-            'StreetAddress2' => 'Apt 209',
-            'City' => 'Gray',
-            'County' => 'Washington',
-            'State' => 'TN',
-            'ZipCode' => '37615',
-            'PhoneNumber' => '423-954-3774',
-            'OpeningHours' => '00:00:00',
-            'ClosingHours' => '00:00:00',
-            'Comments' => 'Surprise! The site does not exist!'
+            'name' => 'Test2',
+            'streetAddress' => '234 No Longer Care Ave',
+            'streetAddress2' => 'Apt 209',
+            'city' => 'Gray',
+            'county' => 'Washington',
+            'state' => 'TN',
+            'zipCode' => '37615',
+            'publicPhoneNumber' => '423-954-3774',
+            'comments' => 'Surprise! The site does not exist!',
+            'provider_id' => '3'
         ]);
         factory(App\Resource::class, 50)->create();
     }

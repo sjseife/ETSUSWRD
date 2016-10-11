@@ -23,7 +23,7 @@
                     <thead>
                     <tr>
                         <!-- class all for always show, lower data priority numbers stay longer-->
-                        <th class="all">Name</th>
+                        <th class="all">Resource Name</th>
                         <th class="all">Action</th>
                     </tr>
                     </thead>

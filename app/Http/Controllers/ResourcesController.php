@@ -218,7 +218,7 @@ class ResourcesController extends Controller
         $resources = Auth::user()->resources;
         return view('resources.generateReport', compact('resources'));
     }
-    
+ 
     public function removeReport(Resource $resource)
     {
         Auth::user()->resources()->detach($resource);

@@ -29,6 +29,7 @@
     }
 </style>
 
+<!-- This image path must be absolute. Dompdf does not support relative paths. -->
 <img id="header" src="C:\Users\Dustin\Documents\swrd-team2\public\images\sw_logo.jpg">
 <div id="resources">
     @foreach($resources as $r)
@@ -45,7 +46,7 @@
                     <dt><span>{{$c->firstName}} {{$c->lastName}}</span></dt><dd><span>{{$c->phoneNumber}}</span></dd>
                     @break <!-- only listing one contact per resource because the dd element is using absolute positioning -->
                 @endforeach
-                Hours: {{$r->OpeningHours}} - {{$r->ClosingHours}}<br/>
+                Hours: {{ Carbon\Carbon::parse($r->OpeningHours)->format('g:i A') }} - {{ Carbon\Carbon::parse($r->ClosingHours)->format('g:i A') }}<br/>
                 @if(isset($r->Comments))
                     {{$r->Comments}}
                 @endif

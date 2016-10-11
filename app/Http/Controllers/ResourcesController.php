@@ -208,9 +208,14 @@ class ResourcesController extends Controller
         }
         else
         {
-            \Session::flash('flash_message', 'Resource Added to Report');
+            \Session::flash('flash_message', 'Resource Removed from Report');
             return Redirect::back();
         }
+    }
+
+    public function remove(Resource $resource, Request $request)
+    {
+        dd($resource);
     }
 
     public function generateReport()
@@ -235,10 +240,20 @@ class ResourcesController extends Controller
         }
     }
 
-    public function removeReport(Resource $resource)
+    public function removeReport(Resource $resource, Request $request)
     {
         Auth::user()->resources()->detach($resource);
-        return redirect('/resources');
+        if($request->ajax())
+        {
+            return response()->json(); //it just needs any JSON response to indicate a success.
+        }
+        else
+        {
+            \Session::flash('flash_message', 'Resource Removed from Report');
+            return Redirect::back();
+        }
+        //Auth::user()->resources()->detach($resource);
+        //return redirect('/resources');
     }
 
     public function emptyReport()

@@ -230,7 +230,7 @@ class ResourcesController extends Controller
         else{
             $resourcesSet = true;
             $pdf = App::make('dompdf.wrapper');
-            $view = View::make('resources.pdfHeader')->with('resources', Auth::user()->resources);
+            $view = View::make('resources._pdfLayout')->with('resources', Auth::user()->resources);
             $contents = $view->render();
             $pdf->loadHTML($contents);
             $report = $pdf->output();
@@ -265,7 +265,7 @@ class ResourcesController extends Controller
     public function generatePDF()
     {
         $pdf = App::make('dompdf.wrapper');
-        $view = View::make('resources.pdfHeader')->with('resources', Auth::user()->resources);
+        $view = View::make('resources._pdfLayout')->with('resources', Auth::user()->resources);
         $contents = $view->render();
         $pdf->loadHTML($contents);
         return $pdf->stream();

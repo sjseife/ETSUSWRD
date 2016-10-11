@@ -27,8 +27,17 @@
     * {
         box-sizing: border-box;
     }
-</style>
 
+    #footer {
+        position: fixed; display: block; margin-top: 890px;
+        width:100%; height: auto; padding-left: 32%;
+    }
+
+</style>
+<div id="footer">
+    <!-- Showing email for now -->
+    <p>Provided by: {{Auth::user()->email}}</p>
+</div>
 <!-- This image path must be absolute. Dompdf does not support relative paths. -->
 <img id="header" src="C:\Users\Dustin\Documents\swrd-team2\public\images\sw_logo.jpg">
 <div id="resources">

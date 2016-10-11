@@ -75,7 +75,7 @@ class CreateArchiveTables extends Migration
         Schema::create('archive_contact_provider', function (Blueprint $table) {
             $table->integer('contact_id')->unsigned();
             $table->integer('provider_id')->unsigned();
-            $table->string('title');
+            $table->string('title')->nullable();
             $table->timestamps();
             $table->timestamp('archived_at');
         });

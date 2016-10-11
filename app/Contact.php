@@ -52,9 +52,9 @@ class Contact extends Model
      * Get a list of resource ids associated with the current resource
      * @return array
      */
-    public function getResourceListAttribute()
+    public function getProviderListAttribute()
     {
-        return $this->resources->lists('id')->all();
+        return $this->providers->lists('id')->all();
     }
 
     /**

@@ -44,7 +44,7 @@
 
     $factory->define(App\Provider::class, function (Faker\Generator $faker) {
        return [
-           'name' => $faker->name,
+           'name' => $faker->company,
            'publicPhoneNumber' => $faker->phoneNumber,
            'publicEmail' => $faker->safeEmail,
            'website' => $faker->domainName

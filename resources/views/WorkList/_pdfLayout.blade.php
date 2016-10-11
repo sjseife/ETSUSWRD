@@ -3,8 +3,8 @@
         <div class="underlined-title">
             <div class="editContent">
                 <h1 class="img-rounded" style="background-color: #f6f6f7; padding: 5px; padding-left: 20px">
-                {{$r->name}}
-                <!--<div class="pull-right"><h3>{{$r->publicPhoneNumber}}</h3> </div> -->
+                {{$r->Name}}
+                <!--<div class="pull-right"><h3>{{$r->ContactPhone}}</h3> </div> -->
                 </h1>
             </div>
         </div>
@@ -18,11 +18,11 @@
                     </div>
                     <div class="editContent">
                         <p>
-                            {{$r->streetAddress}}<br>
-                            @if($r->streetAddress2 != null)
-                                {{$r->streetAddress2}}<br>
+                            {{$r->StreetAddress}}<br>
+                            @if($r->StreetAddress2 != null)
+                                {{$r->StreetAddress2}}<br>
                             @endif
-                            {{$r->city}}, {{$r->state}} {{$r->zipCode}}<br>
+                            {{$r->City}}, {{$r->State}} {{$r->Zipcode}}<br>
                         </p>
                     </div>
                 </div>
@@ -36,11 +36,9 @@
                         <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Hours</h4>
                     </div>
                     <div class="editContent">
-                        <ul>
-                            @foreach($r->hours as $day)
-                                <li>{{ $day->day }} : {{ date('g:i A', strtotime($day->openTime)) }} - {{ date('g:i A', strtotime($day->closeTime)) }}</li>
-                            @endforeach
-                        </ul>
+                        <p>
+                            <b>Hours:</b> {{$r->OpeningHours}} - {{$r->ClosingHours}}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -61,32 +59,23 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-12 col-xs-12 pad15">
+            <div class="col-md-4 col-sm-12 col-xs-12 pad25">
                 <div class="col-xs-2">
                 </div>
                 <div class="col-xs-10">
                     <div class="editContent">
-                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Contact Information</h4>
+                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Contacts</h4>
                     </div>
                     <div class="editContent">
-                        <p>{{ $r->publicPhoneNumber }}</p>
-                        <p>{{ $r->publicEmail }}</p>
-                        <p>{{ $r->website }}</p>
+                        <ul>
+                            @foreach($r->contacts as $contact)
+                                <li> {{$contact->full_name}}: {{$contact->phoneNumber}}</li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-12 col-xs-12 pad15">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-10">
-                    <div class="editContent">
-                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Description</h4>
-                    </div>
-                    <div class="editContent">
-                        <p>{{$r->description}}</p>
-                    </div>
-                </div>
-            </div>
+
             <div class="col-md-4 col-sm-12 col-xs-12 pad25">
                 <div class="col-xs-2">
                 </div>
@@ -95,7 +84,7 @@
                         <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Comments</h4>
                     </div>
                     <div class="editContent">
-                        <p>{{$r->comments}}</p>
+                        <p>{{$r->Comments}}</p>
                     </div>
                 </div>
             </div>

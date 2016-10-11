@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Flag;
-use App\DailyHours;
-use App\Provider;
 use App\Http\Requests\FlagRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -42,56 +40,21 @@ class ResourcesController extends Controller
     public function create()
     {
         $categoryList = Category::lists('name', 'id');
-        $providerList = Provider::lists('name', 'id');
-        return view('resources.create', compact('categoryList', 'providerList'));
+        $passedContacts = $this->getAllContactsFullName();
+        $resourceList = Resource::lists('name', 'id');
+        return view('resources.create', compact('categoryList', 'passedContacts', 'resourceList'));
     }
 
     public function store(ResourceRequest $request)
     {
         $resource = new Resource($request->all());
-        $resource->provider_id = $request->provider;
         $resource->save();
         if(!is_null($request->input('category_list')))
         {
             $syncCategories = $this->checkForNewCategories($request->input('category_list'));
             $resource->categories()->attach($syncCategories);
         }
-        //create and sync daily hours if the resource is not closed that day
-        if(!isset($request->mondayClosedCheck))
-        {
-            $monday = DailyHours::create(['day'=>'Monday', 'openTime'=>$request->mondayOpen,
-                                'closeTime'=>$request->mondayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->tuesdayClosedCheck))
-        {
-            $tuesday = DailyHours::create(['day'=>'Tuesday', 'openTime'=>$request->tuesdayOpen,
-                'closeTime'=>$request->tuesdayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->wednesdayClosedCheck))
-        {
-            $wednesday = DailyHours::create(['day'=>'Wednesday', 'openTime'=>$request->wednesdayOpen,
-                'closeTime'=>$request->wednesdayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->thursdayClosedCheck))
-        {
-            $thursday = DailyHours::create(['day'=>'Thursday', 'openTime'=>$request->thursdayOpen,
-                'closeTime'=>$request->thursdayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->fridayClosedCheck))
-        {
-            $friday = DailyHours::create(['day'=>'Friday', 'openTime'=>$request->fridayOpen,
-                'closeTime'=>$request->fridayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->saturdayClosedCheck))
-        {
-            $saturday = DailyHours::create(['day'=>'Saturday', 'openTime'=>$request->saturdayOpen,
-                'closeTime'=>$request->saturdayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->sundayClosedCheck))
-        {
-            $sunday = DailyHours::create(['day'=>'Sunday', 'openTime'=>$request->sundayOpen,
-                'closeTime'=>$request->sundayClose, 'resource_id'=>$resource->id]);
-        }
+        $resource->contacts()->attach($request->input('contact_list'));
 
         \Session::flash('flash_message', 'Resource Created Successfully!');
 
@@ -101,8 +64,9 @@ class ResourcesController extends Controller
     public function edit(Resource $resource)
     {
         $categoryList = Category::lists('name', 'id');
-        $providerList = Provider::lists('name', 'id');
-        return view('resources.edit', compact('resource', 'categoryList', 'providerList'));
+        $passedContacts = $this->getAllContactsFullName();
+        $resourceList = Resource::lists('name', 'id');
+        return view('resources.edit', compact('resource', 'categoryList', 'passedContacts', 'resourceList'));
     }
 
     public function update(Resource $resource, ResourceRequest $request)
@@ -116,6 +80,15 @@ class ResourcesController extends Controller
         else
         {
             $resource->categories()->sync([]);
+        }
+        if(!is_null($request->input('contact_list')))
+        {
+            $resource->contacts()->sync($request->input('contact_list'));
+        }
+        else
+        {
+
+            $resource->contacts()->sync([]);
         }
         \Session::flash('flash_message', 'Resource Updated Successfully!');
         return redirect('/resources/' . $resource->id);
@@ -134,11 +107,21 @@ class ResourcesController extends Controller
                     'user_id' => $flag->userIdNumber,
                     'resource_id' => $flag->resourceIdNumber,
                     'contact_id' => $flag->contactIdNumber,
-                    'provider_id' => $flag->providerIdNumber,
-                    'event_id' => $flag->eventIdNumber,
                     'created_at' => $flag->created_at,
                     'updated_at' => $flag->updated_at,
                     'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
+            );
+        }
+        foreach($resource->contacts as $contact)
+        {
+            DB::table('archive_contact_resource')->insert(
+                [
+                    'contact_id' => $contact->pivot->contact_id,
+                    'resource_id' => $resource->id,
+                    'created_at' => $contact->pivot->created_at,
+                    'updated_at' => $contact->pivot->updated_at,
+                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
+                ]
             );
         }
         foreach($resource->categories as $category)
@@ -165,38 +148,19 @@ class ResourcesController extends Controller
                 ]
             );
         }
-        foreach($resource->hours as $hours)
-        {
-            DB::table('archive_daily_hours')->insert(
-                [
-                    'id' => $hours->id,
-                    'day' => $hours->day,
-                    'openTime' => $hours->openTime,
-                    'closeTime' => $hours->closeTime,
-                    'resource_id' => $hours->resource_id,
-                    'event_id' => $hours->event_id,
-                    'created_at' => $hours->created_at,
-                    'updated_at' => $hours->updated_at,
-                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
-                ]
-            );
-        }
         DB::table('archive_resources')->insert(
-          [
-              'id' => $resource->id,
-              'name' => $resource->name,
-              'streetAddress' => $resource->streetAddress,
-              'streetAddress2' => $resource->streetAddress2,
-              'city' => $resource->city,
-              'county' => $resource->county,
-              'state' => $resource->state,
-              'zipCode' => $resource->zipCode,
-              'publicPhoneNumber' => $resource->publicPhoneNumber,
-              'publicEmail' => $resource->publicEmail,
-              'website' => $resource->website,
-              'description' => $resource->description,
-              'comments' => $resource->comments,
-              'provider_id' => $resource->provider_id,
+            ['id' => $resource->id,
+                'Name' => $resource->Name,
+                'StreetAddress' => $resource->StreetAddress,
+                'StreetAddress2' => $resource->StreetAddress2,
+                'City' => $resource->City,
+                'County' => $resource->County,
+                'State' => $resource->State,
+                'Zipcode' => $resource->Zipcode,
+                'PhoneNumber' => $resource->PhoneNumber,
+                'OpeningHours' => $resource->OpeningHours,
+                'ClosingHours' => $resource->ClosingHours,
+                'Comments' => $resource->Comments,
               'created_at' => $resource->created_at,
               'updated_at' => $resource->updated_at,
               'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
@@ -223,6 +187,20 @@ class ResourcesController extends Controller
         return $syncCategories;
     }
 
+    public function getAllContactsFullName()
+    {
+        $allContacts = Contact::all();
+        $passedContacts = array();
+        foreach($allContacts as $contact)
+        {
+            $fullname = ucfirst($contact->firstName). ' ' . ucfirst($contact->lastName);
+            $passedContacts[$contact->id] = $fullname;
+        }
+
+        return $passedContacts;
+
+    }
+
     public function add(Resource $resource, Request $request)
     {
         Auth::user()->resources()->syncWithoutDetaching([$resource->id]);
@@ -232,15 +210,37 @@ class ResourcesController extends Controller
         }
         else
         {
-            \Session::flash('flash_message', 'Resource Added to Work List');
+            \Session::flash('flash_message', 'Resource Added to Report');
             return Redirect::back();
         }
     }
 
+    public function generateReport()
+    {
+        $resources = Auth::user()->resources;
+        return view('resources.generateReport', compact('resources'));
+    }
+
+
     public function removeReport(Resource $resource)
     {
         Auth::user()->resources()->detach($resource);
-        return redirect('/worklist/generateReport');
+        return redirect('/resources/generateReport');
+    }
+
+    public function emptyReport()
+    {
+        Auth::user()->resources()->detach();
+        return Redirect::back();
+    }
+
+    public function generatePDF()
+    {
+        $pdf = App::make('dompdf.wrapper');
+        $view = View::make('resources.pdfHeader')->with('resources', Auth::user()->resources);
+        $contents = $view->render();
+        $pdf->loadHTML($contents);
+        return $pdf->stream();
     }
 
     /*
@@ -249,7 +249,7 @@ class ResourcesController extends Controller
     public function flag(Resource $resource)
     {
         return view('flags.create')->with('url', 'resources/flag/' . $resource->id)
-                                   ->with('name', $resource->name);
+                                   ->with('name', $resource->Name);
     }
 
     public function storeFlag(Resource $resource, FlagRequest $request)

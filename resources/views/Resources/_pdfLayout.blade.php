@@ -1,96 +1,76 @@
-@foreach($resources as $r)
-    <div class="container">
-        <div class="underlined-title">
-            <div class="editContent">
-                <h1 class="img-rounded" style="background-color: #f6f6f7; padding: 5px; padding-left: 20px">
-                {{$r->Name}}
-                <!--<div class="pull-right"><h3>{{$r->ContactPhone}}</h3> </div> -->
-                </h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 col-sm-12 col-xs-12 pad25">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-10">
-                    <div class="editContent">
-                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Address</h4>
-                    </div>
-                    <div class="editContent">
-                        <p>
-                            {{$r->StreetAddress}}<br>
-                            @if($r->StreetAddress2 != null)
-                                {{$r->StreetAddress2}}<br>
-                            @endif
-                            {{$r->City}}, {{$r->State}} {{$r->Zipcode}}<br>
-                        </p>
-                    </div>
-                </div>
-            </div>
+<style>
+    @page{
+        margin-top: 180px;
+        margin-bottom: 10px;
+    }
+    #header {
+        position: fixed; display: block; margin-top: -150px;
+        width:25%; height: auto; padding-left: 38%; opacity: 0.5;
+    }
+    hr{
+        opacity: 0.05;
+    }
+    * {
+        box-sizing: border-box;
+    }
+    #footer {
+        position: fixed; display: block; margin-top: 890px;
+        width:100%; height: auto; padding-left: 32%;
+    }
 
-            <div class="col-md-4 col-sm-12 col-xs-12 pad25">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-10">
-                    <div class="editContent">
-                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Hours</h4>
-                    </div>
-                    <div class="editContent">
-                        <p>
-                            <b>Hours:</b> {{$r->OpeningHours}} - {{$r->ClosingHours}}
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-12 col-xs-12 pad25">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-10">
-                    <div class="editContent">
-                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Services</h4>
-                    </div>
-                    <div class="editContent">
-                        <ul>
-                            @foreach($r->categories as $category)
-                                <li> {{$category->name}}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-12 col-xs-12 pad25">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-10">
-                    <div class="editContent">
-                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Contacts</h4>
-                    </div>
-                    <div class="editContent">
-                        <ul>
-                            @foreach($r->contacts as $contact)
-                                <li> {{$contact->full_name}}: {{$contact->phoneNumber}}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-12 col-xs-12 pad25">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-10">
-                    <div class="editContent">
-                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Comments</h4>
-                    </div>
-                    <div class="editContent">
-                        <p>{{$r->Comments}}</p>
-                    </div>
-                </div>
-            </div>
-        </div><!-- /.row -->
+</style>
+<div id="footer">
+    <!-- Showing email for now -->
+    <p>Provided by: {{Auth::user()->email}}</p>
+</div>
+<!-- This image path must be absolute. Dompdf does not support relative paths. -->
+<img id="header" src="C:\Users\Dustin\Documents\swrd-team2\public\images\sw_logo.jpg">
+    @foreach($resources as $r)
+        <div style="page-break-inside: avoid">
+                <table width="100%">
+                <tr>
+                    <td>
+                <b>{{$r->Name}}</b><br>
+                {{$r->StreetAddress}}
+                @if($r->StreetAddress2 != null)
+                    {{$r->StreetAddress2}}
+                @endif
+                , {{$r->City}}, {{$r->State}} {{$r->Zipcode}}<br>
+                    </td>
+                    <td></td>
+                    </tr>
+                @if($r->contacts->count() > 0)
+                    <tr>
+                        <td><i>Contact(s):</i></td>
+                        <td></td>
+                    </tr>
+                @endif
+                @foreach($r->contacts as $c)
+                    <tr>
+                    <td align="left">
+                        <u>{{$c->firstName}} {{$c->lastName}}</u>
+                        </td>
+                    <td align="right">
+                        {{$c->phoneNumber}}
+                        </td>
+                    </tr>
+                @endforeach
+                    <tr>
+                        <td>
+                Hours: {{ Carbon\Carbon::parse($r->OpeningHours)->format('g:i A') }} - {{ Carbon\Carbon::parse($r->ClosingHours)->format('g:i A') }}<br/>
+                        </td>
+                        <td></td>
+                        </tr>
+                <tr>
+                    <td>
+                @if(isset($r->Comments))
+                    {{$r->Comments}}
+                @endif
+                    </td>
+                    <td></td>
+                </tr>
+                </table>
         <hr/>
-        <br/>
-        <br/>
-    </div><!-- /.container -->
-@endforeach
+        </div><!-- /.container -->
+        <br>
+    @endforeach

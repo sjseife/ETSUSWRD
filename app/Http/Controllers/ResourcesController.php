@@ -208,33 +208,64 @@ class ResourcesController extends Controller
         }
         else
         {
-            \Session::flash('flash_message', 'Resource Added to Report');
+            \Session::flash('flash_message', 'Resource Removed from Report');
             return Redirect::back();
         }
+    }
+
+    public function remove(Resource $resource, Request $request)
+    {
+        dd($resource);
     }
 
     public function generateReport()
     {
         $resources = Auth::user()->resources;
-        return view('resources.generateReport', compact('resources'));
+        //flash message if no items in pdf
+        if($resources->isEmpty()){
+            //\Session::flash('flash_message', 'Please add resources to the report first!');
+            $resourcesSet = false;
+            return view('resources.generateReport', compact('resources', 'resourcesSet'));
+        }
+        else{
+            $resourcesSet = true;
+            $pdf = App::make('dompdf.wrapper');
+            $view = View::make('resources._pdfLayout')->with('resources', Auth::user()->resources);
+            $contents = $view->render();
+            $pdf->loadHTML($contents);
+            $report = $pdf->output();
+            file_put_contents('report.pdf', $report);
+            //return view('resources._pdfLayout', compact('resources'));
+            return view('resources.generateReport', compact('resources', 'report', 'resourcesSet'));
+        }
     }
 
-    public function removeReport(Resource $resource)
+    public function removeReport(Resource $resource, Request $request)
     {
         Auth::user()->resources()->detach($resource);
-        return redirect('/resources/generateReport');
+        if($request->ajax())
+        {
+            return response()->json(); //it just needs any JSON response to indicate a success.
+        }
+        else
+        {
+            \Session::flash('flash_message', 'Resource Removed from Report');
+            return Redirect::back();
+        }
+        //Auth::user()->resources()->detach($resource);
+        //return redirect('/resources');
     }
 
     public function emptyReport()
     {
         Auth::user()->resources()->detach();
-        return Redirect::back();
+        return redirect('/resources');
     }
 
     public function generatePDF()
     {
         $pdf = App::make('dompdf.wrapper');
-        $view = View::make('resources.pdfHeader')->with('resources', Auth::user()->resources);
+        $view = View::make('resources._pdfLayout')->with('resources', Auth::user()->resources);
         $contents = $view->render();
         $pdf->loadHTML($contents);
         return $pdf->stream();

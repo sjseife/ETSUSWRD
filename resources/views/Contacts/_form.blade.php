@@ -11,21 +11,21 @@
     </div>
 </div>
 <div class="form-group">
-    {!! Form::label('email', 'Email Address:', ['class'=>'col-md-2 control-label']) !!}
+    {!! Form::label('protectedEmail', 'Email Address:', ['class'=>'col-md-2 control-label']) !!}
     <div class="col-md-4">
-        {!! Form::text('email', null, ['class'=>'form-control input-md']) !!}
+        {!! Form::text('protectedEmail', null, ['class'=>'form-control input-md']) !!}
     </div>
 </div>
 <div class="form-group">
-    {!! Form::label('phoneNumber', 'Phone Number:', ['class'=>'col-md-2 control-label']) !!}
+    {!! Form::label('protectedPhoneNumber', 'Phone Number:', ['class'=>'col-md-2 control-label']) !!}
     <div class="col-md-4">
-        {!! Form::text('phoneNumber', null, ['class'=>'form-control input-md']) !!}
+        {!! Form::text('protectedPhoneNumber', null, ['class'=>'form-control input-md']) !!}
     </div>
 </div>
 <div class="form-group">
-    {!! Form::label('resource_list', 'Resources:', ['class' => 'col-md-2 control-label']) !!}
+    {!! Form::label('provider_list', 'Providers:', ['class' => 'col-md-2 control-label']) !!}
     <div class="col-md-4">
-        {!! Form::select('resource_list[]', $resourceList, null, ['id' => 'resource_list', 'class' => 'form-control', 'multiple']) !!}
+        {!! Form::select('provider_list[]', $providerList, null, ['id' => 'provider_list', 'class' => 'form-control', 'multiple']) !!}
     </div>
 </div>
 <div class="form-group">
@@ -36,8 +36,8 @@
 </div>
 @push('scripts')
     <script>
-        $('#resource_list').select2({
-            placeholder: 'Choose a Resource',
+        $('#provider_list').select2({
+            placeholder: 'Choose a Provider',
         });
     </script>
 @endpush

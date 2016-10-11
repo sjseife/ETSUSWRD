@@ -16,13 +16,22 @@ class PivotTableSeeder extends Seeder
         {
             DB::table('category_resource')->insert([
                 'category_id' => '1',
-                'resource_id' => '' + $x,
+                'resource_id' => $x,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
-            DB::table('contact_resource')->insert([
+            DB::table('contact_provider')->insert([
                 'contact_id' => '1',
-                'resource_id' => '' + $x,
+                'provider_id' => $x,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ]);
+        }
+        for($x = 5; $x <15; $x++)
+        {
+            DB::table('contact_provider')->insert([
+                'contact_id' => '2',
+                'provider_id' => $x,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
@@ -31,13 +40,16 @@ class PivotTableSeeder extends Seeder
         {
             DB::table('category_resource')->insert([
                 'category_id' => '2',
-                'resource_id' => '' + $x,
+                'resource_id' => $x,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
-            DB::table('contact_resource')->insert([
-                'contact_id' => '2',
-                'resource_id' => '' + $x,
+        }
+        for($x = 10; $x < 20; $x++)
+        {
+            DB::table('contact_provider')->insert([
+                'contact_id' => '3',
+                'provider_id' => $x,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
@@ -46,13 +58,16 @@ class PivotTableSeeder extends Seeder
         {
             DB::table('category_resource')->insert([
                 'category_id' => '3',
-                'resource_id' => '' + $x,
+                'resource_id' => $x,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
-            DB::table('contact_resource')->insert([
-                'contact_id' => '3',
-                'resource_id' => '' + $x,
+        }
+        for($x = 1; $x < 4; $x++)
+        {
+            DB::table('category_event')->insert([
+                'category_id' => $x,
+                'event_id' => $x,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);

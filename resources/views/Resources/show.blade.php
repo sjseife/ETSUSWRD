@@ -4,42 +4,39 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
 
-                        <h2><em>{{ $resource->Name }}</em></h2>
+            <h2><em>{{ $resource->name }}</em></h2>
             <div class="col-md-4">
                 <p><b>Address:</b></p>
                 {{--If there is a street 2, display. Else do not--}}
-                @if($resource->StreedAddress2 != null)
-                    <p>{{ $resource->StreetAddress }}<br>
-                        {{ $resource->StreetAddress2 }}</p>
+                @if($resource->streetAddress2 != null)
+                    <p>{{ $resource->streetAddress }}<br>
+                        {{ $resource->streetAddress2 }}</p>
                 @else
-                    <p>{{ $resource->StreetAddress }}</p>
+                    <p>{{ $resource->streetAddress }}</p>
                 @endif
 
-                <p>{{ $resource->City }}, {{ $resource->State }} {{ $resource->Zipcode }}</p>
-                <p>{{ $resource->County }}</p>
+                <p>{{ $resource->city }}, {{ $resource->state }} {{ $resource->zipCode }}</p>
+                <p>{{ $resource->county }}</p>
             </div>
             <div class="col-md-2">
                 <p><b>Hours:</b></p>
-                <p>{{ $resource->OpeningHours }} - {{ $resource->ClosingHours }}</p>
+                @foreach($resource->hours as $day)
+                    <p>{{ $day->day }} : {{ date('g:i A', strtotime($day->openTime)) }} - {{ date('g:i A', strtotime($day->closeTime)) }}</p>
+                @endforeach
             </div>
             <div class="col-md-4">
-                <p><b>Contacts:</b></p>
-                @foreach($resource->contacts as $contact)
-                    <p>
-                        <a href="{{ URL::to('contacts/' . $contact->id) }}">
-                            {{ $contact->full_name }}
-                        </a>
-                    </p>
-                @endforeach
+                <p><b>Contact Methods:</b></p>
+                <ul>
+                    <li>Phone Number: {{ $resource->publicPhoneNumber }} @if($resource->publicPhoneNumber == null) N/A @endif </li>
+                    <li>Email: {{ $resource->publicEmail }} @if($resource->publicEmail == null) N/A @endif </li>
+                    <li>Website: {{ $resource->website }} @if($resource->website == null) N/A @endif </li>
+                </ul>
+
             </div>
             <div class="col-md-10">
                 <hr />
                 <p><b>Description:</b></p>
-                <p>Lorem ipsum dolor sit amet, qui malis vituperatoribus an, hinc tractatos facilisis an sit. Te est
-                    diceret sanctus, an movet commune lobortis qui. Nobis maluisset intellegat sea ad, est liber dolor
-                    in. Vel cu quodsi doctus, te eirmod deleniti eam. Mei id rebum nemore corpora, sit modo debitis
-                    accumsan in. Ei mea quas discere, error debitis eu qui, quem antiopam dignissim id vim. Mea ut
-                    aperiam accusamus.</p>
+                <p>{{ $resource-> description }}</p>
 
                 <p><b>Categories</b></p>
                 <p>
@@ -51,19 +48,19 @@
                 | </p>
                 <hr />
                 <p><b>Comments:</b></p>
-                <p>{{ $resource->Comments }}</p>
+                <p>{{ $resource->comments }}</p>
                 <hr />
             </div>
             <div class="col-md-10">
-                <dt>Reported Problems</dt>
-                @if(isset($resource->flags))
+                <p><b>Reported Problems:</b></p>
+                @if($resource->flags == null)
                     @foreach($resource->flags as $flag)
                         @if(!$flag->resolved)
-                            <dd>{{ $flag->comments }}</dd>
+                            <p>{{ $flag->comments }}</p>
                         @endif
                     @endforeach
                 @else
-                    <dd>No problems reported</dd>
+                    <p>No problems reported</p>
                 @endif
                 <div class="col-md-10">
                     <br/>
@@ -90,7 +87,6 @@
             </div>
 
     </div>
-        </div>
     <!-- Modal -->
     @include('Resources._deleteModal')
 @endsection

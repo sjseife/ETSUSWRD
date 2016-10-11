@@ -43,7 +43,7 @@
 <body>
     @include('layouts._NavBar')
 
-    <div class="container">
+    <div class="container" style="padding-left: 3px; padding-right: 3px;">
         @if (Session::has('flash_message'))
             <div class="alert alert-success">
                 {{ Session::get('flash_message') }}

@@ -17,14 +17,14 @@
                         <dt>Last Name</dt>
                         <dd>{{ $contact->lastName }}</dd>
                         <dt>Email</dt>
-                        <dd>{{ $contact->email }}</dd>
+                        <dd>{{ $contact->protectedEmail }}</dd>
                         <dt>Phone Number</dt>
-                        <dd>{{ $contact->phoneNumber }}</dd>
-                        <dt>Resources</dt>
-                        @foreach($contact->resources as $resource)
+                        <dd>{{ $contact->protectedPhoneNumber }}</dd>
+                        <dt>Providers</dt>
+                        @foreach($contact->providers as $provider)
                             <dd>
-                                <a href="{{ URL::to('resources/' . $resource->id) }}">
-                                    {{ $resource->Name }}
+                                <a href="{{ URL::to('providers/' . $provider->id) }}">
+                                    {{ $provider->name }}
                                 </a>
                             </dd>
                         @endforeach

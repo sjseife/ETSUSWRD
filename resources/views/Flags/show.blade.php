@@ -14,14 +14,20 @@
                     <dl class="dl-horizontal">
 
                         @if(isset($flag->resource))
-                        <dt>Resource Name</dt>
-                        <dd>{{ $flag->resource->Name }}</dd>
+                            <dt>Resource Name</dt>
+                            <dd>{{ $flag->resource->Name }}</dd>
                         @elseif(isset($flag->contact))
                             <dt>Contact Name</dt>
                             <dd>{{ $flag->contact->full_name }}</dd>
-                        @else
+                        @elseif(isset($flag->user))
                             <dt>User Email</dt>
                             <dd>{{ $flag->user->email }}</dd>
+                        @elseif(isset($flag->provider))
+                            <dt>Provider</dt>
+                            <dd>{{ $flag->provider->name }}</dd>
+                        @elseif(isset($flag->event))
+                            <dt>Event Name</dt>
+                            <dd>{{ $flag->event->name }}</dd>
                         @endif
                         <dt>Submitted By</dt>
                         <dd>{{ $flag->submitter->email }}</dd>
@@ -31,9 +37,9 @@
                         <dd>{{ $flag->created_at }}</dd>
                             <dt>Status</dt>
                             @if($flag->resolved)
-                                <td>Resolved</td>
+                                <dd>Resolved</dd>
                             @else
-                                <td>Unresolved</td>
+                                <dd>Unresolved</dd>
                             @endif
 
                         <dt>Description of Issue</dt>

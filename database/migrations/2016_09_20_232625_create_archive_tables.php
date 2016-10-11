@@ -156,12 +156,13 @@ class CreateArchiveTables extends Migration
             $table->timestamp('archived_at');
         });
 
-        Schema::create('archive_dailyHours', function (Blueprint $table) {
+        Schema::create('archive_daily_hours', function (Blueprint $table) {
             $table->increments('id');
             $table->string('day');
             $table->time('openTime');
             $table->time('closeTime');
-            $table->integer('resource_id')->unsigned();
+            $table->integer('resource_id')->unsigned()->nullable();
+            $table->integer('event_id')->unsigned()->nullable();
             $table->timestamps();
             $table->timestamp('archived_at');
         });
@@ -186,6 +187,6 @@ class CreateArchiveTables extends Migration
         Schema::drop('archive_event_user');
         Schema::drop('archive_events');
         Schema::drop('archive_providers');
-        Schema::drop('archive_dailyHours');
+        Schema::drop('archive_daily_hours');
     }
 }

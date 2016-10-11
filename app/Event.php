@@ -44,7 +44,7 @@ class Event extends Model
      * Get the provider associated with the event
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function providers()
+    public function provider()
     {
         return $this->belongsTo('App\Provider');
     }

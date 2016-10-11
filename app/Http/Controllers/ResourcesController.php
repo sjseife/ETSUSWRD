@@ -117,14 +117,6 @@ class ResourcesController extends Controller
         {
             $resource->categories()->sync([]);
         }
-        if(!is_null($request->input('contact_list')))
-        {
-            $resource->contacts()->sync($request->input('contact_list'));
-        }
-        else
-        {
-            $resource->contacts()->sync([]);
-        }
         \Session::flash('flash_message', 'Resource Updated Successfully!');
         return redirect('/resources/' . $resource->id);
     }
@@ -240,36 +232,15 @@ class ResourcesController extends Controller
         }
         else
         {
-            \Session::flash('flash_message', 'Resource Added to Report');
+            \Session::flash('flash_message', 'Resource Added to Work List');
             return Redirect::back();
         }
-    }
-
-    public function generateReport()
-    {
-        $resources = Auth::user()->resources;
-        return view('resources.generateReport', compact('resources'));
     }
 
     public function removeReport(Resource $resource)
     {
         Auth::user()->resources()->detach($resource);
-        return redirect('/resources/generateReport');
-    }
-
-    public function emptyReport()
-    {
-        Auth::user()->resources()->detach();
-        return Redirect::back();
-    }
-
-    public function generatePDF()
-    {
-        $pdf = App::make('dompdf.wrapper');
-        $view = View::make('resources.pdfHeader')->with('resources', Auth::user()->resources);
-        $contents = $view->render();
-        $pdf->loadHTML($contents);
-        return $pdf->stream();
+        return redirect('/worklist/generateReport');
     }
 
     /*

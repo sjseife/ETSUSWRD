@@ -26,7 +26,7 @@ class EventTableSeeder extends Seeder
         ]);
 
         DB::table('events')->insert([
-            'name' => 'Test',
+            'name' => 'Test1',
             'startDate' => '2016-10-15',
             'endDate' => '2016-10-16',
             'streetAddress' => '952 Lets Move On Ave.',
@@ -40,7 +40,7 @@ class EventTableSeeder extends Seeder
         ]);
 
         DB::table('events')->insert([
-            'name' => 'Test',
+            'name' => 'Test2',
             'startDate' => '2016-10-08',
             'endDate' => '2016-10-09',
             'streetAddress' => '234 No Longer Care Ave',

@@ -73,6 +73,18 @@
     </div>
 </div>
 <div class="form-group">
+    {!! Form::label('startDate', 'Start Date:', ['class' => 'col-md-2 control-label']) !!}
+    <div class="col-md-4">
+        {!! Form::date('startDate', null, ['class' => 'form-control input-md']) !!}
+    </div>
+</div>
+<div class="form-group">
+    {!! Form::label('endDate', 'End Date:', ['class' => 'col-md-2 control-label']) !!}
+    <div class="col-md-4">
+        {!! Form::date('endDate', null, ['class' => 'form-control input-md']) !!}
+    </div>
+</div>
+<div class="form-group">
     {!!  Form::label('operatingHours', 'Operating Hours:', ['class'=>'col-md-2 control-label']) !!}
     <div class= col-md-4>
         <div class="form-inline">
@@ -160,23 +172,23 @@
 <div class="form-group">
     <div class="col-md-2"></div>
     <div class="col-md-4">
-        {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary', 'name' => 'resource']) !!}
+        {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary', 'name' => 'event']) !!}
     </div>
 </div>
 
 <!-- Modal -->
-{{--@include('Resources._createContactModal')--}}
+{{--@include('Events._createContactModal')--}}
 
 @push('scripts')
-    <script>
-        $(document).ready(function() {
-            $('#category_list').select2({
-                placeholder: 'Choose a Category',
-                tags: true
-            });
-            $('#provider').select2({
-                placeholder: 'Choose a Provider'
-            });
+<script>
+    $(document).ready(function() {
+        $('#category_list').select2({
+            placeholder: 'Choose a Category',
+            tags: true
         });
-    </script>
+        $('#provider').select2({
+            placeholder: 'Choose a Provider'
+        });
+    });
+</script>
 @endpush

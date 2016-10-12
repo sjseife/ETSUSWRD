@@ -64,12 +64,82 @@
                         </td>
                         <td>
                             <ul>
+                                <?php
+                                    $tempDay = array();
+                                    $tempOpen = '';
+                                    $tempClose = '';
+                                    $dayArr = array();
+                                    $openTimeArr = array();
+                                    $closeTimeArr = array();
+                                ?>
                                 @foreach($resource->hours as $day)
-                                    <li>{{ $day->day }} : {{ date('g:i A', strtotime($day->openTime)) }} - {{ date('g:i A', strtotime($day->closeTime)) }}</li>
+
+                                    <?php
+
+                                        if (empty($tempDay))
+                                            {
+                                                $tempDay[] = $day->day;
+                                                $tempOpen = $day->openTime;
+                                                $tempClose = $day->closeTime;
+                                            }
+                                        elseif(($tempOpen == $day->openTime) && ($tempClose == $day->closeTime))
+                                            {
+                                                $tempDay[] = $day->day;
+                                            }
+                                        else
+                                            {
+                                                $dayArr[] = $tempDay;
+                                                unset($tempDay);
+                                                $tempDay[] = $day->day;
+                                                $openTimeArr[] = $tempOpen;
+                                                $closeTimeArr[] = $tempClose;
+                                                $tempOpen = $day->openTime;
+                                                $tempClose = $day->closeTime;
+                                            }
+                                ?>
+                                        {{--<li>{{ $day->day }} : {{ date('g:i A', strtotime($day->openTime)) }} - {{ date('g:i A', strtotime($day->closeTime)) }}</li>--}}
                                 @endforeach
-                            </ul>
+
+                            <?php
+                                $dayArr[] = $tempDay;
+                                $openTimeArr[] = $tempOpen;
+                                $closeTimeArr[] = $tempClose;
+                                foreach($dayArr as $key => $item)
+                                    {
+                                        if(empty($item))
+                                            {
+                                                echo '';
+                                            }
+                                        elseif (count($item) < 2)
+                                            {
+                                                echo '<li>' . $item[0] . ':<br>' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '</li>';
+                                            }
+                                        elseif (count($item) < 3)
+                                            {
+                                                echo '<li>' . $item[0] . ' - ' . $item[1] . ':<br>' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '</li>';
+                                            }
+                                        else
+                                        {
+                                            echo '<li>' . $item[0] . ' - ' . end($item) . ':<br>' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '</li>';
+                                        }
+                                    }
+                            ?>
+                           </ul>
                         </td>
-                        <td>{{ $resource->publicPhoneNumber }}</td>
+                        <td><?php
+                                    $tempPhoneNumber = $resource->publicPhoneNumber;
+                                    $tempPhoneNumber = preg_replace("/[^0-9,x]/", "", $tempPhoneNumber );
+                                        if(strlen($tempPhoneNumber) > 10)
+                                        {
+                                            $tempPhoneNumber = preg_replace("/^[1]/", "", $tempPhoneNumber );
+                                        }
+                                    $tempPhoneNumber = '(' . substr($tempPhoneNumber,0, 3) . ') '
+                                                        . substr($tempPhoneNumber, 3, 3) . '-'
+                                                        . substr($tempPhoneNumber, 6, 4) . ' '
+                                                        . substr($tempPhoneNumber, 10, (strlen($tempPhoneNumber) - 10));
+                                    echo $tempPhoneNumber;
+
+                            ?></td>
                         <td>{{ $resource->publicEmail }}</td>
                         <td>{{ $resource->website }}</td>
                         <td>{{ $resource->streetAddress }} <br> {{ $resource->streetAddress2 }}</td>

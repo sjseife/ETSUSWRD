@@ -86,61 +86,68 @@
 </div>
 <div class="form-group">
     {!!  Form::label('operatingHours', 'Operating Hours:', ['class'=>'col-md-2 control-label']) !!}
-    <div class= col-md-4>
+    <div class="col-md-3 centered-div"><br><br>
         <div class="form-inline">
             <div class="form-group">
-                {!! Form::label('monday', 'Monday:') !!}
-                {!! Form::checkbox('mondayClosedCheck', 'mondayClosedCheck', true) !!} Closed
-                {!! Form::time('mondayOpen', null, ['class'=>'form-control input-md', 'placeholder'=>'Open Time']) !!}
-                {!! Form::time('mondayClose', null, ['class'=>'form-control input-md', 'placeholder'=>'Close Time']) !!}
+                {!! Form::label('monday', 'Monday:') !!}<br>
+                {!! Form::checkbox('mondayClosedCheck', 'mondayClosedCheck', true, ['id' => 'mondayClosedCheck', 'class' => 'ClosedCheck', 'onClick' => "Close(0);"]) !!} Closed
+                {!! Form::checkbox('mondaySame', 'mondaySame', false, ['id' => 'mondaySame', 'class' => 'Same hidden', 'onClick' => "SameAsAbove(0);"]) !!} <br>
+                {!! Form::time('mondayOpen', null, ['class'=>'form-control input-md OpenTime', 'placeholder'=>'Open Time','id' => 'mondayOpen', 'onChange' => "Uncheck(0);"]) !!}
+                {!! Form::time('mondayClose', null, ['class'=>'form-control input-md CloseTime', 'placeholder'=>'Close Time','id' => 'mondayClose', 'onChange' => "Uncheck(0);"]) !!}
             </div>
-        </div>
+        </div><br>
         <div class="form-inline">
             <div class="form-group">
-                {!! Form::label('tuesday', 'Tuesday:') !!}
-                {!! Form::checkbox('tuesdayClosedCheck', 'tuesdayClosedCheck', true) !!} Closed
-                {!! Form::time('tuesdayOpen', null, ['class'=>'form-control input-md', 'placeholder'=>'Open Time']) !!}
-                {!! Form::time('tuesdayClose', null, ['class'=>'form-control input-md', 'placeholder'=>'Close Time']) !!}
+                {!! Form::label('tuesday', 'Tuesday:') !!}<br>
+                {!! Form::checkbox('tuesdayClosedCheck', 'tuesdayClosedCheck', true, ['id' => 'tuesdayClosedCheck', 'class' => 'ClosedCheck', 'onClick' => "Close(1);"]) !!} Closed
+                {!! Form::checkbox('tuesdaySame', 'tuesdaySame', false, ['id' => 'tuesdaySame', 'class' => 'Same', 'onClick' => "SameAsAbove(1);"]) !!} Same as Above
+                {!! Form::time('tuesdayOpen', null, ['class'=>'form-control input-md OpenTime', 'placeholder'=>'Open Time','id' => 'tuesdayOpen', 'onChange' => "Uncheck(1);"]) !!}
+                {!! Form::time('tuesdayClose', null, ['class'=>'form-control input-md CloseTime', 'placeholder'=>'Close Time','id' => 'tuesdayClose', 'onChange' => "Uncheck(1);"]) !!}
             </div>
-        </div>
+        </div><br>
         <div class="form-inline">
             <div class="form-group">
-                {!! Form::label('wednesday', 'Wednesday:') !!}
-                {!! Form::checkbox('wednesdayClosedCheck', 'wednesdayClosedCheck', true) !!} Closed
-                {!! Form::time('wednesdayOpen', null, ['class'=>'form-control input-md', 'placeholder'=>'Open Time']) !!}
-                {!! Form::time('wednesdayClose', null, ['class'=>'form-control input-md', 'placeholder'=>'Close Time']) !!}
+                {!! Form::label('wednesday', 'Wednesday:') !!}<br>
+                {!! Form::checkbox('wednesdayClosedCheck', 'wednesdayClosedCheck', true, ['id' => 'wednesdayClosedCheck', 'class' => 'ClosedCheck', 'onClick' => "Close(2);"]) !!} Closed
+                {!! Form::checkbox('wednesdaySame', 'wednesdaySame', false, ['id' => 'wednesdaySame', 'class' => 'Same', 'onClick' => "SameAsAbove(2);"]) !!} Same as Above
+                {!! Form::time('wednesdayOpen', null, ['class'=>'form-control input-md OpenTime', 'placeholder'=>'Open Time','id' => 'wednesdayOpen', 'onChange' => "Uncheck(2);"]) !!}
+                {!! Form::time('wednesdayClose', null, ['class'=>'form-control input-md CloseTime', 'placeholder'=>'Close Time','id' => 'wednesdayClose', 'onChange' => "Uncheck(2);"]) !!}
             </div>
-        </div>
+        </div><br>
         <div class="form-inline">
             <div class="form-group">
-                {!! Form::label('thursday', 'Thursday:') !!}
-                {!! Form::checkbox('thursdayClosedCheck', 'thursdayClosedCheck', true) !!} Closed
-                {!! Form::time('thursdayOpen', null, ['class'=>'form-control input-md', 'placeholder'=>'Open Time']) !!}
-                {!! Form::time('thursdayClose', null, ['class'=>'form-control input-md', 'placeholder'=>'Close Time']) !!}
+                {!! Form::label('thursday', 'Thursday:') !!}<br>
+                {!! Form::checkbox('thursdayClosedCheck', 'thursdayClosedCheck', true, ['id' => 'thursdayClosedCheck', 'class' => 'ClosedCheck', 'onClick' => "Close(3);"]) !!} Closed
+                {!! Form::checkbox('thursdaySame', 'thursdaySame', false, ['id' => 'thursdaySame', 'class' => 'Same', 'onClick' => "SameAsAbove(3);"]) !!} Same as Above
+                {!! Form::time('thursdayOpen', null, ['class'=>'form-control input-md OpenTime', 'placeholder'=>'Open Time','id' => 'thursdayOpen', 'onChange' => "Uncheck(3);"]) !!}
+                {!! Form::time('thursdayClose', null, ['class'=>'form-control input-md CloseTime', 'placeholder'=>'Close Time','id' => 'thursdayClose', 'onChange' => "Uncheck(3);"]) !!}
             </div>
-        </div>
+        </div><br>
         <div class="form-inline">
             <div class="form-group">
-                {!! Form::label('friday', 'Friday:') !!}
-                {!! Form::checkbox('fridayClosedCheck', 'fridayClosedCheck', true) !!} Closed
-                {!! Form::time('fridayOpen', null, ['class'=>'form-control input-md', 'placeholder'=>'Open Time']) !!}
-                {!! Form::time('fridayClose', null, ['class'=>'form-control input-md', 'placeholder'=>'Close Time']) !!}
+                {!! Form::label('friday', 'Friday:') !!}<br>
+                {!! Form::checkbox('fridayClosedCheck', 'fridayClosedCheck', true, ['id' => 'fridayClosedCheck', 'class' => 'ClosedCheck', 'onClick' => "Close(4);"]) !!} Closed
+                {!! Form::checkbox('fridaySame', 'fridaySame', false, ['id' => 'fridaySame', 'class' => 'Same', 'onClick' => "SameAsAbove(4);"]) !!} Same as Above
+                {!! Form::time('fridayOpen', null, ['class'=>'form-control input-md OpenTime', 'placeholder'=>'Open Time','id' => 'fridayOpen', 'onChange' => "Uncheck(4);"]) !!}
+                {!! Form::time('fridayClose', null, ['class'=>'form-control input-md CloseTime', 'placeholder'=>'Close Time','id' => 'fridayClose', 'onChange' => "Uncheck(4);"]) !!}
             </div>
-        </div>
+        </div><br>
         <div class="form-inline">
             <div class="form-group">
-                {!! Form::label('saturday', 'Saturday:') !!}
-                {!! Form::checkbox('saturdayClosedCheck', 'saturdayClosedCheck', true) !!} Closed
-                {!! Form::time('saturdayOpen', null, ['class'=>'form-control input-md', 'placeholder'=>'Open Time']) !!}
-                {!! Form::time('saturdayClose', null, ['class'=>'form-control input-md', 'placeholder'=>'Close Time']) !!}
+                {!! Form::label('saturday', 'Saturday:') !!}<br>
+                {!! Form::checkbox('saturdayClosedCheck', 'saturdayClosedCheck', true, ['id' => 'saturdayClosedCheck', 'class' => 'ClosedCheck', 'onClick' => "Close(5);"]) !!} Closed
+                {!! Form::checkbox('saturdaySame', 'saturdaySame', false, ['id' => 'saturdaySame', 'class' => 'Same', 'onClick' => "SameAsAbove(5);"]) !!} Same as Above
+                {!! Form::time('saturdayOpen', null, ['class'=>'form-control input-md OpenTime', 'placeholder'=>'Open Time','id' => 'saturdayOpen', 'onChange' => "Uncheck(5);"]) !!}
+                {!! Form::time('saturdayClose', null, ['class'=>'form-control input-md CloseTime', 'placeholder'=>'Close Time','id' => 'saturdayClose', 'onChange' => "Uncheck(5);"]) !!}
             </div>
-        </div>
+        </div><br>
         <div class="form-inline">
             <div class="form-group">
-                {!! Form::label('sunday', 'Sunday:') !!}
-                {!! Form::checkbox('sundayClosedCheck', 'sundayClosedCheck', true) !!} Closed
-                {!! Form::time('sundayOpen', null, ['class'=>'form-control input-md', 'placeholder'=>'Open Time']) !!}
-                {!! Form::time('sundayClose', null, ['class'=>'form-control input-md', 'placeholder'=>'Close Time']) !!}
+                {!! Form::label('sunday', 'Sunday:') !!}<br>
+                {!! Form::checkbox('sundayClosedCheck', 'sundayClosedCheck', true, ['id' => 'sundayClosedCheck', 'class' => 'ClosedCheck', 'onClick' => "Close(6);"]) !!} Closed
+                {!! Form::checkbox('sundaySame', 'sundaySame', false, ['id' => 'sundaySame', 'class' => 'Same', 'onClick' => "SameAsAbove(6);"])  !!} Same as Above
+                {!! Form::time('sundayOpen', null, ['class'=>'form-control input-md OpenTime', 'placeholder'=>'Open Time', 'id' => 'sundayOpen', 'onChange' => "Uncheck(6);"]) !!}
+                {!! Form::time('sundayClose', null, ['class'=>'form-control input-md CloseTime', 'placeholder'=>'Close Time','id' => 'sundayClose', 'onChange' => "Uncheck(6);"]) !!}
             </div>
         </div>
     </div>
@@ -190,5 +197,55 @@
             placeholder: 'Choose a Provider'
         });
     });
+
+    function checkRefresh(value)
+    {
+        document.submit();
+    }
+    function SameAsAbove(i){
+        var OpenTime = document.getElementsByClassName('OpenTime');
+        var CloseTime = document.getElementsByClassName('CloseTime');
+
+        var ClosedCheck = document.getElementsByClassName('ClosedCheck');
+        var Same =  document.getElementsByClassName('Same');
+
+        if(Same[i].checked){
+            ClosedCheck[i].checked = false;
+            OpenTime[i].value = OpenTime[i-1].value;
+            CloseTime[i].value = CloseTime[i-1].value;
+
+            checkRefresh();
+        }
+
+    }
+
+    function Close(i) {
+
+        var OpenTime = document.getElementsByClassName('OpenTime');
+        var CloseTime = document.getElementsByClassName('CloseTime');
+
+        var ClosedCheck = document.getElementsByClassName('ClosedCheck');
+        var Same = document.getElementsByClassName('Same');
+
+        if (ClosedCheck[i].checked) {
+            Same[i].checked = false;
+            OpenTime[i].value = '';
+            CloseTime[i].value = '';
+
+            checkRefresh();
+        }
+    }
+
+    function Uncheck(i){
+
+        var ClosedCheck = document.getElementsByClassName('ClosedCheck');
+
+        if(ClosedCheck[i].checked){
+            ClosedCheck[i].checked = false;
+
+            checkRefresh();
+        }
+
+    }
 </script>
 @endpush

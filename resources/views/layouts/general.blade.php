@@ -63,8 +63,8 @@
     <footer>
         <div class="main">
             <div class="privacy"><span>East Tennessee State University</span>&nbsp;<span id="directedit">
-                <!-- com.omniupdate.ob --><a id="de" href="http://a.cms.omniupdate.com/10?skin=etsu&amp;account=east-tennessee-state&amp;site=ETSU_Web_Linux&amp;action=de&amp;path=/coe/chs/humanservices/default.pcf" style="text-decoration:none;">©</a><!-- /com.omniupdate.ob -->
-             </span>&nbsp; <span id="year">2016</span>&nbsp; All Rights Reserved &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; <a href="/etsuhome/documents/webprivacystatement.pdf">Privacy Policy</a>
+                <!-- com.omniupdate.ob --><a id="de" href="https://a.cms.omniupdate.com/10/#etsu/east-tennessee-state/ETSU_Web_Linux/dispatch//coe/chs/humanservices/default.pcf" style="text-decoration:none;">©</a><!-- /com.omniupdate.ob -->
+             </span>&nbsp; <span id="year">2016</span>&nbsp; All Rights Reserved &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; <a href="http://www.etsu.edu/etsuhome/documents/WebPrivacyStatement.pdf">Privacy Policy</a>
             </div>
         </div>
         <div id="hidden"></div>

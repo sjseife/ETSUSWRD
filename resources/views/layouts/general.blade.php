@@ -51,7 +51,7 @@
         <div id="linksblock" class="container_24">
             <article class="grid_6"><!-- com.omniupdate.editor csspath="/_resources14/ou/editor/maincontent.css" cssmenu="/_resources14/ou/editor/maincontent.txt" -->
                 <p style="border-bottom: 1px solid #7790ab">
-                    Human Services Program <br>Department of Counseling &amp; Human Services<br>PO Box 70701<br>Johnson City, TN 37614 <br>423-439-7692
+                    Department of Social Work <br>Lyle House | PO Box 70645<br>Johnson City, TN 37614 <br>423-439-6006
                 </p>
                 <p style="padding-top: 20px;">East Tennessee State University<br>
                     PO Box 70300 |  Johnson City, TN 37614<br>

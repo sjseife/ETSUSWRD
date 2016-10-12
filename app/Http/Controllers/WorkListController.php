@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
 use Illuminate\Http\Request;
 
@@ -15,7 +17,25 @@ class WorkListController extends Controller
     {
         $resources = Auth::user()->resources;
         $events = Auth::user()->events;
-        return view('worklist.generateReport', compact('resources', 'events'));
+
+        //flash message if no items in pdf
+        if($resources->isEmpty()){
+            //\Session::flash('flash_message', 'Please add resources to the report first!');
+            $resourcesSet = false;
+            return view('WorkList.generateReport', compact('resources', 'resourcesSet'));
+        }
+        else{
+
+            $resourcesSet = true;
+            $pdf = App::make('dompdf.wrapper');
+            $view = View::make('WorkList._pdfLayout')->with('resources', Auth::user()->resources);
+            $contents = $view->render();
+            $pdf->loadHTML($contents);
+            $report = $pdf->output();
+            file_put_contents('report.pdf', $report);
+            //return view('resources._pdfLayout', compact('resources'));
+            return view('WorkList.generateReport', compact('resources', 'report', 'resourcesSet'));
+        }
     }
 
     public function emptyReport()
@@ -28,7 +48,7 @@ class WorkListController extends Controller
     public function generatePDF()
     {
         $pdf = App::make('dompdf.wrapper');
-        $view = View::make('worklist.pdfHeader')->with('resources', Auth::user()->resources)->with('events', Auth::user()->events);
+        $view = View::make('WorkList._pdfLayout')->with('resources', Auth::user()->resources)->with('events', Auth::user()->events);
         $contents = $view->render();
         $pdf->loadHTML($contents);
         return $pdf->stream();

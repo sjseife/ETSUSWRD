@@ -75,9 +75,8 @@
 
     @yield('content')
     <!-- Footer -->
-    <div class="container_24">
-        <div id="infoblock" class="main">
-        </div>
+    <div class="footer">
+        <img src="/images/mountains.png" alt="Image of Mountains" class="img-responsive center-block">
     </div>
     <aside id="asidelinks">
         <div id="linksblock" class="container_24">
@@ -92,7 +91,7 @@
             </article>
         </div>
     </aside>
-    <footer>
+    <footer></div>
         <div class="main">
             <div class="privacy"><span>East Tennessee State University</span>&nbsp;<span id="directedit">
                 <!-- com.omniupdate.ob --><a id="de" href="http://a.cms.omniupdate.com/10?skin=etsu&amp;account=east-tennessee-state&amp;site=ETSU_Web_Linux&amp;action=de&amp;path=/coe/chs/humanservices/default.pcf" style="text-decoration:none;">©</a><!-- /com.omniupdate.ob -->

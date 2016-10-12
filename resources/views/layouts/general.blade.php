@@ -43,7 +43,8 @@
     </div>
 
     <!-- Footer -->
-    <div class="container_24">
+    <div id="footer">
+        <div class="container_24">
         <img src="/images/mountains.png" alt="Image of Mountains" class="img-responsive center-block">
     </div>
     <aside id="asidelinks">
@@ -68,6 +69,7 @@
         </div>
         <div id="hidden"></div>
     </footer>
+        </div>
     @yield('footer')
 
     <!-- JavaScripts -->

@@ -14,7 +14,6 @@ use App\Http\Requests\ResourceRequest;
 use App\Resource;
 use App\Category;
 use App\Contact;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -237,10 +236,18 @@ class ResourcesController extends Controller
         }
     }
 
-    public function removeReport(Resource $resource)
+    public function removeReport(Resource $resource, Request $request)
     {
         Auth::user()->resources()->detach($resource);
-        return redirect('/worklist/generateReport');
+        if($request->ajax())
+        {
+            return response()->json(); //it just needs any JSON response to indicate a success.
+        }
+        else
+        {
+            \Session::flash('flash_message', 'Resource Removed from Report');
+            return Redirect::back();
+        }
     }
 
     /*

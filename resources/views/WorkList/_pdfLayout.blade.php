@@ -1,107 +1,91 @@
+<style>
+    @page{
+        margin-top: 180px;
+        margin-bottom: 10px;
+    }
+    #header {
+        position: fixed; display: block; margin-top: -150px;
+        width:25%; height: auto; padding-left: 38%; opacity: 0.5;
+    }
+    hr{
+        opacity: 0.05;
+    }
+    * {
+        box-sizing: border-box;
+    }
+    #footer {
+        position: fixed; display: block; margin-top: 890px;
+        width:100%; height: auto; padding-left: 32%;
+    }
+
+</style>
+<div id="footer">
+    <!-- Showing email for now -->
+    <!-- changed to name 10/10/2016 William Kubenka-->
+    <p>Provided by: {{Auth::user()->name}}</p>
+</div>
+<!-- This image path must be absolute. Dompdf does not support relative paths. -->
+<img id="header" src="C:\Users\Will\Documents\swrd-team2-withBetterGui\public\images\sw_logo.jpg">
 @foreach($resources as $r)
-    <div class="container">
-        <div class="underlined-title">
-            <div class="editContent">
-                <h1 class="img-rounded" style="background-color: #f6f6f7; padding: 5px; padding-left: 20px">
-                {{$r->name}}
-                <!--<div class="pull-right"><h3>{{$r->publicPhoneNumber}}</h3> </div> -->
-                </h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 col-sm-12 col-xs-12 pad25">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-10">
-                    <div class="editContent">
-                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Address</h4>
-                    </div>
-                    <div class="editContent">
-                        <p>
-                            {{$r->streetAddress}}<br>
-                            @if($r->streetAddress2 != null)
-                                {{$r->streetAddress2}}<br>
-                            @endif
-                            {{$r->city}}, {{$r->state}} {{$r->zipCode}}<br>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-12 col-xs-12 pad25">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-10">
-                    <div class="editContent">
-                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Hours</h4>
-                    </div>
-                    <div class="editContent">
-                        <ul>
-                            @foreach($r->hours as $day)
-                                <li>{{ $day->day }} : {{ date('g:i A', strtotime($day->openTime)) }} - {{ date('g:i A', strtotime($day->closeTime)) }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-12 col-xs-12 pad25">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-10">
-                    <div class="editContent">
-                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Services</h4>
-                    </div>
-                    <div class="editContent">
-                        <ul>
-                            @foreach($r->categories as $category)
-                                <li> {{$category->name}}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-12 col-xs-12 pad15">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-10">
-                    <div class="editContent">
-                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Contact Information</h4>
-                    </div>
-                    <div class="editContent">
-                        <p>{{ $r->publicPhoneNumber }}</p>
-                        <p>{{ $r->publicEmail }}</p>
-                        <p>{{ $r->website }}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-12 col-xs-12 pad15">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-10">
-                    <div class="editContent">
-                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Description</h4>
-                    </div>
-                    <div class="editContent">
-                        <p>{{$r->description}}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-12 col-xs-12 pad25">
-                <div class="col-xs-2">
-                </div>
-                <div class="col-xs-10">
-                    <div class="editContent">
-                        <h4 class="img-rounded" style="background-color: #f6f6f7; padding: 5px">Comments</h4>
-                    </div>
-                    <div class="editContent">
-                        <p>{{$r->comments}}</p>
-                    </div>
-                </div>
-            </div>
-        </div><!-- /.row -->
+    <div style="page-break-inside: avoid">
+        <table width="100%">
+            <tr>
+                <td>
+                    <b>{{$r->name}}</b><br />
+                    {{$r->streetAddress}}
+                    @if($r->streetAddress2 != null)
+                        {{$r->sreetAddress2}}
+                    @endif
+                    , {{$r->city}}, {{$r->state}} {{$r->zipCode}}<br />
+                    @if(isset($r->publicPhoneNumber))
+                        {{ $r->publicPhoneNumber }} |
+                    @endif
+                    @if(isset($r->publicEmail))
+                        {{ $r->publicEmail }} |
+                    @endif
+                    @if(isset($r->website))
+                        {{ $r->website }}
+                    @endif
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><i>Hours of Operation:</i></td>
+                <td></td>
+            </tr>
+            @foreach($r->hours as $day)
+                <tr>
+                    <td>
+                        <u>{{ $day->day }}</u> : {{ date('g:i A', strtotime($day->openTime)) }} - {{ date('g:i A', strtotime($day->closeTime)) }}
+                    </td>
+                    <td></td>
+                </tr>
+            @endforeach
+            <tr>
+                <td><i>Description</i></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    @if(isset($r->description))
+                        {{ $r->description }}
+                    @endif
+                </td>
+            </tr>
+                <tr>
+                    <td><i>Comments</i></td>
+                    <td></td>
+                </tr>
+            <tr>
+                <td>
+                    @if(isset($r->comments))
+                        {{$r->comments}}
+                    @endif
+                </td>
+                <td></td>
+            </tr>
+        </table>
         <hr/>
-        <br/>
-        <br/>
     </div><!-- /.container -->
+    <br>
 @endforeach

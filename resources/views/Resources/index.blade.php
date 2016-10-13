@@ -66,6 +66,8 @@
                             <ul>
                                 <?php
                                     $tempDay = array();
+                                    $tempNextDay = '';
+                                    $days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
                                     $tempOpen = '';
                                     $tempClose = '';
                                     $dayArr = array();
@@ -79,10 +81,12 @@
                                         if (empty($tempDay))
                                             {
                                                 $tempDay[] = $day->day;
+                                                $key = array_search($day->day, $days); // returns key of matching day in array
+                                                $tempNextDay = $days[$key + 1];
                                                 $tempOpen = $day->openTime;
                                                 $tempClose = $day->closeTime;
                                             }
-                                        elseif(($tempOpen == $day->openTime) && ($tempClose == $day->closeTime))
+                                        elseif(($tempOpen == $day->openTime) && ($tempClose == $day->closeTime) && ($tempNextDay == $day->day))
                                             {
                                                 $tempDay[] = $day->day;
                                             }
@@ -95,9 +99,10 @@
                                                 $closeTimeArr[] = $tempClose;
                                                 $tempOpen = $day->openTime;
                                                 $tempClose = $day->closeTime;
+                                                $key = array_search($day->day, $days); // returns key of matching day in array
+                                                $tempNextDay = $days[$key + 1];
                                             }
                                 ?>
-                                        {{--<li>{{ $day->day }} : {{ date('g:i A', strtotime($day->openTime)) }} - {{ date('g:i A', strtotime($day->closeTime)) }}</li>--}}
                                 @endforeach
 
                             <?php
@@ -114,14 +119,10 @@
                                             {
                                                 echo '<li>' . $item[0] . ':<br>' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '</li>';
                                             }
-                                        elseif (count($item) < 3)
-                                            {
-                                                echo '<li>' . $item[0] . ' - ' . $item[1] . ':<br>' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '</li>';
-                                            }
                                         else
-                                        {
-                                            echo '<li>' . $item[0] . ' - ' . end($item) . ':<br>' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '</li>';
-                                        }
+                                            {
+                                                echo '<li>' . $item[0] . ' - ' . end($item) . ':<br>' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '</li>';
+                                            }
                                     }
                             ?>
                            </ul>

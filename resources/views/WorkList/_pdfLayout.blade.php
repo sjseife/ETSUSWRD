@@ -15,7 +15,7 @@
     }
     #footer {
         position: fixed; display: block; margin-top: 890px;
-        width:100%; height: auto; padding-left: 28%;
+        width:100%; height: auto; text-align: center;
     }
 
 </style>
@@ -186,7 +186,6 @@
                     @endforeach
 
                                 <?php
-
                                 $dayArr[] = $tempDay;
                                 $openTimeArr[] = $tempOpen;
                                 $closeTimeArr[] = $tempClose;

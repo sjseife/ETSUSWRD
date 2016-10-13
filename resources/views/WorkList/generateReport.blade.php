@@ -19,7 +19,7 @@
                 <a class="btn btn-small btn-info pull-right" target="_blank" href="{{ URL::to('worklist/generatePDF') }}" style="margin-bottom: 20px;">External Preview</a>
             </div>
             <div>
-                <table align="left" class="sorted_table table table-striped table-nonfluid table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="ReportTable">
+                <table align="left" class="table table-striped table-nonfluid table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="ReportTable">
                     @if(!$events->isEmpty())
                         <thead>
                         <tr>

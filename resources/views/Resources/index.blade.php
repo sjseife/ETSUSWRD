@@ -82,13 +82,17 @@
                                             {
                                                 $tempDay[] = $day->day;
                                                 $key = array_search($day->day, $days); // returns key of matching day in array
-                                                $tempNextDay = $days[$key + 1];
+                                                if($key < 6)
+                                                    $tempNextDay = $days[$key + 1];
                                                 $tempOpen = $day->openTime;
                                                 $tempClose = $day->closeTime;
                                             }
                                         elseif(($tempOpen == $day->openTime) && ($tempClose == $day->closeTime) && ($tempNextDay == $day->day))
                                             {
                                                 $tempDay[] = $day->day;
+                                                $key = array_search($tempNextDay, $days); // returns key of matching day in array
+                                                if($key < 6)
+                                                    $tempNextDay = $days[$key + 1];
                                             }
                                         else
                                             {
@@ -100,8 +104,10 @@
                                                 $tempOpen = $day->openTime;
                                                 $tempClose = $day->closeTime;
                                                 $key = array_search($day->day, $days); // returns key of matching day in array
-                                                $tempNextDay = $days[$key + 1];
+                                                if($key < 6)
+                                                    $tempNextDay = $days[$key + 1];
                                             }
+
                                 ?>
                                 @endforeach
 

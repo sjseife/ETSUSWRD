@@ -21,7 +21,7 @@ class CreateResourcesTable extends Migration
             $table->string('county', 15);
             $table->string('state', 2);
             $table->string('zipCode', 5);
-            $table->string('publicPhoneNumber', 15)->nullable();
+            $table->string('publicPhoneNumber', 30)->nullable();
             $table->string('publicEmail')->nullable();
             $table->string('website')->nullable();
             $table->text('description');

@@ -26,7 +26,20 @@
                         <td>{{ $contact->firstName }}</td>
                         <td>{{ $contact->lastName }}</td>
                         <td>{{ $contact->protectedEmail }}</td>
-                        <td>{{ $contact->protectedPhoneNumber }}</td>
+                        <td><?php
+                            $tempPhoneNumber = $contact->protectedPhoneNumber;
+                            $tempPhoneNumber = preg_replace("/[^0-9,x]/", "", $tempPhoneNumber );
+                            if(strlen($tempPhoneNumber) > 10)
+                            {
+                                $tempPhoneNumber = preg_replace("/^[1]/", "", $tempPhoneNumber );
+                            }
+                            $tempPhoneNumber = '(' . substr($tempPhoneNumber,0, 3) . ') '
+                                    . substr($tempPhoneNumber, 3, 3) . '-'
+                                    . substr($tempPhoneNumber, 6, 4) . ' '
+                                    . substr($tempPhoneNumber, 10, (strlen($tempPhoneNumber) - 10));
+                            echo $tempPhoneNumber;
+
+                            ?></td>
                         <td class="text-center">
 
                             <!-- show the contact (uses the show method found at GET /contacts/{id} -->

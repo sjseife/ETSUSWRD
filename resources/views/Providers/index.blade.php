@@ -23,7 +23,20 @@
                     <?php $link = false; ?>
                     <tr>
                         <td>{{ $provider->name }}</td>
-                        <td>{{ $provider->publicPhoneNumber }}</td>
+                        <td><?php
+                            $tempPhoneNumber = $provider->publicPhoneNumber;
+                            $tempPhoneNumber = preg_replace("/[^0-9,x]/", "", $tempPhoneNumber );
+                            if(strlen($tempPhoneNumber) > 10)
+                            {
+                                $tempPhoneNumber = preg_replace("/^[1]/", "", $tempPhoneNumber );
+                            }
+                            $tempPhoneNumber = '(' . substr($tempPhoneNumber,0, 3) . ') '
+                                    . substr($tempPhoneNumber, 3, 3) . '-'
+                                    . substr($tempPhoneNumber, 6, 4) . ' '
+                                    . substr($tempPhoneNumber, 10, (strlen($tempPhoneNumber) - 10));
+                            echo $tempPhoneNumber;
+
+                            ?></td>
                         <td>{{ $provider->publicEmail }}</td>
                         <td><a href="http://{{ $provider->website }}">{{ $provider->website }}</a></td>
                         <td class="text-center">

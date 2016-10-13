@@ -146,7 +146,7 @@
                         <td>{{ $resource->city }}</td>
                         <td>{{ $resource->state }}</td>
                         <td>{{ $resource->zipCode }}</td>
-                        <td>{{ $resource->provider->name }}</td>
+                       <td>{{ $resource->provider->name }}</td>
                         <td>{{ $resource->description }}</td>
                         <td>{{ $resource->comments }}</td>
                         <td class="text-center col-md-3">

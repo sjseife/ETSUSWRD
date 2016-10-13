@@ -15,17 +15,15 @@
     }
     #footer {
         position: fixed; display: block; margin-top: 890px;
-        width:100%; height: auto; padding-left: 32%;
+        width:100%; height: auto; padding-left: 28%;
     }
 
 </style>
 <div id="footer">
-    <!-- Showing email for now -->
-    <!-- changed to name 10/10/2016 William Kubenka-->
-    <p>Provided by: {{Auth::user()->name}}</p>
+    <p>Provided by: {{Auth::user()->name}} | {{Auth::user()->email}}</p>
 </div>
 <!-- This image path must be absolute. Dompdf does not support relative paths. -->
-<img id="header" src="C:\Users\Will\Documents\swrd-team2-withBetterGui\public\images\sw_logo.jpg">
+<img id="header" src="C:\Users\Dustin\Documents\swrd-team2\public\images\sw_logo.jpg">
 @foreach($resources as $r)
     <div style="page-break-inside: avoid">
         <table width="100%">

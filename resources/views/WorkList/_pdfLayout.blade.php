@@ -24,66 +24,223 @@
 </div>
 <!-- This image path must be absolute. Dompdf does not support relative paths. -->
 <img id="header" src="C:\Users\Dustin\Documents\swrd-team2\public\images\sw_logo.jpg">
-@foreach($resources as $r)
-    <div style="page-break-inside: avoid">
-        <table width="100%">
-            <tr>
-                <td>
-                    <b>{{$r->name}}</b><br />
-                    {{$r->streetAddress}}
-                    @if($r->streetAddress2 != null)
-                        {{$r->sreetAddress2}}
-                    @endif
-                    , {{$r->city}}, {{$r->state}} {{$r->zipCode}}<br />
-                    @if(isset($r->publicPhoneNumber))
-                        {{ $r->publicPhoneNumber }} |
-                    @endif
-                    @if(isset($r->publicEmail))
-                        {{ $r->publicEmail }} |
-                    @endif
-                    @if(isset($r->website))
-                        {{ $r->website }}
-                    @endif
-                </td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><i>Hours of Operation:</i></td>
-                <td></td>
-            </tr>
-            @foreach($r->hours as $day)
+@if(!$events->isEmpty())
+    <h2 style="text-align: center">Events</h2>
+    <hr>
+    @foreach($events as $e)
+        <div style="page-break-inside: avoid">
+            <table width="100%">
                 <tr>
                     <td>
-                        <u>{{ $day->day }}</u> : {{ date('g:i A', strtotime($day->openTime)) }} - {{ date('g:i A', strtotime($day->closeTime)) }}
+                        <b>{{$e->name}}</b><br />
+                        {{$e->streetAddress}}
+                        @if($e->streetAddress2 != null)
+                            {{$e->sreetAddress2}}
+                        @endif
+                        , {{$e->city}}, {{$e->state}} {{$e->zipCode}}<br>
+                    </td>
+                    <td align="right">
+                        @if(isset($e->publicPhoneNumber))
+                            <?php
+                            $tempPhoneNumber = $e->publicPhoneNumber;
+                            $tempPhoneNumber = preg_replace("/[^0-9,x]/", "", $tempPhoneNumber );
+                            if(strlen($tempPhoneNumber) > 10)
+                            {
+                                $tempPhoneNumber = preg_replace("/^[1]/", "", $tempPhoneNumber );
+                            }
+                            $tempPhoneNumber = '(' . substr($tempPhoneNumber,0, 3) . ') '
+                                    . substr($tempPhoneNumber, 3, 3) . '-'
+                                    . substr($tempPhoneNumber, 6, 4) . ' '
+                                    . substr($tempPhoneNumber, 10, (strlen($tempPhoneNumber) - 10));
+                            echo $tempPhoneNumber;
+                            ?>
+                        @endif
+                    </td>
+                </tr>
+                @if(isset($e->publicEmail) || isset($e->website))
+                <tr>
+                    <td>
+                        @if(isset($e->publicEmail) && isset($e->website))
+                            {{ $e->publicEmail }} | {{ $e->website }}
+                        @else
+                            @if(isset($e->publicEmail))
+                                {{ $e->publicEmail }}
+                            @endif
+                            @if(isset($e->website))
+                                {{ $e->website }}
+                            @endif
+                        @endif
                     </td>
                     <td></td>
                 </tr>
-            @endforeach
-            <tr>
-                <td><i>Description</i></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>
-                    @if(isset($r->description))
-                        {{ $r->description }}
-                    @endif
-                </td>
-            </tr>
+                @endif
+                @if($e->description != "")
+                    <tr>
+                        <td><i>Description</i></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ $e->description }}
+                        </td>
+                        <td></td>
+                    </tr>
+                @endif
+                @if($e->comments != "")
+                    <tr>
+                        <td><i>Comments</i></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{$e->comments}}
+                        </td>
+                        <td></td>
+                    </tr>
+                @endif
+            </table>
+            <hr/>
+        </div><!-- /.container -->
+        <br>
+    @endforeach
+@endif
+@if(!$resources->isEmpty())
+    <h2 style="text-align: center">Resources</h2>
+    <hr>
+    @foreach($resources as $r)
+        <div style="page-break-inside: avoid">
+            <table width="100%">
                 <tr>
-                    <td><i>Comments</i></td>
-                    <td></td>
+                    <td>
+                        <b>{{$r->name}}</b><br />
+                        {{$r->streetAddress}}
+                        @if($r->streetAddress2 != null)
+                            {{$r->sreetAddress2}}
+                        @endif
+                        , {{$r->city}}, {{$r->state}} {{$r->zipCode}}<br />
+                        @if(isset($r->publicEmail))
+                            {{ $r->publicEmail }} |
+                        @endif
+                        @if(isset($r->website))
+                            {{ $r->website }}
+                        @endif
+                    </td>
+                    <td align="right">
+                        @if(isset($r->publicPhoneNumber))
+                            <?php
+                            $tempPhoneNumber = $r->publicPhoneNumber;
+                            $tempPhoneNumber = preg_replace("/[^0-9,x]/", "", $tempPhoneNumber );
+                            if(strlen($tempPhoneNumber) > 10)
+                            {
+                                $tempPhoneNumber = preg_replace("/^[1]/", "", $tempPhoneNumber );
+                            }
+                            $tempPhoneNumber = '(' . substr($tempPhoneNumber,0, 3) . ') '
+                                    . substr($tempPhoneNumber, 3, 3) . '-'
+                                    . substr($tempPhoneNumber, 6, 4) . ' '
+                                    . substr($tempPhoneNumber, 10, (strlen($tempPhoneNumber) - 10));
+                            echo $tempPhoneNumber;
+                            ?>
+                        @endif
+                    </td>
                 </tr>
-            <tr>
-                <td>
-                    @if(isset($r->comments))
-                        {{$r->comments}}
-                    @endif
-                </td>
-                <td></td>
-            </tr>
-        </table>
-        <hr/>
-    </div><!-- /.container -->
-    <br>
-@endforeach
+                @if(!$r->hours->isEmpty())
+                    <tr>
+                        <td><i>Hours of Operation:</i></td>
+                        <td></td>
+                    </tr>
+                    <?php
+                    $tempDay = array();
+                    $tempOpen = '';
+                    $tempClose = '';
+                    $dayArr = array();
+                    $openTimeArr = array();
+                    $closeTimeArr = array();
+                    ?>
+                    <tr>
+                        <td>
+                    @foreach($r->hours as $day)
+                                <?php
+
+                                if (empty($tempDay))
+                                {
+                                    $tempDay[] = $day->day;
+                                    $tempOpen = $day->openTime;
+                                    $tempClose = $day->closeTime;
+                                }
+                                elseif(($tempOpen == $day->openTime) && ($tempClose == $day->closeTime))
+                                {
+                                    $tempDay[] = $day->day;
+                                }
+                                else
+                                {
+                                    $dayArr[] = $tempDay;
+                                    unset($tempDay);
+                                    $tempDay[] = $day->day;
+                                    $openTimeArr[] = $tempOpen;
+                                    $closeTimeArr[] = $tempClose;
+                                    $tempOpen = $day->openTime;
+                                    $tempClose = $day->closeTime;
+                                }
+                                ?>
+                                {{--<li>{{ $day->day }} : {{ date('g:i A', strtotime($day->openTime)) }} - {{ date('g:i A', strtotime($day->closeTime)) }}</li>--}}
+                    @endforeach
+
+                                <?php
+
+                                $dayArr[] = $tempDay;
+                                $openTimeArr[] = $tempOpen;
+                                $closeTimeArr[] = $tempClose;
+                                foreach($dayArr as $key => $item)
+                                {
+                                    if(empty($item))
+                                    {
+                                        echo '';
+                                    }
+                                    elseif (count($item) < 2)
+                                    {
+                                        echo '<u>' . $item[0] . '</u>: ' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '<br>';
+                                    }
+                                    elseif (count($item) < 3)
+                                    {
+                                        echo '<u>' . $item[0] . ' - ' . $item[1] . '</u>: ' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '<br>';
+                                    }
+                                    else
+                                    {
+                                        echo '<u>' . $item[0] . ' - ' . end($item) . '</u>: ' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '<br>';
+                                    }
+                                }
+                                ?>
+                            </td>
+                            <td></td>
+                        </tr>
+                @endif
+                @if($r->description != "")
+                    <tr>
+                        <td><i>Description</i></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ $r->description }}
+                        </td>
+                        <td></td>
+                    </tr>
+                @endif
+                @if($r->comments != "")
+                    <tr>
+                        <td><i>Comments</i></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{$r->comments}}
+                        </td>
+                        <td></td>
+                    </tr>
+                @endif
+            </table>
+            <hr/>
+        </div><!-- /.container -->
+        <br>
+    @endforeach
+@endif

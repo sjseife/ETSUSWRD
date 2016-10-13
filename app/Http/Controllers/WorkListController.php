@@ -25,7 +25,7 @@ class WorkListController extends Controller
         else{
             $resourcesSet = true;
             $pdf = App::make('dompdf.wrapper');
-            $view = View::make('WorkList._pdfLayout')->with('resources', Auth::user()->resources);
+            $view = View::make('WorkList._pdfLayout')->with('resources', $resources)->with('events', $events);
             $contents = $view->render();
             $pdf->loadHTML($contents);
             $report = $pdf->output();

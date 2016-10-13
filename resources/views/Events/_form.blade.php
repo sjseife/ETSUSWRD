@@ -100,7 +100,7 @@
             <div class="form-group">
                 {!! Form::label('tuesday', 'Tuesday:') !!}<br>
                 {!! Form::checkbox('tuesdayClosedCheck', 'tuesdayClosedCheck', true, ['id' => 'tuesdayClosedCheck', 'class' => 'ClosedCheck', 'onClick' => "Close(1);"]) !!} Closed
-                {!! Form::checkbox('tuesdaySame', 'tuesdaySame', false, ['id' => 'tuesdaySame', 'class' => 'Same', 'onClick' => "SameAsAbove(1);"]) !!} Same as Above
+                {!! Form::checkbox('tuesdaySame', 'tuesdaySame', false, ['id' => 'tuesdaySame', 'class' => 'Same', 'onClick' => "SameAsAbove(1);"]) !!} Same as Above <br>
                 {!! Form::time('tuesdayOpen', null, ['class'=>'form-control input-md OpenTime', 'placeholder'=>'Open Time','id' => 'tuesdayOpen', 'onChange' => "Uncheck(1);"]) !!}
                 {!! Form::time('tuesdayClose', null, ['class'=>'form-control input-md CloseTime', 'placeholder'=>'Close Time','id' => 'tuesdayClose', 'onChange' => "Uncheck(1);"]) !!}
             </div>
@@ -109,7 +109,7 @@
             <div class="form-group">
                 {!! Form::label('wednesday', 'Wednesday:') !!}<br>
                 {!! Form::checkbox('wednesdayClosedCheck', 'wednesdayClosedCheck', true, ['id' => 'wednesdayClosedCheck', 'class' => 'ClosedCheck', 'onClick' => "Close(2);"]) !!} Closed
-                {!! Form::checkbox('wednesdaySame', 'wednesdaySame', false, ['id' => 'wednesdaySame', 'class' => 'Same', 'onClick' => "SameAsAbove(2);"]) !!} Same as Above
+                {!! Form::checkbox('wednesdaySame', 'wednesdaySame', false, ['id' => 'wednesdaySame', 'class' => 'Same', 'onClick' => "SameAsAbove(2);"]) !!} Same as Above <br>
                 {!! Form::time('wednesdayOpen', null, ['class'=>'form-control input-md OpenTime', 'placeholder'=>'Open Time','id' => 'wednesdayOpen', 'onChange' => "Uncheck(2);"]) !!}
                 {!! Form::time('wednesdayClose', null, ['class'=>'form-control input-md CloseTime', 'placeholder'=>'Close Time','id' => 'wednesdayClose', 'onChange' => "Uncheck(2);"]) !!}
             </div>
@@ -118,7 +118,7 @@
             <div class="form-group">
                 {!! Form::label('thursday', 'Thursday:') !!}<br>
                 {!! Form::checkbox('thursdayClosedCheck', 'thursdayClosedCheck', true, ['id' => 'thursdayClosedCheck', 'class' => 'ClosedCheck', 'onClick' => "Close(3);"]) !!} Closed
-                {!! Form::checkbox('thursdaySame', 'thursdaySame', false, ['id' => 'thursdaySame', 'class' => 'Same', 'onClick' => "SameAsAbove(3);"]) !!} Same as Above
+                {!! Form::checkbox('thursdaySame', 'thursdaySame', false, ['id' => 'thursdaySame', 'class' => 'Same', 'onClick' => "SameAsAbove(3);"]) !!} Same as Above<br>
                 {!! Form::time('thursdayOpen', null, ['class'=>'form-control input-md OpenTime', 'placeholder'=>'Open Time','id' => 'thursdayOpen', 'onChange' => "Uncheck(3);"]) !!}
                 {!! Form::time('thursdayClose', null, ['class'=>'form-control input-md CloseTime', 'placeholder'=>'Close Time','id' => 'thursdayClose', 'onChange' => "Uncheck(3);"]) !!}
             </div>
@@ -127,7 +127,7 @@
             <div class="form-group">
                 {!! Form::label('friday', 'Friday:') !!}<br>
                 {!! Form::checkbox('fridayClosedCheck', 'fridayClosedCheck', true, ['id' => 'fridayClosedCheck', 'class' => 'ClosedCheck', 'onClick' => "Close(4);"]) !!} Closed
-                {!! Form::checkbox('fridaySame', 'fridaySame', false, ['id' => 'fridaySame', 'class' => 'Same', 'onClick' => "SameAsAbove(4);"]) !!} Same as Above
+                {!! Form::checkbox('fridaySame', 'fridaySame', false, ['id' => 'fridaySame', 'class' => 'Same', 'onClick' => "SameAsAbove(4);"]) !!} Same as Above<br>
                 {!! Form::time('fridayOpen', null, ['class'=>'form-control input-md OpenTime', 'placeholder'=>'Open Time','id' => 'fridayOpen', 'onChange' => "Uncheck(4);"]) !!}
                 {!! Form::time('fridayClose', null, ['class'=>'form-control input-md CloseTime', 'placeholder'=>'Close Time','id' => 'fridayClose', 'onChange' => "Uncheck(4);"]) !!}
             </div>
@@ -136,7 +136,7 @@
             <div class="form-group">
                 {!! Form::label('saturday', 'Saturday:') !!}<br>
                 {!! Form::checkbox('saturdayClosedCheck', 'saturdayClosedCheck', true, ['id' => 'saturdayClosedCheck', 'class' => 'ClosedCheck', 'onClick' => "Close(5);"]) !!} Closed
-                {!! Form::checkbox('saturdaySame', 'saturdaySame', false, ['id' => 'saturdaySame', 'class' => 'Same', 'onClick' => "SameAsAbove(5);"]) !!} Same as Above
+                {!! Form::checkbox('saturdaySame', 'saturdaySame', false, ['id' => 'saturdaySame', 'class' => 'Same', 'onClick' => "SameAsAbove(5);"]) !!} Same as Above<br>
                 {!! Form::time('saturdayOpen', null, ['class'=>'form-control input-md OpenTime', 'placeholder'=>'Open Time','id' => 'saturdayOpen', 'onChange' => "Uncheck(5);"]) !!}
                 {!! Form::time('saturdayClose', null, ['class'=>'form-control input-md CloseTime', 'placeholder'=>'Close Time','id' => 'saturdayClose', 'onChange' => "Uncheck(5);"]) !!}
             </div>
@@ -145,7 +145,7 @@
             <div class="form-group">
                 {!! Form::label('sunday', 'Sunday:') !!}<br>
                 {!! Form::checkbox('sundayClosedCheck', 'sundayClosedCheck', true, ['id' => 'sundayClosedCheck', 'class' => 'ClosedCheck', 'onClick' => "Close(6);"]) !!} Closed
-                {!! Form::checkbox('sundaySame', 'sundaySame', false, ['id' => 'sundaySame', 'class' => 'Same', 'onClick' => "SameAsAbove(6);"])  !!} Same as Above
+                {!! Form::checkbox('sundaySame', 'sundaySame', false, ['id' => 'sundaySame', 'class' => 'Same', 'onClick' => "SameAsAbove(6);"])  !!} Same as Above<br>
                 {!! Form::time('sundayOpen', null, ['class'=>'form-control input-md OpenTime', 'placeholder'=>'Open Time', 'id' => 'sundayOpen', 'onChange' => "Uncheck(6);"]) !!}
                 {!! Form::time('sundayClose', null, ['class'=>'form-control input-md CloseTime', 'placeholder'=>'Close Time','id' => 'sundayClose', 'onChange' => "Uncheck(6);"]) !!}
             </div>

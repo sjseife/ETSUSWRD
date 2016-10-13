@@ -150,6 +150,8 @@
                     </tr>
                     <?php
                     $tempDay = array();
+                    $tempNextDay = '';
+                    $days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
                     $tempOpen = '';
                     $tempClose = '';
                     $dayArr = array();
@@ -159,17 +161,22 @@
                     <tr>
                         <td>
                     @foreach($r->hours as $day)
-                                <?php
-
+                          <?php
                                 if (empty($tempDay))
                                 {
                                     $tempDay[] = $day->day;
+                                    $key = array_search($day->day, $days); // returns key of matching day in array
+                                    if($key < 6)
+                                        $tempNextDay = $days[$key + 1];
                                     $tempOpen = $day->openTime;
                                     $tempClose = $day->closeTime;
                                 }
-                                elseif(($tempOpen == $day->openTime) && ($tempClose == $day->closeTime))
+                                elseif(($tempOpen == $day->openTime) && ($tempClose == $day->closeTime) && ($tempNextDay == $day->day))
                                 {
                                     $tempDay[] = $day->day;
+                                    $key = array_search($tempNextDay, $days); // returns key of matching day in array
+                                    if($key < 6)
+                                        $tempNextDay = $days[$key + 1];
                                 }
                                 else
                                 {
@@ -180,35 +187,32 @@
                                     $closeTimeArr[] = $tempClose;
                                     $tempOpen = $day->openTime;
                                     $tempClose = $day->closeTime;
+                                    $key = array_search($day->day, $days); // returns key of matching day in array
+                                    if($key < 6)
+                                        $tempNextDay = $days[$key + 1];
                                 }
-                                ?>
-                                {{--<li>{{ $day->day }} : {{ date('g:i A', strtotime($day->openTime)) }} - {{ date('g:i A', strtotime($day->closeTime)) }}</li>--}}
+                        ?>
                     @endforeach
-
-                                <?php
-                                $dayArr[] = $tempDay;
-                                $openTimeArr[] = $tempOpen;
-                                $closeTimeArr[] = $tempClose;
-                                foreach($dayArr as $key => $item)
+                        <?php
+                            $dayArr[] = $tempDay;
+                            $openTimeArr[] = $tempOpen;
+                            $closeTimeArr[] = $tempClose;
+                            foreach($dayArr as $key => $item)
+                            {
+                                if(empty($item))
                                 {
-                                    if(empty($item))
-                                    {
-                                        echo '';
-                                    }
-                                    elseif (count($item) < 2)
-                                    {
-                                        echo '<u>' . $item[0] . '</u>: ' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '<br>';
-                                    }
-                                    elseif (count($item) < 3)
-                                    {
-                                        echo '<u>' . $item[0] . ' - ' . $item[1] . '</u>: ' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '<br>';
-                                    }
-                                    else
-                                    {
-                                        echo '<u>' . $item[0] . ' - ' . end($item) . '</u>: ' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '<br>';
-                                    }
+                                    echo '';
                                 }
-                                ?>
+                                elseif (count($item) < 2)
+                                {
+                                    echo '<li>' . $item[0] . ':<br>' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '</li>';
+                                }
+                                else
+                                {
+                                    echo '<li>' . $item[0] . ' - ' . end($item) . ':<br>' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '</li>';
+                                }
+                            }
+                        ?>
                             </td>
                             <td></td>
                         </tr>

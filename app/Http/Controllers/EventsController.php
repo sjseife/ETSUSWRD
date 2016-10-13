@@ -236,10 +236,18 @@ class EventsController extends Controller
         }
     }
 
-    public function removeReport(Event $event)
+    public function removeReport(Event $event, Request $request)
     {
         Auth::user()->events()->detach($event);
-        return redirect('/worklist/generateReport');
+        if($request->ajax())
+        {
+            return response()->json(); //it just needs any JSON response to indicate a success.
+        }
+        else
+        {
+            \Session::flash('flash_message', 'Event Removed from Report');
+            return Redirect('/worklist/generateReport');
+        }
     }
 
     /*

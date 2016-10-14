@@ -4,7 +4,7 @@
     <h1 class="text-center">All Events</h1>
     <div id="successOrFailure"></div>
     <!-- create a new event (uses the create method found at GET /event/create -->
-    <a class="btn btn-lg btn-primary pull-right" href="{{ URL::to('events/create') }}" style="margin-bottom: 20px;">Create New Event</a>
+    <a class="btn btn-md btn-primary pull-right" href="{{ URL::to('events/create') }}" style="margin-bottom: 20px;">Create New Event</a>
     <br>
     <br>
     <div>

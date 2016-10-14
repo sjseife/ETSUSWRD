@@ -4,7 +4,7 @@
     <h1 class="text-center">All Resources</h1>
     <div id="successOrFailure"></div>
         <!-- create a new resource (uses the create method found at GET /resource/create -->
-        <a class="btn btn-lg btn-primary pull-right" href="{{ URL::to('resources/create') }}" style="margin-bottom: 20px;">Create New Resource</a>
+        <a class="btn btn-md btn-primary pull-right" href="{{ URL::to('resources/create') }}" style="margin-bottom: 20px;">Create New Resource</a>
         <br>
         <br>
         <div>

@@ -4,7 +4,7 @@
     <h1 class="text-center">All Providers</h1>
     <div class="container">
         <!-- create a new provider (uses the create method found at GET /providers/create -->
-        <a class="btn btn-small btn-primary pull-right" href="{{ URL::to('providers/create') }}" style="margin-bottom: 20px;">Create New Provider</a>
+        <a class="btn btn-md btn-primary pull-right" href="{{ URL::to('providers/create') }}" style="margin-bottom: 20px;">Create New Provider</a>
         <br />
         <br />
         <div class="row">

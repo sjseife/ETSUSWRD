@@ -52,7 +52,6 @@
         @endif
         @yield('content')
     </div>
-
     <!-- Footer -->
     <div class="container_24">
         <img src="/images/mountains.png" alt="Image of Mountains" class="img-responsive center-block">

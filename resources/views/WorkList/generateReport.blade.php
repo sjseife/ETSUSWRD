@@ -20,30 +20,52 @@
             </div>
             <div>
                 <table align="left" class="table table-striped table-nonfluid table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="ReportTable">
-                    <thead>
-                    <tr>
-                        <!-- class all for always show, lower data priority numbers stay longer-->
-                        <th class="all">Resource Name</th>
-                        <th class="all">Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($resources as $key => $resource)
-                        <?php
-                        $link = false;
-                        ?>
+                    @if(!$events->isEmpty())
+                        <thead>
                         <tr>
-                            <td>{{ $resource->name }}</td>
-                            <td class="text-center col-small-3">
-                                <a href="removeReport/{{$resource->id}}" role="button" class="btn-link btn-sm removeReport
-                                    @if(!Auth::user()->resources->contains($resource))
-                                        disabled
-                                    @endif
-                                        ">Remove from Report</a>
-                            </td>
+                            <!-- class all for always show, lower data priority numbers stay longer-->
+                            <th class="all">Event Name</th>
+                            <th class="all">Action</th>
                         </tr>
-                    @endforeach
-                    </tbody>
+                        </thead>
+                        <tbody>
+                        @foreach($events as $key => $event)
+                            <tr>
+                                <td>{{ $event->name }}</td>
+                                <td class="text-center col-small-3">
+                                    <a href="/events/removeReport/{{$event->id}}" role="button" class="btn-link btn-sm removeReport
+                                        @if(!Auth::user()->events->contains($event))
+                                            disabled
+                                        @endif
+                                            ">Remove from Report</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    @endif
+                    @if(!$resources->isEmpty())
+                        <thead>
+                        <tr>
+                            <!-- class all for always show, lower data priority numbers stay longer-->
+                            <th class="all">Resource Name</th>
+                            <th class="all">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($resources as $key => $resource)
+                            <tr>
+                                <td>{{ $resource->name }}</td>
+                                <td class="text-center col-small-3">
+                                    <a href="/resources/removeReport/{{$resource->id}}" role="button" class="btn-link btn-sm removeReport
+                                        @if(!Auth::user()->resources->contains($resource))
+                                            disabled
+                                        @endif
+                                            ">Remove from Report</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    @endif
                 </table>
                 <div class="container text-right">
                     <object data="/report.pdf" type="application/pdf" width="60%" height="700">
@@ -52,12 +74,12 @@
             </div>
         </div>
     @else
-        <h1 class="text-center">Resource Report</h1>
+        <h1 class="text-center">Resource and Event Report</h1>
         <br>
         <div class="container">
             <h3>
                 Report is empty!<br><br>
-                Try adding <a href="/resources">resources</a> to the report and come back...<br><br>
+                Try adding <a href="/resources">resources</a> or <a href="/events">events</a> to the report and come back...<br><br>
             </h3>
         </div>
     @endif

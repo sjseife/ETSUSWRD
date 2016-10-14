@@ -18,23 +18,19 @@ class WorkListController extends Controller
         $resources = Auth::user()->resources;
         $events = Auth::user()->events;
 
-        //flash message if no items in pdf
-        if($resources->isEmpty()){
-            //\Session::flash('flash_message', 'Please add resources to the report first!');
+        if($resources->isEmpty() && $events->isEmpty()){
             $resourcesSet = false;
-            return view('WorkList.generateReport', compact('resources', 'resourcesSet'));
+            return view('WorkList.generateReport', compact('resources', 'events', 'resourcesSet'));
         }
         else{
-
             $resourcesSet = true;
             $pdf = App::make('dompdf.wrapper');
-            $view = View::make('WorkList._pdfLayout')->with('resources', Auth::user()->resources);
+            $view = View::make('WorkList._pdfLayout')->with('resources', $resources)->with('events', $events);
             $contents = $view->render();
             $pdf->loadHTML($contents);
             $report = $pdf->output();
             file_put_contents('report.pdf', $report);
-            //return view('resources._pdfLayout', compact('resources'));
-            return view('WorkList.generateReport', compact('resources', 'report', 'resourcesSet'));
+            return view('WorkList.generateReport', compact('resources', 'events', 'report', 'resourcesSet'));
         }
     }
 

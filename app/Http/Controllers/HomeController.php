@@ -45,15 +45,18 @@ class HomeController extends Controller
           foreach ($events as $event)
            {
                $endBool = false;
+                $startBool = false;
 
                $start = new Carbon($event->startDate);
+               if ($now->gt($start)) { $startBool = true; }
                $tempStartDiff = ($start->diffInDays($now));
 
                $end = new Carbon($event->endDate);
                if ($end->gt($now)) { $endBool = true; }
                $tempEndDiff = ($end->diffInDays($now));
+               $startBool = (($tempStartDiff  < 6) || $startBool);
 
-              if(($tempStartDiff  < 6)   && ($endBool))
+              if($startBool  && $endBool)
                {
                    $upcomingEvents[] = $event;
                }

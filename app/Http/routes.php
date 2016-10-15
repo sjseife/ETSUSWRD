@@ -80,21 +80,26 @@ Route::group(['middleware' => 'App\Http\Middleware\GAAccessMiddleware'], functio
     Route::post('categories', 'CategoryController@store');
     Route::patch('categories/{category}', 'CategoryController@update');
     Route::delete('categories/{category}', 'CategoryController@destroy');
+
+    //provider
+    Route::get('providers/create', 'ProvidersController@create');
+    Route::get('providers/{provider}/edit', 'ProvidersController@edit');
+
+    Route::post('providersJSON', 'ProvidersController@storeJSON');
+    Route::post('providers', 'ProvidersController@store');
+    Route::patch('providers/{provider}', 'ProvidersController@update');
+    Route::delete('providers/{provider}', 'ProvidersController@destroy');
 });
 
 //if gerneral user is required, leave it below.
 
 //provider
 Route::get('providers', 'ProvidersController@index');
-Route::get('providers/create', 'ProvidersController@create');
 Route::get('providers/{provider}', 'ProvidersController@show');
-Route::get('providers/{provider}/edit', 'ProvidersController@edit');
 Route::get('providers/{provider}/flag', 'ProvidersController@flag');
 Route::post('providers/flag/{provider}', 'ProvidersController@storeFlag');
-Route::post('providersJSON', 'ProvidersController@storeJSON');
-Route::post('providers', 'ProvidersController@store');
-Route::patch('providers/{provider}', 'ProvidersController@update');
-Route::delete('providers/{provider}', 'ProvidersController@destroy');
+
+
 
 //event
 Route::get('events', 'EventsController@index');

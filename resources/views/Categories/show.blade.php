@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
                 <div class="panel-heading">View Category</div>
                 <div class="panel-body">
                     <div class="col-md-offset-2"><br/><br/>
@@ -31,7 +31,7 @@
                             </dd>
                         @endforeach
                     </dl>
-                    <div class="col-md-offset-2">
+                    <div class="col-md-offset-4">
                         <br/>
                         <!-- edit this contact (uses the edit method found at GET /category/{id}/edit -->
                         <a class="btn btn-lg btn-info" href="{{ URL::to('categories/' . $category->id. '/edit') }}">Edit</a>

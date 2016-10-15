@@ -102,21 +102,22 @@
             <tr>
                 <!-- class all for always show, lower data priority numbers stay longer-->
                 <th class="all tableHeader" > Upcoming Events:</th> {{--0--}}
-                <th data-priority="1" class="purple-text">County</th> {{--1--}}
-                <th data-priority="2" class="purple-text">Category</th> {{--2--}}
+
                 <th class="all purple-text">Dates</th> {{--3--}}
                 <th data-priority="1" class="purple-text">Hours of Operation</th> {{--4--}}
-                <th data-priority="2" class="purple-text">Phone</th> {{--5--}}
-                <th data-priority="2" class="purple-text">Email</th> {{--6--}}
-                <th data-priority="2" class="purple-text">Website:</th> {{--7--}}
-                <th data-priority="4" class="purple-text">Street Address:</th> {{--8--}}
-                <th data-priority="5" class="purple-text"></th> {{--8--}}
-                <th data-priority="1" class="purple-text">City</th> {{--9--}}
-                <th data-priority="2" class="purple-text">State:</th> {{--10--}}
-                <th data-priority="2" class="purple-text">Zip Code:</th> {{--11--}}
-                <th data-priority="3" class="purple-text">Provider:</th> {{--12--}}
-                <th data-priority="3" class="purple-text">Description:</th> {{--13--}}
-                <th data-priority="3" class="purple-text">Comments:</th> {{--14--}}
+                <th data-priority="3" class="purple-text">Street Address:</th> {{--8--}}
+                <th data-priority="3" class="purple-text"></th> {{--9--}}
+                <th data-priority="1" class="purple-text">County</th> {{--1--}}
+                <th data-priority="1" class="purple-text">City</th> {{--10--}}
+                <th data-priority="1" class="purple-text">State:</th> {{--11--}}
+                <th data-priority="3" class="purple-text">Zip Code:</th> {{--12--}}
+                <th data-priority="1" class="purple-text">Phone</th> {{--5--}}
+                <th data-priority="3" class="purple-text">Email</th> {{--6--}}
+                <th data-priority="3" class="purple-text">Website:</th> {{--7--}}
+                <th data-priority="1" class="purple-text">Category</th> {{--2--}}
+                <th data-priority="3" class="purple-text">Provider:</th> {{--13--}}
+                <th data-priority="3" class="purple-text">Description:</th> {{--14--}}
+                <th data-priority="3" class="purple-text">Comments:</th> {{--15--}}
             </thead>
             </tr>
             <tbody>
@@ -127,87 +128,88 @@
                 ?>
                 <tr>
                     <td>{{ $event->name }}</td>
-                    <td>{{ $event->county }}</td>
-                    <td>
-                        @foreach ($event->categories as $category)
-                            {{ $category->name }}
-                        @endforeach
-                    </td>
                     <td>
                         {{ date('M jS, Y', strtotime($event->startDate)) }}
                         - {{ date('M jS, Y', strtotime($event->endDate)) }}
                     </td>
                     <td>
-                        <ul>
-                            <?php
-                            $tempDay = array();
-                            $tempNextDay = '';
-                            $days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
-                            $tempOpen = '';
-                            $tempClose = '';
-                            $dayArr = array();
-                            $openTimeArr = array();
-                            $closeTimeArr = array();
-                            ?>
-                            @foreach($event->hours as $day)
-
-                                <?php
-
-                                if (empty($tempDay))
-                                {
-                                    $tempDay[] = $day->day;
-                                    $key = array_search($day->day, $days); // returns key of matching day in array
-                                    if($key < 6)
-                                        $tempNextDay = $days[$key + 1];
-                                    $tempOpen = $day->openTime;
-                                    $tempClose = $day->closeTime;
-                                }
-                                elseif(($tempOpen == $day->openTime) && ($tempClose == $day->closeTime) && ($tempNextDay == $day->day))
-                                {
-                                    $tempDay[] = $day->day;
-                                    $key = array_search($tempNextDay, $days); // returns key of matching day in array
-                                    if($key < 6)
-                                        $tempNextDay = $days[$key + 1];
-                                }
-                                else
-                                {
-                                    $dayArr[] = $tempDay;
-                                    unset($tempDay);
-                                    $tempDay[] = $day->day;
-                                    $openTimeArr[] = $tempOpen;
-                                    $closeTimeArr[] = $tempClose;
-                                    $tempOpen = $day->openTime;
-                                    $tempClose = $day->closeTime;
-                                    $key = array_search($day->day, $days); // returns key of matching day in array
-                                    if($key < 6)
-                                        $tempNextDay = $days[$key + 1];
-                                }
-
-                                ?>
-                            @endforeach
+                    <ul>
+                        <?php
+                        $tempDay = array();
+                        $tempNextDay = '';
+                        $days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
+                        $tempOpen = '';
+                        $tempClose = '';
+                        $dayArr = array();
+                        $openTimeArr = array();
+                        $closeTimeArr = array();
+                        ?>
+                        @foreach($event->hours as $day)
 
                             <?php
-                            $dayArr[] = $tempDay;
-                            $openTimeArr[] = $tempOpen;
-                            $closeTimeArr[] = $tempClose;
-                            foreach($dayArr as $key => $item)
+
+                            if (empty($tempDay))
                             {
-                                if(empty($item))
-                                {
-                                    echo '';
-                                }
-                                elseif (count($item) < 2)
-                                {
-                                    echo '<li>' . $item[0] . ':<br>' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '</li>';
-                                }
-                                else
-                                {
-                                    echo '<li>' . $item[0] . ' - ' . end($item) . ':<br>' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '</li>';
-                                }
+                                $tempDay[] = $day->day;
+                                $key = array_search($day->day, $days); // returns key of matching day in array
+                                if($key < 6)
+                                    $tempNextDay = $days[$key + 1];
+                                $tempOpen = $day->openTime;
+                                $tempClose = $day->closeTime;
                             }
+                            elseif(($tempOpen == $day->openTime) && ($tempClose == $day->closeTime) && ($tempNextDay == $day->day))
+                            {
+                                $tempDay[] = $day->day;
+                                $key = array_search($tempNextDay, $days); // returns key of matching day in array
+                                if($key < 6)
+                                    $tempNextDay = $days[$key + 1];
+                            }
+                            else
+                            {
+                                $dayArr[] = $tempDay;
+                                unset($tempDay);
+                                $tempDay[] = $day->day;
+                                $openTimeArr[] = $tempOpen;
+                                $closeTimeArr[] = $tempClose;
+                                $tempOpen = $day->openTime;
+                                $tempClose = $day->closeTime;
+                                $key = array_search($day->day, $days); // returns key of matching day in array
+                                if($key < 6)
+                                    $tempNextDay = $days[$key + 1];
+                            }
+
                             ?>
-                        </ul>
+                        @endforeach
+
+                        <?php
+                        $dayArr[] = $tempDay;
+                        $openTimeArr[] = $tempOpen;
+                        $closeTimeArr[] = $tempClose;
+                        foreach($dayArr as $key => $item)
+                        {
+                            if(empty($item))
+                            {
+                                echo '';
+                            }
+                            elseif (count($item) < 2)
+                            {
+                                echo '<li>' . $item[0] . ':<br>' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '</li>';
+                            }
+                            else
+                            {
+                                echo '<li>' . $item[0] . ' - ' . end($item) . ':<br>' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '</li>';
+                            }
+                        }
+                        ?>
+                    </ul>
                     </td>
+                    <td>{{ $event->streetAddress }}</td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp; {{ $event->streetAddress2 }}</td>
+                    <td>{{ $event->county }}</td>
+                    <td>{{ $event->city }}</td>
+                    <td>{{ $event->state }}</td>
+                    <td>{{ $event->zipCode }}</td>
+
                     <td><?php
                         $tempPhoneNumber = $event->publicPhoneNumber;
                         $tempPhoneNumber = preg_replace("/[^0-9,x]/", "", $tempPhoneNumber );
@@ -224,11 +226,11 @@
                         ?></td>
                     <td>{{ $event->publicEmail }}</td>
                     <td>{{ $event->website }}</td>
-                    <td>{{ $event->streetAddress }}</td>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp; {{ $event->streetAddress2 }}</td>
-                    <td>{{ $event->city }}</td>
-                    <td>{{ $event->state }}</td>
-                    <td>{{ $event->zipCode }}</td>
+                    <td>
+                        @foreach ($event->categories as $category)
+                            {{ $category->name }}
+                        @endforeach
+                    </td>
                     <td>{{ $event->provider->name }}</td>
                     <td>{{ $event->description }}</td>
                     <td>{{ $event->comments }}</td>
@@ -250,16 +252,16 @@
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/events"><img src="\images\EventsImg.jpg" alt="Events" class="imglink"  ></a><h3 class="footerlink"><a  href="/Events">Events</a></h3></div>
 
-                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/resources"><img src="\images\resourcesimg.jpg" alt="Resources" class="imglink"  ></a><h3 class="footerlink"><a  href="/resources">Resources</a></h3></div>
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/resources"><img src="\images\lightbulb.ico" alt="Resources" class="imglink"  ></a><h3 class="footerlink"><a  href="/resources">Resources</a></h3></div>
                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/providers"><img src="\images\providers.png" alt="Providers" class="imglink"  ></a><h3 class="footerlink"><a  href="/providers">Providers</a></h3></div>
 
                     @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
-                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/contacts"><img src="\images\ContactsImg.png" alt="Contacts" class="imglink"  ></a><h3 class="footerlink"><a  href="/contacts">Contacts</a></h3></div>
+                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/contacts"><img src="\images\Contacts2.png" alt="Contacts" class="imglink"  ></a><h3 class="footerlink"><a  href="/contacts">Contacts</a></h3></div>
                             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"><a href="/categories"><img src="\images\CategoriesImg.png" alt="Categories" class="imglink" ></a> <h3 class="footerlink"><a  href="/categories">Categories</a></h3></div>
-                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"><a href="/flags"><img src="\images\redflag.png" alt="Flags" class="imglink" ></a> <h3 class="footerlink"><a  href="/flags">Flags</a></h3></div>
+                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"><a href="/flags"><img src="\images\waving-flag.jpg" alt="Flags" class="imglink" ></a> <h3 class="footerlink"><a  href="/flags">Flags</a></h3></div>
                         @endif
 
-                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/worklist/generateReport"><img src="\images\ReportImg.gif" alt="Report" class="imglink"  ></a><h3 class="footerlink"><a  href="/resources/generateReport">Report</a></h3></div>
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/worklist/generateReport"><img src="\images\report-icon-2.png" alt="Report" class="imglink"  ></a><h3 class="footerlink"><a  href="/resources/generateReport">Report</a></h3></div>
                         @if (Auth::user()->role == 'Admin')
                             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/users"><img src="\images\usersimg.png" alt="Users" class="imglink"  ></a><h3 class="footerlink"><a  href="/users">Users</a></h3></div>
                         @endif

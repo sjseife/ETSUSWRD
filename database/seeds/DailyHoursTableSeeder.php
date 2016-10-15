@@ -11,6 +11,12 @@ class DailyHoursTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\DailyHours::class, 200)->create();
+        for($i = 1; $i < 51; $i++)
+            for($j = 1; $j < 6; $j++)
+            {
+                variableChanger($i, $j);
+
+                factory(App\DailyHours::class, 1)->create();
+            }
     }
 }

@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
                 <div class="panel-heading">View Provider</div>
                 <div class="panel-body">
-                    <div class="col-md-offset-2"><br/><br/>
+                    <div class="col-md-offset-3"><br/><br/>
                         <div>
                             <a href="{{'/providers'}}">Back to Providers</a></br></br>
                         </div>
@@ -41,7 +41,7 @@
                                     {{ $event->name }}
                                 </a>
                             </dd>
-                        @endforeach
+                        @endforeach<br>
                         <dt>Reported Problems</dt>
                         @if(isset($provider->flags))
                             @foreach($provider->flags as $flag)
@@ -53,6 +53,7 @@
                             <dd>No problems reported</dd>
                         @endif
                     </dl>
+
                     <div class="col-md-offset-2">
                         <br/>
                         <br/>
@@ -60,6 +61,8 @@
                         <a class="btn btn-lg btn-link" href="{{ URL::to('providers/' . $provider->id. '/flag') }}">Report a problem with this provider.</a>
                         <br/>
                         <br/>
+                        @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
+                        <div class="col-md-offset-2">
                         <!-- edit this provider (uses the edit method found at GET /provider/{id}/edit -->
                         <a class="btn btn-lg btn-info" href="{{ URL::to('providers/' . $provider->id. '/edit') }}">Edit</a>
                         <!-- delete the resource -->
@@ -68,11 +71,13 @@
                         <br/>
                         <br/>
                     </div>
+                        @endif
+
                 </div>
             </div>
         </div>
     </div>
-
+</div>
     <!-- Modal -->
     @include('Providers._deleteModal')
 @endsection

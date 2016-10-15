@@ -10,6 +10,15 @@
 | database. Just tell the factory how a default model should look.
 |
 */
+$day_index = 1;
+$id = 1;
+
+function variableChanger($i, $j){
+   global $id, $day_index;
+
+    $id = $i;
+    $day_index = $j;
+}
 
     $factory->define(App\Contact::class, function (Faker\Generator $faker) {
         return [
@@ -51,21 +60,22 @@
        ];
     });
 
-    $factory->define(App\DailyHours::class, function (Faker\Generator $faker) {
+    $factory->define(App\DailyHours::class, function (Faker\Generator $faker){
+
+        global $id, $day_index;
+
         $days = array(
             1 => 'Monday',
             2 => 'Tuesday',
             3 => 'Wednesday',
             4 => 'Thursday',
-            5 => 'Friday',
-            6 => 'Saturday',
-            7 => 'Sunday'
-        );
-       return [
-           'day' => $days[rand(1,7)],
-           'openTime' => $faker->time(),
-           'closeTime' => $faker->time(),
-           'resource_id' => rand(1,50)
-       ];
+            5 => 'Friday');
+
+                return [
+                   'day' => $days[$day_index],
+                    'openTime' => '09:00:00',
+                    'closeTime' => '17:00:00',
+                    'resource_id' => $id
+                ];
     });
 

@@ -19,12 +19,19 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
+                <li><a href="{{ url('/events') }}">Events</a></li>
                 <li><a href="{{ url('/resources') }}">Resources</a></li>
-                <li><a href="{{ url('/contacts') }}">Contacts</a></li>
-                <li><a href="{{ url('/categories') }}">Categories</a></li>
-                <li><a href="{{ url('/resources/generateReport') }}">Report</a></li>
-                <li><a href="{{ url('/users') }}">Users</a></li>
-                <li><a href="{{ url('/flags') }}">Flags</a></li>
+                <li><a href="{{ url('/providers') }}">Providers</a></li>
+                @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
+                    <li><a href="{{ url('/contacts') }}">Contacts</a></li>
+                    <li><a href="{{ url('/categories') }}">Categories</a></li>
+                    <li><a href="{{ url('/flags') }}">Flags</a></li>
+                @endif
+                <li><a href="{{ url('/worklist/generateReport') }}">Report</a></li>
+                @if (Auth::user()->role == 'Admin')
+                    <li><a href="{{ url('/users') }}">Users</a></li>
+                @endif
+
 
             </ul>
 

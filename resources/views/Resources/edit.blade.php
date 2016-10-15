@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Edit: {!! $resource->Name !!}</h1>
+        <h1>Edit: {!! $resource->name !!}</h1>
     </div>
 
     <hr/>

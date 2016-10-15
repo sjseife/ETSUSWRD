@@ -43,4 +43,22 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Flag', 'submitted_by');
     }
+
+    /**
+     * Get a list of resources associated with the current user. Used for Worklist.
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function resources()
+    {
+        return $this->BelongsToMany('App\Resource')->withTimestamps();
+    }
+
+    /**
+     * Get a list of events associated with the current user. Used for WorkList
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function events()
+    {
+        return $this->BelongsToMany('App\Event')->withTimestamps();
+    }
 }

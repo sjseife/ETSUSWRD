@@ -4,7 +4,9 @@
     <h1 class="text-center">All Events</h1>
     <div id="successOrFailure"></div>
     <!-- create a new event (uses the create method found at GET /event/create -->
+    @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
     <a class="btn btn-md btn-primary pull-right" href="{{ URL::to('events/create') }}" style="margin-bottom: 20px;">Create New Event</a>
+    @endif
     <br>
     <br>
     <div>
@@ -29,10 +31,12 @@
                 <th data-priority="3">Description</th> {{--13--}}
                 <th data-priority="3">Comments</th> {{--14--}}
                 <th class="all">Action</th> {{--15--}}
+                <th data-priority="4">View Report:</th>{{--16--}}
             </tr>
             </thead>
             <tfoot>
             <tr>
+                <th></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -174,6 +178,9 @@
                                 " name="{{$event->id}}">Add to Report</button>
                         {{-- <a class="btn btn-sm btn-primary" href="{{ URL::to('events/addAjax/'. $event->id) }}">Add to Report</a>--}}
 
+                    </td>
+                    <td class="text-center col-md-3">
+                        <a class="btn btn-sm btn-success" href="{{ URL::to('events/' . $event->id) }}">View</a>
                     </td>
                 </tr>
             @endforeach

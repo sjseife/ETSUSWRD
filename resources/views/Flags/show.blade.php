@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
                 <div class="panel-heading">View Flag</div>
                 <div class="panel-body">
                     <div class="col-md-offset-2"><br/><br/>
@@ -45,7 +45,7 @@
                         <dt>Description of Issue</dt>
                         <dd>{{ $flag->comments }}</dd>
                     </dl>
-                    <div class="col-md-offset-2">
+                    <div class="col-md-offset-3">
                         <br/>
                         @if(!$flag->resolved)
                             <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#resolveModal">Resolve</button>

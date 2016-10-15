@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
                 <div class="panel-heading">View User</div>
                 <div class="panel-body">
                     <div class="col-md-offset-2"><br/><br/>
@@ -33,9 +33,10 @@
                         <br/>
                         <br/>
                         <!-- Flag this user as incorrect -->
-                        <a class="btn btn-lg btn-link" href="{{ URL::to('users/' . $user->id. '/flag') }}">Report a problem with this contact.</a>
+                        <a class="btn btn-lg btn-link" href="{{ URL::to('users/' . $user->id. '/flag') }}">Report a problem with this user.</a>
                         <br/>
                         <br/>
+                        <div class="col-md-offset-2">
                         <!-- edit this contact (uses the edit method found at GET /contact/{id}/edit -->
                         <a class="btn btn-lg btn-info" href="{{ URL::to('users/' . $user->id. '/edit') }}">Edit</a>
                         <!-- delete the resource -->
@@ -43,6 +44,7 @@
                         <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#deleteModal">Delete</button>
                         <br/>
                         <br/>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -3,8 +3,10 @@
 @section('content')
     <h1 class="text-center">All Resources</h1>
     <div id="successOrFailure"></div>
+    @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
         <!-- create a new resource (uses the create method found at GET /resource/create -->
         <a class="btn btn-md btn-primary pull-right" href="{{ URL::to('resources/create') }}" style="margin-bottom: 20px;">Create New Resource</a>
+        @endif
         <br>
         <br>
         <div>
@@ -28,10 +30,12 @@
                         <th data-priority="3">Description</th> {{--12--}}
                         <th data-priority="3">Comments</th> {{--13--}}
                         <th class="all">Action</th> {{--14--}}
+                        <th data-priority="4">View Report:</th>{{--15--}}
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -169,6 +173,10 @@
                            {{-- <a class="btn btn-sm btn-primary" href="{{ URL::to('resources/addAjax/'. $resource->id) }}">Add to Report</a>--}}
 
                         </td>
+                        <td class="text-center col-md-3">
+                            <a class="btn btn-sm btn-success" href="{{ URL::to('resources/' . $resource->id) }}">View</a>
+                        </td>
+
                     </tr>
                 @endforeach
                 </tbody>
@@ -183,7 +191,7 @@
         //Apply DataTables
         $('#ResourceTable').dataTable( {
             initComplete: function () {
-                this.api().columns([1,5,8,9,10,11]).every( function () {
+                this.api().columns([1,8,9,10,11]).every( function () {
                     var column = this;
                     var select = $('<select><option value=""></option></select>')
                             .appendTo( $(column.footer()).empty() )

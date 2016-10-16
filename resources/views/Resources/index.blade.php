@@ -30,7 +30,7 @@
                         <th data-priority="3">Description</th> {{--12--}}
                         <th data-priority="3">Comments</th> {{--13--}}
                         <th class="all">Action</th> {{--14--}}
-                        <th data-priority="4">View Report:</th>{{--15--}}
+                        <th data-priority="4">View Resource:</th>{{--15--}}
                     </tr>
                 </thead>
                 <tfoot>
@@ -138,17 +138,24 @@
                            </ul>
                         </td>
                         <td><?php
-                                    $tempPhoneNumber = $resource->publicPhoneNumber;
-                                    $tempPhoneNumber = preg_replace("/[^0-9,x]/", "", $tempPhoneNumber );
-                                        if(strlen($tempPhoneNumber) > 10)
-                                        {
-                                            $tempPhoneNumber = preg_replace("/^[1]/", "", $tempPhoneNumber );
-                                        }
-                                    $tempPhoneNumber = '(' . substr($tempPhoneNumber,0, 3) . ') '
-                                                        . substr($tempPhoneNumber, 3, 3) . '-'
-                                                        . substr($tempPhoneNumber, 6, 4) . ' '
-                                                        . substr($tempPhoneNumber, 10, (strlen($tempPhoneNumber) - 10));
-                                    echo $tempPhoneNumber;
+                                    if(strlen($resource->publicPhoneNumber) > 0)
+                                    {
+                                        $tempPhoneNumber = $resource->publicPhoneNumber;
+                                        $tempPhoneNumber = preg_replace("/[^0-9,x]/", "", $tempPhoneNumber );
+                                            if(strlen($tempPhoneNumber) > 10)
+                                            {
+                                                $tempPhoneNumber = preg_replace("/^[1]/", "", $tempPhoneNumber );
+                                            }
+                                        $tempPhoneNumber = '(' . substr($tempPhoneNumber,0, 3) . ') '
+                                                            . substr($tempPhoneNumber, 3, 3) . '-'
+                                                            . substr($tempPhoneNumber, 6, 4) . ' '
+                                                            . substr($tempPhoneNumber, 10, (strlen($tempPhoneNumber) - 10));
+                                        echo $tempPhoneNumber;
+                                    }
+                                    else
+                                    {
+                                        echo "Not Provided";
+                                    }
 
                             ?></td>
                         <td>{{ $resource->publicEmail }}</td>
@@ -157,8 +164,8 @@
                         <td>{{ $resource->city }}</td>
                         <td>{{ $resource->state }}</td>
                         <td>{{ $resource->zipCode }}</td>
-                       <td>{{ $resource->provider->name }}</td>
-                        <td>{{ $resource->description }}</td>
+                        <td>{{ $resource->provider->name }}</td>
+                        <td><span style="white-space: normal;">{{ $resource->description }}</span></td>
                         <td>{{ $resource->comments }}</td>
                         <td class="text-center col-md-3">
 

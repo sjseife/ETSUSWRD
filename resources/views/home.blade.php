@@ -110,16 +110,16 @@
                 <!-- class all for always show, lower data priority numbers stay longer-->
                 <th class="all tableHeader" > Upcoming Events:</th> {{--0--}}
 
-                <th class="all purple-text">Dates</th> {{--3--}}
-                <th data-priority="1" class="purple-text">Hours of Operation</th> {{--4--}}
+                <th class="all purple-text">Dates:</th> {{--3--}}
+                <th data-priority="1" class="purple-text">Hours of Operation:</th> {{--4--}}
                 <th data-priority="3" class="purple-text">Street Address:</th> {{--8--}}
                 <th data-priority="3" class="purple-text"></th> {{--9--}}
-                <th data-priority="1" class="purple-text">County</th> {{--1--}}
-                <th data-priority="1" class="purple-text">City</th> {{--10--}}
+                <th data-priority="1" class="purple-text">County:</th> {{--1--}}
+                <th data-priority="1" class="purple-text">City:</th> {{--10--}}
                 <th data-priority="1" class="purple-text">State:</th> {{--11--}}
                 <th data-priority="3" class="purple-text">Zip Code:</th> {{--12--}}
-                <th data-priority="1" class="purple-text">Phone</th> {{--5--}}
-                <th data-priority="3" class="purple-text">Email</th> {{--6--}}
+                <th data-priority="1" class="purple-text">Phone:</th> {{--5--}}
+                <th data-priority="3" class="purple-text">Email:</th> {{--6--}}
                 <th data-priority="3" class="purple-text">Website:</th> {{--7--}}
                 <th data-priority="1" class="purple-text">Category</th> {{--2--}}
                 <th data-priority="3" class="purple-text">Provider:</th> {{--13--}}

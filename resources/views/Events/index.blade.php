@@ -261,6 +261,15 @@
    //Ajax for add to report button
     $('.addReport').each(function() {
         var button = $(this);
+        var index = button.attr("name");
+        <?php
+            $eventNames = array('empty');
+            foreach($events as $event)
+                {
+                   $eventNames[] = $event->name;
+                }
+        ?>
+        var eventNames = <?php echo json_encode($eventNames); ?>;
         $(this).click(function (){
             $.ajaxSetup({
                 headers: {
@@ -273,7 +282,7 @@
                 dataType: 'json',
                 success: function (data) {
                     //alerts users to successful button pushing.
-                    html = '<div class="alert alert-success">Added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                    html = '<div class="alert alert-success">'+ eventNames[index] +' Added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
                     $('#successOrFailure').html(html);
                     button.attr("disabled","disabled");
 

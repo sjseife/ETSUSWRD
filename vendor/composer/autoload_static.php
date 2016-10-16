@@ -380,6 +380,22 @@ class ComposerStaticInitd73390cccc8b291e238a182e0a30f7c2
         'Cached_PDF_Decorator' => __DIR__ . '/..' . '/dompdf/dompdf/include/cached_pdf_decorator.cls.php',
         'Canvas' => __DIR__ . '/..' . '/dompdf/dompdf/include/canvas.cls.php',
         'Canvas_Factory' => __DIR__ . '/..' . '/dompdf/dompdf/include/canvas_factory.cls.php',
+<<<<<<< HEAD
+        'CategoriesTableSeeder' => __DIR__ . '/../..' . '/../../../../../users/chris/desktop/csci3350/team2project/database/seeds/CategoriesTableSeeder.php',
+        'Cellmap' => __DIR__ . '/..' . '/dompdf/dompdf/include/cellmap.cls.php',
+        'ContactsTableSeeder' => __DIR__ . '/../..' . '/../../../../../users/chris/desktop/csci3350/team2project/database/seeds/ContactsTableSeeder.php',
+        'CreateArchiveTables' => __DIR__ . '/../..' . '/../../../../../users/chris/desktop/csci3350/team2project/database/migrations/2016_09_20_232625_create_archive_tables.php',
+        'CreateCategoriesTable' => __DIR__ . '/../..' . '/../../../../../users/chris/desktop/csci3350/team2project/database/migrations/2016_08_01_000354_create_categories_table.php',
+        'CreateContactsTable' => __DIR__ . '/../..' . '/../../../../../users/chris/desktop/csci3350/team2project/database/migrations/2016_08_02_200639_create_contacts_table.php',
+        'CreateFlagsTable' => __DIR__ . '/../..' . '/../../../../../users/chris/desktop/csci3350/team2project/database/migrations/2016_09_08_001634_create_flags_table.php',
+        'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/../../../../../users/chris/desktop/csci3350/team2project/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+        'CreateResourcesTable' => __DIR__ . '/../..' . '/../../../../../users/chris/desktop/csci3350/team2project/database/migrations/2016_07_31_235815_create_resources_table.php',
+        'CreateUsersTable' => __DIR__ . '/../..' . '/../../../../../users/chris/desktop/csci3350/team2project/database/migrations/2014_10_12_000000_create_users_table.php',
+        'DOMPDF' => __DIR__ . '/..' . '/dompdf/dompdf/include/dompdf.cls.php',
+        'DOMPDF_Exception' => __DIR__ . '/..' . '/dompdf/dompdf/include/dompdf_exception.cls.php',
+        'DOMPDF_Image_Exception' => __DIR__ . '/..' . '/dompdf/dompdf/include/dompdf_image_exception.cls.php',
+        'DatabaseSeeder' => __DIR__ . '/../..' . '/../../../../../users/chris/desktop/csci3350/team2project/database/seeds/DatabaseSeeder.php',
+=======
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
         'CategoriesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CategoriesTableSeeder.php',
@@ -442,6 +458,7 @@ class ComposerStaticInitd73390cccc8b291e238a182e0a30f7c2
         'Dotenv\\Exception\\ValidationException' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Exception/ValidationException.php',
         'Dotenv\\Loader' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Loader.php',
         'Dotenv\\Validator' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Validator.php',
+>>>>>>> 77abc3521a9925c565f8846dbe841efea675aab0
         'Encoding_Map' => __DIR__ . '/..' . '/phenx/php-font-lib/classes/Encoding_Map.php',
         'Faker\\Calculator\\Iban' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Iban.php',
         'Faker\\Calculator\\Luhn' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Luhn.php',
@@ -839,7 +856,7 @@ class ComposerStaticInitd73390cccc8b291e238a182e0a30f7c2
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
         'Fixed_Positioner' => __DIR__ . '/..' . '/dompdf/dompdf/include/fixed_positioner.cls.php',
-        'FlagTableSeeder' => __DIR__ . '/../..' . '/database/seeds/FlagTableSeeder.php',
+        'FlagTableSeeder' => __DIR__ . '/../..' . '/../../../../../users/chris/desktop/csci3350/team2project/database/seeds/FlagTableSeeder.php',
         'Font' => __DIR__ . '/..' . '/phenx/php-font-lib/classes/Font.php',
         'Font_Binary_Stream' => __DIR__ . '/..' . '/phenx/php-font-lib/classes/Font_Binary_Stream.php',
         'Font_EOT' => __DIR__ . '/..' . '/phenx/php-font-lib/classes/Font_EOT.php',
@@ -2382,6 +2399,9 @@ class ComposerStaticInitd73390cccc8b291e238a182e0a30f7c2
         'Page_Cache' => __DIR__ . '/..' . '/dompdf/dompdf/include/page_cache.cls.php',
         'Page_Frame_Decorator' => __DIR__ . '/..' . '/dompdf/dompdf/include/page_frame_decorator.cls.php',
         'Page_Frame_Reflower' => __DIR__ . '/..' . '/dompdf/dompdf/include/page_frame_reflower.cls.php',
+<<<<<<< HEAD
+        'PivotTableSeeder' => __DIR__ . '/../..' . '/../../../../../users/chris/desktop/csci3350/team2project/database/seeds/PivotTableSeeder.php',
+=======
         'PhpParser\\Autoloader' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Autoloader.php',
         'PhpParser\\Builder' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Builder.php',
         'PhpParser\\BuilderAbstract' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/BuilderAbstract.php',
@@ -2580,6 +2600,7 @@ class ComposerStaticInitd73390cccc8b291e238a182e0a30f7c2
         'PhpParser\\Unserializer' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Unserializer.php',
         'PhpParser\\Unserializer\\XML' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Unserializer/XML.php',
         'PivotTableSeeder' => __DIR__ . '/../..' . '/database/seeds/PivotTableSeeder.php',
+>>>>>>> 77abc3521a9925c565f8846dbe841efea675aab0
         'Positioner' => __DIR__ . '/..' . '/dompdf/dompdf/include/positioner.cls.php',
         'Prophecy\\Argument' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument.php',
         'Prophecy\\Argument\\ArgumentsWildcard' => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy/Argument/ArgumentsWildcard.php',
@@ -2784,7 +2805,7 @@ class ComposerStaticInitd73390cccc8b291e238a182e0a30f7c2
         'Psy\\VarDumper\\Presenter' => __DIR__ . '/..' . '/psy/psysh/src/Psy/VarDumper/Presenter.php',
         'Psy\\VarDumper\\PresenterAware' => __DIR__ . '/..' . '/psy/psysh/src/Psy/VarDumper/PresenterAware.php',
         'Renderer' => __DIR__ . '/..' . '/dompdf/dompdf/include/renderer.cls.php',
-        'ResourceTableSeeder' => __DIR__ . '/../..' . '/database/seeds/ResourceTableSeeder.php',
+        'ResourceTableSeeder' => __DIR__ . '/../..' . '/../../../../../users/chris/desktop/csci3350/team2project/database/seeds/ResourceTableSeeder.php',
         'SebastianBergmann\\Comparator\\ArrayComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/ArrayComparator.php',
         'SebastianBergmann\\Comparator\\Comparator' => __DIR__ . '/..' . '/sebastian/comparator/src/Comparator.php',
         'SebastianBergmann\\Comparator\\ComparisonFailure' => __DIR__ . '/..' . '/sebastian/comparator/src/ComparisonFailure.php',
@@ -3350,11 +3371,14 @@ class ComposerStaticInitd73390cccc8b291e238a182e0a30f7c2
         'Table_Row_Group_Frame_Reflower' => __DIR__ . '/..' . '/dompdf/dompdf/include/table_row_group_frame_reflower.cls.php',
         'Table_Row_Group_Renderer' => __DIR__ . '/..' . '/dompdf/dompdf/include/table_row_group_renderer.cls.php',
         'Table_Row_Positioner' => __DIR__ . '/..' . '/dompdf/dompdf/include/table_row_positioner.cls.php',
-        'TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
+        'TestCase' => __DIR__ . '/../..' . '/../../../../../users/chris/desktop/csci3350/team2project/tests/TestCase.php',
         'Text_Frame_Decorator' => __DIR__ . '/..' . '/dompdf/dompdf/include/text_frame_decorator.cls.php',
         'Text_Frame_Reflower' => __DIR__ . '/..' . '/dompdf/dompdf/include/text_frame_reflower.cls.php',
         'Text_Renderer' => __DIR__ . '/..' . '/dompdf/dompdf/include/text_renderer.cls.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
+<<<<<<< HEAD
+        'UserTableSeeder' => __DIR__ . '/../..' . '/../../../../../users/chris/desktop/csci3350/team2project/database/seeds/UserTableSeeder.php',
+=======
         'TijsVerkoyen\\CssToInlineStyles\\CssToInlineStyles' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/CssToInlineStyles.php',
         'TijsVerkoyen\\CssToInlineStyles\\Exception' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Exception.php',
         'TijsVerkoyen\\CssToInlineStyles\\Selector' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Selector.php',
@@ -3445,6 +3469,7 @@ class ComposerStaticInitd73390cccc8b291e238a182e0a30f7c2
         'phpDocumentor\\Reflection\\Types\\String_' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/String_.php',
         'phpDocumentor\\Reflection\\Types\\This' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/This.php',
         'phpDocumentor\\Reflection\\Types\\Void_' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/Void_.php',
+>>>>>>> 77abc3521a9925c565f8846dbe841efea675aab0
     );
 
     public static function getInitializer(ClassLoader $loader)

@@ -106,7 +106,47 @@ class ResourcesController extends Controller
 
     public function update(Resource $resource, ResourceRequest $request)
     {
+        DB::table('daily_hours')->where('resource_id', '=', $resource->id)->delete();
         $resource->update($request->all());
+
+        //create and sync daily hours if the resource is not closed that day
+        if(!isset($request->sundayClosedCheck))
+        {
+            $sunday = DailyHours::create(['day'=>'Sunday', 'openTime'=>$request->sundayOpen,
+                'closeTime'=>$request->sundayClose, 'resource_id'=>$resource->id]);
+        }
+        if(!isset($request->saturdayClosedCheck))
+        {
+            $saturday = DailyHours::create(['day'=>'Saturday', 'openTime'=>$request->saturdayOpen,
+                'closeTime'=>$request->saturdayClose, 'resource_id'=>$resource->id]);
+        }
+        if(!isset($request->fridayClosedCheck))
+        {
+            $friday = DailyHours::create(['day'=>'Friday', 'openTime'=>$request->fridayOpen,
+                'closeTime'=>$request->fridayClose, 'resource_id'=>$resource->id]);
+        }
+        if(!isset($request->thursdayClosedCheck))
+        {
+            $thursday = DailyHours::create(['day'=>'Thursday', 'openTime'=>$request->thursdayOpen,
+                'closeTime'=>$request->thursdayClose, 'resource_id'=>$resource->id]);
+        }
+        if(!isset($request->wednesdayClosedCheck))
+        {
+            $wednesday = DailyHours::create(['day'=>'Wednesday', 'openTime'=>$request->wednesdayOpen,
+                'closeTime'=>$request->wednesdayClose, 'resource_id'=>$resource->id]);
+        }
+        if(!isset($request->tuesdayClosedCheck))
+        {
+            $tuesday = DailyHours::create(['day'=>'Tuesday', 'openTime'=>$request->tuesdayOpen,
+                'closeTime'=>$request->tuesdayClose, 'resource_id'=>$resource->id]);
+        }
+        if(!isset($request->mondayClosedCheck))
+        {
+            $monday = DailyHours::create(['day'=>'Monday', 'openTime'=>$request->mondayOpen,
+                'closeTime'=>$request->mondayClose, 'resource_id'=>$resource->id]);
+        }
+
+
         if(!is_null($request->input('category_list')))
         {
             $syncCategories = $this->checkForNewCategories($request->input('category_list'));

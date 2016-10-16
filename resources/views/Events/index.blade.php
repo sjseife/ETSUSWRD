@@ -24,6 +24,7 @@
                 <th data-priority="2">Email</th> {{--6--}}
                 <th data-priority="2">Website</th> {{--7--}}
                 <th data-priority="3">Street Address</th> {{--8--}}
+                <th data-priority="4"></th> {{--8--}}
                 <th data-priority="2">City</th> {{--9--}}
                 <th data-priority="1">State</th> {{--10--}}
                 <th data-priority="2">Zip Code</th> {{--11--}}
@@ -36,6 +37,7 @@
             </thead>
             <tfoot>
             <tr>
+                <th></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -83,6 +85,11 @@
                             $dayArr = array();
                             $openTimeArr = array();
                             $closeTimeArr = array();
+                           /* $eventHours = array();
+                                foreach($event->hours as $day)
+                                    $eventHours[] = get_object_vars($day);
+                            $daysSorted = $eventHours;*/
+
                             ?>
                             @foreach($event->hours as $day)
 
@@ -142,6 +149,7 @@
                             }
                             ?>
                         </ul>
+
                     </td>
                     <td><?php
                         $tempPhoneNumber = $event->publicPhoneNumber;
@@ -159,13 +167,14 @@
                         ?></td>
                     <td>{{ $event->publicEmail }}</td>
                     <td>{{ $event->website }}</td>
-                    <td>{{ $event->streetAddress }} <br> {{ $event->streetAddress2 }}</td>
+                    <td>{{ $event->streetAddress }}</td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $event->streetAddress2 }}</td>
                     <td>{{ $event->city }}</td>
                     <td>{{ $event->state }}</td>
                     <td>{{ $event->zipCode }}</td>
                     <td>{{ $event->provider->name }}</td>
-                    <td>{{ $event->description }}</td>
-                    <td>{{ $event->comments }}</td>
+                    <td><div width="50%"><span style="white-space: normal;">{{ $event->description }}</span></div></td>
+                    <td><div width="50%"><span style="white-space: normal;">{{ $event->comments }}</span></div></td>
                     <td class="text-center col-md-3">
 
 
@@ -261,6 +270,15 @@
    //Ajax for add to report button
     $('.addReport').each(function() {
         var button = $(this);
+        var index = button.attr("name");
+        <?php
+            $eventNames = array('empty');
+            foreach($events as $event)
+                {
+                   $eventNames[] = $event->name;
+                }
+        ?>
+        var eventNames = <?php echo json_encode($eventNames); ?>;
         $(this).click(function (){
             $.ajaxSetup({
                 headers: {
@@ -273,7 +291,7 @@
                 dataType: 'json',
                 success: function (data) {
                     //alerts users to successful button pushing.
-                    html = '<div class="alert alert-success">Added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                    html = '<div class="alert alert-success">'+ eventNames[index] +' Added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
                     $('#successOrFailure').html(html);
                     button.attr("disabled","disabled");
 

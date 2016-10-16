@@ -69,6 +69,22 @@ return array(
     'Cached_PDF_Decorator' => $vendorDir . '/dompdf/dompdf/include/cached_pdf_decorator.cls.php',
     'Canvas' => $vendorDir . '/dompdf/dompdf/include/canvas.cls.php',
     'Canvas_Factory' => $vendorDir . '/dompdf/dompdf/include/canvas_factory.cls.php',
+<<<<<<< HEAD
+    'CategoriesTableSeeder' => $baseDir . '/../../../../../users/chris/desktop/csci3350/team2project/database/seeds/CategoriesTableSeeder.php',
+    'Cellmap' => $vendorDir . '/dompdf/dompdf/include/cellmap.cls.php',
+    'ContactsTableSeeder' => $baseDir . '/../../../../../users/chris/desktop/csci3350/team2project/database/seeds/ContactsTableSeeder.php',
+    'CreateArchiveTables' => $baseDir . '/../../../../../users/chris/desktop/csci3350/team2project/database/migrations/2016_09_20_232625_create_archive_tables.php',
+    'CreateCategoriesTable' => $baseDir . '/../../../../../users/chris/desktop/csci3350/team2project/database/migrations/2016_08_01_000354_create_categories_table.php',
+    'CreateContactsTable' => $baseDir . '/../../../../../users/chris/desktop/csci3350/team2project/database/migrations/2016_08_02_200639_create_contacts_table.php',
+    'CreateFlagsTable' => $baseDir . '/../../../../../users/chris/desktop/csci3350/team2project/database/migrations/2016_09_08_001634_create_flags_table.php',
+    'CreatePasswordResetsTable' => $baseDir . '/../../../../../users/chris/desktop/csci3350/team2project/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+    'CreateResourcesTable' => $baseDir . '/../../../../../users/chris/desktop/csci3350/team2project/database/migrations/2016_07_31_235815_create_resources_table.php',
+    'CreateUsersTable' => $baseDir . '/../../../../../users/chris/desktop/csci3350/team2project/database/migrations/2014_10_12_000000_create_users_table.php',
+    'DOMPDF' => $vendorDir . '/dompdf/dompdf/include/dompdf.cls.php',
+    'DOMPDF_Exception' => $vendorDir . '/dompdf/dompdf/include/dompdf_exception.cls.php',
+    'DOMPDF_Image_Exception' => $vendorDir . '/dompdf/dompdf/include/dompdf_image_exception.cls.php',
+    'DatabaseSeeder' => $baseDir . '/../../../../../users/chris/desktop/csci3350/team2project/database/seeds/DatabaseSeeder.php',
+=======
     'Carbon\\Carbon' => $vendorDir . '/nesbot/carbon/src/Carbon/Carbon.php',
     'Carbon\\CarbonInterval' => $vendorDir . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
     'CategoriesTableSeeder' => $baseDir . '/database/seeds/CategoriesTableSeeder.php',
@@ -135,6 +151,7 @@ return array(
     'Dotenv\\Exception\\ValidationException' => $vendorDir . '/vlucas/phpdotenv/src/Exception/ValidationException.php',
     'Dotenv\\Loader' => $vendorDir . '/vlucas/phpdotenv/src/Loader.php',
     'Dotenv\\Validator' => $vendorDir . '/vlucas/phpdotenv/src/Validator.php',
+>>>>>>> 77abc3521a9925c565f8846dbe841efea675aab0
     'Encoding_Map' => $vendorDir . '/phenx/php-font-lib/classes/Encoding_Map.php',
     'EventTableSeeder' => $baseDir . '/database/seeds/EventTableSeeder.php',
     'Faker\\Calculator\\Iban' => $vendorDir . '/fzaninotto/faker/src/Faker/Calculator/Iban.php',
@@ -533,7 +550,7 @@ return array(
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',
     'File_Iterator_Factory' => $vendorDir . '/phpunit/php-file-iterator/src/Factory.php',
     'Fixed_Positioner' => $vendorDir . '/dompdf/dompdf/include/fixed_positioner.cls.php',
-    'FlagTableSeeder' => $baseDir . '/database/seeds/FlagTableSeeder.php',
+    'FlagTableSeeder' => $baseDir . '/../../../../../users/chris/desktop/csci3350/team2project/database/seeds/FlagTableSeeder.php',
     'Font' => $vendorDir . '/phenx/php-font-lib/classes/Font.php',
     'Font_Binary_Stream' => $vendorDir . '/phenx/php-font-lib/classes/Font_Binary_Stream.php',
     'Font_EOT' => $vendorDir . '/phenx/php-font-lib/classes/Font_EOT.php',
@@ -2076,6 +2093,9 @@ return array(
     'Page_Cache' => $vendorDir . '/dompdf/dompdf/include/page_cache.cls.php',
     'Page_Frame_Decorator' => $vendorDir . '/dompdf/dompdf/include/page_frame_decorator.cls.php',
     'Page_Frame_Reflower' => $vendorDir . '/dompdf/dompdf/include/page_frame_reflower.cls.php',
+<<<<<<< HEAD
+    'PivotTableSeeder' => $baseDir . '/../../../../../users/chris/desktop/csci3350/team2project/database/seeds/PivotTableSeeder.php',
+=======
     'PhpParser\\Autoloader' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Autoloader.php',
     'PhpParser\\Builder' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Builder.php',
     'PhpParser\\BuilderAbstract' => $vendorDir . '/nikic/php-parser/lib/PhpParser/BuilderAbstract.php',
@@ -2274,6 +2294,7 @@ return array(
     'PhpParser\\Unserializer' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Unserializer.php',
     'PhpParser\\Unserializer\\XML' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Unserializer/XML.php',
     'PivotTableSeeder' => $baseDir . '/database/seeds/PivotTableSeeder.php',
+>>>>>>> 77abc3521a9925c565f8846dbe841efea675aab0
     'Positioner' => $vendorDir . '/dompdf/dompdf/include/positioner.cls.php',
     'Prophecy\\Argument' => $vendorDir . '/phpspec/prophecy/src/Prophecy/Argument.php',
     'Prophecy\\Argument\\ArgumentsWildcard' => $vendorDir . '/phpspec/prophecy/src/Prophecy/Argument/ArgumentsWildcard.php',
@@ -2479,7 +2500,7 @@ return array(
     'Psy\\VarDumper\\Presenter' => $vendorDir . '/psy/psysh/src/Psy/VarDumper/Presenter.php',
     'Psy\\VarDumper\\PresenterAware' => $vendorDir . '/psy/psysh/src/Psy/VarDumper/PresenterAware.php',
     'Renderer' => $vendorDir . '/dompdf/dompdf/include/renderer.cls.php',
-    'ResourceTableSeeder' => $baseDir . '/database/seeds/ResourceTableSeeder.php',
+    'ResourceTableSeeder' => $baseDir . '/../../../../../users/chris/desktop/csci3350/team2project/database/seeds/ResourceTableSeeder.php',
     'SebastianBergmann\\Comparator\\ArrayComparator' => $vendorDir . '/sebastian/comparator/src/ArrayComparator.php',
     'SebastianBergmann\\Comparator\\Comparator' => $vendorDir . '/sebastian/comparator/src/Comparator.php',
     'SebastianBergmann\\Comparator\\ComparisonFailure' => $vendorDir . '/sebastian/comparator/src/ComparisonFailure.php',
@@ -3045,11 +3066,14 @@ return array(
     'Table_Row_Group_Frame_Reflower' => $vendorDir . '/dompdf/dompdf/include/table_row_group_frame_reflower.cls.php',
     'Table_Row_Group_Renderer' => $vendorDir . '/dompdf/dompdf/include/table_row_group_renderer.cls.php',
     'Table_Row_Positioner' => $vendorDir . '/dompdf/dompdf/include/table_row_positioner.cls.php',
-    'TestCase' => $baseDir . '/tests/TestCase.php',
+    'TestCase' => $baseDir . '/../../../../../users/chris/desktop/csci3350/team2project/tests/TestCase.php',
     'Text_Frame_Decorator' => $vendorDir . '/dompdf/dompdf/include/text_frame_decorator.cls.php',
     'Text_Frame_Reflower' => $vendorDir . '/dompdf/dompdf/include/text_frame_reflower.cls.php',
     'Text_Renderer' => $vendorDir . '/dompdf/dompdf/include/text_renderer.cls.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
+<<<<<<< HEAD
+    'UserTableSeeder' => $baseDir . '/../../../../../users/chris/desktop/csci3350/team2project/database/seeds/UserTableSeeder.php',
+=======
     'TijsVerkoyen\\CssToInlineStyles\\CssToInlineStyles' => $vendorDir . '/tijsverkoyen/css-to-inline-styles/src/CssToInlineStyles.php',
     'TijsVerkoyen\\CssToInlineStyles\\Exception' => $vendorDir . '/tijsverkoyen/css-to-inline-styles/src/Exception.php',
     'TijsVerkoyen\\CssToInlineStyles\\Selector' => $vendorDir . '/tijsverkoyen/css-to-inline-styles/src/Selector.php',
@@ -3140,4 +3164,5 @@ return array(
     'phpDocumentor\\Reflection\\Types\\String_' => $vendorDir . '/phpdocumentor/type-resolver/src/Types/String_.php',
     'phpDocumentor\\Reflection\\Types\\This' => $vendorDir . '/phpdocumentor/type-resolver/src/Types/This.php',
     'phpDocumentor\\Reflection\\Types\\Void_' => $vendorDir . '/phpdocumentor/type-resolver/src/Types/Void_.php',
+>>>>>>> 77abc3521a9925c565f8846dbe841efea675aab0
 );

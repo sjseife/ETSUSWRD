@@ -12,16 +12,23 @@
             margin-top:0px;
             margin-bottom:0px;
             margin: 0 auto;
-            font-size: 13px;
+            font-size: 89%;
             width:65%;
             border:2px solid #7790ab;
+            white-space: nowrap;
 
         }
         th, td {
-            padding-left: 5px;
+            padding-left: 10px;
             padding-bottom: 8px;
             padding-top: 5px;
             text-align: left;
+
+        }
+        .name{
+            table-layout:fixed;
+            word-wrap:break-word;
+            width:20%;
         }
         .tableHeader{
              margin:0 auto;
@@ -91,28 +98,28 @@
     </style>
 
 <div class="container">
-    <div class="row col-md-10 col-md-offset-1 col-sm-6">
+    <div class="row col-md-10 col-md-offset-1 col-sm-offset-1 col-sm-6">
         <?php
         if(!empty($upcomingEvents))
             echo  '<button class="btn btn-sm btn-white pull-right" id="hide">Hide Events</button>';
 
         ?>
-        <table class="dt-responsive nowrap tableText pull-right" cellspacing="0" width="75%"  id="UpcomingEventsTable" frame="hsides" rules="thead , row='1'" >
+        <table class="dt-responsive nowrap tableText pull-right" cellspacing="0" width="70%"  id="UpcomingEventsTable" frame="hsides" rules="thead , row='1'" >
             <thead>
             <tr>
                 <!-- class all for always show, lower data priority numbers stay longer-->
                 <th class="all tableHeader" > Upcoming Events:</th> {{--0--}}
 
-                <th class="all purple-text">Dates</th> {{--3--}}
-                <th data-priority="1" class="purple-text">Hours of Operation</th> {{--4--}}
+                <th class="all purple-text">Dates:</th> {{--3--}}
+                <th data-priority="1" class="purple-text">Hours of Operation:</th> {{--4--}}
                 <th data-priority="3" class="purple-text">Street Address:</th> {{--8--}}
                 <th data-priority="3" class="purple-text"></th> {{--9--}}
-                <th data-priority="1" class="purple-text">County</th> {{--1--}}
-                <th data-priority="1" class="purple-text">City</th> {{--10--}}
+                <th data-priority="1" class="purple-text">County:</th> {{--1--}}
+                <th data-priority="1" class="purple-text">City:</th> {{--10--}}
                 <th data-priority="1" class="purple-text">State:</th> {{--11--}}
                 <th data-priority="3" class="purple-text">Zip Code:</th> {{--12--}}
-                <th data-priority="1" class="purple-text">Phone</th> {{--5--}}
-                <th data-priority="3" class="purple-text">Email</th> {{--6--}}
+                <th data-priority="1" class="purple-text">Phone:</th> {{--5--}}
+                <th data-priority="3" class="purple-text">Email:</th> {{--6--}}
                 <th data-priority="3" class="purple-text">Website:</th> {{--7--}}
                 <th data-priority="1" class="purple-text">Category</th> {{--2--}}
                 <th data-priority="3" class="purple-text">Provider:</th> {{--13--}}
@@ -129,8 +136,8 @@
                 <tr>
                     <td>{{ $event->name }}</td>
                     <td>
-                        {{ date('M jS, Y', strtotime($event->startDate)) }}
-                        - {{ date('M jS, Y', strtotime($event->endDate)) }}
+                        {{ date('M d, Y', strtotime($event->startDate)) }}
+                        - {{ date('M d, Y', strtotime($event->endDate)) }}
                     </td>
                     <td>
                     <ul>
@@ -232,8 +239,8 @@
                         @endforeach
                     </td>
                     <td>{{ $event->provider->name }}</td>
-                    <td>{{ $event->description }}</td>
-                    <td>{{ $event->comments }}</td>
+                    <td><div width="50%"><span style="white-space: normal;">{{ $event->description }}</span></div></td>
+                    <td><div width="50%"><span style="white-space: normal;">{{ $event->comments }}</span></div></td>
 
                 </tr>
 

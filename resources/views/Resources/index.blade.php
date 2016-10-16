@@ -23,6 +23,7 @@
                         <th data-priority="2">Email</th> {{--5--}}
                         <th data-priority="2">Website</th> {{--6--}}
                         <th data-priority="3">Street Address</th> {{--7--}}
+                        <th data-priority="4"></th> {{--7--}}
                         <th data-priority="2">City</th> {{--8--}}
                         <th data-priority="1">State</th> {{--9--}}
                         <th data-priority="2">Zip Code</th> {{--10--}}
@@ -35,6 +36,7 @@
                 </thead>
                 <tfoot>
                     <tr>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -160,13 +162,14 @@
                             ?></td>
                         <td>{{ $resource->publicEmail }}</td>
                         <td>{{ $resource->website }}</td>
-                        <td>{{ $resource->streetAddress }} <br> {{ $resource->streetAddress2 }}</td>
+                        <td>{{ $resource->streetAddress }}</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $resource->streetAddress2 }}</td>
                         <td>{{ $resource->city }}</td>
                         <td>{{ $resource->state }}</td>
                         <td>{{ $resource->zipCode }}</td>
                         <td>{{ $resource->provider->name }}</td>
-                        <td><span style="white-space: normal;">{{ $resource->description }}</span></td>
-                        <td>{{ $resource->comments }}</td>
+                        <td><div width="50%"><span style="white-space: normal;">{{ $resource->description }}</span></div></td>
+                        <td><div width="50%"><span style="white-space: normal;">{{ $resource->comments }}</span></div></td>
                         <td class="text-center col-md-3">
 
 
@@ -261,6 +264,15 @@
     //Ajax for add to report button
     $('.addReport').each(function() {
         var button = $(this);
+        var index = button.attr("name");
+                <?php
+                $resourceNames = array('empty');
+                foreach($resources as $resource)
+                {
+                    $resourceNames[] = $resource->name;
+                }
+                ?>
+        var resourceNames = <?php echo json_encode($resourceNames); ?>;
         $(this).click(function (){
             $.ajaxSetup({
                 headers: {
@@ -273,7 +285,7 @@
                 dataType: 'json',
                 success: function (data) {
                     //alerts users to successful button pushing.
-                     html = '<div class="alert alert-success">{{$resource->name}} added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                     html = '<div class="alert alert-success">'+ resourceNames[index] +' Added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
                      $('#successOrFailure').html(html);
                     button.attr("disabled","disabled");
 

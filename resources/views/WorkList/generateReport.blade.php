@@ -14,11 +14,16 @@
     $detect = new Mobile_Detect;
 ?>
     @if($resourcesSet != false)
-        <h1 class="text-center">Resource and Event Report</h1>
+        <?php if ( $detect->isMobile() ) { ?>
+            <h3 class="text-center">Resource and Event Report</h3><br>
+        <?php }
+        else{ ?>
+            <h1 class="text-center">Resource and Event Report</h1>
+        <?php } ?>
             <div class="container">
                 <a class="btn btn-small btn-danger pull-left" href="{{ URL::to('worklist/emptyReport') }}" style="margin-bottom: 20px;">Empty Report</a>
                 <?php if ( $detect->isMobile() ) { ?>
-                    <a class="btn btn-small btn-success pull-right" target="_blank" href="{{ URL::to('/report.pdf') }}" style="margin-bottom: 20px;">Download</a>
+                    <a class="btn btn-small btn-success pull-right" target="_blank" href="{{ URL::to('/worklist/mobileReport') }}" style="margin-bottom: 20px;">Download</a>
                 <?php }
                 else{ ?>
                 <a class="btn btn-small btn-info pull-right" target="_blank" href="{{ URL::to('worklist/generatePDF') }}" style="margin-bottom: 20px;">External Preview</a>

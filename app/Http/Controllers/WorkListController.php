@@ -34,6 +34,19 @@ class WorkListController extends Controller
         }
     }
 
+    public function mobileReport()
+    {
+        $resources = Auth::user()->resources;
+        $events = Auth::user()->events;
+        $pdf = App::make('dompdf.wrapper');
+        $view = View::make('WorkList._pdfLayout')->with('resources', $resources)->with('events', $events);
+        $contents = $view->render();
+        $pdf->loadHTML($contents);
+        $report = $pdf->output();
+        file_put_contents('report.pdf', $report);
+        return Redirect('/report.pdf');
+    }
+
     public function emptyReport()
     {
         Auth::user()->resources()->detach();

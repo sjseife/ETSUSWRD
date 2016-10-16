@@ -121,6 +121,7 @@ Route::post('resources/flag/{resource}', 'ResourcesController@storeFlag');
 Route::get('worklist/emptyReport', 'WorkListController@emptyReport');
 Route::get('worklist/generateReport', 'WorkListController@generateReport');
 Route::get('worklist/generatePDF', 'WorkListController@generatePDF');
+Route::get('worklist/mobileReport', 'WorkListController@mobileReport');
 
 //flags
 Route::get('flags', 'FlagsController@index');

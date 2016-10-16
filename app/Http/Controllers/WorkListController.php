@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\View;
 
 use Illuminate\Http\Request;
 
+use Response;
+use Storage;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
@@ -29,8 +31,17 @@ class WorkListController extends Controller
             $contents = $view->render();
             $pdf->loadHTML($contents);
             $report = $pdf->output();
-            file_put_contents('report.pdf', $report);
-            return view('WorkList.generateReport', compact('resources', 'events', 'report', 'resourcesSet'));
+
+            $directory = DIRECTORY_SEPARATOR . Auth::user()->email;
+
+            Storage::disk('public')->deleteDirectory($directory);
+            Storage::disk('public')->makeDirectory($directory);
+
+            $filename = uniqid(Auth::user()->email, true) . '.pdf';
+            Storage::disk('public')->put($directory. DIRECTORY_SEPARATOR . $filename, $report);
+            $file = Storage::disk('public')->get($directory. DIRECTORY_SEPARATOR . $filename);
+
+            return view('WorkList.generateReport', compact('resources', 'events', 'file', 'resourcesSet'));
         }
     }
 
@@ -38,13 +49,30 @@ class WorkListController extends Controller
     {
         $resources = Auth::user()->resources;
         $events = Auth::user()->events;
+
+        //create the pdf
         $pdf = App::make('dompdf.wrapper');
         $view = View::make('WorkList._pdfLayout')->with('resources', $resources)->with('events', $events);
         $contents = $view->render();
         $pdf->loadHTML($contents);
         $report = $pdf->output();
-        file_put_contents('report.pdf', $report);
-        return Redirect('/report.pdf');
+
+        //make public directory with user email
+        $directory = DIRECTORY_SEPARATOR . Auth::user()->email;
+
+        //delete the contents and folder, regenerate folder
+        Storage::disk('public')->deleteDirectory($directory);
+        Storage::disk('public')->makeDirectory($directory);
+
+        //create unique pdf name so a new pdf is shown on mobile devices
+        $filename = uniqid(Auth::user()->email, true) . '.pdf';
+
+        //store the file and retrieve for response view
+        Storage::disk('public')->put($directory. DIRECTORY_SEPARATOR . $filename, $report);
+        $file = Storage::disk('public')->get($directory. DIRECTORY_SEPARATOR . $filename);
+
+        return Response::make($file, 200)
+            ->header('Content-Type', 'application/pdf');
     }
 
     public function emptyReport()

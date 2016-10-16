@@ -40,7 +40,7 @@ class HomeController extends Controller
 
 
         $upcomingEvents = array();
-           $now= Carbon::now();
+           $now= Carbon::now('America/New_York');
 
           foreach ($events as $event)
            {
@@ -49,12 +49,14 @@ class HomeController extends Controller
 
                $start = new Carbon($event->startDate);
                if ($now->gt($start)) { $startBool = true; }
-               $tempStartDiff = ($start->diffInDays($now));
+               $tempStartDiff = ($now->diffInDays($start));
 
                $end = new Carbon($event->endDate);
                if ($end->gt($now)) { $endBool = true; }
                $tempEndDiff = ($end->diffInDays($now));
+
                $startBool = (($tempStartDiff  < 6) || $startBool);
+               $endBool = (($tempEndDiff  < 1) || $endBool);
 
               if($startBool  && $endBool)
                {

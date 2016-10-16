@@ -23,6 +23,7 @@
                         <th data-priority="2">Email</th> {{--5--}}
                         <th data-priority="2">Website</th> {{--6--}}
                         <th data-priority="3">Street Address</th> {{--7--}}
+                        <th data-priority="4"></th> {{--7--}}
                         <th data-priority="2">City</th> {{--8--}}
                         <th data-priority="1">State</th> {{--9--}}
                         <th data-priority="2">Zip Code</th> {{--10--}}
@@ -35,6 +36,7 @@
                 </thead>
                 <tfoot>
                     <tr>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -160,7 +162,8 @@
                             ?></td>
                         <td>{{ $resource->publicEmail }}</td>
                         <td>{{ $resource->website }}</td>
-                        <td>{{ $resource->streetAddress }} <br> {{ $resource->streetAddress2 }}</td>
+                        <td>{{ $resource->streetAddress }}</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $resource->streetAddress2 }}</td>
                         <td>{{ $resource->city }}</td>
                         <td>{{ $resource->state }}</td>
                         <td>{{ $resource->zipCode }}</td>

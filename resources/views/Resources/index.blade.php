@@ -165,8 +165,8 @@
                         <td>{{ $resource->state }}</td>
                         <td>{{ $resource->zipCode }}</td>
                         <td>{{ $resource->provider->name }}</td>
-                        <td><span style="white-space: normal;">{{ $resource->description }}</span></td>
-                        <td>{{ $resource->comments }}</td>
+                        <td><div width="50%"><span style="white-space: normal;">{{ $resource->description }}</span></div></td>
+                        <td><div width="50%"><span style="white-space: normal;">{{ $resource->comments }}</span></div></td>
                         <td class="text-center col-md-3">
 
 

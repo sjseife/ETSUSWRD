@@ -239,8 +239,8 @@
                         @endforeach
                     </td>
                     <td>{{ $event->provider->name }}</td>
-                    <td>{{ $event->description }}</td>
-                    <td>{{ $event->comments }}</td>
+                    <td><div width="50%"><span style="white-space: normal;">{{ $event->description }}</span></div></td>
+                    <td><div width="50%"><span style="white-space: normal;">{{ $event->comments }}</span></div></td>
 
                 </tr>
 

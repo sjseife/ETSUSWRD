@@ -21,7 +21,10 @@ class EventTableSeeder extends Seeder
             'state' => 'TN',
             'zipCode' => '37615',
             'publicPhoneNumber' => '423-954-2343',
-            'comments' => 'Surprise! The event does not exist!',
+            'publicEmail' => 'test@email.com',
+            'website' => 'test.com',
+            'description' => file_get_contents('http://loripsum.net/api/2/plaintext'),
+            'Comments' => file_get_contents('http://loripsum.net/api/1/short/plaintext'),
             'provider_id' => '1'
         ]);
 
@@ -35,7 +38,9 @@ class EventTableSeeder extends Seeder
             'state' => 'TN',
             'zipCode' => '37615',
             'publicPhoneNumber' => '423-954-3042',
-            'comments' => 'Surprise! The event does not exist!',
+            'publicEmail' => 'test1@email.com',
+            'website' => 'test1.com',
+            'description' => file_get_contents('http://loripsum.net/api/3/plaintext'),
             'provider_id' => '2'
         ]);
 
@@ -49,8 +54,10 @@ class EventTableSeeder extends Seeder
             'county' => 'Washington',
             'state' => 'TN',
             'zipCode' => '37615',
-            'publicPhoneNumber' => '423-954-3774',
-            'comments' => 'Surprise! The event does not exist!',
+            'publicEmail' => 'test2@email.com',
+            'website' => 'test2.com',
+            'description' => file_get_contents('http://loripsum.net/api/4/plaintext'),
+            'Comments' => file_get_contents('http://loripsum.net/api/1/short/plaintext'),
             'provider_id' => '3'
         ]);
         for($x = 1; $x < 4; $x++)

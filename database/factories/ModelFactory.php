@@ -38,6 +38,9 @@ function variableChanger($i, $j){
             'state' => 'TN',
             'zipcode' => $faker->postcode,
             'publicPhoneNumber' => $faker->phoneNumber,
+            'publicEmail' => $faker->safeEmail,
+            'description' => file_get_contents('http://loripsum.net/api/2/plaintext'),
+            'Comments' => file_get_contents('http://loripsum.net/api/1/short/plaintext'),
             'provider_id' => rand(1, 21)
         ];
     });
@@ -56,7 +59,9 @@ function variableChanger($i, $j){
            'name' => $faker->company,
            'publicPhoneNumber' => $faker->phoneNumber,
            'publicEmail' => $faker->safeEmail,
-           'website' => $faker->domainName
+           'website' => $faker->domainName,
+           'description' => file_get_contents('http://loripsum.net/api/2/plaintext'),
+           'Comments' => file_get_contents('http://loripsum.net/api/1/short/plaintext'),
        ];
     });
 

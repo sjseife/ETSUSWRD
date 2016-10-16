@@ -205,11 +205,11 @@
                                 }
                                 elseif (count($item) < 2)
                                 {
-                                    echo '<li>' . $item[0] . ':<br>' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '</li>';
+                                    echo '<u>' . $item[0] . '</u>: ' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '<br>';
                                 }
                                 else
                                 {
-                                    echo '<li>' . $item[0] . ' - ' . end($item) . ':<br>' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '</li>';
+                                    echo '<u>' . $item[0] . ' - ' . end($item) . '</u>: ' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '<br>';
                                 }
                             }
                         ?>

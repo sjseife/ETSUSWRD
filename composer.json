@@ -10,7 +10,8 @@
         "yajra/laravel-datatables-oracle": "~6.0",
         "barryvdh/laravel-dompdf": "^0.6.1",
         "laravelcollective/html": "5.2.*",
-        "barryvdh/laravel-snappy": "^0.3.0"
+        "barryvdh/laravel-snappy": "^0.3.0",
+        "mobiledetect/mobiledetectlib": "^2.8"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

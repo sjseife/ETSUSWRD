@@ -6,8 +6,6 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">View Event</div>
                 <div class="panel-body">
-                    <div class="col-md-offset-1"><br/><br/>
-
             <h2><em>{{ $event->name }}</em></h2>
             <div class="col-md-4">
                 <p><b>Address:</b></p>
@@ -22,6 +20,7 @@
                 <p>{{ $event->city }}, {{ $event->state }} {{ $event->zipCode }}</p>
                 <p>{{ $event->county }}</p>
             </div>
+
             <div class="col-md-4">
                 <p><b>Dates:</b></p>
                 <p>{{ date('M jS, Y', strtotime($event->startDate)) }} - {{ date('M jS, Y', strtotime($event->endDate)) }}</p>
@@ -132,6 +131,7 @@
                 @else
                     <p>No problems reported</p>
                 @endif
+                </div>
                 <div class="col-md-10 col-md-offset-4">
                     <br/>
                     <br/>
@@ -152,6 +152,7 @@
 
                             <!-- Flag this event as incorrect -->
                             <a  href="{{ URL::to('events/' . $event->id. '/flag') }}">Report a problem with this event.</a>
+                        </div>
                         </div>
                     </div>
                     <br/>

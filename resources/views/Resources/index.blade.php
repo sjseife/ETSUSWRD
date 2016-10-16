@@ -30,7 +30,7 @@
                         <th data-priority="3">Description</th> {{--12--}}
                         <th data-priority="3">Comments</th> {{--13--}}
                         <th class="all">Action</th> {{--14--}}
-                        <th data-priority="4">View Report:</th>{{--15--}}
+                        <th data-priority="4">View Resource:</th>{{--15--}}
                     </tr>
                 </thead>
                 <tfoot>
@@ -138,17 +138,24 @@
                            </ul>
                         </td>
                         <td><?php
-                                    $tempPhoneNumber = $resource->publicPhoneNumber;
-                                    $tempPhoneNumber = preg_replace("/[^0-9,x]/", "", $tempPhoneNumber );
-                                        if(strlen($tempPhoneNumber) > 10)
-                                        {
-                                            $tempPhoneNumber = preg_replace("/^[1]/", "", $tempPhoneNumber );
-                                        }
-                                    $tempPhoneNumber = '(' . substr($tempPhoneNumber,0, 3) . ') '
-                                                        . substr($tempPhoneNumber, 3, 3) . '-'
-                                                        . substr($tempPhoneNumber, 6, 4) . ' '
-                                                        . substr($tempPhoneNumber, 10, (strlen($tempPhoneNumber) - 10));
-                                    echo $tempPhoneNumber;
+                                    if(strlen($resource->publicPhoneNumber) > 0)
+                                    {
+                                        $tempPhoneNumber = $resource->publicPhoneNumber;
+                                        $tempPhoneNumber = preg_replace("/[^0-9,x]/", "", $tempPhoneNumber );
+                                            if(strlen($tempPhoneNumber) > 10)
+                                            {
+                                                $tempPhoneNumber = preg_replace("/^[1]/", "", $tempPhoneNumber );
+                                            }
+                                        $tempPhoneNumber = '(' . substr($tempPhoneNumber,0, 3) . ') '
+                                                            . substr($tempPhoneNumber, 3, 3) . '-'
+                                                            . substr($tempPhoneNumber, 6, 4) . ' '
+                                                            . substr($tempPhoneNumber, 10, (strlen($tempPhoneNumber) - 10));
+                                        echo $tempPhoneNumber;
+                                    }
+                                    else
+                                    {
+                                        echo "Not Provided";
+                                    }
 
                             ?></td>
                         <td>{{ $resource->publicEmail }}</td>
@@ -157,9 +164,9 @@
                         <td>{{ $resource->city }}</td>
                         <td>{{ $resource->state }}</td>
                         <td>{{ $resource->zipCode }}</td>
-                       <td>{{ $resource->provider->name }}</td>
-                        <td>{{ $resource->description }}</td>
-                        <td>{{ $resource->comments }}</td>
+                        <td>{{ $resource->provider->name }}</td>
+                        <td><div width="50%"><span style="white-space: normal;">{{ $resource->description }}</span></div></td>
+                        <td><div width="50%"><span style="white-space: normal;">{{ $resource->comments }}</span></div></td>
                         <td class="text-center col-md-3">
 
 
@@ -254,6 +261,15 @@
     //Ajax for add to report button
     $('.addReport').each(function() {
         var button = $(this);
+        var index = button.attr("name");
+                <?php
+                $resourceNames = array('empty');
+                foreach($resources as $resource)
+                {
+                    $resourceNames[] = $resource->name;
+                }
+                ?>
+        var resourceNames = <?php echo json_encode($resourceNames); ?>;
         $(this).click(function (){
             $.ajaxSetup({
                 headers: {
@@ -266,7 +282,7 @@
                 dataType: 'json',
                 success: function (data) {
                     //alerts users to successful button pushing.
-                     html = '<div class="alert alert-success">Added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                     html = '<div class="alert alert-success">'+ resourceNames[index] +' Added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
                      $('#successOrFailure').html(html);
                     button.attr("disabled","disabled");
 

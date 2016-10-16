@@ -27,7 +27,7 @@
     </style>
 </head>
 <body id="app-layout">
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-default navbar-static-top" style="background-color:#041E42; height:70px">
         <div class="container">
             <div class="navbar-header">
 
@@ -41,7 +41,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
+                    <img src="/images/header_logo_2014.png" style="width:190px;">
                 </a>
             </div>
 

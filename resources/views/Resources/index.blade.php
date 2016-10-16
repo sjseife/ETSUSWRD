@@ -273,7 +273,7 @@
                 dataType: 'json',
                 success: function (data) {
                     //alerts users to successful button pushing.
-                     html = '<div class="alert alert-success">Added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                     html = '<div class="alert alert-success">{{$resource->name}} added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
                      $('#successOrFailure').html(html);
                     button.attr("disabled","disabled");
 

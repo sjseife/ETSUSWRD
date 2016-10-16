@@ -6,59 +6,64 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">View Provider</div>
                 <div class="panel-body">
-                    <div class="col-md-offset-3"><br/><br/>
-                        <div>
-                            <a href="{{'/providers'}}">Back to Providers</a></br></br>
-                        </div>
+                    <div class="col-md-offset-1"><br/><br/>
+
                     </div>
-                    <dl class="dl-horizontal">
-                        <dt>Name</dt>
-                        <dd>{{ $provider->name }}</dd>
-                        <dt>Email</dt>
-                        <dd>{{ $provider->protectedEmail }}</dd>
-                        <dt>Phone Number</dt>
-                        <dd>{{ $provider->protectedPhoneNumber }}</dd>
-                        <dt>Contacts</dt>
+                    <h2><em>{{ $provider->name }}</em></h2>
+                    <div class="col-md-10">
+                        <p>Email:</p>
+                        <p>{{ $provider->protectedEmail }}</p>
+                        <p>Phone:</p>
+                        <p>{{ $provider->protectedPhoneNumber }}</p>
+                        <hr>
+                    </div>
+                    <div class="col-md-10">
+                        <p><strong>Contacts</strong></p>
                         @foreach($provider->contacts as $contact)
-                            <dd>
+                            <p>
                                 <a href="{{ URL::to('contacts/' . $contact->id) }}">
                                     {{ $contact->full_name }}
                                 </a>
-                            </dd>
+                            </p>
                         @endforeach
-                        <dt>Resources</dt>
+                        <hr>
+                    </div>
+                    <div class="col-md-10">
+                        <p><strong>Resources</strong></p>
                         @foreach($provider->resources as $resource)
-                            <dd>
+                            <p>
                                 <a href="{{ URL::to('resources/' . $resource->id) }}">
                                     {{ $resource->name }}
                                 </a>
-                            </dd>
+                            </p>
                         @endforeach
-                        <dt>Events</dt>
+                        <hr>
+                    </div>
+                    <div class="col-md-10">
+                        <p><strong>Events</strong></p>
                         @foreach($provider->events as $event)
-                            <dd>
+                            <p>
                                 <a href="{{ URL::to('events/' . $event->id) }}">
                                     {{ $event->name }}
                                 </a>
-                            </dd>
+                            </p>
                         @endforeach<br>
-                        <dt>Reported Problems</dt>
+                        <hr>
+                        <p>Reported Problems</p>
                         @if(isset($provider->flags))
                             @foreach($provider->flags as $flag)
                                 @if(!$flag->resolved)
-                                    <dd>{{ $flag->comments }}</dd>
+                                    <p>{{ $flag->comments }}</p>
                                 @endif
                             @endforeach
                         @else
-                            <dd>No problems reported</dd>
+                            <p>No problems reported</p>
                         @endif
-                    </dl>
+                    </div>
 
-                    <div class="col-md-offset-2">
+                    <div class="col-md-10">
                         <br/>
-                        <br/>
-                        <!-- Flag this resource as incorrect -->
-                        <a class="btn btn-lg btn-link" href="{{ URL::to('providers/' . $provider->id. '/flag') }}">Report a problem with this provider.</a>
+
                         <br/>
                         <br/>
                         @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
@@ -70,8 +75,14 @@
                         <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#deleteModal">Delete</button>
                         <br/>
                         <br/>
+                            <div>
+                                <a href="{{'/providers'}}">Back to Providers</a></br>
+                                <!-- Flag this provider as incorrect -->
+                                <a  href="{{ URL::to('privders/' . $provider->id. '/flag') }}">Report a problem with this resource.</a>
+                            </div>
                     </div>
                         @endif
+
 
                 </div>
             </div>

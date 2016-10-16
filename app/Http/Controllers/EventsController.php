@@ -245,7 +245,7 @@ class EventsController extends Controller
         }
         else
         {
-            \Session::flash('flash_message', 'Event Removed from Report');
+            \Session::flash('flash_message', $event->name.' removed from the Report.');
             return Redirect('/worklist/generateReport');
         }
     }

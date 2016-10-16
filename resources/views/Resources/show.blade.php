@@ -94,13 +94,13 @@
             </div>
                         <div class="col-md-4">
                             <h5 class="list-heading"><b>Contact Methods:</b></h5>
-                            <ul>
-                                <li>Phone Number: {{ $resource->publicPhoneNumber }} @if($resource->publicPhoneNumber == null) N/A @endif </li>
+                            <ul style="list-style:none;">
+                                <li>Phone: {{ $resource->publicPhoneNumber }} @if($resource->publicPhoneNumber == null) N/A @endif </li>
                                 <li>Email: {{ $resource->publicEmail }} @if($resource->publicEmail == null) N/A @endif </li>
                                 <li>Website: {{ $resource->website }} @if($resource->website == null) N/A @endif </li>
                             </ul>
                             <h5 class="list-heading"><b>Categories:</b></h5>
-                            <ul>
+                            <ul style="list-style:none;">
                                 @foreach ($resource->categories as $category)
                                     <li><a href="{{ URL::to('categories/' . $category->id) }}">
                                             | {{ $category->name }}

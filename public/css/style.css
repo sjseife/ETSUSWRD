@@ -125,3 +125,12 @@ footer ul li:nth-child(1) { padding-left: 0 }
     color:#FFC72C ;
 }
 
+.navbar .nav > li > a {
+    color:  white;
+    vertical-align:middle;
+    margin-top: 10px;
+}
+
+.navbar .nav > li > a:hover {
+    color:#FFC72C ;
+}

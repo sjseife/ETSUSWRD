@@ -23,8 +23,10 @@ class ResourceTableSeeder extends Seeder
             'state' => 'TN',
             'zipCode' => '37601',
             'publicPhoneNumber' => '423-123-3244',
-            'description' => 'Here at Test, we firmly believe in Science!',
-            'Comments' => 'Surprise! The site does not exist!',
+            'publicEmail' => 'test@email.com',
+            'website' => 'test.com',
+            'description' => file_get_contents('http://loripsum.net/api/2/plaintext'),
+            'Comments' => file_get_contents('http://loripsum.net/api/1/short/plaintext'),
             'provider_id' => '1'
         ]);
         DB::table('resources')->insert([
@@ -35,7 +37,9 @@ class ResourceTableSeeder extends Seeder
             'state' => 'TN',
             'zipCode' => '37604',
             'publicPhoneNumber' => '423-234-3944',
-            'comments' => 'Surprise! The site does not exist!',
+            'publicEmail' => 'test1@email.com',
+            'website' => 'test.com',
+            'description' => file_get_contents('http://loripsum.net/api/3/plaintext'),
             'provider_id' => '2'
         ]);
         DB::table('resources')->insert([
@@ -47,7 +51,10 @@ class ResourceTableSeeder extends Seeder
             'state' => 'TN',
             'zipCode' => '37615',
             'publicPhoneNumber' => '423-954-3774',
-            'comments' => 'Surprise! The site does not exist!',
+            'publicEmail' => 'test2@email.com',
+            'website' => 'test.com',
+            'description' => file_get_contents('http://loripsum.net/api/4/plaintext'),
+            'comments' => file_get_contents('http://loripsum.net/api/1/short/plaintext'),
             'provider_id' => '3'
         ]);
         factory(App\Resource::class, 50)->create();

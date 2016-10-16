@@ -61,4 +61,57 @@ footer ul li:nth-child(1) { padding-left: 0 }
     margin: 0 auto;
     padding: 0;
 }
+.navbar .nav > li > a {
+
+    color:  white;
+    vertical-align:middle;
+    margin-top: 10px;
+}
+
+.navbar .nav > li > a:hover {
+    color:#FFC72C ;
+}
+
+@media only screen and (max-width: 766px) {
+    .collapsing, .in {background-color: #FFC72C;}
+    .collapsing ul li a, .in ul li a {color: #041E42!important;}
+    .collapsing ul li a:hover, .in ul li a:hover {color: #FFC72C!important;}
+}
+
+.navbar-toggle{
+    background-color: #041E42!important;
+    vertical-align:middle;
+    margin-top:20px;
+}
+.navbar-toggle.collapsed{
+    background-color: #041E42!important;
+}
+.navbar-toggle.collapsed .icon-bar{
+    background-color: #FFC72C!important;
+}
+.navbar-toggle:focus{
+    background-color:#FFC72C!important;;
+}
+
+.navbar-toggle.collapsed:focus{
+    background-color: #041E42!important;
+}
+
+.navbar-toggle.collapsed:focus .icon-bar{
+    background-color: #FFC72C!important;
+}
+
+.icon-bar{
+    background-color: #FFC72C!important;
+}
+
+.navbar-toggle:focus .icon-bar{
+    background-color:#041E42!important;;
+}
+
+
+
+
+
+
 

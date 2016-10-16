@@ -103,7 +103,58 @@ class EventsController extends Controller
     
     public function update(Event $event, EventRequest $request)
     {
+         DB::table('daily_hours')->where('event_id', '=', $event->id)->delete();
         $event->update($request->all());
+
+
+
+
+        //create and sync daily hours if the event is not closed that day
+        if(!isset($request->sundayClosedCheck))
+        {
+            $sunday = DailyHours::create(['day'=>'Sunday', 'openTime'=>$request->sundayOpen,
+                'closeTime'=>$request->sundayClose, 'event_id'=>$event->id]);
+        }
+        if(!isset($request->saturdayClosedCheck))
+        {
+            $saturday = DailyHours::create(['day'=>'Saturday', 'openTime'=>$request->saturdayOpen,
+                'closeTime'=>$request->saturdayClose, 'event_id'=>$event->id]);
+        }
+        if(!isset($request->fridayClosedCheck))
+        {
+            $friday = DailyHours::create(['day'=>'Friday', 'openTime'=>$request->fridayOpen,
+                'closeTime'=>$request->fridayClose, 'event_id'=>$event->id]);
+        }
+        if(!isset($request->thursdayClosedCheck))
+        {
+            $thursday = DailyHours::create(['day'=>'Thursday', 'openTime'=>$request->thursdayOpen,
+                'closeTime'=>$request->thursdayClose, 'event_id'=>$event->id]);
+        }
+        if(!isset($request->wednesdayClosedCheck))
+        {
+            $wednesday = DailyHours::create(['day'=>'Wednesday', 'openTime'=>$request->wednesdayOpen,
+                'closeTime'=>$request->wednesdayClose, 'event_id'=>$event->id]);
+        }
+        if(!isset($request->tuesdayClosedCheck))
+        {
+            $tuesday = DailyHours::create(['day'=>'Tuesday', 'openTime'=>$request->tuesdayOpen,
+                'closeTime'=>$request->tuesdayClose, 'event_id'=>$event->id]);
+        }
+        if(!isset($request->mondayClosedCheck))
+        {
+            $monday = DailyHours::create(['day'=>'Monday', 'openTime'=>$request->mondayOpen,
+                'closeTime'=>$request->mondayClose, 'event_id'=>$event->id]);
+        }
+
+
+
+
+
+
+
+
+
+
         if(!is_null($request->input('category_list')))
         {
             $syncCategories = $this->checkForNewCategories($request->input('category_list'));
@@ -113,6 +164,7 @@ class EventsController extends Controller
         {
             $event->categories()->sync([]);
         }
+
         \Session::flash('flash_message', 'Event Updated Successfully!');
         return redirect('/events/' . $event->id);
     }

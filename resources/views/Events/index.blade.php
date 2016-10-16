@@ -24,6 +24,7 @@
                 <th data-priority="2">Email</th> {{--6--}}
                 <th data-priority="2">Website</th> {{--7--}}
                 <th data-priority="3">Street Address</th> {{--8--}}
+                <th data-priority="4"></th> {{--8--}}
                 <th data-priority="2">City</th> {{--9--}}
                 <th data-priority="1">State</th> {{--10--}}
                 <th data-priority="2">Zip Code</th> {{--11--}}
@@ -36,6 +37,7 @@
             </thead>
             <tfoot>
             <tr>
+                <th></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -83,6 +85,11 @@
                             $dayArr = array();
                             $openTimeArr = array();
                             $closeTimeArr = array();
+                           /* $eventHours = array();
+                                foreach($event->hours as $day)
+                                    $eventHours[] = get_object_vars($day);
+                            $daysSorted = $eventHours;*/
+
                             ?>
                             @foreach($event->hours as $day)
 
@@ -142,6 +149,7 @@
                             }
                             ?>
                         </ul>
+
                     </td>
                     <td><?php
                         $tempPhoneNumber = $event->publicPhoneNumber;
@@ -159,7 +167,8 @@
                         ?></td>
                     <td>{{ $event->publicEmail }}</td>
                     <td>{{ $event->website }}</td>
-                    <td>{{ $event->streetAddress }} <br> {{ $event->streetAddress2 }}</td>
+                    <td>{{ $event->streetAddress }}</td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $event->streetAddress2 }}</td>
                     <td>{{ $event->city }}</td>
                     <td>{{ $event->state }}</td>
                     <td>{{ $event->zipCode }}</td>

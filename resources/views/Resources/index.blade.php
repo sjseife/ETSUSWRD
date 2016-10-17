@@ -1,5 +1,12 @@
 @extends('layouts.dataTables')
-
+<style>
+    .disabled
+    {
+        background-color: #dff0d8!important;
+        border-color: #3B5323!important;
+        color:#3c763d!important;
+    }
+</style>
 @section('content')
     <h1 class="text-center">All Resources</h1>
     <div id="successOrFailure"></div>
@@ -177,9 +184,10 @@
                             {{--<a class="btn btn-sm btn-success" href="{{ URL::to('resources/' . $resource->id) }}">View</a>--}}
                             <button type="button" class="btn btn-sm btn-primary addReport
                                     @if(Auth::user()->resources->contains($resource))
-                                    disabled
-                                    @endif
+                                    disabled" name="{{$resource->id}}">Added</button>
+                                    @else
                                     " name="{{$resource->id}}">Add to Report</button>
+                                    @endif
                            {{-- <a class="btn btn-sm btn-primary" href="{{ URL::to('resources/addAjax/'. $resource->id) }}">Add to Report</a>--}}
 
                         </td>
@@ -287,7 +295,7 @@
                     //alerts users to successful button pushing.
                      html = '<div class="alert alert-success">'+ resourceNames[index] +' Added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
                      $('#successOrFailure').html(html);
-                    button.attr("disabled","disabled").css("background-color","green");
+                    button.attr("disabled","disabled").css({"background-color": "#dff0d8", "color": "#3c763d", "border-color": "#3B5323" });
                     button.text(function (i, text){
                                 return "Added";
                     })

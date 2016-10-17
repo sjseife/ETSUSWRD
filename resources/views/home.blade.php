@@ -40,19 +40,19 @@
             background-color: #663399;
             color: #ffffff;
         }
-        .btn{
+        .purple-btn{
               background-color: #663399;
               color: white;
           }
-        .btn:hover{
+        .purple-btn:hover{
             background-color: #663399;
             color: white;
         }
-        .btn:active{
+        .purple-btn:active{
             background-color: #663399;
             color: white;
         }
-        .btn:focus{
+        .purple-btn:focus{
             background-color: #663399;
             color: white;
         }
@@ -74,6 +74,9 @@
         }
         .purple-text{
             color: #663399;
+        }
+        .view-btn{
+            margin-top:15px;
         }
         .zeroTopMargin{
             margin-top: 0px;
@@ -102,7 +105,7 @@
         <div class="col-md-10 col-md-offset-1" >
         <?php
         if(!empty($upcomingEvents))
-            echo  '<button class="btn btn-sm btn-white pull-right" id="hide">Hide Events</button>';
+            echo  '<button class="btn btn-sm purple-btn pull-right" id="hide">Hide Events</button>';
 
         ?>
         <table class="dt-responsive nowrap tableText pull-right" cellspacing="0" width="70%"  id="UpcomingEventsTable" frame="hsides" rules="thead , row='1'" >
@@ -126,6 +129,7 @@
                 <th data-priority="3" class="purple-text">Provider:</th> {{--13--}}
                 <th data-priority="3" class="purple-text">Description:</th> {{--14--}}
                 <th data-priority="3" class="purple-text">Comments:</th> {{--15--}}
+                <th data-priority="3" class="purple-text">View Event:</th>
             </thead>
             </tr>
             <tbody>
@@ -242,7 +246,9 @@
                     <td>{{ $event->provider->name }}</td>
                     <td><div width="50%"><span style="white-space: normal;">{{ $event->description }}</span></div></td>
                     <td><div width="50%"><span style="white-space: normal;">{{ $event->comments }}</span></div></td>
-
+                    <td class="text-center col-md-3">
+                        <a class="btn btn-sm btn-success view-btn" href="{{ URL::to('events/' . $event->id) }}">View</a>
+                    </td>
                 </tr>
 
             @endforeach
@@ -301,6 +307,7 @@
         });
 
     });
+
 </script>
 </head>
 @endpush

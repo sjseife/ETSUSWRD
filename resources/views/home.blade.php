@@ -98,7 +98,8 @@
     </style>
 
 <div class="container">
-    <div class="row col-md-10 col-md-offset-1 col-sm-offset-1 col-sm-6">
+    <div class="row " >
+        <div class="col-md-10 col-md-offset-1" >
         <?php
         if(!empty($upcomingEvents))
             echo  '<button class="btn btn-sm btn-white pull-right" id="hide">Hide Events</button>';
@@ -247,6 +248,7 @@
             @endforeach
             </tbody>
         </table>
+            </div>
     </div>
     <div class="row zeroTopMargin">
         <div class="col-md-10 col-md-offset-1 zeroTopMargin">

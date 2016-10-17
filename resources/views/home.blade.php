@@ -98,13 +98,14 @@
     </style>
 
 <div class="container">
-    <div class="row col-md-10 col-md-offset-1 col-sm-offset-1 col-sm-6">
+    <div class="row " >
+        <div class="col-md-10 col-md-offset-1" >
         <?php
         if(!empty($upcomingEvents))
             echo  '<button class="btn btn-sm btn-white pull-right" id="hide">Hide Events</button>';
 
         ?>
-        <table class="dt-responsive nowrap tableText pull-right" cellspacing="0" width="70%"  id="UpcomingEventsTable" frame="hsides" rules="thead , row='1'" >
+        <table class="dt-responsive nowrap tableText pull-right" cellspacing="0" width="75%"  id="UpcomingEventsTable" frame="hsides" rules="thead , row='1'" >
             <thead>
             <tr>
                 <!-- class all for always show, lower data priority numbers stay longer-->
@@ -248,10 +249,11 @@
             </tbody>
         </table>
     </div>
-    <div class="row zeroTopMargin">
-        <div class="col-md-10 col-md-offset-1 zeroTopMargin">
+        </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 ">
 
-            <div class="panel-body panel-primary zeroTopMargin">
+            <div class="panel-body panel-primary pull-right">
                 <div class="panel-heading"><h3>Community Resource Allocation</h3></div>
 
                 <div class="panel-body w3-panel w3-blue w3-round-xlarge">

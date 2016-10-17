@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-default navbar-static-top" style="background-color:#041E42; height:70px">
     <div class="container">
         <div class="navbar-header">
@@ -36,7 +37,7 @@
             </ul>
 
             <!-- Right Side Of Navbar -->
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right pull-right">
                 <!-- Authentication Links -->
                 @if (Auth::guest())
                     <li><a href="{{ url('/login') }}">Login</a></li>

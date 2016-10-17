@@ -73,22 +73,51 @@
                         $dayArr[] = $tempDay;
                         $openTimeArr[] = $tempOpen;
                         $closeTimeArr[] = $tempClose;
-                        foreach($dayArr as $key => $item)
-                        {
-                            if(empty($item))
-                            {
-                                echo '';
-                            }
-                            elseif (count($item) < 2)
-                            {
-                                echo '<p>' . $item[0] . ':<br>' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '</p>';
-                            }
-                            else
-                            {
-                                echo '<p>' . $item[0] . ' - ' . end($item) . ':<br>' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '</p>';
-                            }
-                        }
-                        ?>
+                        $tempOpen = $day->openTime;
+                        $tempClose = $day->closeTime;
+                        $key = array_search($day->day, $days); // returns key of matching day in array
+                        if($key < 6)
+                            $tempNextDay = $days[$key + 1];
+                    }
+
+                    ?>
+                @endforeach
+                <?php
+                $dayArr[] = $tempDay;
+                $openTimeArr[] = $tempOpen;
+                $closeTimeArr[] = $tempClose;
+                foreach($dayArr as $key => $item)
+                {
+                    if(empty($item))
+                    {
+                        echo '';
+                    }
+                    elseif (count($item) < 2)
+                    {
+                        echo '<p>' . $item[0] . ':<br>' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '</p>';
+                    }
+                    else
+                    {
+                        echo '<p>' . $item[0] . ' - ' . end($item) . ':<br>' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '</p>';
+                    }
+                }
+                ?>
+            </div>
+                        <div class="col-md-4">
+                            <h5 class="list-heading"><b>Contact Methods:</b></h5>
+                            <ul style="list-style:none;">
+                                <li>Phone: {{ $resource->publicPhoneNumber }} @if($resource->publicPhoneNumber == null) N/A @endif </li>
+                                <li>Email: {{ $resource->publicEmail }} @if($resource->publicEmail == null) N/A @endif </li>
+                                <li>Website: {{ $resource->website }} @if($resource->website == null) N/A @endif </li>
+                            </ul>
+                            <h5 class="list-heading"><b>Categories:</b></h5>
+                            <ul style="list-style:none;">
+                                @foreach ($resource->categories as $category)
+                                    <li><a href="{{ URL::to('categories/' . $category->id) }}">
+                                            | {{ $category->name }}
+                                        </a>|</li>
+                                @endforeach
+                            </ul>
                         </div>
                     <div class="col-md-4">
                         <h5 class="list-heading"><b>Contact Methods:</b></h5>

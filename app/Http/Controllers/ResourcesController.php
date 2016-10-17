@@ -285,7 +285,7 @@ class ResourcesController extends Controller
         }
         else
         {
-            \Session::flash('flash_message', 'Resource Removed from Report');
+            \Session::flash('flash_message',  $resource->name.' removed from the Report.');
             return Redirect::back();
         }
     }

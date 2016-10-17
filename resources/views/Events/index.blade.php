@@ -1,11 +1,16 @@
 @extends('layouts.dataTables')
 <style>
-.disabled
-{
-    background-color: #dff0d8!important;
-    border-color: #3B5323!important;
-    color:#3c763d!important;
-}
+    .removeReport {
+        background-color: #c9302c!important;
+        border-color: #ac2925!important;
+        color: white!important;
+    }
+    .addReport{
+        background-color: #337ab7!important;
+        border-color: #2e6da4!important;
+        color: white!important;
+
+    }
 
 </style>
 @section('content')
@@ -194,11 +199,11 @@
 
                         <!-- show the event (uses the show method found at GET /event/view/{id} -->
                         {{--<a class="btn btn-sm btn-success" href="{{ URL::to('events/' . $event->id) }}">View</a>--}}
-                        <button type="button" class="btn btn-sm btn-primary addReport
+                        <button type="button" class="btn btn-sm btn-primary report
                                     @if(Auth::user()->events->contains($event))
-                                disabled" name="{{$event->id}}">Added</button>
+                               removeReport" name="{{$event->id}}">Remove from Report</button>
                                 @else
-                                " name="{{$event->id}}">Add to Report</button>
+                                addReport" name="{{$event->id}}">Add to Report</button>
                                 @endif
                         {{-- <a class="btn btn-sm btn-primary" href="{{ URL::to('events/addAjax/'. $event->id) }}">Add to Report</a>--}}
 
@@ -280,68 +285,112 @@
         } );
 
 
-    } );
-   //Ajax for add to report button
-    $('.addReport').each(function() {
-        var button = $(this);
-        var index = button.attr("name");
-        <?php
-            $eventNames = array('empty');
-            foreach($events as $event)
-                {
-                   $eventNames[] = $event->name;
-                }
-        ?>
-        var eventNames = <?php echo json_encode($eventNames); ?>;
 
-        $(this).click(function (){
+   //Ajax for add to report button
+
+
+
+        $(".report").click(function (){
+            var button = $(this);
+            var index = button.attr("name");
+            var remove = $(this).hasClass("removeReport");
+            var add = $(this).hasClass("addReport");
+                    <?php
+                    $eventNames = array('empty');
+                    foreach($events as $event)
+                    {
+                        $eventNames[] = $event->name;
+                    }
+                    ?>
+            var eventNames = <?php echo json_encode($eventNames); ?>;
 
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            $.ajax({
-                type: "GET",
-                url: 'events/add/' + $(this).attr("name"),
-                dataType: 'json',
-                success: function (data) {
-                    //alerts users to successful button pushing.
-                    html = '<div class="alert alert-success">'+ eventNames[index] +' Added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
-                    $('#successOrFailure').html(html);
-                    button.attr("disabled","disabled").css({"background-color": "#dff0d8", "color": "#3c763d", "border-color": "#3B5323" });
-                    button.text(function (i, text){
-                        return "Added";
-                    })
+            if (add) {
+                $.ajax({
 
-
-                },
-                error: function (data) {
-                    if (data.status === 401) //redirect if not authenticated user.
-                        $(location).prop('pathname', 'auth/login');
-                    if (data.status === 422) {
-                        //process validation errors here.
-                        var errors = data.responseJSON; //this will get the errors response data.
-                        //show them somewhere in the modal
-                        errorsHtml = '<div class="alert alert-danger"><ul>';
-
-                        $.each(errors, function (key, value) {
-                            errorsHtml += '<li>' + value[0] + '</li>'; //showing only the first error.
-                        });
-                        errorsHtml += '</ul><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
-
-                        $('#successOrFailure').html(errorsHtml); //appending to a <div id="form-errors"></div> inside form
-                    } else {
-                        html = '<div class="alert alert-danger"><ul><li>There was a problem processing your request. ' +
-                                'Please try again later.</li></ul><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                    type: "GET",
+                    url: 'events/add/' + $(this).attr("name"),
+                    dataType: 'json',
+                    success: function (data) {
+                        //alerts users to successful button pushing.
+                        html = '<div class="alert alert-success">' + eventNames[index] + ' Added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
                         $('#successOrFailure').html(html);
-                    }
-                }
-            });
-        });
-    });
-    
+                        button.css({"background-color": "#c9302c", "color": "white", "border-color": "#ac2925"});
+                        button.addClass('removeReport').removeClass('addReport');
+                        button.text(function (i, text) {
+                            return "Remove from Report";
+                        })
 
+                    },
+                    error: function (data) {
+                        if (data.status === 401) //redirect if not authenticated user.
+                            $(location).prop('pathname', 'auth/login');
+                        if (data.status === 422) {
+                            //process validation errors here.
+                            var errors = data.responseJSON; //this will get the errors response data.
+                            //show them somewhere in the modal
+                            errorsHtml = '<div class="alert alert-danger"><ul>';
+
+                            $.each(errors, function (key, value) {
+                                errorsHtml += '<li>' + value[0] + '</li>'; //showing only the first error.
+                            });
+                            errorsHtml += '</ul><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+
+                            $('#successOrFailure').html(errorsHtml); //appending to a <div id="form-errors"></div> inside form
+                        } else {
+                            html = '<div class="alert alert-danger"><ul><li>There was a problem processing your request. ' +
+                                    'Please try again later.</li></ul><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                            $('#successOrFailure').html(html);
+                        }
+                    }
+                });
+            }
+            else if (remove) {
+                $.ajax({
+
+                    type: "GET",
+                    url: 'events/removeReport/' + $(this).attr("name"),
+                    dataType: 'json',
+                    success: function (data) {
+                        //alerts users to successful button pushing.
+                        html = '<div class="alert alert-success">' + eventNames[index] + ' Removed from Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                        $('#successOrFailure').html(html);
+                        button.css({"background-color": "#337ab7", "color": "white", "border-color": "#2e6da4"});
+                        button.addClass('addReport').removeClass('removeReport');
+                        button.text(function (i, text) {
+                            return "Add to Report";
+                        })
+
+                    },
+                    error: function (data) {
+                        if (data.status === 401) //redirect if not authenticated user.
+                            $(location).prop('pathname', 'auth/login');
+                        if (data.status === 422) {
+                            //process validation errors here.
+                            var errors = data.responseJSON; //this will get the errors response data.
+                            //show them somewhere in the modal
+                            errorsHtml = '<div class="alert alert-danger"><ul>';
+
+                            $.each(errors, function (key, value) {
+                                errorsHtml += '<li>' + value[0] + '</li>'; //showing only the first error.
+                            });
+                            errorsHtml += '</ul><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+
+                            $('#successOrFailure').html(errorsHtml); //appending to a <div id="form-errors"></div> inside form
+                        } else {
+                            html = '<div class="alert alert-danger"><ul><li>There was a problem processing your request. ' +
+                                    'Please try again later.</li></ul><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                            $('#successOrFailure').html(html);
+                        }
+                    }
+                });
+            }
+        });
+    } );
 </script>
 
 @endpush

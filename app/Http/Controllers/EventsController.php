@@ -44,49 +44,35 @@ class EventsController extends Controller
 
     public function store(EventRequest $request)
     {
+
         $event = new Event($request->all());
         $event->provider_id = $request->provider;
         $event->save();
+
+        //categories
         if(!is_null($request->input('category_list')))
         {
             $syncCategories = $this->checkForNewCategories($request->input('category_list'));
             $event->categories()->attach($syncCategories);
         }
-        //create and sync daily hours if the event is not closed that day
-        if(!isset($request->mondayClosedCheck))
+
+        //daily hours
+        $i = 0;
+        $dayArray = $request->day;
+        $openArray = $request->open;
+        $closeArray = $request->close;
+        foreach($dayArray as $day)
         {
-            $monday = DailyHours::create(['day'=>'Monday', 'openTime'=>$request->mondayOpen,
-                'closeTime'=>$request->mondayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->tuesdayClosedCheck))
-        {
-            $tuesday = DailyHours::create(['day'=>'Tuesday', 'openTime'=>$request->tuesdayOpen,
-                'closeTime'=>$request->tuesdayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->wednesdayClosedCheck))
-        {
-            $wednesday = DailyHours::create(['day'=>'Wednesday', 'openTime'=>$request->wednesdayOpen,
-                'closeTime'=>$request->wednesdayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->thursdayClosedCheck))
-        {
-            $thursday = DailyHours::create(['day'=>'Thursday', 'openTime'=>$request->thursdayOpen,
-                'closeTime'=>$request->thursdayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->fridayClosedCheck))
-        {
-            $friday = DailyHours::create(['day'=>'Friday', 'openTime'=>$request->fridayOpen,
-                'closeTime'=>$request->fridayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->saturdayClosedCheck))
-        {
-            $saturday = DailyHours::create(['day'=>'Saturday', 'openTime'=>$request->saturdayOpen,
-                'closeTime'=>$request->saturdayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->sundayClosedCheck))
-        {
-            $sunday = DailyHours::create(['day'=>'Sunday', 'openTime'=>$request->sundayOpen,
-                'closeTime'=>$request->sundayClose, 'event_id'=>$event->id]);
+            if($dayArray[$i] != "" && $openArray[$i] != "" && $closeArray[$i] != "")
+            {
+                $tempDay = DailyHours::create(['day'=>$day, "openTime"=>$openArray[$i],
+                    'closeTime'=>$closeArray[$i], 'event_id'=>$event->id]);
+            }
+            else
+            {
+                \Session::flash('flash_message', 'Problem creating operating hours. Please double check operating hours.');
+            }
+            $i++;
         }
 
         \Session::flash('flash_message', 'Event Created Successfully!');
@@ -103,58 +89,29 @@ class EventsController extends Controller
     
     public function update(Event $event, EventRequest $request)
     {
-         DB::table('daily_hours')->where('event_id', '=', $event->id)->delete();
         $event->update($request->all());
 
-
-
-
-        //create and sync daily hours if the event is not closed that day
-        if(!isset($request->sundayClosedCheck))
+        //daily hours
+        DB::table('daily_hours')->where('event_id', '=', $event->id)->delete(); //dump the old ones
+        $i = 0;
+        $dayArray = $request->day;
+        $openArray = $request->open;
+        $closeArray = $request->close;
+        foreach($dayArray as $day)
         {
-            $sunday = DailyHours::create(['day'=>'Sunday', 'openTime'=>$request->sundayOpen,
-                'closeTime'=>$request->sundayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->saturdayClosedCheck))
-        {
-            $saturday = DailyHours::create(['day'=>'Saturday', 'openTime'=>$request->saturdayOpen,
-                'closeTime'=>$request->saturdayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->fridayClosedCheck))
-        {
-            $friday = DailyHours::create(['day'=>'Friday', 'openTime'=>$request->fridayOpen,
-                'closeTime'=>$request->fridayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->thursdayClosedCheck))
-        {
-            $thursday = DailyHours::create(['day'=>'Thursday', 'openTime'=>$request->thursdayOpen,
-                'closeTime'=>$request->thursdayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->wednesdayClosedCheck))
-        {
-            $wednesday = DailyHours::create(['day'=>'Wednesday', 'openTime'=>$request->wednesdayOpen,
-                'closeTime'=>$request->wednesdayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->tuesdayClosedCheck))
-        {
-            $tuesday = DailyHours::create(['day'=>'Tuesday', 'openTime'=>$request->tuesdayOpen,
-                'closeTime'=>$request->tuesdayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->mondayClosedCheck))
-        {
-            $monday = DailyHours::create(['day'=>'Monday', 'openTime'=>$request->mondayOpen,
-                'closeTime'=>$request->mondayClose, 'event_id'=>$event->id]);
+            if($dayArray[$i] != "" && $openArray[$i] != "" && $closeArray[$i] != "")
+            {
+                $tempDay = DailyHours::create(['day'=>$day, "openTime"=>$openArray[$i],
+                    'closeTime'=>$closeArray[$i], 'event_id'=>$event->id]);
+            }
+            else
+            {
+                \Session::flash('flash_message', 'Problem creating operating hours. Please double check operating hours.');
+            }
+            $i++;
         }
 
-
-
-
-
-
-
-
-
-
+        //categories
         if(!is_null($request->input('category_list')))
         {
             $syncCategories = $this->checkForNewCategories($request->input('category_list'));

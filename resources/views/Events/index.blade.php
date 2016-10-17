@@ -13,15 +13,14 @@
     <br>
     <br>
     <div>
-        <table {{--style="display:none;"--}} class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="EventsTable">
+        <table style="display:none;" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="EventsTable">
             <thead>
-
             <tr>
                 <!-- class all for always show, lower data priority numbers stay longer-->
                 <th class="all" >Name</th> {{--0--}}
                 <th data-priority="1">County</th> {{--1--}}
                 <th data-priority="2">Category</th> {{--2--}}
-                <th data-priority="1">Dates</th> {{--3--}}
+                <th data-priority="0">Dates</th> {{--3--}}
                 <th data-priority="2">Hours of Operation</th> {{--4--}}
                 <th data-priority="2">Phone</th> {{--5--}}
                 <th data-priority="2">Email</th> {{--6--}}
@@ -35,7 +34,7 @@
                 <th data-priority="3">Description</th> {{--13--}}
                 <th data-priority="3">Comments</th> {{--14--}}
                 <th class="all">Action</th> {{--15--}}
-                <th data-priority="4">View Report:</th>{{--16--}}
+                <th data-priority="4">View Event:</th>{{--16--}}
             </tr>
             </thead>
             <tfoot>
@@ -155,17 +154,24 @@
 
                     </td>
                     <td><?php
-                        $tempPhoneNumber = $event->publicPhoneNumber;
-                        $tempPhoneNumber = preg_replace("/[^0-9,x]/", "", $tempPhoneNumber );
-                        if(strlen($tempPhoneNumber) > 10)
-                        {
-                            $tempPhoneNumber = preg_replace("/^[1]/", "", $tempPhoneNumber );
+                            if(strlen($event->publicPhoneNumber) > 0)
+                            {
+                                $tempPhoneNumber = $event->publicPhoneNumber;
+                                $tempPhoneNumber = preg_replace("/[^0-9,x]/", "", $tempPhoneNumber );
+                                if(strlen($tempPhoneNumber) > 10)
+                                {
+                                    $tempPhoneNumber = preg_replace("/^[1]/", "", $tempPhoneNumber );
+                                }
+                                $tempPhoneNumber = '(' . substr($tempPhoneNumber,0, 3) . ') '
+                                        . substr($tempPhoneNumber, 3, 3) . '-'
+                                        . substr($tempPhoneNumber, 6, 4) . ' '
+                                        . substr($tempPhoneNumber, 10, (strlen($tempPhoneNumber) - 10));
+                                echo $tempPhoneNumber;
+                            }
+                            else
+                            {
+                                echo "Not Provided";
                         }
-                        $tempPhoneNumber = '(' . substr($tempPhoneNumber,0, 3) . ') '
-                                . substr($tempPhoneNumber, 3, 3) . '-'
-                                . substr($tempPhoneNumber, 6, 4) . ' '
-                                . substr($tempPhoneNumber, 10, (strlen($tempPhoneNumber) - 10));
-                        echo $tempPhoneNumber;
 
                         ?></td>
                     <td>{{ $event->publicEmail }}</td>
@@ -207,10 +213,9 @@
     {
         //Apply DataTables
 
-        $('#EventsTable').dataTable({/*delete everything from here*/});
-    }); /*to here when uncommenting*/
-            /*initComplete: function () {
-                this.api().columns([1,5,8,9,10,11]).every( function () {
+        $('#EventsTable').dataTable({
+            initComplete: function () {
+                this.api().columns([1,5,9,10,11,12]).every( function () {
                     var column = this;
                     var select = $('<select><option value=""></option></select>')
                             .appendTo( $(column.footer()).empty() )
@@ -255,7 +260,7 @@
                                         .search(val ? $(this).val() : val, true, false)
                                         .draw();
                             });
-                    var categories = <?php //echo json_encode($categories); ?>;
+                    var categories = <?php echo json_encode($categories); ?>;
                     for(y = 0; y < categories.length; y++)
                     {
                         select.append('<option value="' + categories[y] + '">' + categories[y] + '</option>');
@@ -269,7 +274,7 @@
         } );
 
 
-    } )*/
+    } );
    //Ajax for add to report button
     $('.addReport').each(function() {
         var button = $(this);

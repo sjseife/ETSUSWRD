@@ -50,47 +50,31 @@ class ResourcesController extends Controller
         $resource = new Resource($request->all());
         $resource->provider_id = $request->provider;
         $resource->save();
+
+        //categories
         if(!is_null($request->input('category_list')))
         {
             $syncCategories = $this->checkForNewCategories($request->input('category_list'));
             $resource->categories()->attach($syncCategories);
         }
-        //create and sync daily hours if the resource is not closed that day
-        if(!isset($request->mondayClosedCheck))
+
+        //daily hours
+        $dayArray = $request->day;
+        $openArray = $request->open;
+        $closeArray = $request->close;
+        for($i = count($dayArray) - 1; $i >=0; $i--)
         {
-            $monday = DailyHours::create(['day'=>'Monday', 'openTime'=>$request->mondayOpen,
-                                'closeTime'=>$request->mondayClose, 'resource_id'=>$resource->id]);
+            if($dayArray[$i] != "" && $openArray[$i] != "" && $closeArray[$i] != "")
+            {
+                $tempDay = DailyHours::create(['day'=>$dayArray[$i], "openTime"=>$openArray[$i],
+                    'closeTime'=>$closeArray[$i], 'resource_id'=>$resource->id]);
+            }
+            else
+            {
+                \Session::flash('flash_message', 'Problem creating operating hours. Please double check operating hours.');
+            }
         }
-        if(!isset($request->tuesdayClosedCheck))
-        {
-            $tuesday = DailyHours::create(['day'=>'Tuesday', 'openTime'=>$request->tuesdayOpen,
-                'closeTime'=>$request->tuesdayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->wednesdayClosedCheck))
-        {
-            $wednesday = DailyHours::create(['day'=>'Wednesday', 'openTime'=>$request->wednesdayOpen,
-                'closeTime'=>$request->wednesdayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->thursdayClosedCheck))
-        {
-            $thursday = DailyHours::create(['day'=>'Thursday', 'openTime'=>$request->thursdayOpen,
-                'closeTime'=>$request->thursdayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->fridayClosedCheck))
-        {
-            $friday = DailyHours::create(['day'=>'Friday', 'openTime'=>$request->fridayOpen,
-                'closeTime'=>$request->fridayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->saturdayClosedCheck))
-        {
-            $saturday = DailyHours::create(['day'=>'Saturday', 'openTime'=>$request->saturdayOpen,
-                'closeTime'=>$request->saturdayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->sundayClosedCheck))
-        {
-            $sunday = DailyHours::create(['day'=>'Sunday', 'openTime'=>$request->sundayOpen,
-                'closeTime'=>$request->sundayClose, 'resource_id'=>$resource->id]);
-        }
+
 
         \Session::flash('flash_message', 'Resource Created Successfully!');
 
@@ -106,47 +90,27 @@ class ResourcesController extends Controller
 
     public function update(Resource $resource, ResourceRequest $request)
     {
-        DB::table('daily_hours')->where('resource_id', '=', $resource->id)->delete();
         $resource->update($request->all());
 
-        //create and sync daily hours if the resource is not closed that day
-        if(!isset($request->sundayClosedCheck))
+        //daily hours
+        DB::table('daily_hours')->where('resource_id', '=', $resource->id)->delete();//dump the old ones
+        $dayArray = $request->day;
+        $openArray = $request->open;
+        $closeArray = $request->close;
+        for($i = count($dayArray) - 1; $i >=0; $i--)
         {
-            $sunday = DailyHours::create(['day'=>'Sunday', 'openTime'=>$request->sundayOpen,
-                'closeTime'=>$request->sundayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->saturdayClosedCheck))
-        {
-            $saturday = DailyHours::create(['day'=>'Saturday', 'openTime'=>$request->saturdayOpen,
-                'closeTime'=>$request->saturdayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->fridayClosedCheck))
-        {
-            $friday = DailyHours::create(['day'=>'Friday', 'openTime'=>$request->fridayOpen,
-                'closeTime'=>$request->fridayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->thursdayClosedCheck))
-        {
-            $thursday = DailyHours::create(['day'=>'Thursday', 'openTime'=>$request->thursdayOpen,
-                'closeTime'=>$request->thursdayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->wednesdayClosedCheck))
-        {
-            $wednesday = DailyHours::create(['day'=>'Wednesday', 'openTime'=>$request->wednesdayOpen,
-                'closeTime'=>$request->wednesdayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->tuesdayClosedCheck))
-        {
-            $tuesday = DailyHours::create(['day'=>'Tuesday', 'openTime'=>$request->tuesdayOpen,
-                'closeTime'=>$request->tuesdayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->mondayClosedCheck))
-        {
-            $monday = DailyHours::create(['day'=>'Monday', 'openTime'=>$request->mondayOpen,
-                'closeTime'=>$request->mondayClose, 'resource_id'=>$resource->id]);
+            if($dayArray[$i] != "" && $openArray[$i] != "" && $closeArray[$i] != "")
+            {
+                $tempDay = DailyHours::create(['day'=>$dayArray[$i], "openTime"=>$openArray[$i],
+                    'closeTime'=>$closeArray[$i], 'resource_id'=>$resource->id]);
+            }
+            else
+            {
+                \Session::flash('flash_message', 'Problem creating operating hours. Please double check operating hours.');
+            }
         }
 
-
+        //categories
         if(!is_null($request->input('category_list')))
         {
             $syncCategories = $this->checkForNewCategories($request->input('category_list'));
@@ -156,6 +120,8 @@ class ResourcesController extends Controller
         {
             $resource->categories()->sync([]);
         }
+
+
         \Session::flash('flash_message', 'Resource Updated Successfully!');
         return redirect('/resources/' . $resource->id);
     }

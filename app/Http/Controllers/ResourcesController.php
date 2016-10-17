@@ -59,23 +59,23 @@ class ResourcesController extends Controller
         }
 
         //daily hours
-        $i = 0;
         $dayArray = $request->day;
         $openArray = $request->open;
         $closeArray = $request->close;
-        foreach($dayArray as $day)
+        for($i = count($dayArray) - 1; $i >=0; $i--)
         {
             if($dayArray[$i] != "" && $openArray[$i] != "" && $closeArray[$i] != "")
             {
-                $tempDay = DailyHours::create(['day'=>$day, "openTime"=>$openArray[$i],
-                            'closeTime'=>$closeArray[$i], 'resource_id'=>$resource->id]);
+                $tempDay = DailyHours::create(['day'=>$dayArray[$i], "openTime"=>$openArray[$i],
+                    'closeTime'=>$closeArray[$i], 'resource_id'=>$resource->id]);
             }
             else
             {
                 \Session::flash('flash_message', 'Problem creating operating hours. Please double check operating hours.');
             }
-            $i++;
         }
+
+
         \Session::flash('flash_message', 'Resource Created Successfully!');
 
         return redirect('resources');
@@ -94,22 +94,20 @@ class ResourcesController extends Controller
 
         //daily hours
         DB::table('daily_hours')->where('resource_id', '=', $resource->id)->delete();//dump the old ones
-        $i = 0;
         $dayArray = $request->day;
         $openArray = $request->open;
         $closeArray = $request->close;
-        foreach($dayArray as $day)
+        for($i = count($dayArray) - 1; $i >=0; $i--)
         {
             if($dayArray[$i] != "" && $openArray[$i] != "" && $closeArray[$i] != "")
             {
-                $tempDay = DailyHours::create(['day'=>$day, "openTime"=>$openArray[$i],
+                $tempDay = DailyHours::create(['day'=>$dayArray[$i], "openTime"=>$openArray[$i],
                     'closeTime'=>$closeArray[$i], 'resource_id'=>$resource->id]);
             }
             else
             {
                 \Session::flash('flash_message', 'Problem creating operating hours. Please double check operating hours.');
             }
-            $i++;
         }
 
         //categories
@@ -122,6 +120,8 @@ class ResourcesController extends Controller
         {
             $resource->categories()->sync([]);
         }
+
+
         \Session::flash('flash_message', 'Resource Updated Successfully!');
         return redirect('/resources/' . $resource->id);
     }

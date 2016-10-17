@@ -57,22 +57,21 @@ class EventsController extends Controller
         }
 
         //daily hours
-        $i = 0;
         $dayArray = $request->day;
         $openArray = $request->open;
         $closeArray = $request->close;
-        foreach($dayArray as $day)
+        $i = count($dayArray) - 1;
+        for($i = count($dayArray) - 1; $i >=0; $i--)
         {
             if($dayArray[$i] != "" && $openArray[$i] != "" && $closeArray[$i] != "")
             {
-                $tempDay = DailyHours::create(['day'=>$day, "openTime"=>$openArray[$i],
+                $tempDay = DailyHours::create(['day'=>$dayArray[$i], "openTime"=>$openArray[$i],
                     'closeTime'=>$closeArray[$i], 'event_id'=>$event->id]);
             }
             else
             {
                 \Session::flash('flash_message', 'Problem creating operating hours. Please double check operating hours.');
             }
-            $i++;
         }
 
         \Session::flash('flash_message', 'Event Created Successfully!');
@@ -93,22 +92,20 @@ class EventsController extends Controller
 
         //daily hours
         DB::table('daily_hours')->where('event_id', '=', $event->id)->delete(); //dump the old ones
-        $i = 0;
         $dayArray = $request->day;
         $openArray = $request->open;
         $closeArray = $request->close;
-        foreach($dayArray as $day)
+        for($i = count($dayArray) - 1; $i >=0; $i--)
         {
             if($dayArray[$i] != "" && $openArray[$i] != "" && $closeArray[$i] != "")
             {
-                $tempDay = DailyHours::create(['day'=>$day, "openTime"=>$openArray[$i],
+                $tempDay = DailyHours::create(['day'=>$dayArray[$i], "openTime"=>$openArray[$i],
                     'closeTime'=>$closeArray[$i], 'event_id'=>$event->id]);
             }
             else
             {
                 \Session::flash('flash_message', 'Problem creating operating hours. Please double check operating hours.');
             }
-            $i++;
         }
 
         //categories

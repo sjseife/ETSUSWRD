@@ -287,8 +287,10 @@
                     //alerts users to successful button pushing.
                      html = '<div class="alert alert-success">'+ resourceNames[index] +' Added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
                      $('#successOrFailure').html(html);
-                    button.attr("disabled","disabled");
-
+                    button.attr("disabled","disabled").css("background-color","green");
+                    button.text(function (i, text){
+                                return "Added";
+                    })
                 },
                 error: function (data) {
                     if (data.status === 401) //redirect if not authenticated user.

@@ -1,5 +1,8 @@
 @extends('layouts.dataTables')
+<style>
 
+
+</style>
 @section('content')
     <h1 class="text-center">All Events</h1>
     <div id="successOrFailure"></div>
@@ -200,8 +203,8 @@
 
 @push('scripts')
 <script>
-    $(document).ready(function() {
-
+    $(document).ready(function()
+    {
         //Apply DataTables
 
         $('#EventsTable').dataTable({/*delete everything from here*/});
@@ -279,7 +282,9 @@
                 }
         ?>
         var eventNames = <?php echo json_encode($eventNames); ?>;
+
         $(this).click(function (){
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -293,7 +298,11 @@
                     //alerts users to successful button pushing.
                     html = '<div class="alert alert-success">'+ eventNames[index] +' Added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
                     $('#successOrFailure').html(html);
-                    button.attr("disabled","disabled");
+                    button.attr("disabled","disabled").css("background-color","green");
+                    button.text(function (i, text){
+                        return "Added";
+                    })
+
 
                 },
                 error: function (data) {

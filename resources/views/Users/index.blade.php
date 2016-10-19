@@ -1,7 +1,7 @@
 @extends('layouts.dataTables')
 
 @section('content')
-    <h1 class="text-center">All Users</h1>
+    <div class="text-center"><h1 class="page-header">All Users</h1></div>
 
     <div class="container">
         <!-- create a new user (uses the create method found at GET /contact/create -->

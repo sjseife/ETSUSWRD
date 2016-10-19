@@ -13,8 +13,7 @@
             margin-bottom:0px;
             margin: 0 auto;
             font-size: 89%;
-            width:65%;
-            border:2px solid #7790ab;
+            border:2px solid #041E42;
             white-space: nowrap;
 
         }
@@ -34,49 +33,75 @@
              margin:0 auto;
              width:50%;
             font-size: 14px;
-
+            border-bottom: 2px solid #041E42!important;
          }
         th{
-            background-color: #663399;
-            color: #ffffff;
+            background-color: #FFC72C!important;
+            color: #041E42!important;
         }
         .purple-btn{
-              background-color: #663399;
+            background-color: #041E42;
               color: white;
-          }
+            border:2px solid #FFC72C!important;
+            outline:none;
+        }
         .purple-btn:hover{
-            background-color: #663399;
+            background-color: #041E42;
             color: white;
+            border:2px solid #FFC72C!important;
+            outline:none;
         }
         .purple-btn:active{
-            background-color: #663399;
+            background-color: #041E42;
             color: white;
+            border:2px solid #FFC72C!important;
+            outline:none;
         }
         .purple-btn:focus{
-            background-color: #663399;
+            background-color: #041E42;
             color: white;
+            border:2px solid #FFC72C!important;
+            outline:none;
         }
         .orange{
-            background-color: #FFA500;
-            color: white;
+            background-color: #FFC72C;
+            color: #041E42;
+            border:2px solid #041E42!important;
+            font-weight: bold;
+
         }
         .orange:hover{
-            background-color: #FFA500;
-            color: white;
+            background-color: #FFC72C;
+            color: #041E42;
+            border:2px solid #041E42!important;
+            font-weight: bold;
         }
         .orange:active{
-            background-color: #FFA500;
-            color: white;
+            background-color: #FFC72C;
+            color: #041E42;
+            border:2px solid #041E42!important;
+            font-weight: bold;
         }
         .orange:focus{
-            background-color: #FFA500;
-            color: white;
+            background-color: #FFC72C;
+            color: #041E42;
+            border:2px solid #041E42!important;
+            font-weight: bold;
         }
         .purple-text{
-            color: #663399;
+            color: #FFC72C!important;
+            border-bottom: 2px solid #041E42!important;
         }
         .view-btn{
             margin-top:15px;
+        }
+        .panel-heading{
+            -webkit-border-radius: 15px;
+            -moz-border-radius: 15px;
+            border-radius: 15px;
+            border:3px solid #FFC72C!important;
+            background-color:#041E42!important;
+            vertical-align: middle;
         }
         .zeroTopMargin{
             margin-top: 0px;
@@ -98,19 +123,23 @@
             text-decoration: none;
         }
 
+
     </style>
 
 <div class="container">
     <div class="row " >
-        <div class="col-md-10 col-md-offset-1" >
-        <?php
-        if(!empty($upcomingEvents))
-            echo  '<button class="btn btn-sm purple-btn pull-right" id="hide">Hide Events</button>';
+        <div class="col-md-10 col-md-offset-1">
 
-        ?>
-        <table class="dt-responsive nowrap tableText pull-right" cellspacing="0" width="70%"  id="UpcomingEventsTable" frame="hsides" rules="thead , row='1'" >
+         <div class="padsome">
+             <?php
+                if(!empty($upcomingEvents))
+                    echo  '<button class="btn-sm purple-btn pull-right" id="hide">Hide Events</button>';
+
+                ?>
+
+            <table class="dt-responsive nowrap tableText pull-right" cellspacing="0" width="100%"  id="UpcomingEventsTable" frame="hsides" rules="thead , row='1'" >
             <thead>
-            <tr>
+            <tr >
                 <!-- class all for always show, lower data priority numbers stay longer-->
                 <th class="all tableHeader" > Upcoming Events:</th> {{--0--}}
 
@@ -130,6 +159,7 @@
                 <th data-priority="3" class="purple-text">Description:</th> {{--14--}}
                 <th data-priority="3" class="purple-text">Comments:</th> {{--15--}}
                 <th data-priority="3" class="purple-text">View Event:</th>
+
             </thead>
             </tr>
             <tbody>
@@ -254,13 +284,9 @@
             @endforeach
             </tbody>
         </table>
-            </div>
-    </div>
-    <div class="row zeroTopMargin">
-        <div class="col-md-10 col-md-offset-1 zeroTopMargin">
-
+         </div>
             <div class="panel-body panel-primary zeroTopMargin">
-                <div class="panel-heading"><h3>Community Resource Allocation</h3></div>
+                <div class="panel-heading sw-heading"> <h4 class="siteheading">Department of Social Work</h4><br><h5 class="sitesubheading">College of Arts & Sciences</h5></div>
 
                 <div class="panel-body w3-panel w3-blue w3-round-xlarge">
 
@@ -292,8 +318,7 @@
 <script>
     $(document).ready(function(){
         $("#hide").click(function(){
-            $("table").toggle();
-            $("h4").toggle();
+            $("#UpcomingEventsTable").toggle();
             $(this).text(function (i, text){
                 return text === "Hide Events" ? "Show Events" : "Hide Events";
             })

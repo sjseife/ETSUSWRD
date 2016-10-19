@@ -159,7 +159,120 @@ footer ul li:nth-child(1) { padding-left: 0 }
         display:block !important;
     }
 }
+.background-img{
+    background-image: url("/images/Buccaneer.png");
+    background-repeat: no-repeat;
+    background-position: 50% 10%;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
 
+}
+.social-work-logo
+{
+    padding: 15px;
+
+}
+table thead th{
+    background-color: #FFC72C;
+    color: #041E42;
+}
+.btn-primary{
+    background-color:#041E42;
+    border:2px solid #FFC72C;
+}
+.btn-success{
+    background-color:#041E42;
+    border:2px solid #FFC72C;
+}
+.page-header{
+    padding: 15px;
+    color:white;
+    margin:0 auto;
+    text-align: center;
+    display:inline-block;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    border:3px solid #FFC72C;
+    background-color:#041E42;
+    -webkit-box-shadow: #828282 15px 15px 15px;
+    -moz-box-shadow: #828282 15px 15px 15px;
+    box-shadow: #828282 15px 15px 15px;
+    margin-bottom: 20px;
+}
+
+.siteheading {
+
+    display: inline-block;
+
+    font-size: 130%;
+    padding-top: 15px;
+    margin: 0 auto;
+    font-family: "sorts italic", georgia, serif;
+
+}
+
+.sitesubheading {
+
+    display: block;
+    font-size: 100%;
+    color: #fff;
+    margin: 0;
+    padding: 0px;
+
+    margin-top: 0px;
+    min-width: 35%;
+    clear: both;
+}
+@media only screen and (min-width: 500px){
+    .sw-heading{
+        height: 85px!important;
+        padding: 0!important;
+        background-image: url("/images/header_logo.png");
+        background-position: 2% 50%;
+        background-repeat: no-repeat;
+
+    }
+    .siteheading {
+        float: right;
+        display: inline-block;
+        padding-right: 20px;
+    }
+    .sitesubheading {
+        float: right;
+        text-align: right;
+        padding-right: 20px;
+    }
+    .padsome{
+        padding-left:20px;
+        padding-right:20px;
+
+    }
+}
+.sw-heading{
+    height: 85px!important;
+    padding: 0!important;
+
+}
+
+@media only screen and (max-width: 499px) {
+
+    .siteheading {
+        text-align: center!important;
+        padding-top: 20px;
+
+        padding-left: 25px;
+        margin: 0 auto;
+    }
+
+    .sitesubheading {
+        text-align: center!important;
+        padding:0!important;
+    }
+}
 
 
 

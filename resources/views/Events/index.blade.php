@@ -6,7 +6,7 @@
         color: white!important;
     }
     .addReport{
-        background-color: #337ab7!important;
+        background-color: #041E42!important;
         border-color: #2e6da4!important;
         color: white!important;
 
@@ -14,8 +14,8 @@
 
 </style>
 @section('content')
-    <h1 class="text-center">All Events</h1>
-    <div id="successOrFailure"></div>
+   <div class="text-center"><h1 class="page-header">All Events</h1></div>
+   <div id="successOrFailure"></div>
     <!-- create a new event (uses the create method found at GET /event/create -->
     @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
     <a class="btn btn-md btn-primary pull-right" href="{{ URL::to('events/create') }}" style="margin-bottom: 20px;">Create New Event</a>
@@ -201,9 +201,9 @@
                         {{--<a class="btn btn-sm btn-success" href="{{ URL::to('events/' . $event->id) }}">View</a>--}}
                         <button type="button" class="btn btn-sm btn-primary report
                                     @if(Auth::user()->events->contains($event))
-                               removeReport" name="{{$event->id}}">Remove from Report</button>
+                               removeReport" name="{{$event->id}}">Remove Event</button>
                                 @else
-                                addReport" name="{{$event->id}}">Add to Report</button>
+                                addReport" name="{{$event->id}}">Add Event</button>
                                 @endif
                         {{-- <a class="btn btn-sm btn-primary" href="{{ URL::to('events/addAjax/'. $event->id) }}">Add to Report</a>--}}
 
@@ -322,7 +322,7 @@
                         button.css({"background-color": "#c9302c", "color": "white", "border-color": "#ac2925"});
                         button.addClass('removeReport').removeClass('addReport');
                         button.text(function (i, text) {
-                            return "Remove from Report";
+                            return "Remove Event";
                         })
 
                     },
@@ -357,12 +357,12 @@
                     dataType: 'json',
                     success: function (data) {
                         //alerts users to successful button pushing.
-                        html = '<div class="alert alert-success">' + eventNames[index] + ' Removed from Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                        html = '<div class="alert alert-danger">' + eventNames[index] + ' Removed from Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
                         $('#successOrFailure').html(html);
                         button.css({"background-color": "#337ab7", "color": "white", "border-color": "#2e6da4"});
                         button.addClass('addReport').removeClass('removeReport');
                         button.text(function (i, text) {
-                            return "Add to Report";
+                            return "Add Event";
                         })
 
                     },

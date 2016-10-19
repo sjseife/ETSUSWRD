@@ -6,14 +6,14 @@
         color: white!important;
     }
     .addReport{
-        background-color: #337ab7!important;
+        background-color: #041E42!important;
         border-color: #2e6da4!important;
         color: white!important;
 
     }
 </style>
 @section('content')
-    <h1 class="text-center">All Resources</h1>
+    <div class="text-center"><h1 class="page-header">All Resources</h1></div>
     <div id="successOrFailure"></div>
     @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
         <!-- create a new resource (uses the create method found at GET /resource/create -->
@@ -189,9 +189,9 @@
                             {{--<a class="btn btn-sm btn-success" href="{{ URL::to('resources/' . $resource->id) }}">View</a>--}}
                             <button type="button" class="btn btn-sm btn-primary report
                                     @if(Auth::user()->resources->contains($resource))
-                                    removeReport" name="{{$resource->id}}">Remove from Report</button>
+                                    removeReport" name="{{$resource->id}}">Remove Resource</button>
                                     @else
-                                    addReport" name="{{$resource->id}}">Add to Report</button>
+                                    addReport" name="{{$resource->id}}">Add Resource</button>
                                     @endif
                            {{-- <a class="btn btn-sm btn-primary" href="{{ URL::to('resources/addAjax/'. $resource->id) }}">Add to Report</a>--}}
 
@@ -307,7 +307,7 @@
                         button.css({"background-color": "#c9302c", "color": "white", "border-color": "#ac2925"});
                         button.addClass('removeReport').removeClass('addReport');
                         button.text(function (i, text) {
-                            return "Remove from Report";
+                            return "Remove Resource";
                         })
 
                     },
@@ -342,12 +342,12 @@
                     dataType: 'json',
                     success: function (data) {
                         //alerts users to successful button pushing.
-                        html = '<div class="alert alert-success">' + resourceNames[index] + ' Removed from Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                        html = '<div class="alert alert-danger">' + resourceNames[index] + ' Removed from Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
                         $('#successOrFailure').html(html);
                         button.css({"background-color": "#337ab7", "color": "white", "border-color": "#2e6da4"});
                         button.addClass('addReport').removeClass('removeReport');
                         button.text(function (i, text) {
-                            return "Add to Report";
+                            return "Add Resource";
                         })
 
                     },

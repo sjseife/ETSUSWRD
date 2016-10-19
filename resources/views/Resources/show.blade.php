@@ -65,8 +65,8 @@
                                 $key = array_search($day->day, $days); // returns key of matching day in array
                                 if($key < 6)
                                     $tempNextDay = $days[$key + 1];
-                            }
 
+                            }
                             ?>
                         @endforeach
                         <?php
@@ -78,8 +78,7 @@
                         $key = array_search($day->day, $days); // returns key of matching day in array
                         if($key < 6)
                             $tempNextDay = $days[$key + 1];
-                    }
-
+                        }
                     ?>
                 @endforeach
                 <?php

@@ -44,6 +44,8 @@
               color: white;
             border:2px solid #FFC72C!important;
             outline:none;
+            white-space: nowrap;
+
         }
         .purple-btn:hover{
             background-color: #041E42;
@@ -128,16 +130,16 @@
 
 <div class="container">
     <div class="row " >
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-10 col-md-offset-1 ">
 
          <div class="padsome">
              <?php
                 if(!empty($upcomingEvents))
-                    echo  '<button class="btn-sm purple-btn pull-right" id="hide">Hide Events</button>';
+                    echo  '<button class="purple-btn pull-right nowrap" id="hide">Hide Events</button>';
 
                 ?>
 
-            <table class="dt-responsive nowrap tableText pull-right" cellspacing="0" width="100%"  id="UpcomingEventsTable" frame="hsides" rules="thead , row='1'" >
+            <table class="dt-responsive nowrap tableText pull-right" cellspacing="0" width="100%" id="UpcomingEventsTable" frame="hsides" rules="thead , row='1'" >
             <thead>
             <tr >
                 <!-- class all for always show, lower data priority numbers stay longer-->
@@ -169,7 +171,7 @@
                 $link = false;
                 ?>
                 <tr>
-                    <td>{{ $event->name }}</td>
+                    <td><div width="50%"><span class="wrapcell">{{ $event->name }}</span></div></td>
                     <td>
                         {{ date('M d, Y', strtotime($event->startDate)) }}
                         - {{ date('M d, Y', strtotime($event->endDate)) }}
@@ -286,7 +288,7 @@
         </table>
          </div>
             <div class="panel-body panel-primary zeroTopMargin">
-                <div class="panel-heading sw-heading"> <h4 class="siteheading">Department of Social Work</h4><br><h5 class="sitesubheading">College of Arts & Sciences</h5></div>
+                <div class="panel-heading sw-heading"> <h4 class="siteheading">Department of Social Work<br></h4><p class="sitesubheading">College of Arts & Sciences</p></div>
 
                 <div class="panel-body w3-panel w3-blue w3-round-xlarge">
 

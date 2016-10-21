@@ -1,7 +1,7 @@
 @extends('layouts.dataTables')
 
 @section('content')
-    <h1 class="text-center">All Categories</h1>
+    <div class="text-center"><h1 class="page-header">All Categories</h1></div>
     <div class="container">
         <!-- create a new category (uses the create method found at GET /categories/create -->
         <a class="btn btn-small btn-primary pull-right" href="{{ URL::to('categories/create') }}" style="margin-bottom: 20px;">Create New Category</a>

@@ -31,7 +31,7 @@
     <p>Provided by: {{Auth::user()->name}} | {{Auth::user()->email}}</p>
 </div>
 <!-- This image path must be absolute. Dompdf does not support relative paths. -->
-<img id="header" src="C:\Users\stan2\Documents\Soft Eng II\MasterPresentation\public\images\sw_logo.jpg">
+<img id="header" src="C:\Users\Stan\Documents\Software Engineering 2\Live\public\images\sw_logo.jpg">
 @if(!$events->isEmpty())
     <h2 style="text-align: center">Events</h2>
     <hr>

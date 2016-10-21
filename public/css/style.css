@@ -206,11 +206,10 @@ table thead th{
 
 .siteheading {
 
-    display: inline-block;
 
     font-size: 130%;
     padding-top: 15px;
-    margin: 0 auto;
+    margin: 0 ;
     font-family: "sorts italic", georgia, serif;
 
 }
@@ -249,8 +248,8 @@ table thead th{
     .padsome{
         padding-left:20px;
         padding-right:20px;
-
     }
+
 }
 .sw-heading{
     height: 85px!important;
@@ -262,15 +261,18 @@ table thead th{
 
     .siteheading {
         text-align: center!important;
-        padding-top: 20px;
-
-        padding-left: 25px;
+        white-space: nowrap;
+        vertical-align: middle;
+      /*  padding-top: 10px;
+        padding-left: 25px;*/
         margin: 0 auto;
     }
-
     .sitesubheading {
         text-align: center!important;
         padding:0!important;
+    }
+    .wrapcell{
+        white-space: normal;
     }
 }
 

@@ -135,11 +135,15 @@
          <div class="padsome">
              <?php
                 if(!empty($upcomingEvents))
+                {
                     echo  '<button class="purple-btn pull-right nowrap" id="hide">Hide Events</button>';
-
-                ?>
-
-            <table class="dt-responsive nowrap tableText pull-right" cellspacing="0" width="100%" id="UpcomingEventsTable" frame="hsides" rules="thead , row='1'" >
+                    echo "<table class='dt-responsive nowrap tableText pull-right' cellspacing='0' width='100%' id='UpcomingEventsTable' frame='hsides' rules='thead , row='1'' >";
+                }
+                else
+                    {
+                        echo "<table class='dt-responsive nowrap tableText pull-right hidden' cellspacing='0' width='100%' id='UpcomingEventsTable' frame='hsides' rules='thead , row='1'' >";
+                    }
+             ?>
             <thead>
             <tr >
                 <!-- class all for always show, lower data priority numbers stay longer-->
@@ -299,7 +303,7 @@
                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/providers"><img src="\images\providers.png" alt="Providers" class="imglink"  ></a><h3 class="footerlink"><a  href="/providers">Providers</a></h3></div>
 
                     @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
-                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/contacts"><img src="\images\Contacts2.png" alt="Contacts" class="imglink"  ></a><h3 class="footerlink"><a  href="/contacts">Contacts</a></h3></div>
+                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/contacts"><img src="\images\contacts2.png" alt="Contacts" class="imglink"  ></a><h3 class="footerlink"><a  href="/contacts">Contacts</a></h3></div>
                             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"><a href="/categories"><img src="\images\CategoriesImg.png" alt="Categories" class="imglink" ></a> <h3 class="footerlink"><a  href="/categories">Categories</a></h3></div>
                             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"><a href="/flags"><img src="\images\waving-flag.jpg" alt="Flags" class="imglink" ></a> <h3 class="footerlink"><a  href="/flags">Flags</a></h3></div>
                         @endif

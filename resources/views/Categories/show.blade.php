@@ -47,5 +47,5 @@
     </div>
 
     <!-- Modal -->
-    @include('Categories._deleteModal')
+    @include('categories._deleteModal')
 @endsection

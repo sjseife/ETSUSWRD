@@ -68,6 +68,6 @@
 
     @if(!$flag->resolved)
         <!-- Resolve Modal -->
-        @include('Flags._resolveModal')
+        @include('flags._resolveModal')
     @endif
 @endsection

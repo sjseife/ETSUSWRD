@@ -157,5 +157,5 @@
             </div>
         </div>
     <!-- Modal -->
-    @include('Resources._deleteModal')
+    @include('resources._deleteModal')
 @endsection

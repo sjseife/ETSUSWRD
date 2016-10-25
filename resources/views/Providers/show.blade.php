@@ -90,5 +90,5 @@
     </div>
 </div>
     <!-- Modal -->
-    @include('Providers._deleteModal')
+    @include('providers._deleteModal')
 @endsection

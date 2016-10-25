@@ -78,89 +78,16 @@
                     <td>{{ $event->name }}</td>
                     <td>{{ $event->county }}</td>
                     <td>
-                        @foreach ($event->categories as $category)
+                        {{--@foreach ($event->categories as $category)
                             {{ $category->name }}
-                        @endforeach
+                        @endforeach--}}
                     </td>
                     <td>
                         {{ date('F jS, Y', strtotime($event->startDate)) }}
                         - {{ date('F jS, Y', strtotime($event->endDate)) }}
                     </td>
                     <td>
-                        <ul>
-                            <?php
-                            $tempDay = array();
-                            $tempNextDay = '';
-                            $days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
-                            $tempOpen = '';
-                            $tempClose = '';
-                            $dayArr = array();
-                            $openTimeArr = array();
-                            $closeTimeArr = array();
-                           /* $eventHours = array();
-                                foreach($event->hours as $day)
-                                    $eventHours[] = get_object_vars($day);
-                            $daysSorted = $eventHours;*/
 
-                            ?>
-                            @foreach($event->hours as $day)
-
-                                <?php
-
-                                if (empty($tempDay))
-                                {
-                                    $tempDay[] = $day->day;
-                                    $key = array_search($day->day, $days); // returns key of matching day in array
-                                    if($key < 6)
-                                        $tempNextDay = $days[$key + 1];
-                                    $tempOpen = $day->openTime;
-                                    $tempClose = $day->closeTime;
-                                }
-                                elseif(($tempOpen == $day->openTime) && ($tempClose == $day->closeTime) && ($tempNextDay == $day->day))
-                                {
-                                    $tempDay[] = $day->day;
-                                    $key = array_search($tempNextDay, $days); // returns key of matching day in array
-                                    if($key < 6)
-                                        $tempNextDay = $days[$key + 1];
-                                }
-                                else
-                                {
-                                    $dayArr[] = $tempDay;
-                                    unset($tempDay);
-                                    $tempDay[] = $day->day;
-                                    $openTimeArr[] = $tempOpen;
-                                    $closeTimeArr[] = $tempClose;
-                                    $tempOpen = $day->openTime;
-                                    $tempClose = $day->closeTime;
-                                    $key = array_search($day->day, $days); // returns key of matching day in array
-                                    if($key < 6)
-                                        $tempNextDay = $days[$key + 1];
-                                }
-
-                                ?>
-                            @endforeach
-
-                            <?php
-                            $dayArr[] = $tempDay;
-                            $openTimeArr[] = $tempOpen;
-                            $closeTimeArr[] = $tempClose;
-                            foreach($dayArr as $key => $item)
-                            {
-                                if(empty($item))
-                                {
-                                    echo '';
-                                }
-                                elseif (count($item) < 2)
-                                {
-                                    echo '<li>' . $item[0] . ':<br>' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '</li>';
-                                }
-                                else
-                                {
-                                    echo '<li>' . $item[0] . ' - ' . end($item) . ':<br>' . date('g:i A',strtotime($openTimeArr[$key])) . ' - ' . date('g:i A',strtotime($closeTimeArr[$key])) . '</li>';
-                                }
-                            }
-                            ?>
-                        </ul>
 
                     </td>
                     <td><?php
@@ -191,7 +118,7 @@
                     <td>{{ $event->city }}</td>
                     <td>{{ $event->state }}</td>
                     <td>{{ $event->zipCode }}</td>
-                    <td>{{ $event->provider->name }}</td>
+                    <td>{{--{{ $event->provider->name }}--}}</td>
                     <td><div width="50%"><span style="white-space: normal;">{{ $event->description }}</span></div></td>
                     <td><div width="50%"><span style="white-space: normal;">{{ $event->comments }}</span></div></td>
                     <td class="text-center col-md-3">

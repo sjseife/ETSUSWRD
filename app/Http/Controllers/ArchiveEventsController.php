@@ -22,7 +22,7 @@ class ArchiveEventsController extends Controller
 {
     public function index()
     {
-        $events = DB::table('archive_events')->get();
+        $events = ArchiveEvent::all();
         $categories = Category::lists('name');
         return view('archive_events.index', compact('events', 'categories'));
     }

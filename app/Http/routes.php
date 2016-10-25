@@ -89,6 +89,12 @@ Route::group(['middleware' => 'App\Http\Middleware\GAAccessMiddleware'], functio
     Route::post('providers', 'ProvidersController@store');
     Route::patch('providers/{provider}', 'ProvidersController@update');
     Route::delete('providers/{provider}', 'ProvidersController@destroy');
+
+    //archive
+    Route::get('archive', 'ArchiveController@index');
+
+    //archive events
+    Route::get('archive_events', 'ArchiveEventsController@index');
 });
 
 //if gerneral user is required, leave it below.

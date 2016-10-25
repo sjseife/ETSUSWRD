@@ -30,6 +30,7 @@
                 <li><a href="{{ url('/worklist/generateReport') }}">Report</a></li>
                 @if (Auth::user()->role == 'Admin')
                     <li><a href="{{ url('/users') }}">Users</a></li>
+                    <li><a href="{{ url('/archive') }}">Archive</a></li>
                 @endif
 
 

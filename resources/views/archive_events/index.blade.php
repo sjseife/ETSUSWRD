@@ -14,11 +14,11 @@
 
 </style>
 @section('content')
-   <div class="text-center"><h1 class="page-header">All Archived Events</h1></div>
-   <div id="successOrFailure"></div>
+    <div class="text-center"><h1 class="page-header">All Archived Events</h1></div>
+    <div id="successOrFailure"></div>
     <!-- create a new event (uses the create method found at GET /event/create -->
     @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
-    <a class="btn btn-md btn-primary pull-right" href="{{ URL::to('events/create') }}" style="margin-bottom: 20px;">Create New Event</a>
+        <a class="btn btn-md btn-primary pull-right" href="{{ URL::to('events/create') }}" style="margin-bottom: 20px;">Create New Event</a>
     @endif
     <br>
     <br>
@@ -164,23 +164,23 @@
 
                     </td>
                     <td><?php
-                            if(strlen($event->publicPhoneNumber) > 0)
+                        if(strlen($event->publicPhoneNumber) > 0)
+                        {
+                            $tempPhoneNumber = $event->publicPhoneNumber;
+                            $tempPhoneNumber = preg_replace("/[^0-9,x]/", "", $tempPhoneNumber );
+                            if(strlen($tempPhoneNumber) > 10)
                             {
-                                $tempPhoneNumber = $event->publicPhoneNumber;
-                                $tempPhoneNumber = preg_replace("/[^0-9,x]/", "", $tempPhoneNumber );
-                                if(strlen($tempPhoneNumber) > 10)
-                                {
-                                    $tempPhoneNumber = preg_replace("/^[1]/", "", $tempPhoneNumber );
-                                }
-                                $tempPhoneNumber = '(' . substr($tempPhoneNumber,0, 3) . ') '
-                                        . substr($tempPhoneNumber, 3, 3) . '-'
-                                        . substr($tempPhoneNumber, 6, 4) . ' '
-                                        . substr($tempPhoneNumber, 10, (strlen($tempPhoneNumber) - 10));
-                                echo $tempPhoneNumber;
+                                $tempPhoneNumber = preg_replace("/^[1]/", "", $tempPhoneNumber );
                             }
-                            else
-                            {
-                                echo "Not Provided";
+                            $tempPhoneNumber = '(' . substr($tempPhoneNumber,0, 3) . ') '
+                                    . substr($tempPhoneNumber, 3, 3) . '-'
+                                    . substr($tempPhoneNumber, 6, 4) . ' '
+                                    . substr($tempPhoneNumber, 10, (strlen($tempPhoneNumber) - 10));
+                            echo $tempPhoneNumber;
+                        }
+                        else
+                        {
+                            echo "Not Provided";
                         }
 
                         ?></td>
@@ -201,10 +201,10 @@
                         {{--<a class="btn btn-sm btn-success" href="{{ URL::to('events/' . $event->id) }}">View</a>--}}
                         <button type="button" class="btn btn-sm btn-primary report
                                     @if(Auth::user()->events->contains($event))
-                               removeReport" name="{{$event->id}}">Remove Event</button>
-                                @else
-                                addReport" name="{{$event->id}}">Add Event</button>
-                                @endif
+                                removeReport" name="{{$event->id}}">Remove Event</button>
+                        @else
+                            addReport" name="{{$event->id}}">Restore Event</button>
+                        @endif
                         {{-- <a class="btn btn-sm btn-primary" href="{{ URL::to('events/addAjax/'. $event->id) }}">Add to Report</a>--}}
 
                     </td>
@@ -286,7 +286,7 @@
 
 
 
-   //Ajax for add to report button
+        //Ajax for add to report button
 
 
 
@@ -299,7 +299,7 @@
                     $eventNames = array('empty');
                     foreach($events as $event)
                     {
-                        $eventNames[] = $event->name;
+                        $eventNames[$event->id] = $event->name;
                     }
                     ?>
             var eventNames = <?php echo json_encode($eventNames); ?>;
@@ -313,16 +313,16 @@
                 $.ajax({
 
                     type: "GET",
-                    url: 'events/add/' + $(this).attr("name"),
+                    url: 'archive_events/restore/' + $(this).attr("name"),
                     dataType: 'json',
                     success: function (data) {
                         //alerts users to successful button pushing.
-                        html = '<div class="alert alert-success">' + eventNames[index] + ' Added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                        html = '<div class="alert alert-success">' + eventNames[index] + ' restored to event page!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
                         $('#successOrFailure').html(html);
-                        button.css({"background-color": "#c9302c", "color": "white", "border-color": "#ac2925"});
-                        button.addClass('removeReport').removeClass('addReport');
+                        button.css({"background-color": "#FFC72C", "color": "#041E42", "border-color": "#FFC72C"});
+                        button.addClass('disabled').removeClass('addReport');
                         button.text(function (i, text) {
-                            return "Remove Event";
+                            return "Event Restored";
                         })
 
                     },

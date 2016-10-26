@@ -95,6 +95,7 @@ Route::group(['middleware' => 'App\Http\Middleware\GAAccessMiddleware'], functio
 
     //archive events
     Route::get('archive_events', 'ArchiveEventsController@index');
+    Route::get('archive_events/restore/{event}', 'ArchiveEventsController@restore');
 });
 
 //if gerneral user is required, leave it below.

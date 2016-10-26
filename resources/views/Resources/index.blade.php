@@ -284,7 +284,7 @@
                     $eventNames = array('empty');
                     foreach($resources as $resource)
                     {
-                        $resourceNames[] = $resource->name;
+                        $resourceNames[$resource->id] = $resource->name;
                     }
                     ?>
             var resourceNames = <?php echo json_encode($resourceNames); ?>;

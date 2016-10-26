@@ -16,6 +16,7 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->string('name', 150);
             $table->timestamps();
+            $table->tinyInteger('archived')->default(0);
         });
 
         Schema::create('category_resource', function (Blueprint $table) {

@@ -22,7 +22,7 @@ class ArchiveEventsController extends Controller
 {
     public function index()
     {
-        $events = ArchiveEvent::all();
+        $events = Event::where('archived','=','1')->get();
         $categories = Category::lists('name');
         return view('archive_events.index', compact('events', 'categories'));
     }

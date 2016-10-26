@@ -21,7 +21,7 @@ class EventsController extends Controller
 {
     public function index()
     {
-        $events = Event::all();
+        $events = Event::where('archived','=','0')->get();
         $categories = Category::lists('name');
         return view('events.index', compact('events', 'categories'));
     }
@@ -143,7 +143,9 @@ class EventsController extends Controller
 
     public function destroy(Event $event)
     {
-        foreach($event->flags as $flag)
+        $event->archived = '1';
+        $event->save();
+        /*foreach($event->flags as $flag)
         {
             DB::table('archive_flags')->insert(
                 ['id' => $flag->id,
@@ -223,7 +225,8 @@ class EventsController extends Controller
                 'updated_at' => $event->updated_at,
                 'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
         );
-        $event->delete();
+        $event->delete();*/
+
         \Session::flash('flash_message', 'Event Deleted');
         return redirect('/events');
     }

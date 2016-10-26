@@ -163,5 +163,5 @@
         </div>
                 </div>
         <!-- Modal -->
-    @include('Events._deleteModal')
+    @include('events._deleteModal')
 @endsection

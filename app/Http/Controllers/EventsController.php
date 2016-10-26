@@ -21,7 +21,7 @@ class EventsController extends Controller
 {
     public function index()
     {
-        $events = Event::all();
+        $events = Event::where('archived','=','0')->get();
         $categories = Category::lists('name');
         return view('events.index', compact('events', 'categories'));
     }
@@ -44,49 +44,34 @@ class EventsController extends Controller
 
     public function store(EventRequest $request)
     {
+
         $event = new Event($request->all());
         $event->provider_id = $request->provider;
         $event->save();
+
+        //categories
         if(!is_null($request->input('category_list')))
         {
             $syncCategories = $this->checkForNewCategories($request->input('category_list'));
             $event->categories()->attach($syncCategories);
         }
-        //create and sync daily hours if the event is not closed that day
-        if(!isset($request->mondayClosedCheck))
+
+        //daily hours
+        $dayArray = $request->day;
+        $openArray = $request->open;
+        $closeArray = $request->close;
+        $i = count($dayArray) - 1;
+        for($i = count($dayArray) - 1; $i >=0; $i--)
         {
-            $monday = DailyHours::create(['day'=>'Monday', 'openTime'=>$request->mondayOpen,
-                'closeTime'=>$request->mondayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->tuesdayClosedCheck))
-        {
-            $tuesday = DailyHours::create(['day'=>'Tuesday', 'openTime'=>$request->tuesdayOpen,
-                'closeTime'=>$request->tuesdayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->wednesdayClosedCheck))
-        {
-            $wednesday = DailyHours::create(['day'=>'Wednesday', 'openTime'=>$request->wednesdayOpen,
-                'closeTime'=>$request->wednesdayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->thursdayClosedCheck))
-        {
-            $thursday = DailyHours::create(['day'=>'Thursday', 'openTime'=>$request->thursdayOpen,
-                'closeTime'=>$request->thursdayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->fridayClosedCheck))
-        {
-            $friday = DailyHours::create(['day'=>'Friday', 'openTime'=>$request->fridayOpen,
-                'closeTime'=>$request->fridayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->saturdayClosedCheck))
-        {
-            $saturday = DailyHours::create(['day'=>'Saturday', 'openTime'=>$request->saturdayOpen,
-                'closeTime'=>$request->saturdayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->sundayClosedCheck))
-        {
-            $sunday = DailyHours::create(['day'=>'Sunday', 'openTime'=>$request->sundayOpen,
-                'closeTime'=>$request->sundayClose, 'event_id'=>$event->id]);
+            if($dayArray[$i] != "" && $openArray[$i] != "" && $closeArray[$i] != "")
+            {
+                $tempDay = DailyHours::create(['day'=>$dayArray[$i], "openTime"=>$openArray[$i],
+                    'closeTime'=>$closeArray[$i], 'event_id'=>$event->id]);
+            }
+            else
+            {
+                \Session::flash('flash_message', 'Problem creating operating hours. Please double check operating hours.');
+            }
         }
 
         \Session::flash('flash_message', 'Event Created Successfully!');
@@ -103,58 +88,27 @@ class EventsController extends Controller
     
     public function update(Event $event, EventRequest $request)
     {
-         DB::table('daily_hours')->where('event_id', '=', $event->id)->delete();
         $event->update($request->all());
 
-
-
-
-        //create and sync daily hours if the event is not closed that day
-        if(!isset($request->sundayClosedCheck))
+        //daily hours
+        DB::table('daily_hours')->where('event_id', '=', $event->id)->delete(); //dump the old ones
+        $dayArray = $request->day;
+        $openArray = $request->open;
+        $closeArray = $request->close;
+        for($i = count($dayArray) - 1; $i >=0; $i--)
         {
-            $sunday = DailyHours::create(['day'=>'Sunday', 'openTime'=>$request->sundayOpen,
-                'closeTime'=>$request->sundayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->saturdayClosedCheck))
-        {
-            $saturday = DailyHours::create(['day'=>'Saturday', 'openTime'=>$request->saturdayOpen,
-                'closeTime'=>$request->saturdayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->fridayClosedCheck))
-        {
-            $friday = DailyHours::create(['day'=>'Friday', 'openTime'=>$request->fridayOpen,
-                'closeTime'=>$request->fridayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->thursdayClosedCheck))
-        {
-            $thursday = DailyHours::create(['day'=>'Thursday', 'openTime'=>$request->thursdayOpen,
-                'closeTime'=>$request->thursdayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->wednesdayClosedCheck))
-        {
-            $wednesday = DailyHours::create(['day'=>'Wednesday', 'openTime'=>$request->wednesdayOpen,
-                'closeTime'=>$request->wednesdayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->tuesdayClosedCheck))
-        {
-            $tuesday = DailyHours::create(['day'=>'Tuesday', 'openTime'=>$request->tuesdayOpen,
-                'closeTime'=>$request->tuesdayClose, 'event_id'=>$event->id]);
-        }
-        if(!isset($request->mondayClosedCheck))
-        {
-            $monday = DailyHours::create(['day'=>'Monday', 'openTime'=>$request->mondayOpen,
-                'closeTime'=>$request->mondayClose, 'event_id'=>$event->id]);
+            if($dayArray[$i] != "" && $openArray[$i] != "" && $closeArray[$i] != "")
+            {
+                $tempDay = DailyHours::create(['day'=>$dayArray[$i], "openTime"=>$openArray[$i],
+                    'closeTime'=>$closeArray[$i], 'event_id'=>$event->id]);
+            }
+            else
+            {
+                \Session::flash('flash_message', 'Problem creating operating hours. Please double check operating hours.');
+            }
         }
 
-
-
-
-
-
-
-
-
-
+        //categories
         if(!is_null($request->input('category_list')))
         {
             $syncCategories = $this->checkForNewCategories($request->input('category_list'));
@@ -189,87 +143,10 @@ class EventsController extends Controller
 
     public function destroy(Event $event)
     {
-        foreach($event->flags as $flag)
-        {
-            DB::table('archive_flags')->insert(
-                ['id' => $flag->id,
-                    'level' => $flag->level,
-                    'comments' => $flag->comments,
-                    'resolved' => $flag->resolved,
-                    'submitted_by' => $flag->submitter->id,
-                    'user_id' => $flag->userIdNumber,
-                    'event_id' => $flag->eventIdNumber,
-                    'contact_id' => $flag->contactIdNumber,
-                    'provider_id' => $flag->providerIdNumber,
-                    'resource_id' => $flag->resourceIdNumber,
-                    'created_at' => $flag->created_at,
-                    'updated_at' => $flag->updated_at,
-                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
-            );
-        }
-        foreach($event->categories as $category)
-        {
-            DB::table('archive_category_event')->insert(
-                [
-                    'category_id' => $category->pivot->category_id,
-                    'event_id' => $event->id,
-                    'created_at' => $category->pivot->created_at,
-                    'updated_at' => $category->pivot->updated_at,
-                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
-                ]
-            );
-        }
-        foreach($event->users as $user)
-        {
-            DB::table('archive_event_user')->insert(
-                [
-                    'user_id' => $user->pivot->user_id,
-                    'event_id' => $event->id,
-                    'created_at' => $user->pivot->created_at,
-                    'updated_at' => $user->pivot->updated_at,
-                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
-                ]
-            );
-        }
-        foreach($event->hours as $hours)
-        {
-            DB::table('archive_daily_hours')->insert(
-                [
-                    'id' => $hours->id,
-                    'day' => $hours->day,
-                    'openTime' => $hours->openTime,
-                    'closeTime' => $hours->closeTime,
-                    'event_id' => $hours->event_id,
-                    'resource_id' => $hours->resource_id,
-                    'created_at' => $hours->created_at,
-                    'updated_at' => $hours->updated_at,
-                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
-                ]
-            );
-        }
-        DB::table('archive_events')->insert(
-            [
-                'id' => $event->id,
-                'name' => $event->name,
-                'startDate' => $event->startDate,
-                'endDate' => $event->endDate,
-                'streetAddress' => $event->streetAddress,
-                'streetAddress2' => $event->streetAddress2,
-                'city' => $event->city,
-                'county' => $event->county,
-                'state' => $event->state,
-                'zipCode' => $event->zipCode,
-                'publicPhoneNumber' => $event->publicPhoneNumber,
-                'publicEmail' => $event->publicEmail,
-                'website' => $event->website,
-                'description' => $event->description,
-                'comments' => $event->comments,
-                'provider_id' => $event->provider_id,
-                'created_at' => $event->created_at,
-                'updated_at' => $event->updated_at,
-                'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
-        );
-        $event->delete();
+        $event->archived = '1';
+        $event->save();
+
+
         \Session::flash('flash_message', 'Event Deleted');
         return redirect('/events');
     }

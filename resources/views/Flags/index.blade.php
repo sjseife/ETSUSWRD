@@ -1,7 +1,7 @@
 @extends('layouts.dataTables')
 
 @section('content')
-    <h1 class="text-center">All Flags</h1>
+    <div class="text-center"><h1 class="page-header">All Flags</h1></div>
 
     <div class="container">
         <!-- create a new flag (uses the create method found at GET /flags/create -->
@@ -41,7 +41,7 @@
                         @endif
 
                         <td>{{ $flag->level }}</td>
-                            <td>{{ $flag->submitter->email }}</td>
+                            <td>{{ $flag->submitter->name }}</td>
                             <td>{{ $flag->created_at }}</td>
 
                             @if($flag->resolved)

@@ -30,7 +30,7 @@
                             <dd>{{ $flag->event->name }}</dd>
                         @endif
                         <dt>Submitted By</dt>
-                        <dd>{{ $flag->submitter->email }}</dd>
+                        <dd>{{ $flag->submitter->name }}</dd>
                         <dt>Level</dt>
                         <dd>{{ $flag->level }}</dd>
                         <dt>Submitted At</dt>
@@ -68,6 +68,6 @@
 
     @if(!$flag->resolved)
         <!-- Resolve Modal -->
-        @include('Flags._resolveModal')
+        @include('flags._resolveModal')
     @endif
 @endsection

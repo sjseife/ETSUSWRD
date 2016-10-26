@@ -1,11 +1,21 @@
 @extends('layouts.dataTables')
 <style>
+    .removeReport {
+        background-color: #c9302c!important;
+        border-color: #ac2925!important;
+        color: white!important;
+    }
+    .addReport{
+        background-color: #041E42!important;
+        border-color: #2e6da4!important;
+        color: white!important;
 
+    }
 
 </style>
 @section('content')
-    <h1 class="text-center">All Events</h1>
-    <div id="successOrFailure"></div>
+   <div class="text-center"><h1 class="page-header">All Events</h1></div>
+   <div id="successOrFailure"></div>
     <!-- create a new event (uses the create method found at GET /event/create -->
     @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
     <a class="btn btn-md btn-primary pull-right" href="{{ URL::to('events/create') }}" style="margin-bottom: 20px;">Create New Event</a>
@@ -13,15 +23,14 @@
     <br>
     <br>
     <div>
-        <table {{--style="display:none;"--}} class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="EventsTable">
+        <table style="display:none;" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="EventsTable">
             <thead>
-
             <tr>
                 <!-- class all for always show, lower data priority numbers stay longer-->
                 <th class="all" >Name</th> {{--0--}}
                 <th data-priority="1">County</th> {{--1--}}
                 <th data-priority="2">Category</th> {{--2--}}
-                <th data-priority="1">Dates</th> {{--3--}}
+                <th data-priority="0">Dates</th> {{--3--}}
                 <th data-priority="2">Hours of Operation</th> {{--4--}}
                 <th data-priority="2">Phone</th> {{--5--}}
                 <th data-priority="2">Email</th> {{--6--}}
@@ -35,7 +44,7 @@
                 <th data-priority="3">Description</th> {{--13--}}
                 <th data-priority="3">Comments</th> {{--14--}}
                 <th class="all">Action</th> {{--15--}}
-                <th data-priority="4">View Report:</th>{{--16--}}
+                <th data-priority="4">View Event:</th>{{--16--}}
             </tr>
             </thead>
             <tfoot>
@@ -155,17 +164,24 @@
 
                     </td>
                     <td><?php
-                        $tempPhoneNumber = $event->publicPhoneNumber;
-                        $tempPhoneNumber = preg_replace("/[^0-9,x]/", "", $tempPhoneNumber );
-                        if(strlen($tempPhoneNumber) > 10)
-                        {
-                            $tempPhoneNumber = preg_replace("/^[1]/", "", $tempPhoneNumber );
+                            if(strlen($event->publicPhoneNumber) > 0)
+                            {
+                                $tempPhoneNumber = $event->publicPhoneNumber;
+                                $tempPhoneNumber = preg_replace("/[^0-9,x]/", "", $tempPhoneNumber );
+                                if(strlen($tempPhoneNumber) > 10)
+                                {
+                                    $tempPhoneNumber = preg_replace("/^[1]/", "", $tempPhoneNumber );
+                                }
+                                $tempPhoneNumber = '(' . substr($tempPhoneNumber,0, 3) . ') '
+                                        . substr($tempPhoneNumber, 3, 3) . '-'
+                                        . substr($tempPhoneNumber, 6, 4) . ' '
+                                        . substr($tempPhoneNumber, 10, (strlen($tempPhoneNumber) - 10));
+                                echo $tempPhoneNumber;
+                            }
+                            else
+                            {
+                                echo "Not Provided";
                         }
-                        $tempPhoneNumber = '(' . substr($tempPhoneNumber,0, 3) . ') '
-                                . substr($tempPhoneNumber, 3, 3) . '-'
-                                . substr($tempPhoneNumber, 6, 4) . ' '
-                                . substr($tempPhoneNumber, 10, (strlen($tempPhoneNumber) - 10));
-                        echo $tempPhoneNumber;
 
                         ?></td>
                     <td>{{ $event->publicEmail }}</td>
@@ -183,11 +199,12 @@
 
                         <!-- show the event (uses the show method found at GET /event/view/{id} -->
                         {{--<a class="btn btn-sm btn-success" href="{{ URL::to('events/' . $event->id) }}">View</a>--}}
-                        <button type="button" class="btn btn-sm btn-primary addReport
+                        <button type="button" class="btn btn-sm btn-primary report
                                     @if(Auth::user()->events->contains($event))
-                                disabled
+                               removeReport" name="{{$event->id}}">Remove Event</button>
+                                @else
+                                addReport" name="{{$event->id}}">Add Event</button>
                                 @endif
-                                " name="{{$event->id}}">Add to Report</button>
                         {{-- <a class="btn btn-sm btn-primary" href="{{ URL::to('events/addAjax/'. $event->id) }}">Add to Report</a>--}}
 
                     </td>
@@ -207,10 +224,9 @@
     {
         //Apply DataTables
 
-        $('#EventsTable').dataTable({/*delete everything from here*/});
-    }); /*to here when uncommenting*/
-            /*initComplete: function () {
-                this.api().columns([1,5,8,9,10,11]).every( function () {
+        $('#EventsTable').dataTable({
+            initComplete: function () {
+                this.api().columns([1,5,9,10,11,12]).every( function () {
                     var column = this;
                     var select = $('<select><option value=""></option></select>')
                             .appendTo( $(column.footer()).empty() )
@@ -255,7 +271,7 @@
                                         .search(val ? $(this).val() : val, true, false)
                                         .draw();
                             });
-                    var categories = <?php //echo json_encode($categories); ?>;
+                    var categories = <?php echo json_encode($categories); ?>;
                     for(y = 0; y < categories.length; y++)
                     {
                         select.append('<option value="' + categories[y] + '">' + categories[y] + '</option>');
@@ -269,67 +285,112 @@
         } );
 
 
-    } )*/
-   //Ajax for add to report button
-    $('.addReport').each(function() {
-        var button = $(this);
-        var index = button.attr("name");
-        <?php
-            $eventNames = array('empty');
-            foreach($events as $event)
-                {
-                   $eventNames[] = $event->name;
-                }
-        ?>
-        var eventNames = <?php echo json_encode($eventNames); ?>;
 
-        $(this).click(function (){
+   //Ajax for add to report button
+
+
+
+        $(".report").click(function (){
+            var button = $(this);
+            var index = button.attr("name");
+            var remove = $(this).hasClass("removeReport");
+            var add = $(this).hasClass("addReport");
+                    <?php
+                    $eventNames = array('empty');
+                    foreach($events as $event)
+                    {
+                        $eventNames[] = $event->name;
+                    }
+                    ?>
+            var eventNames = <?php echo json_encode($eventNames); ?>;
 
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            $.ajax({
-                type: "GET",
-                url: 'events/add/' + $(this).attr("name"),
-                dataType: 'json',
-                success: function (data) {
-                    //alerts users to successful button pushing.
-                    html = '<div class="alert alert-success">'+ eventNames[index] +' Added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
-                    $('#successOrFailure').html(html);
-                    button.attr("disabled","disabled").css("background-color","green");
-                    button.text(function (i, text){
-                        return "Added";
-                    })
+            if (add) {
+                $.ajax({
 
-
-                },
-                error: function (data) {
-                    if (data.status === 401) //redirect if not authenticated user.
-                        $(location).prop('pathname', 'auth/login');
-                    if (data.status === 422) {
-                        //process validation errors here.
-                        var errors = data.responseJSON; //this will get the errors response data.
-                        //show them somewhere in the modal
-                        errorsHtml = '<div class="alert alert-danger"><ul>';
-
-                        $.each(errors, function (key, value) {
-                            errorsHtml += '<li>' + value[0] + '</li>'; //showing only the first error.
-                        });
-                        errorsHtml += '</ul><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
-
-                        $('#successOrFailure').html(errorsHtml); //appending to a <div id="form-errors"></div> inside form
-                    } else {
-                        html = '<div class="alert alert-danger"><ul><li>There was a problem processing your request. ' +
-                                'Please try again later.</li></ul><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                    type: "GET",
+                    url: 'events/add/' + $(this).attr("name"),
+                    dataType: 'json',
+                    success: function (data) {
+                        //alerts users to successful button pushing.
+                        html = '<div class="alert alert-success">' + eventNames[index] + ' Added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
                         $('#successOrFailure').html(html);
-                    }
-                }
-            });
-        });
-    });
+                        button.css({"background-color": "#c9302c", "color": "white", "border-color": "#ac2925"});
+                        button.addClass('removeReport').removeClass('addReport');
+                        button.text(function (i, text) {
+                            return "Remove Event";
+                        })
 
+                    },
+                    error: function (data) {
+                        if (data.status === 401) //redirect if not authenticated user.
+                            $(location).prop('pathname', 'auth/login');
+                        if (data.status === 422) {
+                            //process validation errors here.
+                            var errors = data.responseJSON; //this will get the errors response data.
+                            //show them somewhere in the modal
+                            errorsHtml = '<div class="alert alert-danger"><ul>';
+
+                            $.each(errors, function (key, value) {
+                                errorsHtml += '<li>' + value[0] + '</li>'; //showing only the first error.
+                            });
+                            errorsHtml += '</ul><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+
+                            $('#successOrFailure').html(errorsHtml); //appending to a <div id="form-errors"></div> inside form
+                        } else {
+                            html = '<div class="alert alert-danger"><ul><li>There was a problem processing your request. ' +
+                                    'Please try again later.</li></ul><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                            $('#successOrFailure').html(html);
+                        }
+                    }
+                });
+            }
+            else if (remove) {
+                $.ajax({
+
+                    type: "GET",
+                    url: 'events/removeReport/' + $(this).attr("name"),
+                    dataType: 'json',
+                    success: function (data) {
+                        //alerts users to successful button pushing.
+                        html = '<div class="alert alert-danger">' + eventNames[index] + ' Removed from Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                        $('#successOrFailure').html(html);
+                        button.css({"background-color": "#337ab7", "color": "white", "border-color": "#2e6da4"});
+                        button.addClass('addReport').removeClass('removeReport');
+                        button.text(function (i, text) {
+                            return "Add Event";
+                        })
+
+                    },
+                    error: function (data) {
+                        if (data.status === 401) //redirect if not authenticated user.
+                            $(location).prop('pathname', 'auth/login');
+                        if (data.status === 422) {
+                            //process validation errors here.
+                            var errors = data.responseJSON; //this will get the errors response data.
+                            //show them somewhere in the modal
+                            errorsHtml = '<div class="alert alert-danger"><ul>';
+
+                            $.each(errors, function (key, value) {
+                                errorsHtml += '<li>' + value[0] + '</li>'; //showing only the first error.
+                            });
+                            errorsHtml += '</ul><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+
+                            $('#successOrFailure').html(errorsHtml); //appending to a <div id="form-errors"></div> inside form
+                        } else {
+                            html = '<div class="alert alert-danger"><ul><li>There was a problem processing your request. ' +
+                                    'Please try again later.</li></ul><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                            $('#successOrFailure').html(html);
+                        }
+                    }
+                });
+            }
+        });
+    } );
 </script>
 
 @endpush

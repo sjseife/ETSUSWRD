@@ -52,5 +52,5 @@
     </div>
 
     <!-- Modal -->
-    @include('Users._deleteModal')
+    @include('users._deleteModal')
 @endsection

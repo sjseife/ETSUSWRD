@@ -65,22 +65,10 @@
                                 $key = array_search($day->day, $days); // returns key of matching day in array
                                 if($key < 6)
                                     $tempNextDay = $days[$key + 1];
-
                             }
+
                             ?>
                         @endforeach
-                        <?php
-                        $dayArr[] = $tempDay;
-                        $openTimeArr[] = $tempOpen;
-                        $closeTimeArr[] = $tempClose;
-                        $tempOpen = $day->openTime;
-                        $tempClose = $day->closeTime;
-                        $key = array_search($day->day, $days); // returns key of matching day in array
-                        if($key < 6)
-                            $tempNextDay = $days[$key + 1];
-                        }
-                    ?>
-                @endforeach
                 <?php
                 $dayArr[] = $tempDay;
                 $openTimeArr[] = $tempOpen;
@@ -118,23 +106,6 @@
                                 @endforeach
                             </ul>
                         </div>
-                    <div class="col-md-4">
-                        <h5 class="list-heading"><b>Contact Methods:</b></h5>
-                        <ul>
-                            <li>Phone Number: {{ $resource->publicPhoneNumber }} @if($resource->publicPhoneNumber == null) N/A @endif </li>
-                            <li>Email: {{ $resource->publicEmail }} @if($resource->publicEmail == null) N/A @endif </li>
-                            <li>Website: {{ $resource->website }} @if($resource->website == null) N/A @endif </li>
-                        </ul>
-                        <h5 class="list-heading"><b>Categories:</b></h5>
-                        <ul>
-                            @foreach ($resource->categories as $category)
-                                <li><a href="{{ URL::to('categories/' . $category->id) }}">
-                                        | {{ $category->name }}
-                                    </a>|</li>
-                            @endforeach
-                        </ul>
-
-                    </div>
                     <div class="col-md-10">
                         <p><b>Description:</b></p>
                         <p>{{ $resource-> description }}</p>
@@ -186,5 +157,5 @@
             </div>
         </div>
     <!-- Modal -->
-    @include('Resources._deleteModal')
+    @include('resources._deleteModal')
 @endsection

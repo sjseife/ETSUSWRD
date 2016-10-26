@@ -19,6 +19,7 @@ class CreateContactsTable extends Migration
             $table->string('protectedEmail')->unique()->nullable();
             $table->string('protectedPhoneNumber', 30)->nullable();
             $table->timestamps();
+            $table->tinyInteger('archived')->default(0);
         });
 
         Schema::create('contact_provider', function (Blueprint $table) {

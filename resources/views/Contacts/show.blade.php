@@ -72,5 +72,5 @@
         </div>
 
     <!-- Modal -->
-    @include('Contacts._deleteModal')
+    @include('contacts._deleteModal')
 @endsection

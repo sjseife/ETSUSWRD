@@ -59,46 +59,9 @@ class UsersController extends Controller
 
     public function destroy(User $user)
     {
-        foreach($user->flags as $flag)
-        {
-            DB::table('archive_flags')->insert(
-                ['id' => $flag->id,
-                    'level' => $flag->level,
-                    'comments' => $flag->comments,
-                    'resolved' => $flag->resolved,
-                    'submitted_by' => $flag->submitter->id,
-                    'user_id' => $flag->userIdNumber,
-                    'resource_id' => $flag->resourceIdNumber,
-                    'contact_id' => $flag->contactIdNumber,
-                    'created_at' => $flag->created_at,
-                    'updated_at' => $flag->updated_at,
-                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
-            );
-        }
-        foreach($user->resources as $resource)
-        {
-            DB::table('archive_resource_user')->insert(
-                [
-                    'user_id' => $user->id,
-                    'resource_id' => $resource->pivot->resource_id,
-                    'created_at' => $resource->pivot->created_at,
-                    'updated_at' => $resource->pivot->updated_at,
-                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
-                ]
-            );
-        }
+        $user->archived = '1';
+        $user->save();
 
-        DB::table('archive_users')->insert(
-            ['id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
-                'password' => $user->password,
-                'role' => $user->role,
-                'created_at' => $user->created_at,
-                'updated_at' => $user->updated_at,
-                'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
-        );
-        $user->delete();
         \Session::flash('flash_message', 'User Deleted');
         return redirect('/users');
 

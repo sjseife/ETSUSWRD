@@ -8,7 +8,7 @@ class Resource extends Model
 {
     protected $fillable = [
         'name', 'streetAddress', 'streetAddress2', 'city', 'county', 'state', 'zipCode', 'publicPhoneNumber',
-        'publicEmail', 'website', 'description', 'comments', 'provider_id'
+        'publicEmail', 'website', 'description', 'comments', 'provider_id', 'archived'
     ];
 
     /**

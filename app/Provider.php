@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Provider extends Model
 {
     protected $fillable = [
-            'name', 'publicPhoneNumber', 'publicEmail', 'website', 'description', 'comments'
+            'name', 'publicPhoneNumber', 'publicEmail', 'website', 'description', 'comments', 'archived'
     ];
 
     public function events()

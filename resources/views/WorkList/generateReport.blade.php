@@ -15,10 +15,10 @@
 ?>
     @if($resourcesSet != false)
         <?php if ( $detect->isMobile() ) { ?>
-            <h3 class="text-center">Resource and Event Report</h3><br>
+        <div class="text-center"><h3 class="page-header">Resource and Event Report</h3></div><br>
         <?php }
         else{ ?>
-            <h1 class="text-center">Resource and Event Report</h1>
+        <div class="text-center"><h1 class="page-header">Resource and Event Report</h1></div>
         <?php } ?>
             <div class="container">
                 <a class="btn btn-small btn-danger pull-left" href="{{ URL::to('worklist/emptyReport') }}" style="margin-bottom: 20px;">Empty Report</a>
@@ -115,7 +115,8 @@
         </div>
 
     @else
-        <h1 class="text-center">Resource and Event Report</h1>
+        <div class="text-center"><h1 class="page-header">Resource and Event Report</h1></div>
+
         <br>
         <div class="container">
             <h3>

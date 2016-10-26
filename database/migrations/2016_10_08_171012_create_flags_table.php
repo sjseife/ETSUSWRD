@@ -36,6 +36,7 @@ class CreateFlagsTable extends Migration
                 ->unsigned()
                 ->nullable();
             $table->timestamps();
+            $table->tinyInteger('archived')->default(0);
         });
 
         Schema::table('flags', function(Blueprint $table){

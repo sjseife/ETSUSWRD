@@ -9,7 +9,7 @@ class Event extends Model
     protected $fillable = [
         'name', 'startDate', 'endDate', 'streetAddress', 'streetAddress2', 'city', 'county',
         'state', 'zipCode', 'publicPhoneNumber', 'publicEmail', 'website', 'description', 'comments',
-        'provider_id'
+        'provider_id','archived'
     ];
 
     /**

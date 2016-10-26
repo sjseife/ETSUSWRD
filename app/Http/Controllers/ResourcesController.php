@@ -50,47 +50,31 @@ class ResourcesController extends Controller
         $resource = new Resource($request->all());
         $resource->provider_id = $request->provider;
         $resource->save();
+
+        //categories
         if(!is_null($request->input('category_list')))
         {
             $syncCategories = $this->checkForNewCategories($request->input('category_list'));
             $resource->categories()->attach($syncCategories);
         }
-        //create and sync daily hours if the resource is not closed that day
-        if(!isset($request->mondayClosedCheck))
+
+        //daily hours
+        $dayArray = $request->day;
+        $openArray = $request->open;
+        $closeArray = $request->close;
+        for($i = count($dayArray) - 1; $i >=0; $i--)
         {
-            $monday = DailyHours::create(['day'=>'Monday', 'openTime'=>$request->mondayOpen,
-                                'closeTime'=>$request->mondayClose, 'resource_id'=>$resource->id]);
+            if($dayArray[$i] != "" && $openArray[$i] != "" && $closeArray[$i] != "")
+            {
+                $tempDay = DailyHours::create(['day'=>$dayArray[$i], "openTime"=>$openArray[$i],
+                    'closeTime'=>$closeArray[$i], 'resource_id'=>$resource->id]);
+            }
+            else
+            {
+                \Session::flash('flash_message', 'Problem creating operating hours. Please double check operating hours.');
+            }
         }
-        if(!isset($request->tuesdayClosedCheck))
-        {
-            $tuesday = DailyHours::create(['day'=>'Tuesday', 'openTime'=>$request->tuesdayOpen,
-                'closeTime'=>$request->tuesdayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->wednesdayClosedCheck))
-        {
-            $wednesday = DailyHours::create(['day'=>'Wednesday', 'openTime'=>$request->wednesdayOpen,
-                'closeTime'=>$request->wednesdayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->thursdayClosedCheck))
-        {
-            $thursday = DailyHours::create(['day'=>'Thursday', 'openTime'=>$request->thursdayOpen,
-                'closeTime'=>$request->thursdayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->fridayClosedCheck))
-        {
-            $friday = DailyHours::create(['day'=>'Friday', 'openTime'=>$request->fridayOpen,
-                'closeTime'=>$request->fridayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->saturdayClosedCheck))
-        {
-            $saturday = DailyHours::create(['day'=>'Saturday', 'openTime'=>$request->saturdayOpen,
-                'closeTime'=>$request->saturdayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->sundayClosedCheck))
-        {
-            $sunday = DailyHours::create(['day'=>'Sunday', 'openTime'=>$request->sundayOpen,
-                'closeTime'=>$request->sundayClose, 'resource_id'=>$resource->id]);
-        }
+
 
         \Session::flash('flash_message', 'Resource Created Successfully!');
 
@@ -106,47 +90,27 @@ class ResourcesController extends Controller
 
     public function update(Resource $resource, ResourceRequest $request)
     {
-        DB::table('daily_hours')->where('resource_id', '=', $resource->id)->delete();
         $resource->update($request->all());
 
-        //create and sync daily hours if the resource is not closed that day
-        if(!isset($request->sundayClosedCheck))
+        //daily hours
+        DB::table('daily_hours')->where('resource_id', '=', $resource->id)->delete();//dump the old ones
+        $dayArray = $request->day;
+        $openArray = $request->open;
+        $closeArray = $request->close;
+        for($i = count($dayArray) - 1; $i >=0; $i--)
         {
-            $sunday = DailyHours::create(['day'=>'Sunday', 'openTime'=>$request->sundayOpen,
-                'closeTime'=>$request->sundayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->saturdayClosedCheck))
-        {
-            $saturday = DailyHours::create(['day'=>'Saturday', 'openTime'=>$request->saturdayOpen,
-                'closeTime'=>$request->saturdayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->fridayClosedCheck))
-        {
-            $friday = DailyHours::create(['day'=>'Friday', 'openTime'=>$request->fridayOpen,
-                'closeTime'=>$request->fridayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->thursdayClosedCheck))
-        {
-            $thursday = DailyHours::create(['day'=>'Thursday', 'openTime'=>$request->thursdayOpen,
-                'closeTime'=>$request->thursdayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->wednesdayClosedCheck))
-        {
-            $wednesday = DailyHours::create(['day'=>'Wednesday', 'openTime'=>$request->wednesdayOpen,
-                'closeTime'=>$request->wednesdayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->tuesdayClosedCheck))
-        {
-            $tuesday = DailyHours::create(['day'=>'Tuesday', 'openTime'=>$request->tuesdayOpen,
-                'closeTime'=>$request->tuesdayClose, 'resource_id'=>$resource->id]);
-        }
-        if(!isset($request->mondayClosedCheck))
-        {
-            $monday = DailyHours::create(['day'=>'Monday', 'openTime'=>$request->mondayOpen,
-                'closeTime'=>$request->mondayClose, 'resource_id'=>$resource->id]);
+            if($dayArray[$i] != "" && $openArray[$i] != "" && $closeArray[$i] != "")
+            {
+                $tempDay = DailyHours::create(['day'=>$dayArray[$i], "openTime"=>$openArray[$i],
+                    'closeTime'=>$closeArray[$i], 'resource_id'=>$resource->id]);
+            }
+            else
+            {
+                \Session::flash('flash_message', 'Problem creating operating hours. Please double check operating hours.');
+            }
         }
 
-
+        //categories
         if(!is_null($request->input('category_list')))
         {
             $syncCategories = $this->checkForNewCategories($request->input('category_list'));
@@ -156,91 +120,17 @@ class ResourcesController extends Controller
         {
             $resource->categories()->sync([]);
         }
+
+
         \Session::flash('flash_message', 'Resource Updated Successfully!');
         return redirect('/resources/' . $resource->id);
     }
     
     public function destroy(Resource $resource)
     {
-        foreach($resource->flags as $flag)
-        {
-            DB::table('archive_flags')->insert(
-                ['id' => $flag->id,
-                    'level' => $flag->level,
-                    'comments' => $flag->comments,
-                    'resolved' => $flag->resolved,
-                    'submitted_by' => $flag->submitter->id,
-                    'user_id' => $flag->userIdNumber,
-                    'resource_id' => $flag->resourceIdNumber,
-                    'contact_id' => $flag->contactIdNumber,
-                    'provider_id' => $flag->providerIdNumber,
-                    'event_id' => $flag->eventIdNumber,
-                    'created_at' => $flag->created_at,
-                    'updated_at' => $flag->updated_at,
-                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
-            );
-        }
-        foreach($resource->categories as $category)
-        {
-            DB::table('archive_category_resource')->insert(
-                [
-                    'category_id' => $category->pivot->category_id,
-                    'resource_id' => $resource->id,
-                    'created_at' => $category->pivot->created_at,
-                    'updated_at' => $category->pivot->updated_at,
-                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
-                ]
-            );
-        }
-        foreach($resource->users as $user)
-        {
-            DB::table('archive_resource_user')->insert(
-                [
-                    'user_id' => $user->pivot->user_id,
-                    'resource_id' => $resource->id,
-                    'created_at' => $user->pivot->created_at,
-                    'updated_at' => $user->pivot->updated_at,
-                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
-                ]
-            );
-        }
-        foreach($resource->hours as $hours)
-        {
-            DB::table('archive_daily_hours')->insert(
-                [
-                    'id' => $hours->id,
-                    'day' => $hours->day,
-                    'openTime' => $hours->openTime,
-                    'closeTime' => $hours->closeTime,
-                    'resource_id' => $hours->resource_id,
-                    'event_id' => $hours->event_id,
-                    'created_at' => $hours->created_at,
-                    'updated_at' => $hours->updated_at,
-                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
-                ]
-            );
-        }
-        DB::table('archive_resources')->insert(
-          [
-              'id' => $resource->id,
-              'name' => $resource->name,
-              'streetAddress' => $resource->streetAddress,
-              'streetAddress2' => $resource->streetAddress2,
-              'city' => $resource->city,
-              'county' => $resource->county,
-              'state' => $resource->state,
-              'zipCode' => $resource->zipCode,
-              'publicPhoneNumber' => $resource->publicPhoneNumber,
-              'publicEmail' => $resource->publicEmail,
-              'website' => $resource->website,
-              'description' => $resource->description,
-              'comments' => $resource->comments,
-              'provider_id' => $resource->provider_id,
-              'created_at' => $resource->created_at,
-              'updated_at' => $resource->updated_at,
-              'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
-        );
-        $resource->delete();
+        $resource->archived = '1';
+        $resource->save();
+
         \Session::flash('flash_message', 'Resource Deleted');
         return redirect('/resources');
     }

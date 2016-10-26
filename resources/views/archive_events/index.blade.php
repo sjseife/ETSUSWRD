@@ -209,7 +209,7 @@
 
                     </td>
                     <td class="text-center col-md-3">
-                        <a class="btn btn-sm btn-success" href="{{ URL::to('events/' . $event->id) }}">View</a>
+                        <a class="btn btn-sm btn-success" href="{{ URL::to('archive_events/' . $event->id) }}">View</a>
                     </td>
                 </tr>
             @endforeach

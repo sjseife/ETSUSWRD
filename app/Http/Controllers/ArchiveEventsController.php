@@ -33,20 +33,8 @@ class ArchiveEventsController extends Controller
         //Incrementing view count when viewed
         //app('App\Http\Controllers\ViewsController')->eventView($event);
 
-        return view('events.show', compact('event'));
+        return view('archive_events.show', compact('event'));
     }
-
-
-
-
-
-    public function edit(Event $event)
-    {
-        $categoryList = Category::lists('name', 'id');
-        $providerList = Provider::lists('name', 'id');
-        return view('events.edit', compact('event', 'categoryList', 'providerList'));
-    }
-
 
 
     public function restore(Event $event, Request $request)
@@ -79,27 +67,13 @@ class ArchiveEventsController extends Controller
         }
     }
 
-    /*
-     * This method takes in a event, compacts it into a "common flag format" and sends it to the flag.create view
-     */
-    public function flag(Event $event)
+    public function showRestore(Event $event, Request $request)
     {
-        return view('flags.create')->with('url', 'events/flag/' . $event->id)
-            ->with('name', $event->name);
+        $event->archived = '0'; //set archived back to false
+        $event->save();
+
+        \Session::flash('flash_message', 'Event Restored');
+        return redirect('/archive_events');
     }
 
-    public function storeFlag(Event $event, FlagRequest $request)
-    {
-        $flagData = ['level' => $request->level,
-            'comments' => $request->comments,
-            'resolved' => '0',
-            'event_id' => $event->id,
-            'submitted_by' => Auth::id()];
-        $flag = new Flag($flagData);
-        $flag->save();
-
-        \Session::flash('flash_message', 'Thank you for reporting the problem!');
-
-        return redirect('events/'.$event->id);
-    }
 }

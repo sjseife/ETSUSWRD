@@ -4,11 +4,9 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Event;
-use App\Resource;
 use App\Flag;
 use Carbon\Carbon;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class Kernel extends ConsoleKernel
 {
@@ -29,18 +27,33 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+
         $schedule->call(function() {
-            $events = DB::table('events')->whereDate('endDate', '<', Carbon::today()->toDateString())->get();
-            foreach($events as $event)
+            //AutoArchive Events where endDate is in past
+            DB::table('events')->whereDate('endDate', '<', Carbon::today()->toDateString())->update(['archived' => '1']);
+
+            //AutoFlag Resources where updated_at is more than 6 months ago
+            $resources = DB::table('resources')->whereDate('updated_at', '<', Carbon::today()->subMonths(6)->toDateString())->get();
+            foreach($resources as $resource)
             {
                 $flagData = ['level' => 'GA',
-                    'comments' => 'Event end date in past.',
+                    'comments' => 'Resource has not been updated in 6 months.',
                     'resolved' => '0',
-                    'event_id' => $event->id,
+                    'resource_id' => $resource->id,
                     'submitted_by' => '1'];
                 $flag = new Flag($flagData);
                 $flag->save();
             }
+
+            //AutoDelete Items that have been archived for more than 12 months.
+            DB::table('events')
+                            ->whereDate('updated_at', '<', Carbon::today()->subYear()->toDateString())
+                            ->where('archived', 1)
+                            ->delete();
+            DB::table('resources')
+                            ->whereDate('updated_at', '<', Carbon::today()->subYear()->toDateString())
+                            ->where('archived', 1)
+                            ->delete();
         })->dailyAt('00:01');
     }
 }

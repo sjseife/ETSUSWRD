@@ -16,10 +16,6 @@
 @section('content')
     <div class="text-center"><h1 class="page-header">All Archived Events</h1></div>
     <div id="successOrFailure"></div>
-    <!-- create a new event (uses the create method found at GET /event/create -->
-    @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
-        <a class="btn btn-md btn-primary pull-right" href="{{ URL::to('events/create') }}" style="margin-bottom: 20px;">Create New Event</a>
-    @endif
     <br>
     <br>
     <div>

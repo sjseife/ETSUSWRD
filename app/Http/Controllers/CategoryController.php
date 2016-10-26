@@ -82,37 +82,9 @@ class CategoryController extends Controller
     
     public function destroy(Category $category)
     {
-        foreach($category->resources as $resource)
-        {
-            DB::table('archive_category_resource')->insert(
-                [
-                    'category_id' => $category->id,
-                    'resource_id' => $resource->pivot->resource_id,
-                    'created_at' => $resource->pivot->created_at,
-                    'updated_at' => $resource->pivot->updated_at,
-                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
-                ]);
-        }
-        foreach($category->events as $event)
-        {
-            DB::table('archive_category_event')->insert(
-                [
-                    'category_id' => $category->id,
-                    'event_id' => $event->pivot->event_id,
-                    'created_at' => $event->pivot->created_at,
-                    'updated_at' => $event->pivot->updated_at,
-                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
-                ]);
-        }
-        DB::table('archive_categories')->insert(
-            ['id' => $category->id,
-                'name' => $category->name,
-                'created_at' => $category->created_at,
-                'updated_at' => $category->updated_at,
-                'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
-        );
+        $category->archived = '1';
+        $category->save();
 
-        $category->delete();
         \Session::flash('flash_message', 'Category Deleted');
         return redirect('/categories');
 

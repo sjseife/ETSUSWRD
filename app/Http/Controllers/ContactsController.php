@@ -94,45 +94,9 @@ class ContactsController extends Controller
 
     public function destroy(Contact $contact)
     {
-        foreach($contact->flags as $flag)
-        {
-            DB::table('archive_flags')->insert(
-                ['id' => $flag->id,
-                    'level' => $flag->level,
-                    'comments' => $flag->comments,
-                    'resolved' => $flag->resolved,
-                    'submitted_by' => $flag->submitter->id,
-                    'user_id' => $flag->userIdNumber,
-                    'resource_id' => $flag->resourceIdNumber,
-                    'contact_id' => $flag->contactIdNumber,
-                    'created_at' => $flag->created_at,
-                    'updated_at' => $flag->updated_at,
-                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
-            );
-        }
-        foreach($contact->providers as $provider)
-        {
-            DB::table('archive_contact_provider')->insert(
-                [
-                    'contact_id' => $contact->id,
-                    'provider_id' => $provider->pivot->provider_id,
-                    'created_at' => $provider->pivot->created_at,
-                    'updated_at' => $provider->pivot->updated_at,
-                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
-                ]
-            );
-        }
-        DB::table('archive_contacts')->insert(
-            ['id' => $contact->id,
-                'firstName' => $contact->firstName,
-                'lastName' => $contact->lastName,
-                'protectedEmail' => $contact->protectedEmail,
-                'protectedPhoneNumber' => $contact->protectedPhoneNumber,
-                'created_at' => $contact->created_at,
-                'updated_at' => $contact->updated_at,
-                'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
-        );
-        $contact->delete();
+        $contact->archived = '1';
+        $contact->save();
+
         \Session::flash('flash_message', 'Contact Deleted');
         return redirect('/contacts');
 

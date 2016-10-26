@@ -37,20 +37,9 @@ class FlagsController extends Controller
 
     public function destroy(Flag $flag)
     {
-        DB::table('archive_flags')->insert(
-            ['id' => $flag->id,
-                'level' => $flag->level,
-                'comments' => $flag->comments,
-                'resolved' => $flag->resolved,
-                'submitted_by' => $flag->submitter->id,
-                'user_id' => $flag->userIdNumber,
-                'resource_id' => $flag->resourceIdNumber,
-                'contact_id' => $flag->contactIdNumber,
-                'created_at' => $flag->created_at,
-                'updated_at' => $flag->updated_at,
-                'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
-        );
-        $flag->delete();
+        $flag->archived = '1';
+        $flag->save();
+
         \Session::flash('flash_message', 'Flag Deleted');
         return redirect('/flags');
     }

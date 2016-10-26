@@ -65,51 +65,9 @@ class ProvidersController extends Controller
 
     public function destroy(Provider $provider)
     {
-        foreach($provider->flags as $flag)
-        {
-            DB::table('archive_flags')->insert(
-                ['id' => $flag->id,
-                    'level' => $flag->level,
-                    'comments' => $flag->comments,
-                    'resolved' => $flag->resolved,
-                    'submitted_by' => $flag->submitter->id,
-                    'user_id' => $flag->userIdNumber,
-                    'resource_id' => $flag->resourceIdNumber,
-                    'contact_id' => $flag->contactIdNumber,
-                    'provider_id' => $flag->providerIdNumber,
-                    'event_id' => $flag->eventIdNumber,
-                    'created_at' => $flag->created_at,
-                    'updated_at' => $flag->updated_at,
-                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
-            );
-        }
-        foreach($provider->contacts as $contact)
-        {
-            DB::table('archive_contact_provider')->insert(
-                [
-                    'contact_id' => $contact->pivot->contact_id,
-                    'provider_id' => $provider->id,
-                    'title' => $contact->pivot->table,
-                    'created_at' => $contact->pivot->created_at,
-                    'updated_at' => $contact->pivot->updated_at,
-                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
-                ]
-            );
-        }
-        DB::table('archive_providers')->insert(
-            [
-                'id' => $provider->id,
-                'name' => $provider->name,
-                'publicPhoneNumber' => $provider->publicPhoneNumber,
-                'publicEmail' => $provider->publicEmail,
-                'website' => $provider->website,
-                'description' => $provider->description,
-                'comments' => $provider->comments,
-                'created_at' => $provider->created_at,
-                'updated_at' => $provider->updated_at,
-                'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
-        );
-        $provider->delete();
+        $provider->archived = '1';
+        $provider->save();
+
         \Session::flash('flash_message', 'Provider Deleted');
         return redirect('/providers');
     }

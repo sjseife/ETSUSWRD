@@ -17,7 +17,7 @@ class FlagTableSeeder extends Seeder
             'level' => 'Admin',
             'comments' => 'User is a stupid idiot! >:(',
             'resolved' => '0',
-            'submitted_by' => '3',
+            'submitted_by' => '4',
             'user_id' => '6',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
@@ -26,7 +26,7 @@ class FlagTableSeeder extends Seeder
             'level' => 'Admin',
             'comments' => 'Resource went bankrupt and no longer provides services. :(',
             'resolved' => '0',
-            'submitted_by' => '2',
+            'submitted_by' => '3',
             'resource_id' => '6',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
@@ -35,7 +35,7 @@ class FlagTableSeeder extends Seeder
             'level' => 'GA',
             'comments' => 'Contact got Married! Last name is now Fitzgerald. :)',
             'resolved' => '0',
-            'submitted_by' => '2',
+            'submitted_by' => '3',
             'contact_id' => '6',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
@@ -44,7 +44,7 @@ class FlagTableSeeder extends Seeder
             'level' => 'Admin',
             'comments' => 'Provider went bankrupt and no longer provides services. :(',
             'resolved' => '0',
-            'submitted_by' => '2',
+            'submitted_by' => '3',
             'provider_id' => '6',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
@@ -53,7 +53,7 @@ class FlagTableSeeder extends Seeder
             'level' => 'GA',
             'comments' => 'Event is cancelled due to inbound hurricane! :(',
             'resolved' => '0',
-            'submitted_by' => '2',
+            'submitted_by' => '3',
             'event_id' => '2',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')

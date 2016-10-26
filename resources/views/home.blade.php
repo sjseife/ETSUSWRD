@@ -297,7 +297,7 @@
                 <div class="panel-body w3-panel w3-blue w3-round-xlarge">
 
                     <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/events"><img src="\images\EventsImg.jpg" alt="Events" class="imglink"  ></a><h3 class="footerlink"><a  href="/Events">Events</a></h3></div>
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/events"><img src="\images\EventsImg.jpg" alt="Events" class="imglink"  ></a><h3 class="footerlink"><a  href="/events">Events</a></h3></div>
 
                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/resources"><img src="\images\lightbulb.ico" alt="Resources" class="imglink"  ></a><h3 class="footerlink"><a  href="/resources">Resources</a></h3></div>
                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/providers"><img src="\images\providers.png" alt="Providers" class="imglink"  ></a><h3 class="footerlink"><a  href="/providers">Providers</a></h3></div>

@@ -13,7 +13,7 @@ class Flag extends Model
      */
     protected $fillable = [
         'date', 'level', 'comments', 'resolved', 'submitted_by',
-        'user_id', 'resource_id', 'contact_id', 'event_id', 'provider_id'
+        'user_id', 'resource_id', 'contact_id', 'event_id', 'provider_id', 'archived'
     ];
 
     /**

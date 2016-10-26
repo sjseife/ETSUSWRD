@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\ArchiveEvent;
 use App\Category;
 use App\Provider;
 use App\DailyHours;
@@ -17,13 +18,13 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class EventsController extends Controller
+class ArchiveEventsController extends Controller
 {
     public function index()
     {
-        $events = Event::where('archived','=','0')->get();
+        $events = Event::where('archived','=','1')->get();
         $categories = Category::lists('name');
-        return view('events.index', compact('events', 'categories'));
+        return view('archive_events.index', compact('events', 'categories'));
     }
 
     public function show(Event $event)
@@ -85,7 +86,7 @@ class EventsController extends Controller
         $providerList = Provider::lists('name', 'id');
         return view('events.edit', compact('event', 'categoryList', 'providerList'));
     }
-    
+
     public function update(Event $event, EventRequest $request)
     {
         $event->update($request->all());
@@ -143,10 +144,87 @@ class EventsController extends Controller
 
     public function destroy(Event $event)
     {
-        $event->archived = '1';
-        $event->save();
-
-
+        foreach($event->flags as $flag)
+        {
+            DB::table('archive_flags')->insert(
+                ['id' => $flag->id,
+                    'level' => $flag->level,
+                    'comments' => $flag->comments,
+                    'resolved' => $flag->resolved,
+                    'submitted_by' => $flag->submitter->id,
+                    'user_id' => $flag->userIdNumber,
+                    'event_id' => $flag->eventIdNumber,
+                    'contact_id' => $flag->contactIdNumber,
+                    'provider_id' => $flag->providerIdNumber,
+                    'resource_id' => $flag->resourceIdNumber,
+                    'created_at' => $flag->created_at,
+                    'updated_at' => $flag->updated_at,
+                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
+            );
+        }
+        foreach($event->categories as $category)
+        {
+            DB::table('archive_category_event')->insert(
+                [
+                    'category_id' => $category->pivot->category_id,
+                    'event_id' => $event->id,
+                    'created_at' => $category->pivot->created_at,
+                    'updated_at' => $category->pivot->updated_at,
+                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
+                ]
+            );
+        }
+        foreach($event->users as $user)
+        {
+            DB::table('archive_event_user')->insert(
+                [
+                    'user_id' => $user->pivot->user_id,
+                    'event_id' => $event->id,
+                    'created_at' => $user->pivot->created_at,
+                    'updated_at' => $user->pivot->updated_at,
+                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
+                ]
+            );
+        }
+        foreach($event->hours as $hours)
+        {
+            DB::table('archive_daily_hours')->insert(
+                [
+                    'id' => $hours->id,
+                    'day' => $hours->day,
+                    'openTime' => $hours->openTime,
+                    'closeTime' => $hours->closeTime,
+                    'event_id' => $hours->event_id,
+                    'resource_id' => $hours->resource_id,
+                    'created_at' => $hours->created_at,
+                    'updated_at' => $hours->updated_at,
+                    'archived_at' => Carbon::now()->format('Y-m-d H:i:s')
+                ]
+            );
+        }
+        DB::table('archive_events')->insert(
+            [
+                'id' => $event->id,
+                'name' => $event->name,
+                'startDate' => $event->startDate,
+                'endDate' => $event->endDate,
+                'streetAddress' => $event->streetAddress,
+                'streetAddress2' => $event->streetAddress2,
+                'city' => $event->city,
+                'county' => $event->county,
+                'state' => $event->state,
+                'zipCode' => $event->zipCode,
+                'publicPhoneNumber' => $event->publicPhoneNumber,
+                'publicEmail' => $event->publicEmail,
+                'website' => $event->website,
+                'description' => $event->description,
+                'comments' => $event->comments,
+                'provider_id' => $event->provider_id,
+                'created_at' => $event->created_at,
+                'updated_at' => $event->updated_at,
+                'archived_at' => Carbon::now()->format('Y-m-d H:i:s')]
+        );
+        $event->delete();
         \Session::flash('flash_message', 'Event Deleted');
         return redirect('/events');
     }

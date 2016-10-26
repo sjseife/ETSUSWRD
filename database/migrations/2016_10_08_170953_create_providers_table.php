@@ -21,6 +21,7 @@ class CreateProvidersTable extends Migration
             $table->text('description');
             $table->text('comments');
             $table->timestamps();
+            $table->tinyInteger('archived')->default(0);
         });
     }
 

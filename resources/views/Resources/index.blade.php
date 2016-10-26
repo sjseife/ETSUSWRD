@@ -73,7 +73,22 @@
                         $link = false;
                     ?>
                     <tr>
-                        <td>{{ $resource->name }}</td>
+                        <td>{{ $resource->name }}
+                        <?php
+                            $count = 0;
+                            foreach ($resource->flags as $key=>$value) {
+                                if ($value ['resolved'] == '0') {
+                                    $count++;
+                                }
+                            }
+                            if($count != 0)
+                            {
+                            ?>
+                                <a class="btn btn-xs btn-danger" style="border-radius: 12px;" href="{{ URL::to('resources/' . $resource->id) }}">{{ $count }}</a>
+                            <?php
+                            }
+                        ?>
+                        </td>
                         <td>{{ $resource->county }}</td>
                         <td>
                             @foreach ($resource->categories as $category)

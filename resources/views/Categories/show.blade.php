@@ -6,14 +6,15 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">View Category</div>
                 <div class="panel-body">
-                    <div class="col-md-offset-2"><br/><br/>
+                    <div class="col-md-offset-1"><br/><br/>
                         <div>
                             <a href="{{'/categories'}}">Back to Categories</a></br></br>
                         </div>
                     </div>
                     <dl class="dl-horizontal">
-                        <dt>Name</dt>
-                        <dd>{{ $category->name }}</dd>
+                        <dt><h2>{{ $category->name }}</h2></dt>
+
+                        <dd></dd>
                         <dt>Resources</dt>
                         @foreach($category->resources as $resource)
                             <dd>

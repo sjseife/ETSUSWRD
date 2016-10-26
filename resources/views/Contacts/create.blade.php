@@ -9,6 +9,7 @@
 
     {!! Form::open(array('class'=>'form-horizontal', 'url' => 'contacts')) !!}
         @include('contacts._form', ['submitButtonText' => 'Create Contact'])
+
     {!! Form::close() !!}
 
     {{--If user does not enter required field.--}}

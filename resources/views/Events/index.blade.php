@@ -299,7 +299,7 @@
                     $eventNames = array('empty');
                     foreach($events as $event)
                     {
-                        $eventNames[] = $event->name;
+                        $eventNames[$event->id] = $event->name;
                     }
                     ?>
             var eventNames = <?php echo json_encode($eventNames); ?>;

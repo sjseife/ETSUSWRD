@@ -43,6 +43,15 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminAccessMiddleware'], func
     Route::patch('users/{user}', 'UsersController@update');
     Route::delete('users/{user}', 'UsersController@destroy');
 
+    //archive
+    Route::get('archive', 'ArchiveController@index');
+
+    //archive events
+    Route::get('archive_events', 'ArchiveEventsController@index');
+    Route::get('archive_events/restore/{event}', 'ArchiveEventsController@restore');
+    Route::get('archive_events/{event}', 'ArchiveEventsController@show');
+    Route::get('archive_events/showrestore/{event}', 'ArchiveEventsController@showRestore');
+
 });
 
 //if GA or Admin is required, place route in this group
@@ -90,11 +99,7 @@ Route::group(['middleware' => 'App\Http\Middleware\GAAccessMiddleware'], functio
     Route::patch('providers/{provider}', 'ProvidersController@update');
     Route::delete('providers/{provider}', 'ProvidersController@destroy');
 
-    //archive
-    Route::get('archive', 'ArchiveController@index');
 
-    //archive events
-    Route::get('archive_events', 'ArchiveEventsController@index');
 });
 
 //if gerneral user is required, leave it below.

@@ -41,7 +41,7 @@
                         @endif
 
                         <td>{{ $flag->level }}</td>
-                            <td>{{ $flag->submitter->email }}</td>
+                            <td>{{ $flag->submitter->name }}</td>
                             <td>{{ $flag->created_at }}</td>
 
                             @if($flag->resolved)

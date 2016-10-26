@@ -145,11 +145,11 @@
 
                             @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
                                 <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/archive_contacts"><img src="\images\archive-contacts-b.png" alt="Archived Contacts" class="imglink"  ></a><h3 class="footerlink"><a  href="/archive_contacts">Archived Contacts</a></h3></div>
-                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"><a href="/archive_categories"><img src="\images\archive-categories-y.png" alt="Archived Categories" class="imglink" ></a> <h3 class="footerlink"><a  href="/archive_categories">Archived Categories</a></h3></div>
-                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"><a href="/archive_flags"><img src="\images\archive-flags-b.png" alt="Archived Flags" class="imglink" ></a> <h3 class="footerlink"><a  href="/archive_flags">Archived Flags</a></h3></div>
+                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"><a href="/archive_categories"><img src="\images\archive-categories-b.png" alt="Archived Categories" class="imglink" ></a> <h3 class="footerlink"><a  href="/archive_categories">Archived Categories</a></h3></div>
+                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"><a href="/archive_flags"><img src="\images\archive-flags-y.png" alt="Archived Flags" class="imglink" ></a> <h3 class="footerlink"><a  href="/archive_flags">Archived Flags</a></h3></div>
                             @endif
                             @if (Auth::user()->role == 'Admin')
-                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/archive_users"><img src="\images\archive-users-y.png" alt="Archived Users" class="imglink"  ></a><h3 class="footerlink"><a  href="/archive_users">Archived Users</a></h3></div>
+                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/archive_users"><img src="\images\archive-users-b.png" alt="Archived Users" class="imglink"  ></a><h3 class="footerlink"><a  href="/archive_users">Archived Users</a></h3></div>
                             @endif
                         </div>
 

@@ -37,7 +37,7 @@ class Kernel extends ConsoleKernel
             foreach($resources as $resource)
             {
                 $flagData = ['level' => 'GA',
-                    'comments' => 'Resource has not been updated in 6 months.',
+                    'comments' => 'Resource has not been updated in 6 months. Potentially out of date.',
                     'resolved' => '0',
                     'resource_id' => $resource->id,
                     'submitted_by' => '1'];

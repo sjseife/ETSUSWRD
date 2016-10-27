@@ -24,7 +24,7 @@ class ResourcesController extends Controller
 {
     public function index()
     {
-        $resources = Resource::all();
+        $resources = Resource::where('archived','=','0')->get();
         $categories = Category::lists('name');
         return view('resources.index', compact('resources', 'categories'));
     }
@@ -128,6 +128,9 @@ class ResourcesController extends Controller
     
     public function destroy(Resource $resource)
     {
+        if(Auth::user()->resources->contains($resource))
+            Auth::user()->resources()->detach($resource);
+
         $resource->archived = '1';
         $resource->save();
 

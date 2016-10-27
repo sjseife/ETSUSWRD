@@ -143,6 +143,9 @@ class EventsController extends Controller
 
     public function destroy(Event $event)
     {
+        if(Auth::user()->events->contains($event))
+            Auth::user()->events()->detach($event);
+
         $event->archived = '1';
         $event->save();
 

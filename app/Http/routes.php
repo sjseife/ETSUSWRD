@@ -52,6 +52,18 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminAccessMiddleware'], func
     Route::get('archive_events/{event}', 'ArchiveEventsController@show');
     Route::get('archive_events/showrestore/{event}', 'ArchiveEventsController@showRestore');
 
+    //archive resources
+    Route::get('archive_resources', 'ArchiveResourcesController@index');
+    Route::get('archive_resources/restore/{resource}', 'ArchiveResourcesController@restore');
+    Route::get('archive_resources/{resource}', 'ArchiveResourcesController@show');
+    Route::get('archive_resources/showrestore/{resource}', 'ArchiveResourcesController@showRestore');
+    
+    //archive providers
+    Route::get('archive_providers', 'ArchiveProvidersController@index');
+    Route::get('archive_providers/restore/{provider}', 'ArchiveProvidersController@restore');
+    Route::get('archive_providers/{provider}', 'ArchiveProvidersController@show');
+    Route::get('archive_providers/showrestore/{provider}', 'ArchiveProvidersController@showRestore');
+
 });
 
 //if GA or Admin is required, place route in this group

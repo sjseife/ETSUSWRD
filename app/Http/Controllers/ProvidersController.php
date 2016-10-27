@@ -18,7 +18,7 @@ class ProvidersController extends Controller
 {
     public function index()
     {
-        $providers = Provider::all();
+        $providers = Provider::where('archived','=','0')->get();
         return view('providers.index', compact('providers'));
     }
 

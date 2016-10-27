@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Event;
-use App\ArchiveEvent;
 use App\Category;
 use App\Provider;
 use App\DailyHours;

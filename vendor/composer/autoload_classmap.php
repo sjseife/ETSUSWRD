@@ -20,6 +20,7 @@ return array(
     'App\\Flag' => $baseDir . '/app/Flag.php',
     'App\\Http\\Controllers\\ArchiveController' => $baseDir . '/app/Http/Controllers/ArchiveController.php',
     'App\\Http\\Controllers\\ArchiveEventsController' => $baseDir . '/app/Http/Controllers/ArchiveEventsController.php',
+    'App\\Http\\Controllers\\ArchiveResourcesController' => $baseDir . '/app/Http/Controllers/ArchiveResourcesController.php',
     'App\\Http\\Controllers\\Auth\\AuthController' => $baseDir . '/app/Http/Controllers/Auth/AuthController.php',
     'App\\Http\\Controllers\\Auth\\PasswordController' => $baseDir . '/app/Http/Controllers/Auth/PasswordController.php',
     'App\\Http\\Controllers\\CategoryController' => $baseDir . '/app/Http/Controllers/CategoryController.php',

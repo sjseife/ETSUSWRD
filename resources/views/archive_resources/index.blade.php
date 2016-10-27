@@ -66,21 +66,21 @@
             </tr>
             </tfoot>
             <tbody>
-            @foreach($events as $key => $event)
+            @foreach($resources as $key => $resource)
                 <?php
                 $link = false;
                 ?>
                 <tr>
-                    <td>{{ $event->name }}</td>
-                    <td>{{ $event->county }}</td>
+                    <td>{{ $resource->name }}</td>
+                    <td>{{ $resource->county }}</td>
                     <td>
-                        @foreach ($event->categories as $category)
+                        @foreach ($resource->categories as $category)
                             {{ $category->name }}
                         @endforeach
                     </td>
                     <td>
-                        {{ date('F jS, Y', strtotime($event->startDate)) }}
-                        - {{ date('F jS, Y', strtotime($event->endDate)) }}
+                        {{ date('F jS, Y', strtotime($resource->startDate)) }}
+                        - {{ date('F jS, Y', strtotime($resource->endDate)) }}
                     </td>
                     <td>
                         <ul>
@@ -93,13 +93,13 @@
                             $dayArr = array();
                             $openTimeArr = array();
                             $closeTimeArr = array();
-                            /* $eventHours = array();
-                                 foreach($event->hours as $day)
-                                     $eventHours[] = get_object_vars($day);
-                             $daysSorted = $eventHours;*/
+                            /* $resourceHours = array();
+                                 foreach($resource->hours as $day)
+                                     $resourceHours[] = get_object_vars($day);
+                             $daysSorted = $resourceHours;*/
 
                             ?>
-                            @foreach($event->hours as $day)
+                            @foreach($resource->hours as $day)
 
                                 <?php
 
@@ -160,9 +160,9 @@
 
                     </td>
                     <td><?php
-                        if(strlen($event->publicPhoneNumber) > 0)
+                        if(strlen($resource->publicPhoneNumber) > 0)
                         {
-                            $tempPhoneNumber = $event->publicPhoneNumber;
+                            $tempPhoneNumber = $resource->publicPhoneNumber;
                             $tempPhoneNumber = preg_replace("/[^0-9,x]/", "", $tempPhoneNumber );
                             if(strlen($tempPhoneNumber) > 10)
                             {
@@ -180,32 +180,32 @@
                         }
 
                         ?></td>
-                    <td>{{ $event->publicEmail }}</td>
-                    <td>{{ $event->website }}</td>
-                    <td>{{ $event->streetAddress }}</td>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $event->streetAddress2 }}</td>
-                    <td>{{ $event->city }}</td>
-                    <td>{{ $event->state }}</td>
-                    <td>{{ $event->zipCode }}</td>
-                    <td>{{ $event->provider->name }}</td>
-                    <td><div width="50%"><span style="white-space: normal;">{{ $event->description }}</span></div></td>
-                    <td><div width="50%"><span style="white-space: normal;">{{ $event->comments }}</span></div></td>
+                    <td>{{ $resource->publicEmail }}</td>
+                    <td>{{ $resource->website }}</td>
+                    <td>{{ $resource->streetAddress }}</td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $resource->streetAddress2 }}</td>
+                    <td>{{ $resource->city }}</td>
+                    <td>{{ $resource->state }}</td>
+                    <td>{{ $resource->zipCode }}</td>
+                    <td>{{ $resource->provider->name }}</td>
+                    <td><div width="50%"><span style="white-space: normal;">{{ $resource->description }}</span></div></td>
+                    <td><div width="50%"><span style="white-space: normal;">{{ $resource->comments }}</span></div></td>
                     <td class="text-center col-md-3">
 
 
-                        <!-- show the event (uses the show method found at GET /event/view/{id} -->
-                        {{--<a class="btn btn-sm btn-success" href="{{ URL::to('events/' . $event->id) }}">View</a>--}}
+                        <!-- show the resource (uses the show method found at GET /resource/view/{id} -->
+                        {{--<a class="btn btn-sm btn-success" href="{{ URL::to('resources/' . $resource->id) }}">View</a>--}}
                         <button type="button" class="btn btn-sm btn-primary report
-                                    @if(Auth::user()->events->contains($event))
-                                removeReport" name="{{$event->id}}">Remove Event</button>
+                                    @if(Auth::user()->resources->contains($resource))
+                                removeReport" name="{{$resource->id}}">Remove Event</button>
                         @else
-                            addReport" name="{{$event->id}}">Restore Event</button>
+                            addReport" name="{{$resource->id}}">Restore Event</button>
                         @endif
-                        {{-- <a class="btn btn-sm btn-primary" href="{{ URL::to('events/addAjax/'. $event->id) }}">Add to Report</a>--}}
+                        {{-- <a class="btn btn-sm btn-primary" href="{{ URL::to('resources/addAjax/'. $resource->id) }}">Add to Report</a>--}}
 
                     </td>
                     <td class="text-center col-md-3">
-                        <a class="btn btn-sm btn-success" href="{{ URL::to('archive_events/' . $event->id) }}">View</a>
+                        <a class="btn btn-sm btn-success" href="{{ URL::to('archive_resources/' . $resource->id) }}">View</a>
                     </td>
                 </tr>
             @endforeach
@@ -292,13 +292,13 @@
             var remove = $(this).hasClass("removeReport");
             var add = $(this).hasClass("addReport");
                     <?php
-                    $eventNames = array('empty');
-                    foreach($events as $event)
+                    $resourceNames = array('empty');
+                    foreach($resources as $resource)
                     {
-                        $eventNames[$event->id] = $event->name;
+                        $resourceNames[$resource->id] = $resource->name;
                     }
                     ?>
-            var eventNames = <?php echo json_encode($eventNames); ?>;
+            var resourceNames = <?php echo json_encode($resourceNames); ?>;
 
             $.ajaxSetup({
                 headers: {
@@ -309,11 +309,11 @@
                 $.ajax({
 
                     type: "GET",
-                    url: 'archive_events/restore/' + $(this).attr("name"),
+                    url: 'archive_resources/restore/' + $(this).attr("name"),
                     dataType: 'json',
                     success: function (data) {
                         //alerts users to successful button pushing.
-                        html = '<div class="alert alert-success">' + eventNames[index] + ' restored to event page!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                        html = '<div class="alert alert-success">' + resourceNames[index] + ' restored to resource page!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
                         $('#successOrFailure').html(html);
                         button.css({"background-color": "#FFC72C", "color": "#041E42", "border-color": "#FFC72C"});
                         button.addClass('disabled').removeClass('addReport');
@@ -349,11 +349,11 @@
                 $.ajax({
 
                     type: "GET",
-                    url: 'events/removeReport/' + $(this).attr("name"),
+                    url: 'resources/removeReport/' + $(this).attr("name"),
                     dataType: 'json',
                     success: function (data) {
                         //alerts users to successful button pushing.
-                        html = '<div class="alert alert-danger">' + eventNames[index] + ' Removed from Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                        html = '<div class="alert alert-danger">' + resourceNames[index] + ' Removed from Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
                         $('#successOrFailure').html(html);
                         button.css({"background-color": "#337ab7", "color": "white", "border-color": "#2e6da4"});
                         button.addClass('addReport').removeClass('removeReport');

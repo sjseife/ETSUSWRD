@@ -338,6 +338,7 @@ class ComposerStaticInitd73390cccc8b291e238a182e0a30f7c2
         'App\\Flag' => __DIR__ . '/../..' . '/app/Flag.php',
         'App\\Http\\Controllers\\ArchiveController' => __DIR__ . '/../..' . '/app/Http/Controllers/ArchiveController.php',
         'App\\Http\\Controllers\\ArchiveEventsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ArchiveEventsController.php',
+        'App\\Http\\Controllers\\ArchiveResourcesController' => __DIR__ . '/../..' . '/app/Http/Controllers/ArchiveResourcesController.php',
         'App\\Http\\Controllers\\Auth\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AuthController.php',
         'App\\Http\\Controllers\\Auth\\PasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/PasswordController.php',
         'App\\Http\\Controllers\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/CategoryController.php',

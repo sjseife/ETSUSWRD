@@ -14,7 +14,7 @@
 
 </style>
 @section('content')
-    <div class="text-center"><h1 class="page-header">All Archived Events</h1></div>
+    <div class="text-center"><h1 class="page-header">All Archived Resources</h1></div>
     <div id="successOrFailure"></div>
     <br>
     <br>

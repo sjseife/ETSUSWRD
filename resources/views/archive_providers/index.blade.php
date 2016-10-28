@@ -1,14 +1,8 @@
 @extends('layouts.dataTables')
 
 @section('content')
-    <div class="text-center"><h1 class="page-header">All Providers</h1></div>
+    <div class="text-center"><h1 class="page-header">All Archived Providers</h1></div>
     <div class="container">
-    @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
-        <!-- create a new provider (uses the create method found at GET /providers/create -->
-        <a class="btn btn-md btn-primary pull-right" href="{{ URL::to('providers/create') }}" style="margin-bottom: 20px;">Create New Provider</a>
-        @endif
-        <br />
-        <br />
         <div class="row">
             <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%"id="ProviderTable">
                 <thead>

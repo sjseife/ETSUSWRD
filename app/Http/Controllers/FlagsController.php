@@ -14,7 +14,8 @@ class FlagsController extends Controller
 {
     public function index()
     {
-        $flags = Flag::all();
+        $flags = Flag::where('resolved','=','0')->get();
+
         return view('flags.index', compact('flags'));
     }
 

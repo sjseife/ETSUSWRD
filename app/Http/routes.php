@@ -75,6 +75,18 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminAccessMiddleware'], func
     Route::get('archive_categories/restore/{category}', 'ArchiveCategoryController@restore');
     Route::get('archive_categories/{category}', 'ArchiveCategoryController@show');
     Route::get('archive_categories/showrestore/{category}', 'ArchiveCategoryController@showRestore');
+
+    //archive flags
+    Route::get('archive_flags', 'ArchiveFlagsController@index');
+    Route::get('archive_flags/restore/{flag}', 'ArchiveFlagsController@restore');
+    Route::get('archive_flags/{flag}', 'ArchiveFlagsController@show');
+    Route::get('archive_flags/showrestore/{flag}', 'ArchiveFlagsController@showRestore');
+
+    //archive users
+    Route::get('archive_users', 'ArchiveUsersController@index');
+    Route::get('archive_users/restore/{user}', 'ArchiveUsersController@restore');
+    Route::get('archive_users/{user}', 'ArchiveUsersController@show');
+    Route::get('archive_users/showrestore/{user}', 'ArchiveUsersController@showRestore');
 });
 
 //if GA or Admin is required, place route in this group

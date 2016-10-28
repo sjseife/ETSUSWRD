@@ -15,7 +15,7 @@ class UsersController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::where('archived','=','0')->get();
         return view('users.index', compact('users'));
     }
 

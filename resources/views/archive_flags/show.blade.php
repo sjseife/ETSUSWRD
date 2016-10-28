@@ -47,14 +47,15 @@
                     </dl>
                     <div class="col-md-offset-3">
                         <br/>
-                        @if(!$flag->resolved)
-                            <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#resolveModal">Resolve</button>
+                        @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
+                            <br>
+                            <br>
+                            <!-- edit this event (uses the edit method found at GET /event/edit/{id} -->
+                            <a class="btn btn-lg btn-info" href="{{ URL::to('archive_flags/showrestore/' . $flag->id) }}">Restore</a>
+                            <a class="btn btn-lg btn-danger" href="{{ URL::to('archive_flags') }}">Cancel</a>
+                            <!-- delete the event -->
+                            <!-- Trigger the modal with a button -->
                         @endif
-                        <!-- edit this flag (uses the edit method found at GET /flag/{id}/edit/ -->
-                        <a class="btn btn-lg btn-primary" href="{{ URL::to('flags/' . $flag->id. '/edit') }}">Edit</a>
-                        <!-- delete the flag -->
-                        <!-- Trigger the modal with a button -->
-                        <a class="btn btn-danger btn-lg" href="{{ URL::to('flags') }}">Cancel</a>
                         <br/>
                         <br/>
                     </div>

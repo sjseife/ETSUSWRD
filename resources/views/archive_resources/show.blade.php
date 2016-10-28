@@ -138,18 +138,12 @@
 
                         <!-- edit this event (uses the edit method found at GET /event/edit/{id} -->
                             <a class="btn btn-lg btn-info" href="{{ URL::to('archive_resources/showrestore/' . $resource->id) }}">Restore</a>
+                            <a class="btn btn-lg btn-danger" href="{{ URL::to('archive_resources') }}">Cancel</a>
+
                             <!-- delete the event -->
                             <!-- Trigger the modal with a button -->
                         @endif
-                        <div class=""><br/><br/>
-                            <div>
-                                <a href="{{'/resources'}}">Back to Resources</a></br>
-
-                                <!-- Flag this resource as incorrect -->
-                                <a  href="{{ URL::to('resources/' . $resource->id. '/flag') }}">Report a problem with this resource.</a>
-                            </div>
-                        </div>
-                    </div>
+                  </div>
                     <br/>
                     <br/>
                 </div>

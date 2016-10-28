@@ -64,6 +64,12 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminAccessMiddleware'], func
     Route::get('archive_providers/{provider}', 'ArchiveProvidersController@show');
     Route::get('archive_providers/showrestore/{provider}', 'ArchiveProvidersController@showRestore');
 
+    //archive contacts
+    Route::get('archive_contacts', 'ArchiveContactsController@index');
+    Route::get('archive_contacts/restore/{contact}', 'ArchiveContactsController@restore');
+    Route::get('archive_contacts/{contact}', 'ArchiveContactsController@show');
+    Route::get('archive_contacts/showrestore/{contact}', 'ArchiveContactsController@showRestore');
+
 });
 
 //if GA or Admin is required, place route in this group

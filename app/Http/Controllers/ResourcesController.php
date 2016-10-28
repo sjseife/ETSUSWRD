@@ -134,7 +134,8 @@ class ResourcesController extends Controller
         $resource->archived = '1';
         $resource->save();
 
-        \Session::flash('flash_message', 'Resource Deleted');
+       /* \Session::flash('flash_message', 'Resource Deleted');*/
+        flash($resource->name . ' was deleted from resources!', 'success');
         return redirect('/resources');
     }
 

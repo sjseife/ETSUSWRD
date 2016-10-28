@@ -216,7 +216,18 @@
 
 @push('scripts')
 <script>
-    $(document).ready(function()
+
+    @if (session()->has('flash_notification.message'))
+        @if(session('flash_notification.level') == 'success')
+            toastr.success('{{session('flash_notification.message')}}');
+        @elseif(session('flash_notification.level') == 'danger')
+            toastr.error('{{session('flash_notification.message')}}');
+        @elseif(session('flash_notification.level') == 'info')
+            toastr.info('{{session('flash_notification.message')}}');
+        @endif
+    @endif
+
+$(document).ready(function()
     {
         //Apply DataTables
 
@@ -313,52 +324,13 @@
                     dataType: 'json',
                     success: function (data) {
                         //alerts users to successful button pushing.
-                        html = '<div class="alert alert-success">' + resourceNames[index] + ' restored to resource page!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
-                        $('#successOrFailure').html(html);
+                        /*html = '<div class="alert alert-success">' + resourceNames[index] + ' restored to resource page!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                        $('#successOrFailure').html(html);*/
+                        toastr["success"]( resourceNames[index] + " successfully restored to events", "Event Restored");
                         button.css({"background-color": "#FFC72C", "color": "#041E42", "border-color": "#FFC72C"});
                         button.addClass('disabled').removeClass('addReport');
                         button.text(function (i, text) {
                             return "Event Restored";
-                        })
-
-                    },
-                    error: function (data) {
-                        if (data.status === 401) //redirect if not authenticated user.
-                            $(location).prop('pathname', 'auth/login');
-                        if (data.status === 422) {
-                            //process validation errors here.
-                            var errors = data.responseJSON; //this will get the errors response data.
-                            //show them somewhere in the modal
-                            errorsHtml = '<div class="alert alert-danger"><ul>';
-
-                            $.each(errors, function (key, value) {
-                                errorsHtml += '<li>' + value[0] + '</li>'; //showing only the first error.
-                            });
-                            errorsHtml += '</ul><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
-
-                            $('#successOrFailure').html(errorsHtml); //appending to a <div id="form-errors"></div> inside form
-                        } else {
-                            html = '<div class="alert alert-danger"><ul><li>There was a problem processing your request. ' +
-                                    'Please try again later.</li></ul><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
-                            $('#successOrFailure').html(html);
-                        }
-                    }
-                });
-            }
-            else if (remove) {
-                $.ajax({
-
-                    type: "GET",
-                    url: 'resources/removeReport/' + $(this).attr("name"),
-                    dataType: 'json',
-                    success: function (data) {
-                        //alerts users to successful button pushing.
-                        html = '<div class="alert alert-danger">' + resourceNames[index] + ' Removed from Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
-                        $('#successOrFailure').html(html);
-                        button.css({"background-color": "#337ab7", "color": "white", "border-color": "#2e6da4"});
-                        button.addClass('addReport').removeClass('removeReport');
-                        button.text(function (i, text) {
-                            return "Add Event";
                         })
 
                     },

@@ -74,7 +74,7 @@ class ArchiveResourcesController extends Controller
         $resource->archived = '0'; //set archived back to false
         $resource->save();
 
-        \Session::flash('flash_message', 'Resource Restored');
+        flash($resource->name . ' was restored to resources!', 'success');
         return redirect('/archive_resources');
     }
 

@@ -1,33 +1,35 @@
 @extends('layouts.dataTables')
 
 @section('content')
-    <div class="text-center"><h1 class="page-header">All Providers</h1></div>
+    <div class="text-center"><h1 class="page-header">All Contactss</h1></div>
     <div class="container">
     @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
-        <!-- create a new provider (uses the create method found at GET /providers/create -->
-        <a class="btn btn-md btn-primary pull-right" href="{{ URL::to('providers/create') }}" style="margin-bottom: 20px;">Create New Provider</a>
+        <!-- create a new contacts (uses the create method found at GET /contacts/create -->
+        <a class="btn btn-md btn-primary pull-right" href="{{ URL::to('contacts/create') }}" style="margin-bottom: 20px;">Create New Contacts</a>
         @endif
         <br />
         <br />
         <div class="row">
-            <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%"id="ProviderTable">
+            <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%"id="ContactTable">
                 <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Phone Number</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
                     <th>Email</th>
-                    <th>Website</th>
+                    <th>Phone Number</th>
                     <th>View</th>
                     <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($providers as $key => $provider)
+                @foreach($contacts as $key => $contact)
                     <?php $link = false; ?>
                     <tr>
-                        <td>{{ $provider->name }}</td>
+                        <td>{{ $contact->firstName }}</td>
+                        <td>{{ $contact->lastName }}</td>
+                        <td>{{ $contact->protectedEmail }}</td>
                         <td><?php
-                            $tempPhoneNumber = $provider->publicPhoneNumber;
+                            $tempPhoneNumber = $contact->protectedPhoneNumber;
                             $tempPhoneNumber = preg_replace("/[^0-9,x]/", "", $tempPhoneNumber );
                             if(strlen($tempPhoneNumber) > 10)
                             {
@@ -40,12 +42,10 @@
                             echo $tempPhoneNumber;
 
                             ?></td>
-                        <td>{{ $provider->publicEmail }}</td>
-                        <td><a href="http://{{ $provider->website }}">{{ $provider->website }}</a></td>
                         <td class="text-center">
 
                             <!-- show the contact (uses the show method found at GET /contacts/{id} -->
-                            <a class="btn btn-sm btn-success" href="{{ URL::to('archive_providers/' . $provider->id) }}">View</a>
+                            <a class="btn btn-small btn-success" href="{{ URL::to('archive_contacts/' . $contact->id) }}">View</a>
 
                         </td>
                         <td class="text-center ">
@@ -54,7 +54,7 @@
                             <!-- show the event (uses the show method found at GET /event/view/{id} -->
                             {{--<a class="btn btn-sm btn-success" href="{{ URL::to('events/' . $event->id) }}">View</a>--}}
                             <button type="button" class="btn btn-sm btn-primary report
-                                addReport" name="{{$provider->id}}">Restore</button>
+                                addReport" name="{{$contact->id}}">Restore</button>
                             {{-- <a class="btn btn-sm btn-primary" href="{{ URL::to('events/addAjax/'. $event->id) }}">Add to Report</a>--}}
                         </td>
                     </tr>
@@ -70,8 +70,8 @@
 <script>
 
     @if (session()->has('flash_notification.message'))
-       @if(session('flash_notification.level') == 'success')
-           toastr.success('{{session('flash_notification.message')}}');
+        @if(session('flash_notification.level') == 'success')
+            toastr.success('{{session('flash_notification.message')}}');
         @elseif(session('flash_notification.level') == 'danger')
             toastr.error('{{session('flash_notification.message')}}');
         @elseif(session('flash_notification.level') == 'info')
@@ -80,7 +80,7 @@
     @endif
 
 $(document).ready(function() {
-        $('#ProviderTable').DataTable();
+        $('#ContactsTable').DataTable();
         
         $(".report").click(function (){
             var button = $(this);
@@ -88,13 +88,13 @@ $(document).ready(function() {
             var remove = $(this).hasClass("removeReport");
             var add = $(this).hasClass("addReport");
                     <?php
-                    $providerNames = array('empty');
-                    foreach($providers as $provider)
+                    $contactNames = array('empty');
+                    foreach($contacts as $contact)
                     {
-                        $providerNames[$provider->id] = $provider->name;
+                        $contactNames[$contact->id] = $contact->firstName . ' ' . $contact->lastName;
                     }
                     ?>
-            var providerNames = <?php echo json_encode($providerNames); ?>;
+            var contactNames = <?php echo json_encode($contactNames); ?>;
 
             $.ajaxSetup({
                 headers: {
@@ -105,15 +105,18 @@ $(document).ready(function() {
                 $.ajax({
 
                     type: "GET",
-                    url: 'archive_providers/restore/' + $(this).attr("name"),
+                    url: 'archive_contacts/restore/' + $(this).attr("name"),
                     dataType: 'json',
                     success: function (data) {
                         //alerts users to successful button pushing.
-                        toastr["success"]( providerNames[index] + " successfully restored to providers", "Provider Restored");
+                        /*html = '<div class="alert alert-success">' + contactNames[index] + ' restored to contact page!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                        $('#successOrFailure').html(html);*/
+                        toastr["success"]( contactNames[index] + " successfully restored to contacts", "Contact Restored");
+
                         button.css({"background-color": "#FFC72C", "color": "#041E42", "border-color": "#FFC72C"});
                         button.addClass('disabled').removeClass('addReport');
                         button.text(function (i, text) {
-                            return "Provider Restored";
+                            return "Contacts Restored";
                         })
 
                     },

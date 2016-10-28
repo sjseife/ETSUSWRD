@@ -71,7 +71,7 @@ class ArchiveEventsController extends Controller
         $event->archived = '0'; //set archived back to false
         $event->save();
 
-        \Session::flash('flash_message', 'Event Restored');
+        flash($event->name . ' was restored to events!', 'success');
         return redirect('/archive_events');
     }
 

@@ -17,6 +17,7 @@ class ComposerStaticInitd73390cccc8b291e238a182e0a30f7c2
         'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        'e23faeee409e941dc9b4c80386209c39' => __DIR__ . '/..' . '/laracasts/flash/src/Laracasts/Flash/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -285,6 +286,13 @@ class ComposerStaticInitd73390cccc8b291e238a182e0a30f7c2
                 0 => __DIR__ . '/..' . '/maatwebsite/excel/src',
             ),
         ),
+        'L' => 
+        array (
+            'Laracasts\\Flash' => 
+            array (
+                0 => __DIR__ . '/..' . '/laracasts/flash/src',
+            ),
+        ),
         'K' => 
         array (
             'Knp\\Snappy' => 
@@ -338,6 +346,7 @@ class ComposerStaticInitd73390cccc8b291e238a182e0a30f7c2
         'App\\Flag' => __DIR__ . '/../..' . '/app/Flag.php',
         'App\\Http\\Controllers\\ArchiveController' => __DIR__ . '/../..' . '/app/Http/Controllers/ArchiveController.php',
         'App\\Http\\Controllers\\ArchiveEventsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ArchiveEventsController.php',
+        'App\\Http\\Controllers\\ArchiveProvidersController' => __DIR__ . '/../..' . '/app/Http/Controllers/ArchiveProvidersController.php',
         'App\\Http\\Controllers\\ArchiveResourcesController' => __DIR__ . '/../..' . '/app/Http/Controllers/ArchiveResourcesController.php',
         'App\\Http\\Controllers\\Auth\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AuthController.php',
         'App\\Http\\Controllers\\Auth\\PasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/PasswordController.php',
@@ -1553,6 +1562,11 @@ class ComposerStaticInitd73390cccc8b291e238a182e0a30f7c2
         'Knp\\Snappy\\GeneratorInterface' => __DIR__ . '/..' . '/knplabs/knp-snappy/src/Knp/Snappy/GeneratorInterface.php',
         'Knp\\Snappy\\Image' => __DIR__ . '/..' . '/knplabs/knp-snappy/src/Knp/Snappy/Image.php',
         'Knp\\Snappy\\Pdf' => __DIR__ . '/..' . '/knplabs/knp-snappy/src/Knp/Snappy/Pdf.php',
+        'Laracasts\\Flash\\Flash' => __DIR__ . '/..' . '/laracasts/flash/src/Laracasts/Flash/Flash.php',
+        'Laracasts\\Flash\\FlashNotifier' => __DIR__ . '/..' . '/laracasts/flash/src/Laracasts/Flash/FlashNotifier.php',
+        'Laracasts\\Flash\\FlashServiceProvider' => __DIR__ . '/..' . '/laracasts/flash/src/Laracasts/Flash/FlashServiceProvider.php',
+        'Laracasts\\Flash\\LaravelSessionStore' => __DIR__ . '/..' . '/laracasts/flash/src/Laracasts/Flash/LaravelSessionStore.php',
+        'Laracasts\\Flash\\SessionStore' => __DIR__ . '/..' . '/laracasts/flash/src/Laracasts/Flash/SessionStore.php',
         'League\\Flysystem\\AdapterInterface' => __DIR__ . '/..' . '/league/flysystem/src/AdapterInterface.php',
         'League\\Flysystem\\Adapter\\AbstractAdapter' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/AbstractAdapter.php',
         'League\\Flysystem\\Adapter\\AbstractFtpAdapter' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/AbstractFtpAdapter.php',

@@ -224,6 +224,15 @@
 
 @push('scripts')
 <script>
+    @if (session()->has('flash_notification.message'))
+        @if(session('flash_notification.level') == 'success')
+            toastr.success('{{session('flash_notification.message')}}');
+        @elseif(session('flash_notification.level') == 'danger')
+            toastr.error('{{session('flash_notification.message')}}');
+        @elseif(session('flash_notification.level') == 'info')
+            toastr.info('{{session('flash_notification.message')}}');
+        @endif
+    @endif
     $(document).ready(function() {
 
         //Apply DataTables
@@ -296,7 +305,7 @@
             var remove = $(this).hasClass("removeReport");
             var add = $(this).hasClass("addReport");
                     <?php
-                    $eventNames = array('empty');
+                    $resourceNames = array('empty');
                     foreach($resources as $resource)
                     {
                         $resourceNames[$resource->id] = $resource->name;
@@ -317,8 +326,9 @@
                     dataType: 'json',
                     success: function (data) {
                         //alerts users to successful button pushing.
-                        html = '<div class="alert alert-success">' + resourceNames[index] + ' Added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
-                        $('#successOrFailure').html(html);
+                       /* html = '<div class="alert alert-success">' + resourceNames[index] + ' Added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                        $('#successOrFailure').html(html);*/
+                        toastr["success"]( resourceNames[index] + " successfully added to the report", "Resource Added to Report");
                         button.css({"background-color": "#c9302c", "color": "white", "border-color": "#ac2925"});
                         button.addClass('removeReport').removeClass('addReport');
                         button.text(function (i, text) {
@@ -357,8 +367,9 @@
                     dataType: 'json',
                     success: function (data) {
                         //alerts users to successful button pushing.
-                        html = '<div class="alert alert-danger">' + resourceNames[index] + ' Removed from Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
-                        $('#successOrFailure').html(html);
+                       /* html = '<div class="alert alert-danger">' + resourceNames[index] + ' Removed from Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                        $('#successOrFailure').html(html);*/
+                        toastr["success"]("You have successfully removed the resource from the report", "Resource Removed from Report");
                         button.css({"background-color": "#337ab7", "color": "white", "border-color": "#2e6da4"});
                         button.addClass('addReport').removeClass('removeReport');
                         button.text(function (i, text) {

@@ -1,45 +1,26 @@
 @extends('layouts.dataTables')
 
 @section('content')
-    <div class="text-center"><h1 class="page-header">All Archived Providers</h1></div>
+    <div class="text-center"><h1 class="page-header">All Archived Categories</h1></div>
     <div class="container">
         <div class="row">
-            <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%"id="ProviderTable">
+            <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%"id="CategoryTable">
                 <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Phone Number</th>
-                    <th>Email</th>
-                    <th>Website</th>
                     <th>View</th>
                     <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($providers as $key => $provider)
+                @foreach($categories as $key => $category)
                     <?php $link = false; ?>
                     <tr>
-                        <td>{{ $provider->name }}</td>
-                        <td><?php
-                            $tempPhoneNumber = $provider->publicPhoneNumber;
-                            $tempPhoneNumber = preg_replace("/[^0-9,x]/", "", $tempPhoneNumber );
-                            if(strlen($tempPhoneNumber) > 10)
-                            {
-                                $tempPhoneNumber = preg_replace("/^[1]/", "", $tempPhoneNumber );
-                            }
-                            $tempPhoneNumber = '(' . substr($tempPhoneNumber,0, 3) . ') '
-                                    . substr($tempPhoneNumber, 3, 3) . '-'
-                                    . substr($tempPhoneNumber, 6, 4) . ' '
-                                    . substr($tempPhoneNumber, 10, (strlen($tempPhoneNumber) - 10));
-                            echo $tempPhoneNumber;
-
-                            ?></td>
-                        <td>{{ $provider->publicEmail }}</td>
-                        <td><a href="http://{{ $provider->website }}">{{ $provider->website }}</a></td>
+                        <td>{{ $category->name }}</td>
                         <td class="text-center">
 
-                            <!-- show the contact (uses the show method found at GET /contacts/{id} -->
-                            <a class="btn btn-sm btn-success" href="{{ URL::to('archive_providers/' . $provider->id) }}">View</a>
+                            <!-- show the category (uses the show method found at GET /categories/{id} -->
+                            <a class="btn btn-small btn-success" href="{{ URL::to('archive_categories/' . $category->id) }}">View</a>
 
                         </td>
                         <td class="text-center ">
@@ -48,7 +29,7 @@
                             <!-- show the event (uses the show method found at GET /event/view/{id} -->
                             {{--<a class="btn btn-sm btn-success" href="{{ URL::to('events/' . $event->id) }}">View</a>--}}
                             <button type="button" class="btn btn-sm btn-primary report
-                                addReport" name="{{$provider->id}}">Restore</button>
+                                addReport" name="{{$category->id}}">Restore</button>
                             {{-- <a class="btn btn-sm btn-primary" href="{{ URL::to('events/addAjax/'. $event->id) }}">Add to Report</a>--}}
                         </td>
                     </tr>
@@ -64,8 +45,8 @@
 <script>
 
     @if (session()->has('flash_notification.message'))
-       @if(session('flash_notification.level') == 'success')
-           toastr.success('{{session('flash_notification.message')}}');
+        @if(session('flash_notification.level') == 'success')
+            toastr.success('{{session('flash_notification.message')}}');
         @elseif(session('flash_notification.level') == 'danger')
             toastr.error('{{session('flash_notification.message')}}');
         @elseif(session('flash_notification.level') == 'info')
@@ -74,7 +55,7 @@
     @endif
 
 $(document).ready(function() {
-        $('#ProviderTable').DataTable();
+        $('#CategoriesTable').DataTable();
         
         $(".report").click(function (){
             var button = $(this);
@@ -82,13 +63,13 @@ $(document).ready(function() {
             var remove = $(this).hasClass("removeReport");
             var add = $(this).hasClass("addReport");
                     <?php
-                    $providerNames = array('empty');
-                    foreach($providers as $provider)
+                    $categoryNames = array('empty');
+                    foreach($categories as $category)
                     {
-                        $providerNames[$provider->id] = $provider->name;
+                        $categoryNames[$category->id] = $category->name;
                     }
                     ?>
-            var providerNames = <?php echo json_encode($providerNames); ?>;
+            var categoryNames = <?php echo json_encode($categoryNames); ?>;
 
             $.ajaxSetup({
                 headers: {
@@ -99,15 +80,18 @@ $(document).ready(function() {
                 $.ajax({
 
                     type: "GET",
-                    url: 'archive_providers/restore/' + $(this).attr("name"),
+                    url: 'archive_categories/restore/' + $(this).attr("name"),
                     dataType: 'json',
                     success: function (data) {
                         //alerts users to successful button pushing.
-                        toastr["success"]( providerNames[index] + " successfully restored to providers", "Provider Restored");
+                        /*html = '<div class="alert alert-success">' + categoryNames[index] + ' restored to category page!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                        $('#successOrFailure').html(html);*/
+                        toastr["success"]( categoryNames[index] + " successfully restored to categories", "Category Restored");
+
                         button.css({"background-color": "#FFC72C", "color": "#041E42", "border-color": "#FFC72C"});
                         button.addClass('disabled').removeClass('addReport');
                         button.text(function (i, text) {
-                            return "Provider Restored";
+                            return "Categories Restored";
                         })
 
                     },

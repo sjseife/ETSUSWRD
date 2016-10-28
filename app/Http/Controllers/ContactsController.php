@@ -18,7 +18,7 @@ class ContactsController extends Controller
 {
     public function index()
     {
-        $contacts = Contact::all();
+        $contacts = Contact::where('archived','=','0')->get();
         return view('contacts.index', compact('contacts'));
     }
 

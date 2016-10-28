@@ -67,7 +67,7 @@ class ArchiveProvidersController extends Controller
         $provider->archived = '0'; //set archived back to false
         $provider->save();
 
-        \Session::flash('flash_message', 'Provider Restored');
+        flash($provider->name . ' was restored to providers!', 'success');
         return redirect('/archive_providers');
     }
 

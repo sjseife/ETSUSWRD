@@ -285,7 +285,9 @@ table thead th{
     background-color:#041E42!important;
 }
 
-
+.toast {
+    opacity: 1 !important;
+}
 
 
 

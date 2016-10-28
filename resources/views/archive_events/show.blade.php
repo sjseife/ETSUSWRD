@@ -142,7 +142,9 @@
 
                     <!-- edit this event (uses the edit method found at GET /event/edit/{id} -->
                     <a class="btn btn-lg btn-info" href="{{ URL::to('archive_events/showrestore/' . $event->id) }}">Restore</a>
-                    <!-- delete the event -->
+                        <a class="btn btn-lg btn-danger" href="{{ URL::to('archive_events') }}">Cancel</a>
+
+                        <!-- delete the event -->
                     <!-- Trigger the modal with a button -->
                     @endif
                     <div class=""><br/><br/>

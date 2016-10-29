@@ -32,17 +32,17 @@
                 <th data-priority="2">Category</th> {{--2--}}
                 <th data-priority="0">Dates</th> {{--3--}}
                 <th data-priority="2">Hours of Operation</th> {{--4--}}
-                <th data-priority="2">Phone</th> {{--5--}}
-                <th data-priority="2">Email</th> {{--6--}}
-                <th data-priority="2">Website</th> {{--7--}}
-                <th data-priority="3">Street Address</th> {{--8--}}
+                <th data-priority="2">Phone:</th> {{--5--}}
+                <th data-priority="2">Email:</th> {{--6--}}
+                <th data-priority="2">Website:</th> {{--7--}}
+                <th data-priority="3">Street Address:</th> {{--8--}}
                 <th data-priority="4"></th> {{--8--}}
-                <th data-priority="2">City</th> {{--9--}}
+                <th data-priority="2">City:</th> {{--9--}}
                 <th data-priority="1">State</th> {{--10--}}
-                <th data-priority="2">Zip Code</th> {{--11--}}
-                <th data-priority="3">Provider</th> {{--12--}}
-                <th data-priority="3">Description</th> {{--13--}}
-                <th data-priority="3">Comments</th> {{--14--}}
+                <th data-priority="2">Zip Code:</th> {{--11--}}
+                <th data-priority="3">Provider:</th> {{--12--}}
+                <th data-priority="3">Description:</th> {{--13--}}
+                <th data-priority="3">Comments:</th> {{--14--}}
                 <th class="all">Action</th> {{--15--}}
                 <th data-priority="4">View Event:</th>{{--16--}}
             </tr>

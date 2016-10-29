@@ -6,7 +6,9 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">View Event</div>
                 <div class="panel-body">
-            <h2><em>{{ $event->name }}</em></h2>
+                    <a href="{{ '/events' }}" class="btn btn-default">Back</a>
+
+                    <h2><em>{{ $event->name }}</em></h2>
             <div class="col-md-4">
                 <p><b>Address:</b></p>
                 {{--If there is a street 2, display. Else do not--}}
@@ -148,7 +150,7 @@
                     @endif
                     <div class=""><br/><br/>
                         <div>
-                            <a href="{{'/events'}}">Back to Events</a></br>
+
 
                             <!-- Flag this event as incorrect -->
                             <a  href="{{ URL::to('events/' . $event->id. '/flag') }}">Report a problem with this event.</a>

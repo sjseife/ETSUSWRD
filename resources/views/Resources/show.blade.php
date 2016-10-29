@@ -6,7 +6,8 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">View Resource</div>
                 <div class="panel-body ">
-                         <h2><em>{{ $resource->name }}</em></h2>
+                    <a href="{{ '/resources' }}" class="btn btn-default">Back</a>
+                    <h2><em>{{ $resource->name }}</em></h2>
                          <div class="col-md-4">
                             <p><b>Address:</b></p>
                             {{--If there is a street 2, display. Else do not--}}
@@ -143,10 +144,9 @@
                             @endif
                         <div class=""><br/><br/>
                             <div>
-                                <a href="{{'/resources'}}">Back to Resources</a></br>
 
                                 <!-- Flag this resource as incorrect -->
-                                <a  href="{{ URL::to('resources/' . $resource->id. '/flag') }}">Report a problem with this resource.</a>
+                                <a  href="{{ URL::to('resources/' . $resource->id. '/flag') }}" class="btn btn-danger">Report a problem with this resource.</a>
                                 </div>
                             </div>
                         </div>

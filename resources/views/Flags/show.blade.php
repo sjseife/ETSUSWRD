@@ -6,10 +6,9 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">View Flag</div>
                 <div class="panel-body">
+                    <a class="btn btn-default" href="{{ URL::to('flags') }}">Back</a>
+
                     <div class="col-md-offset-2"><br/><br/>
-                        <div>
-                            <a href="{{'/flags'}}">Back to Flags</a></br></br>
-                        </div>
                     </div>
                     <dl class="dl-horizontal">
 
@@ -54,7 +53,7 @@
                         <a class="btn btn-lg btn-primary" href="{{ URL::to('flags/' . $flag->id. '/edit') }}">Edit</a>
                         <!-- delete the flag -->
                         <!-- Trigger the modal with a button -->
-                        <a class="btn btn-danger btn-lg" href="{{ URL::to('flags') }}">Cancel</a>
+
                         <br/>
                         <br/>
                     </div>

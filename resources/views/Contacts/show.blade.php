@@ -6,8 +6,9 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">View Contact</div>
                 <div class="panel-body">
-                    <div class="col-md-offset-1"><br/><br/>
-                        <a href="{{'/contacts'}}" class="btn btn-default">Cancel</a>
+                    <a href="{{ '/contacts' }}" class="btn btn-default">Back</a>
+
+                    <div class="col-md-offset"><br/><br/>
 
                     </div>
 

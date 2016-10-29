@@ -6,9 +6,10 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">View User</div>
                 <div class="panel-body">
+                    <a href="{{ '/resources' }}" class="btn btn-default">Back</a>
+
                     <div class="col-md-offset-2"><br/><br/>
                         <div>
-                            <a href="{{'/users'}}">Back to Users</a></br></br>
                         </div>
                     </div>
                     <dl class="dl-horizontal">

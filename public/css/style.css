@@ -59,7 +59,7 @@ footer ul li:nth-child(1) { padding-left: 0 }
     position: relative;
     width: 100%;
     margin: 0 auto;
-    padding: 0;
+    padding-top:100px;
 }
 .navbar .nav > li > a {
 

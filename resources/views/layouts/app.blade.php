@@ -75,7 +75,7 @@
 
     @yield('content')
     <!-- Footer -->
-    <div class="footer">
+    <div class="container_24">
         <img src="/images/mountains.png" alt="Image of Mountains" class="img-responsive center-block">
     </div>
     <aside id="asidelinks">

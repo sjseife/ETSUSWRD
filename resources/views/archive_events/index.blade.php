@@ -191,18 +191,7 @@
                     <td><div width="50%"><span style="white-space: normal;">{{ $event->description }}</span></div></td>
                     <td><div width="50%"><span style="white-space: normal;">{{ $event->comments }}</span></div></td>
                     <td class="text-center">
-
-
-                        <!-- show the event (uses the show method found at GET /event/view/{id} -->
-                        {{--<a class="btn btn-sm btn-success" href="{{ URL::to('events/' . $event->id) }}">View</a>--}}
-                        <button type="button" class="btn btn-sm btn-primary report
-                                    @if(Auth::user()->events->contains($event))
-                                removeReport" name="{{$event->id}}">Remove Event</button>
-                        @else
-                            addReport" name="{{$event->id}}">Restore Event</button>
-                        @endif
-                        {{-- <a class="btn btn-sm btn-primary" href="{{ URL::to('events/addAjax/'. $event->id) }}">Add to Report</a>--}}
-
+                        <button type="button" class="btn btn-sm btn-primary report addReport" name="{{$event->id}}">Restore</button>
                     </td>
                     <td class="text-center col-md-3">
                         <a class="btn btn-sm btn-success" href="{{ URL::to('archive_events/' . $event->id) }}">View</a>
@@ -297,7 +286,7 @@ $(document).ready(function()
 
 
 
-        $(".report").click(function (){
+        $('#EventsTable').on('click', '.report', function(){
             var button = $(this);
             var index = button.attr("name");
             var remove = $(this).hasClass("removeReport");

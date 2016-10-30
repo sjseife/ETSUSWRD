@@ -19,33 +19,32 @@
     <br>
     <br>
     <div>
-        <table style="display:none;" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="EventsTable">
+        <table style="display:none;" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="ResourceTable">
             <thead>
+
             <tr>
                 <!-- class all for always show, lower data priority numbers stay longer-->
                 <th class="all" >Name</th> {{--0--}}
                 <th data-priority="1">County</th> {{--1--}}
-                <th data-priority="2">Category</th> {{--2--}}
-                <th data-priority="0">Dates</th> {{--3--}}
-                <th data-priority="2">Hours of Operation</th> {{--4--}}
-                <th data-priority="2">Phone</th> {{--5--}}
-                <th data-priority="2">Email</th> {{--6--}}
-                <th data-priority="2">Website</th> {{--7--}}
-                <th data-priority="3">Street Address</th> {{--8--}}
-                <th data-priority="4"></th> {{--8--}}
-                <th data-priority="2">City</th> {{--9--}}
-                <th data-priority="1">State</th> {{--10--}}
-                <th data-priority="2">Zip Code</th> {{--11--}}
-                <th data-priority="3">Provider</th> {{--12--}}
-                <th data-priority="3">Description</th> {{--13--}}
-                <th data-priority="3">Comments</th> {{--14--}}
-                <th class="all">Action</th> {{--15--}}
-                <th data-priority="4">View Event:</th>{{--16--}}
+                <th data-priority="1">Category</th> {{--2--}}
+                <th data-priority="2">Hours of Operation</th> {{--3--}}
+                <th data-priority="2">Phone</th> {{--4--}}
+                <th data-priority="2">Email</th> {{--5--}}
+                <th data-priority="2">Website</th> {{--6--}}
+                <th data-priority="3">Street Address</th> {{--7--}}
+                <th data-priority="4"></th> {{--7--}}
+                <th data-priority="2">City</th> {{--8--}}
+                <th data-priority="1">State</th> {{--9--}}
+                <th data-priority="2">Zip Code</th> {{--10--}}
+                <th data-priority="3">Provider</th> {{--11--}}
+                <th data-priority="3">Description</th> {{--12--}}
+                <th data-priority="3">Comments</th> {{--13--}}
+                <th class="all">Action</th> {{--14--}}
+                <th data-priority="4">View Resource:</th>{{--15--}}
             </tr>
             </thead>
             <tfoot>
             <tr>
-                <th></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -71,16 +70,27 @@
                 $link = false;
                 ?>
                 <tr>
-                    <td>{{ $resource->name }}</td>
+                    <td>{{ $resource->name }}
+                        <?php
+                        $count = 0;
+                        foreach ($resource->flags as $key=>$value) {
+                            if ($value ['resolved'] == '0') {
+                                $count++;
+                            }
+                        }
+                        if($count != 0)
+                        {
+                        ?>
+                        <a class="btn btn-xs btn-danger" style="border-radius: 12px;" href="{{ URL::to('resources/' . $resource->id) }}">{{ $count }}</a>
+                        <?php
+                        }
+                        ?>
+                    </td>
                     <td>{{ $resource->county }}</td>
                     <td>
                         @foreach ($resource->categories as $category)
                             {{ $category->name }}
                         @endforeach
-                    </td>
-                    <td>
-                        {{ date('F jS, Y', strtotime($resource->startDate)) }}
-                        - {{ date('F jS, Y', strtotime($resource->endDate)) }}
                     </td>
                     <td>
                         <ul>
@@ -93,11 +103,6 @@
                             $dayArr = array();
                             $openTimeArr = array();
                             $closeTimeArr = array();
-                            /* $resourceHours = array();
-                                 foreach($resource->hours as $day)
-                                     $resourceHours[] = get_object_vars($day);
-                             $daysSorted = $resourceHours;*/
-
                             ?>
                             @foreach($resource->hours as $day)
 
@@ -157,7 +162,6 @@
                             }
                             ?>
                         </ul>
-
                     </td>
                     <td><?php
                         if(strlen($resource->publicPhoneNumber) > 0)
@@ -190,23 +194,13 @@
                     <td>{{ $resource->provider->name }}</td>
                     <td><div width="50%"><span style="white-space: normal;">{{ $resource->description }}</span></div></td>
                     <td><div width="50%"><span style="white-space: normal;">{{ $resource->comments }}</span></div></td>
-                    <td class="text-center col-md-3">
-
-
-                        <!-- show the resource (uses the show method found at GET /resource/view/{id} -->
-                        {{--<a class="btn btn-sm btn-success" href="{{ URL::to('resources/' . $resource->id) }}">View</a>--}}
-                        <button type="button" class="btn btn-sm btn-primary report
-                                    @if(Auth::user()->resources->contains($resource))
-                                removeReport" name="{{$resource->id}}">Remove Event</button>
-                        @else
-                            addReport" name="{{$resource->id}}">Restore Event</button>
-                        @endif
-                        {{-- <a class="btn btn-sm btn-primary" href="{{ URL::to('resources/addAjax/'. $resource->id) }}">Add to Report</a>--}}
-
+                    <td class="text-center">
+                        <button type="button" class="btn btn-sm btn-primary report addReport" name="{{$resource->id}}">Restore</button>
                     </td>
                     <td class="text-center col-md-3">
-                        <a class="btn btn-sm btn-success" href="{{ URL::to('archive_resources/' . $resource->id) }}">View</a>
+                        <a class="btn btn-sm btn-success" href="{{ URL::to('resources/' . $resource->id) }}">View</a>
                     </td>
+
                 </tr>
             @endforeach
             </tbody>
@@ -231,7 +225,7 @@ $(document).ready(function()
     {
         //Apply DataTables
 
-        $('#EventsTable').dataTable({
+        $('#ResourceTable').dataTable({
             initComplete: function () {
                 this.api().columns([1,5,9,10,11,12]).every( function () {
                     var column = this;
@@ -297,7 +291,7 @@ $(document).ready(function()
 
 
 
-        $(".report").click(function (){
+        $('#ResourceTable').on('click', '.report', function(){
             var button = $(this);
             var index = button.attr("name");
             var remove = $(this).hasClass("removeReport");
@@ -330,7 +324,7 @@ $(document).ready(function()
                         button.css({"background-color": "#FFC72C", "color": "#041E42", "border-color": "#FFC72C"});
                         button.addClass('disabled').removeClass('addReport');
                         button.text(function (i, text) {
-                            return "Event Restored";
+                            return "Resource Restored";
                         })
 
                     },

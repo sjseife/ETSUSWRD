@@ -1,10 +1,15 @@
 @extends('layouts.dataTables')
 
 @section('content')
+    <style>
+        .table-bordered{
+            border-bottom: solid 3px  #041E42!important;
+        }
+    </style>
     <div class="text-center"><h1 class="page-header">All Archived Contacts</h1></div>
     <div class="container">
         <div class="row">
-            <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%"id="ContactTable">
+            <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%"id="ContactsTable">
                 <thead>
                 <tr>
                     <th>First Name</th>
@@ -75,8 +80,8 @@
 
 $(document).ready(function() {
         $('#ContactsTable').DataTable();
-        
-        $(".report").click(function (){
+
+        $('#ContactsTable').on('click', '.report', function(){
             var button = $(this);
             var index = button.attr("name");
             var remove = $(this).hasClass("removeReport");
@@ -110,7 +115,7 @@ $(document).ready(function() {
                         button.css({"background-color": "#FFC72C", "color": "#041E42", "border-color": "#FFC72C"});
                         button.addClass('disabled').removeClass('addReport');
                         button.text(function (i, text) {
-                            return "Contacts Restored";
+                            return "Contact Restored";
                         })
 
                     },

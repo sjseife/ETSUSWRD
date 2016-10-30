@@ -1,16 +1,59 @@
 @extends('layouts.dataTables')
 <style>
-    .removeReport {
-        background-color: #c9302c!important;
-        border-color: #ac2925!important;
-        color: white!important;
-    }
-    .addReport{
-        background-color: #041E42!important;
-        border-color: #2e6da4!important;
-        color: white!important;
+    .addReport {
+        color: #ffffff !important;
+        background-color: #041E42 !important;
+        border: 2px solid #FFC72C !important;
 
     }
+
+    .removeReport {
+        color: #041E42 !important;
+        background-color: #FFC72C !important;
+        border: 2px solid #041E42 !important;
+        font-weight: bold !important;
+    }
+
+    @media only screen and (min-width: 768px) {
+
+
+        .removeReport:hover, .removeReport:active {
+            color: #ffffff !important;
+            background-color: #041E42 !important;
+            border: 2px solid #FFC72C !important;
+        }
+        .addReport:hover, .addReport:active {
+            color: #041E42 !important;
+            background-color: #FFC72C !important;
+            border-color: #041E42 !important;
+            font-weight: bold !important;
+        }
+    }
+    @media only screen and (max-width: 767px) {
+        .removeReport:active {
+            color: #ffffff !important;
+            background-color: #041E42 !important;
+            border: 2px solid #FFC72C !important;
+        }
+        .addReport:active {
+            color: #041E42 !important;
+            background-color: #FFC72C !important;
+            border-color: #041E42 !important;
+            font-weight: bold !important;
+        }
+        .removeReport:hover {
+            color: #041E42 !important;
+            background-color: #FFC72C !important;
+            border-color: #041E42 !important;
+            font-weight: bold !important;
+        }
+        .addReport:hover {
+            color: #ffffff !important;
+            background-color: #041E42 !important;
+            border: 2px solid #FFC72C !important;
+        }
+    }
+
 </style>
 @section('content')
     <div class="text-center"><h1 class="page-header">All Resources</h1></div>
@@ -73,7 +116,7 @@
                         $link = false;
                     ?>
                     <tr>
-                        <td>{{ $resource->name }}
+                        <td><div width="50%"><span class="wrapcell">{{ $resource->name }}
                         <?php
                             $count = 0;
                             foreach ($resource->flags as $key=>$value) {
@@ -88,7 +131,7 @@
                             <?php
                             }
                         ?>
-                        </td>
+                       </span></div></td>
                         <td>{{ $resource->county }}</td>
                         <td>
                             @foreach ($resource->categories as $category)
@@ -197,12 +240,12 @@
                         <td>{{ $resource->provider->name }}</td>
                         <td><div width="50%"><span style="white-space: normal;">{{ $resource->description }}</span></div></td>
                         <td><div width="50%"><span style="white-space: normal;">{{ $resource->comments }}</span></div></td>
-                        <td class="text-center col-md-3">
+                        <td class="text-center">
 
 
                             <!-- show the resource (uses the show method found at GET /resource/view/{id} -->
                             {{--<a class="btn btn-sm btn-success" href="{{ URL::to('resources/' . $resource->id) }}">View</a>--}}
-                            <button type="button" class="btn btn-sm btn-primary report
+                            <button type="button" class="btn btn-sm report
                                     @if(Auth::user()->resources->contains($resource))
                                     removeReport" name="{{$resource->id}}">Remove Resource</button>
                                     @else
@@ -299,7 +342,7 @@
 
 
     //Ajax for add to report button
-        $(".report").click(function (){
+        $('#ResourceTable').on('click', '.report', function(){
             var button = $(this);
             var index = button.attr("name");
             var remove = $(this).hasClass("removeReport");

@@ -1,10 +1,15 @@
 @extends('layouts.dataTables')
 
 @section('content')
+    <style>
+        .table-bordered{
+            border-bottom: solid 3px  #041E42!important;
+        }
+    </style>
     <div class="text-center"><h1 class="page-header">All Archived Categories</h1></div>
     <div class="container">
         <div class="row">
-            <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%"id="CategoryTable">
+            <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%"id="CategoriesTable">
                 <thead>
                 <tr>
                     <th>Name</th>
@@ -56,8 +61,8 @@
 
 $(document).ready(function() {
         $('#CategoriesTable').DataTable();
-        
-        $(".report").click(function (){
+
+        $('#CategoriesTable').on('click', '.report', function(){
             var button = $(this);
             var index = button.attr("name");
             var remove = $(this).hasClass("removeReport");

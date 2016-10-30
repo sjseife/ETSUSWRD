@@ -105,6 +105,14 @@
             background-color:#041E42!important;
             vertical-align: middle;
         }
+        .panel-body{
+            border: none!important;
+        }
+        .panel-primary{
+            border: none!important;
+            background-color: #ffffff!important;
+
+        }
         .zeroTopMargin{
             margin-top: 0px;
             margin-bottom:0px;

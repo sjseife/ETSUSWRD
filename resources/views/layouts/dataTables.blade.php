@@ -64,7 +64,9 @@
     </div>
     <aside id="asidelinks">
         <div id="linksblock" class="container_24">
-            <article class="grid_6"><!-- com.omniupdate.editor csspath="/_resources14/ou/editor/maincontent.css" cssmenu="/_resources14/ou/editor/maincontent.txt" -->
+            <article class=""><!-- com.omniupdate.editor csspath="/_resources14/ou/editor/maincontent.css" cssmenu="/_resources14/ou/editor/maincontent.txt" -->
+                <br>
+                <br>
                 <p style="border-bottom: 1px solid #7790ab">
                     Human Services Program <br>Department of Counseling &amp; Human Services<br>PO Box 70701<br>Johnson City, TN 37614 <br>423-439-7692
                 </p>

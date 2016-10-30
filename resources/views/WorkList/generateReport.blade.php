@@ -9,6 +9,15 @@
         .btn-link {
             color: red !important;
         }
+        th{
+            border-top: solid 3px  #041E42!important;
+            border-bottom: solid 3px  #041E42!important;
+            border-left: solid 2px  #041E42!important;
+
+        }
+        .table-bordered{
+            border-bottom: solid 3px  #041E42!important;
+        }
     </style>
 <?php
     $detect = new Mobile_Detect;

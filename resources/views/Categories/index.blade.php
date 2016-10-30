@@ -1,6 +1,11 @@
 @extends('layouts.dataTables')
 
 @section('content')
+    <style>
+        .table-bordered{
+            border-bottom: solid 3px  #041E42!important;
+        }
+    </style>
     <div class="text-center"><h1 class="page-header">All Categories</h1></div>
     <div class="container">
         <!-- create a new category (uses the create method found at GET /categories/create -->

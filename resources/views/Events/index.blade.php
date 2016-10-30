@@ -1,15 +1,57 @@
 @extends('layouts.dataTables')
 <style>
-    .removeReport {
-        background-color: #c9302c!important;
-        border-color: #ac2925!important;
-        color: white!important;
-    }
-    .addReport{
-        background-color: #041E42!important;
-        border-color: #2e6da4!important;
-        color: white!important;
+    .addReport {
+        color: #ffffff !important;
+        background-color: #041E42 !important;
+        border: 2px solid #FFC72C !important;
 
+    }
+
+    .removeReport {
+        color: #041E42 !important;
+        background-color: #FFC72C !important;
+        border: 2px solid #041E42 !important;
+        font-weight: bold !important;
+    }
+
+    @media only screen and (min-width: 768px) {
+
+
+        .removeReport:hover, .removeReport:active {
+            color: #ffffff !important;
+            background-color: #041E42 !important;
+            border: 2px solid #FFC72C !important;
+        }
+        .addReport:hover, .addReport:active {
+            color: #041E42 !important;
+            background-color: #FFC72C !important;
+            border-color: #041E42 !important;
+            font-weight: bold !important;
+        }
+    }
+    @media only screen and (max-width: 767px) {
+        .removeReport:active {
+            color: #ffffff !important;
+            background-color: #041E42 !important;
+            border: 2px solid #FFC72C !important;
+        }
+        .addReport:active {
+            color: #041E42 !important;
+            background-color: #FFC72C !important;
+            border-color: #041E42 !important;
+            font-weight: bold !important;
+        }
+        .removeReport:hover {
+            color: #041E42 !important;
+            background-color: #FFC72C !important;
+            border-color: #041E42 !important;
+            font-weight: bold !important;
+        }
+        .addReport:hover {
+            color: #ffffff !important;
+            background-color: #041E42 !important;
+            border: 2px solid #FFC72C !important;
+        }
     }
 
 </style>
@@ -75,7 +117,7 @@
                 $link = false;
                 ?>
                 <tr>
-                    <td>{{ $event->name }}</td>
+                    <td><div width="50%"><span class="wrapcell">{{ $event->name }}</span></div></td>
                     <td>{{ $event->county }}</td>
                     <td>
                         @foreach ($event->categories as $category)
@@ -199,7 +241,7 @@
 
                         <!-- show the event (uses the show method found at GET /event/view/{id} -->
                         {{--<a class="btn btn-sm btn-success" href="{{ URL::to('events/' . $event->id) }}">View</a>--}}
-                        <button type="button" class="btn btn-sm btn-primary report
+                        <button type="button" class="btn btn-sm report
                                     @if(Auth::user()->events->contains($event))
                                removeReport" name="{{$event->id}}">Remove Event</button>
                                 @else
@@ -290,7 +332,7 @@
 
 
 
-        $(".report").click(function (){
+        $('#EventsTable').on('click', '.report', function(){
             var button = $(this);
             var index = button.attr("name");
             var remove = $(this).hasClass("removeReport");
@@ -320,6 +362,7 @@
                         html = '<div class="alert alert-success">' + eventNames[index] + ' Added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
                         $('#successOrFailure').html(html);
                         button.css({"background-color": "#c9302c", "color": "white", "border-color": "#ac2925"});
+                        document.activeElement.blur();
                         button.addClass('removeReport').removeClass('addReport');
                         button.text(function (i, text) {
                             return "Remove Event";
@@ -360,6 +403,7 @@
                         html = '<div class="alert alert-danger">' + eventNames[index] + ' Removed from Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
                         $('#successOrFailure').html(html);
                         button.css({"background-color": "#337ab7", "color": "white", "border-color": "#2e6da4"});
+                        document.activeElement.blur();
                         button.addClass('addReport').removeClass('removeReport');
                         button.text(function (i, text) {
                             return "Add Event";

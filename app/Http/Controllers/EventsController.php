@@ -70,11 +70,11 @@ class EventsController extends Controller
             }
             else
             {
-                \Session::flash('flash_message', 'Problem creating operating hours. Please double check operating hours.');
+                flash('Problem creating operating hours. Please double check operating hours.', 'info');
             }
         }
 
-        \Session::flash('flash_message', 'Event Created Successfully!');
+        flash( $event->name. ' created successfully!', 'success');
 
         return redirect('events');
     }
@@ -104,7 +104,7 @@ class EventsController extends Controller
             }
             else
             {
-                \Session::flash('flash_message', 'Problem creating operating hours. Please double check operating hours.');
+                flash('Problem creating operating hours. Please double check operating hours.', 'info');
             }
         }
 
@@ -119,7 +119,7 @@ class EventsController extends Controller
             $event->categories()->sync([]);
         }
 
-        \Session::flash('flash_message', 'Event Updated Successfully!');
+        flash($event->name. ' updated successfully!', 'success');
         return redirect('/events/' . $event->id);
     }
 
@@ -150,7 +150,7 @@ class EventsController extends Controller
         $event->save();
 
 
-        \Session::flash('flash_message', 'Event Deleted');
+        flash($event->name. ' successfully deleted.', 'success');
         return redirect('/events');
     }
 
@@ -163,7 +163,7 @@ class EventsController extends Controller
         }
         else
         {
-            \Session::flash('flash_message', 'Event Added to Work List');
+            flash($event->name. ' added to Work List', 'success');
             return Redirect::back();
         }
     }
@@ -177,7 +177,7 @@ class EventsController extends Controller
         }
         else
         {
-            \Session::flash('flash_message', $event->name.' removed from the Report.');
+            flash( $event->name.' removed from the Report.', 'success');
             return Redirect('/worklist/generateReport');
         }
     }
@@ -201,7 +201,7 @@ class EventsController extends Controller
         $flag = new Flag($flagData);
         $flag->save();
 
-        \Session::flash('flash_message', 'Thank you for reporting the problem!');
+        flash('Thank you for reporting the problem!', 'success');
 
         return redirect('events/'.$event->id);
     }

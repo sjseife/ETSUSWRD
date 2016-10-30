@@ -8,6 +8,13 @@
             margin-bottom: 10px;
 
         }
+        .imglink2 {
+            width: 95%;
+            margin: 0 auto;
+            margin-bottom: 18px;
+            padding-left: 15px;
+
+        }
         .tableText{
             margin-top:0px;
             margin-bottom:0px;
@@ -311,7 +318,7 @@
 
                     @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
                             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"><a href="/categories"><img src="\images\CategoriesImg.png" alt="Categories" class="imglink" ></a> <h3 class="footerlink"><a  href="/categories">Categories</a></h3></div>
-                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"><a href="/flags"><img src="\images\waving-flag.jpg" alt="Flags" class="imglink" ></a> <h3 class="footerlink"><a  href="/flags">Flags</a></h3></div>
+                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"><a href="/flags"><img src="\images\waving-flag.jpg" alt="Flags" class="imglink2" ></a> <h3 class="footerlink"><a  href="/flags">Flags</a></h3></div>
                         @endif
 
                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/worklist/generateReport"><img src="\images\report-icon-2.png" alt="Report" class="imglink"  ></a><h3 class="footerlink"><a  href="/resources/generateReport">Report</a></h3></div>

@@ -1,10 +1,15 @@
 @extends('layouts.dataTables')
 
 @section('content')
+    <style>
+        .table-bordered{
+            border-bottom: solid 3px  #041E42!important;
+        }
+    </style>
     <div class="text-center"><h1 class="page-header">All Archived Flags</h1></div>
     <div class="container">
         <div class="row">
-            <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="FlagTable">
+            <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="FlagsTable">
                 <thead>
                 <tr>
                     <th>Type</th>
@@ -77,8 +82,8 @@
 
 $(document).ready(function() {
         $('#FlagsTable').DataTable();
-        
-        $(".report").click(function (){
+
+        $('#FlagsTable').on('click', '.report', function(){
             var button = $(this);
             var index = button.attr("name");
             var remove = $(this).hasClass("removeReport");
@@ -112,7 +117,7 @@ $(document).ready(function() {
                         button.css({"background-color": "#FFC72C", "color": "#041E42", "border-color": "#FFC72C"});
                         button.addClass('disabled').removeClass('addReport');
                         button.text(function (i, text) {
-                            return "Flags Restored";
+                            return "Flag Restored";
                         })
 
                     },

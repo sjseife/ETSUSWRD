@@ -1,6 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+        .panel-heading{
+            -webkit-border-radius: 15px;
+            -moz-border-radius: 15px;
+            border-radius: 15px;
+            border:3px solid #FFC72C!important;
+            background-color:#041E42!important;
+            vertical-align: middle;
+            color:white!important;
+        }
+        .panel{
+            border-radius: 15px;
+            border:3px solid #041E42!important;
+            background-color: #FFC72C!important;
+
+        }
+    </style>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">

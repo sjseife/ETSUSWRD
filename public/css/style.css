@@ -39,7 +39,7 @@ aside h2{font-size:16px;line-height:18px;color:#e9e8e8;text-transform:uppercase;
 aside#asidelinks {padding-bottom: 50px;background-color:#00162e;}
 h2 a.linkheading {color:#fff !important; font-family: "sorts italic",georgia,serif; font-size: 1.2em; line-height: 1.2em; text-decoration: none; text-transform: none }
 .catlinks {margin-right: 10px; border-right: 1px solid #1c293b }
-div#linksblock article { height: 100%; min-height: 220px }
+div#linksblock article { /*height: 100%;*/ min-height: 220px }
 div#linksblock article:nth-child(6) div.catlinks { border-right: none }
 
 /*================== footer =========================*/
@@ -78,7 +78,13 @@ footer ul li:nth-child(1) { padding-left: 0 }
     .collapsing ul li a:hover, .in ul li a:hover {
         color: #FFC72C!important;
         background-color:#041E42!important;
-        box-shadow: 0 5px #666!important;
+        box-shadow: 0 6px #999;
+    }
+    .collapsing ul li a:active, .in ul li a:active {
+        color: #FFC72C!important;
+        background-color:#041E42!important;
+        box-shadow: 0 2px #666;
+        transform: translateY(4px);
     }
 }
 
@@ -117,13 +123,20 @@ footer ul li:nth-child(1) { padding-left: 0 }
         float: none;
     }
     .collapsing, .in {background-color: #FFC72C;}
-    .collapsing ul li a, .in ul li a {color: #041E42!important;}
+    .collapsing ul li a, .in ul li a {
+        color: #041E42!important;
+    }
     .collapsing ul li a:hover, .in ul li a:hover {
         color: #FFC72C!important;
         background-color:#041E42!important;
-        box-shadow: 0 5px #666!important;
+        box-shadow: 0 6px #999;
     }
-
+    .collapsing ul li a:active, .in ul li a:active {
+        color: #FFC72C!important;
+        background-color:#041E42!important;
+        box-shadow: 0 2px #666;
+        transform: translateY(4px);
+    }
     .navbar-left,.navbar-right {
         float: none !important;
     }
@@ -186,6 +199,15 @@ table thead th{
 .btn-success{
     background-color:#041E42;
     border:2px solid #FFC72C;
+}
+.btn-info{
+    background-color:#041E42;
+    border:2px solid #FFC72C;
+}
+.btn-warning{
+    color: #ffffff!important;
+    background-color:#041E42!important;
+    border-color: #FFC72C!important;
 }
 .page-header{
     padding: 15px;
@@ -283,12 +305,72 @@ table thead th{
 .pagination>.active>span:focus,
 .pagination>.active>span:hover {
     background-color:#041E42!important;
+    color:#ffffff!important;
+
+}
+.pagination>li>a, .pagination>li>span{
+    border: solid 1px #041E42!important;
+    color:#041E42!important;
 }
 
 .toast {
     opacity: 1 !important;
 }
 
+.btn-success:hover, .btn-success:active, .btn-success:focus {
+    color: #041E42!important;
+    background-color:#FFC72C!important;
+    border-color: #041E42!important;
+}
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+    color: #041E42!important;
+    background-color:#FFC72C!important;
+    border-color: #041E42!important;
+}
 
+.btn-info:hover, .btn-info:active, .btn-info:focus {
+    color: #041E42!important;
+    background-color:#FFC72C!important;
+    border-color: #041E42!important;
+}
+.panel-heading{
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    border:3px solid #FFC72C!important;
+    background-color:#041E42!important;
+    vertical-align: middle;
+}
+.panel-body{
+    border-top: 6px solid #041E42!important;
+    border-radius: 10px;
+    background-color: #ffffff!important;
 
+}
+.panel-primary{
+    border-radius: 15px;
+    border:3px solid #041E42!important;
+    background-color: #FFC72C!important;
+}
 
+.btn-warning:hover, .btn-warning:active, .btn-warning:focus {
+    color: #041E42!important;
+    background-color:#FFC72C!important;
+    border-color: #041E42!important;
+}
+
+th
+{
+    border-bottom: solid 3px  #041E42!important;
+}
+
+.table-bordered{
+    -khtml-border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    -ms-border-radius: 4px 4px 4px 4px;
+    -o-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+    border-left: solid 3px  #041E42!important;
+    border-right: solid 3px  #041E42!important;
+    border-top: solid 3px  #041E42!important;
+}

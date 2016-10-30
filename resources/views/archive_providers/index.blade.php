@@ -1,6 +1,11 @@
 @extends('layouts.dataTables')
 
 @section('content')
+    <style>
+        .table-bordered{
+            border-bottom: solid 3px  #041E42!important;
+        }
+    </style>
     <div class="text-center"><h1 class="page-header">All Archived Providers</h1></div>
     <div class="container">
         <div class="row">

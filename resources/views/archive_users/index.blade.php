@@ -1,6 +1,11 @@
 @extends('layouts.dataTables')
 
 @section('content')
+    <style>
+        .table-bordered{
+            border-bottom: solid 3px  #041E42!important;
+        }
+    </style>
     <div class="text-center"><h1 class="page-header">All Archived Users</h1></div>
     <div class="container">
         <div class="row">
@@ -55,10 +60,10 @@
     @endif
 
 $(document).ready(function() {
-        $('#UserTable').DataTable();
-        
-        $(".report").click(function (){
-            var button = $(this);
+        $('#UsersTable').DataTable();
+
+            $('#UsersTable').on('click', '.report', function(){
+                var button = $(this);
             var index = button.attr("name");
             var remove = $(this).hasClass("removeReport");
             var add = $(this).hasClass("addReport");

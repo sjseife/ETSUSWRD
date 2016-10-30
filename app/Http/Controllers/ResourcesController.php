@@ -70,12 +70,12 @@ class ResourcesController extends Controller
             }
             else
             {
-                \Session::flash('flash_message', 'Problem creating operating hours. Please double check operating hours.');
+                flash('Problem creating operating hours. Please double check operating hours.', 'info');
             }
         }
 
 
-        \Session::flash('flash_message', 'Resource Created Successfully!');
+        flash('Successfully created ' . $resource->name  , 'success');
 
         return redirect('resources');
     }
@@ -105,7 +105,7 @@ class ResourcesController extends Controller
             }
             else
             {
-                \Session::flash('flash_message', 'Problem creating operating hours. Please double check operating hours.');
+                flash('Problem creating operating hours. Please double check operating hours.', 'info');
             }
         }
 
@@ -121,7 +121,7 @@ class ResourcesController extends Controller
         }
 
 
-        \Session::flash('flash_message', 'Resource Updated Successfully!');
+        flash($resource->name . ' updated successfully!', 'success');
         return redirect('/resources/' . $resource->id);
     }
     
@@ -164,7 +164,7 @@ class ResourcesController extends Controller
         }
         else
         {
-            \Session::flash('flash_message', 'Resource Added to Work List');
+            flash($resource->name . 'added to Work List', 'success');
             return Redirect::back();
         }
     }
@@ -178,7 +178,7 @@ class ResourcesController extends Controller
         }
         else
         {
-            \Session::flash('flash_message',  $resource->name.' removed from the Report.');
+            flash( $resource->name.' removed from the Report.', 'success');
             return Redirect::back();
         }
     }
@@ -202,7 +202,7 @@ class ResourcesController extends Controller
         $flag = new Flag($flagData);
         $flag->save();
 
-        \Session::flash('flash_message', 'Flag Created Successfully!');
+        flash('Flag Created Successfully!', 'success');
 
         return redirect('resources/'.$resource->id);
     }

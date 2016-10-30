@@ -29,6 +29,18 @@
 <body id="app-layout">
     <nav class="navbar navbar-default navbar-static-top" style="background-color:#041E42; height:70px">
         <div class="container">
+            {{--This if statement sets up toastr to recieve flash messages from laravel's flash package.--}}
+            @if (session()->has('flash_notification.message'))
+                <script>
+                    @if(session('flash_notification.level') == 'success')
+                        toastr.success('{{session('flash_notification.message')}}');
+                    @elseif(session('flash_notification.level') == 'danger')
+                        toastr.error('{{session('flash_notification.message')}}');
+                    @elseif(session('flash_notification.level') == 'info')
+                        toastr.info('{{session('flash_notification.message')}}');
+                    @endif
+                </script>
+            @endif
             <div class="navbar-header">
 
                 <!-- Collapsed Hamburger -->

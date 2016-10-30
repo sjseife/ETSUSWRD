@@ -412,7 +412,7 @@
                         //alerts users to successful button pushing.
                        /* html = '<div class="alert alert-danger">' + resourceNames[index] + ' Removed from Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
                         $('#successOrFailure').html(html);*/
-                        toastr["success"]("You have successfully removed the resource from the report", "Resource Removed from Report");
+                        toastr["success"](resourceNames[index] +" successfully removed from the report", "Resource Removed from Report");
                         button.css({"background-color": "#337ab7", "color": "white", "border-color": "#2e6da4"});
                         button.addClass('addReport').removeClass('removeReport');
                         button.text(function (i, text) {

@@ -1,7 +1,6 @@
 <nav class="navbar navbar-default navbar-static-top" style="background-color:#041E42; height:70px">
     <div class="container">
         <div class="navbar-header">
-
             <!-- Collapsed Hamburger -->
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                 <span class="sr-only">Toggle Navigation</span>
@@ -24,7 +23,7 @@
                 <li><a href="{{ url('/contacts') }}">Contacts</a></li>
                 @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
                     <li><a href="{{ url('/categories') }}">Categories</a></li>
-                    <li><a href="{{ url('/flags') }}">Flags</a></li>
+                    <li><a href="{{ url('/flags') }}">Flags <span class="badge badge-danger">{{$flagCount}}</span></a></li>
                 @endif
                 <li><a href="{{ url('/worklist/generateReport') }}">Report</a></li>
                 @if (Auth::user()->role == 'Admin')

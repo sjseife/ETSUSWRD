@@ -262,7 +262,16 @@
 
 @push('scripts')
 <script>
-    $(document).ready(function()
+    @if (session()->has('flash_notification.message'))
+        @if(session('flash_notification.level') == 'success')
+            toastr.success('{{session('flash_notification.message')}}');
+    @elseif(session('flash_notification.level') == 'danger')
+        toastr.error('{{session('flash_notification.message')}}');
+    @elseif(session('flash_notification.level') == 'info')
+        toastr.info('{{session('flash_notification.message')}}');
+    @endif
+@endif
+$(document).ready(function()
     {
         //Apply DataTables
 
@@ -358,8 +367,7 @@
                     url: 'events/add/' + $(this).attr("name"),
                     dataType: 'json',
                     success: function (data) {
-                        //alerts users to successful button pushing.
-                        html = '<div class="alert alert-success">' + eventNames[index] + ' Added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                        toastr["success"]( eventNames[index] + " successfully added to the report", "Event Added to Report");
                         $('#successOrFailure').html(html);
                         button.css({"background-color": "#c9302c", "color": "white", "border-color": "#ac2925"});
                         document.activeElement.blur();
@@ -399,8 +407,7 @@
                     url: 'events/removeReport/' + $(this).attr("name"),
                     dataType: 'json',
                     success: function (data) {
-                        //alerts users to successful button pushing.
-                        html = '<div class="alert alert-danger">' + eventNames[index] + ' Removed from Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
+                        toastr["success"](eventNames[index] + " successfully removed from the report", "Event Removed from Report");
                         $('#successOrFailure').html(html);
                         button.css({"background-color": "#337ab7", "color": "white", "border-color": "#2e6da4"});
                         document.activeElement.blur();

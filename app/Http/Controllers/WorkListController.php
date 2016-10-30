@@ -12,6 +12,7 @@ use Storage;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
+use File;
 
 class WorkListController extends Controller
 {
@@ -58,21 +59,26 @@ class WorkListController extends Controller
         $report = $pdf->output();
 
         //make public directory with user email
-        $directory = DIRECTORY_SEPARATOR . Auth::user()->email;
+        $directory = Auth::user()->email;
+        $path = public_path('/pdf/'.$directory);
 
+        if (!File::exists($path))
+        {
+           File::makeDirectory($path, 0775);
+        }
+        else
+        {
+            File::cleanDirectory($path);
+        }
         //delete the contents and folder, regenerate folder
-        Storage::disk('public')->deleteDirectory($directory);
-        Storage::disk('public')->makeDirectory($directory);
-
         //create unique pdf name so a new pdf is shown on mobile devices
         $filename = uniqid(Auth::user()->email, true) . '.pdf';
+        $path = public_path('/pdf/'. $directory . '/' . $filename);
 
         //store the file and retrieve for response view
-        Storage::disk('public')->put($directory. DIRECTORY_SEPARATOR . $filename, $report);
-        $file = Storage::disk('public')->get($directory. DIRECTORY_SEPARATOR . $filename);
+        File::put($path, $report);
 
-        return Response::make($file, 200)
-            ->header('Content-Type', 'application/pdf');
+        return Response::download($path);
     }
 
     public function emptyReport()

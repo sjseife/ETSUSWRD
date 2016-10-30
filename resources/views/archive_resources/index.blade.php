@@ -45,6 +45,9 @@
             </thead>
             <tfoot>
             <tr>
+                <th><label>Name:&nbsp;&nbsp; </label> </th>
+                <th><label>County:&nbsp;&nbsp;</label> </th>
+                <th><label>Category:&nbsp;&nbsp; </label></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -52,10 +55,7 @@
                 <th></th>
                 <th></th>
                 <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
+                <th><label>State:&nbsp;&nbsp; </label></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -230,7 +230,7 @@ $(document).ready(function()
                 this.api().columns([1,5,9,10,11,12]).every( function () {
                     var column = this;
                     var select = $('<select><option value=""></option></select>')
-                            .appendTo( $(column.footer()).empty() )
+                            .appendTo( $(column.footer()) )
                             .on( 'change', function () {
                                 var val = $.fn.dataTable.util.escapeRegex(
                                         $(this).val()
@@ -248,7 +248,7 @@ $(document).ready(function()
                 this.api().columns([0]).every( function() {
                     var column = this;
                     var select = $('<select><option value=""></option></select>')
-                            .appendTo($(column.footer()).empty())
+                            .appendTo($(column.footer()))
                             .on('change', function () {
                                 var val = $(this).val();
                                 column //Only the name column
@@ -265,7 +265,7 @@ $(document).ready(function()
                 this.api().columns([2]).every( function() {
                     var column = this;
                     var select = $('<select><option value=""></option></select>')
-                            .appendTo($(column.footer()).empty())
+                            .appendTo($(column.footer()))
                             .on('change', function () {
                                 var val = $(this).val();
                                 column //Only the name column

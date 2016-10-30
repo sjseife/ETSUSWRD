@@ -52,9 +52,7 @@
             background-color: #041E42 !important;
             border: 2px solid #FFC72C !important;
         }
-    }
-
-</style>
+    }</style>
 @section('content')
     <div class="text-center"><h1 class="page-header">All Resources</h1></div>
     <div id="successOrFailure"></div>
@@ -90,7 +88,11 @@
                     </tr>
                 </thead>
                 <tfoot>
+
                     <tr>
+                        <th><label>Name:&nbsp;&nbsp; </label> </th>
+                        <th><label>County:&nbsp;&nbsp;</label> </th>
+                        <th><label>Category:&nbsp;&nbsp; </label></th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -98,10 +100,7 @@
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th><label>State:&nbsp;&nbsp; </label></th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -132,7 +131,7 @@
                             }
                         ?>
                        </span></div></td>
-                        <td>{{ $resource->county }}</td>
+                        <td class="alignRight">{{ $resource->county }}</td>
                         <td>
                             @foreach ($resource->categories as $category)
                                 {{ $category->name }}
@@ -260,6 +259,25 @@
 
                     </tr>
                 @endforeach
+           {{--     <tr>
+                    <td>Name</td> --}}{{--0--}}{{--
+                    <td>County</td> --}}{{--1--}}{{--
+                    <td>Category</td> --}}{{--2--}}{{--
+                    <td>Hours of Operation</td> --}}{{--3--}}{{--
+                    <td>Phone</td> --}}{{--4--}}{{--
+                    <td>Email</td> --}}{{--5--}}{{--
+                    <td>Website</td> --}}{{--6--}}{{--
+                    <td>Street Address</td> --}}{{--7--}}{{--
+                    <td></td> --}}{{--7--}}{{--
+                    <td>City</td> --}}{{--8--}}{{--
+                    <td>State</td> --}}{{--9--}}{{--
+                    <td>Zip Code</td> --}}{{--10--}}{{--
+                    <td>Provider</td> --}}{{--11--}}{{--
+                    <td>Description</td> --}}{{--12--}}{{--
+                    <td>Comments</td> --}}{{--13--}}{{--
+                    <td>Action</td> --}}{{--14--}}{{--
+                    <td>View Resource:</td>--}}{{--15--}}{{--
+                </tr>--}}
                 </tbody>
             </table>
         </div>
@@ -276,15 +294,24 @@
             toastr.info('{{session('flash_notification.message')}}');
         @endif
     @endif
+
+    function stopPropagation(evt) {
+        if (evt.stopPropagation !== undefined) {
+            evt.stopPropagation();
+        } else {
+            evt.cancelBubble = true;
+        }
+    }
     $(document).ready(function() {
 
         //Apply DataTables
         $('#ResourceTable').dataTable( {
+            orderCellsTop: true,
             initComplete: function () {
                 this.api().columns([1,8,9,10,11]).every( function () {
                     var column = this;
                     var select = $('<select><option value=""></option></select>')
-                            .appendTo( $(column.footer()).empty() )
+                            .appendTo( $(column.footer()))
                             .on( 'change', function () {
                                 var val = $.fn.dataTable.util.escapeRegex(
                                         $(this).val()
@@ -302,7 +329,7 @@
                 this.api().columns([0]).every( function() {
                     var column = this;
                     var select = $('<select><option value=""></option></select>')
-                            .appendTo($(column.footer()).empty())
+                            .appendTo($(column.footer()))
                             .on('change', function () {
                                 var val = $(this).val();
                                 column //Only the name column
@@ -315,11 +342,12 @@
                         letter = String.fromCharCode('A'.charCodeAt() + y);
                         select.append('<option value="' + letter + '">' + letter + '</option>');
                     }
+
                 });
                 this.api().columns([2]).every( function() {
                     var column = this;
                     var select = $('<select><option value=""></option></select>')
-                            .appendTo($(column.footer()).empty())
+                            .appendTo($(column.footer()))
                             .on('change', function () {
                                 var val = $(this).val();
                                 column //Only the name column

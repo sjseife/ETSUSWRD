@@ -374,3 +374,16 @@ th
     border-right: solid 3px  #041E42!important;
     border-top: solid 3px  #041E42!important;
 }
+/*.semi-square {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #FFC72C!important;
+    border:3px solid #041E42!important;
+    color: #041E42!important;
+}
+
+option:hover{
+    background-color: #041E42!important;
+    color: #ffffff!important;
+}*/

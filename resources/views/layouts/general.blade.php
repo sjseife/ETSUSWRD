@@ -40,7 +40,7 @@
 <body id="app-layout">
     @include('layouts._NavBar')
     <div class="container">
-        @if (session()->has('flash_notification.message'))
+        {{--@if (session()->has('flash_notification.message'))
             @if(session('flash_notification.level') == 'success')
                 toastr.success('{{session('flash_notification.message')}}');
             @elseif(session('flash_notification.level') == 'danger')
@@ -48,7 +48,7 @@
             @elseif(session('flash_notification.level') == 'info')
                 toastr.info('{{session('flash_notification.message')}}');
             @endif
-        @endif
+        @endif--}}
         @if (Session::has('flash_message'))
             <div class="alert alert-success">
                 {{ Session::get('flash_message') }}

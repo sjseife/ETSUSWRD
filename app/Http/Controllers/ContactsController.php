@@ -41,7 +41,7 @@ class ContactsController extends Controller
         $contact->save();
         $contact->providers()->attach($request->input('provider_list'));
 
-        \Session::flash('flash_message', 'Contact Created Successfully!');
+        flash($contact->full_name . ' created successfully!', 'success');
 
         return redirect('contacts');
     }
@@ -88,7 +88,7 @@ class ContactsController extends Controller
         {
             $contact->providers()->sync([]);
         }
-        \Session::flash('flash_message', 'Contact Updated Successfully!');
+        flash($contact->full_name . ' updated successfully!', 'success');
         return redirect('/contacts/' . $contact->id);
     }
 
@@ -97,7 +97,7 @@ class ContactsController extends Controller
         $contact->archived = '1';
         $contact->save();
 
-        \Session::flash('flash_message', 'Contact Deleted');
+        flash($contact->full_name . ' deleted.', 'success');
         return redirect('/contacts');
 
     }
@@ -121,7 +121,7 @@ class ContactsController extends Controller
         $flag = new Flag($flagData);
         $flag->save();
 
-        \Session::flash('flash_message', 'Flag Created Successfully!');
+       flash($contact->full_name . ' created successfully!', 'success');
 
         return redirect('contacts/'. $contact->id);
     }

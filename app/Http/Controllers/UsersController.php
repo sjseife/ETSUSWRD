@@ -73,7 +73,7 @@ class UsersController extends Controller
     public function flag(User $user)
     {
         return view('flags.create')->with('url', 'users/flag/' . $user->id)
-            ->with('name', $user->Name);
+            ->with('name', $user->name);
     }
 
     public function storeFlag(User $user, FlagRequest $request)

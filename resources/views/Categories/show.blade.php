@@ -51,4 +51,17 @@
 
     <!-- Modal -->
     @include('categories._deleteModal')
-@endsection
+@stop
+@push('scripts')
+<script>
+    @if (session()->has('flash_notification.message'))
+        @if(session('flash_notification.level') == 'success')
+            toastr.success('{{session('flash_notification.message')}}');
+    @elseif(session('flash_notification.level') == 'danger')
+        toastr.error('{{session('flash_notification.message')}}');
+    @elseif(session('flash_notification.level') == 'info')
+        toastr.info('{{session('flash_notification.message')}}');
+    @endif
+    @endif
+</script>
+@endpush

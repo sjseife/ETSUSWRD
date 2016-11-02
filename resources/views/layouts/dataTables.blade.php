@@ -64,16 +64,33 @@
     </div>
     <aside id="asidelinks">
         <div id="linksblock" class="container_24">
-            <article class=""><!-- com.omniupdate.editor csspath="/_resources14/ou/editor/maincontent.css" cssmenu="/_resources14/ou/editor/maincontent.txt" -->
-                <br>
-                <br>
-                <p style="border-bottom: 1px solid #7790ab">
-                    Human Services Program <br>Department of Counseling &amp; Human Services<br>PO Box 70701<br>Johnson City, TN 37614 <br>423-439-7692
-                </p>
-                <p style="padding-top: 20px;">East Tennessee State University<br>
-                    PO Box 70300 |  Johnson City, TN 37614<br>
-                    423-439-1000 | <a href="mailto:info@etsu.edu">info@etsu.edu</a>
-                </p>
+            <article class="grid_6"><!-- com.omniupdate.editor csspath="/_resources14/ou/editor/maincontent.css" cssmenu="/_resources14/ou/editor/maincontent.txt" -->
+                <div class="container">
+                    <div class="row"  style="padding-top:50px">
+                        <div class="col-xs-6">
+
+                            <p >
+                                Human Services Program <br>
+                                Department of Counseling &amp; Human Services<br>
+                                PO Box 70701<br>Johnson City, TN 37614 <br>
+                                423-439-7692</p>
+                        </div>
+
+                        <div class="col-xs-6"  style="padding-top:35px">
+                            <p align="right">
+                                East Tennessee State University<br>
+                                PO Box 70300 |  Johnson City, TN 37614<br>
+                                423-439-1000 | <a href="mailto:info@etsu.edu">info@etsu.edu</a></p>
+
+                        </div>
+                        <div class="col-xs-12">
+                            <p style="border-bottom: 1px solid #7790ab"></p>
+                        </div>
+                    </div>
+
+                </div>
+
+
             </article>
         </div>
     </aside>

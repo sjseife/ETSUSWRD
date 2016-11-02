@@ -7,6 +7,8 @@
                 <div class="panel-heading">View Flag</div>
                 <div class="panel-body">
                     <a class="btn btn-default" href="{{ URL::to('flags') }}">Back</a>
+                    <!-- edit this flag (uses the edit method found at GET /flag/{id}/edit/ -->
+                    <a class="btn btn-primary pull-right" href="{{ URL::to('flags/' . $flag->id. '/edit') }}">Edit Flag</a>
 
                     <div class="col-md-offset-2"><br/><br/>
                     </div>
@@ -44,13 +46,26 @@
                         <dt>Description of Issue</dt>
                         <dd>{{ $flag->comments }}</dd>
                     </dl>
+                    <hr />
+
+                    <div>
+                        @if(isset($flag->resource))
+                            @include('Resources._flagShow', ['resource' => $flag->resource])
+                        @elseif(isset($flag->contact))
+                            @include('Contacts._flagShow', ['contact' => $flag->contact])
+                        @elseif(isset($flag->user))
+                            @include('Users._flagShow', ['user' => $flag->user])
+                        @elseif(isset($flag->provider))
+                            @include('Providers._flagShow', ['provider' => $flag->provider])
+                        @elseif(isset($flag->event))
+                            @include('Events._flagShow', ['event' => $flag->event])
+                        @endif
+                    </div>
                     <div class="col-md-offset-3">
                         <br/>
                         @if(!$flag->resolved)
-                            <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#resolveModal">Resolve</button>
+                            <button type="button" class="btn btn-success btn-lg pull-right" data-toggle="modal" data-target="#resolveModal">Resolve</button>
                         @endif
-                        <!-- edit this flag (uses the edit method found at GET /flag/{id}/edit/ -->
-                        <a class="btn btn-lg btn-primary" href="{{ URL::to('flags/' . $flag->id. '/edit') }}">Edit</a>
                         <!-- delete the flag -->
                         <!-- Trigger the modal with a button -->
 
@@ -61,9 +76,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Delete Modal -->
-    @include('Flags._deleteModal')
 
     @if(!$flag->resolved)
         <!-- Resolve Modal -->

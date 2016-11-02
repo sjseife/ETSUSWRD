@@ -6,7 +6,7 @@
             border-bottom: solid 3px  #041E42!important;
         }
     </style>
-    <div class="text-center"><h1 class="page-header">All Flags</h1></div>
+    <div class="text-center"><h1 class="page-header">Unresolved Flags</h1></div>
 
     <div class="container">
         <!-- create a new flag (uses the create method found at GET /flags/create -->
@@ -15,13 +15,12 @@
             <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="FlagTable">
                 <thead>
                     <tr>
-                        <th>Type</th>
-                        <th>Name</th>
+                        <th class="all">Type</th>
+                        <th>Item Name</th>
                         <th>Flagged For</th>
                         <th>Submitted By</th>
                         <th>Submitted At</th>
-                        <th>Status</th>
-                        <th>View</th>
+                        <th class="all">View</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,11 +48,6 @@
                             <td>{{ $flag->submitter->name }}</td>
                             <td>{{ $flag->created_at }}</td>
 
-                            @if($flag->resolved)
-                                <td>Resolved</td>
-                            @else
-                                <td>Unresolved</td>
-                            @endif
                         <td class="text-center col-md-1">
                             <!-- show the resource (uses the show method found at GET /flag/view/{id} -->
                             <a class="btn btn-small btn-success" href="{{ URL::to('flags/' . $flag->id) }}">View</a>

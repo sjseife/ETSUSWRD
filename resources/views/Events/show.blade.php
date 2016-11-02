@@ -153,7 +153,7 @@
 
 
                             <!-- Flag this event as incorrect -->
-                            <a  href="{{ URL::to('events/' . $event->id. '/flag') }}">Report a problem with this event.</a>
+                            <a  href="{{ URL::to('events/' . $event->id. '/flag') }}" class="btn btn-danger">Report a problem with this event.</a>
                         </div>
                         </div>
                     </div>

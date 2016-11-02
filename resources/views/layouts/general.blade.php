@@ -51,7 +51,13 @@
     <!-- Footer -->
     <div class="container_24">
         <img src="/images/mountains.png" alt="Image of Mountains" class="img-responsive center-block">
-    </div>
+        <div class="row">
+            <div class=""col-xs-1>
+
+                </div>
+
+            </div>
+
     <aside id="asidelinks">
         <div id="linksblock" class="container_24">
             <article class="grid_6"><!-- com.omniupdate.editor csspath="/_resources14/ou/editor/maincontent.css" cssmenu="/_resources14/ou/editor/maincontent.txt" -->
@@ -75,6 +81,7 @@
         <div id="hidden"></div>
     </footer>
         </div>
+    </div>
     @yield('footer')
 
     <!-- JavaScripts -->

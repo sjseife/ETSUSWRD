@@ -37,7 +37,7 @@ class UsersController extends Controller
         $user = new User($request->all());
         $user->save();
 
-        \Session::flash('flash_message', 'User Created Successfully!');
+        flash($user->name . ' created successfully!', 'success');
 
         return redirect('users');
     }
@@ -53,7 +53,7 @@ class UsersController extends Controller
         $this->validate($request,
             ['email' => 'unique:users,email,'.$user->id]);
         $user->update($request->all());
-        \Session::flash('flash_message', 'User Updated Successfully!');
+        flash($user->name . ' updated successfully!', 'success');
         return redirect('/users/' . $user->id);
     }
 
@@ -62,7 +62,7 @@ class UsersController extends Controller
         $user->archived = '1';
         $user->save();
 
-        \Session::flash('flash_message', 'User Deleted');
+        flash($user->name . ' deleted.', 'success');
         return redirect('/users');
 
     }
@@ -86,7 +86,7 @@ class UsersController extends Controller
         $flag = new Flag($flagData);
         $flag->save();
 
-        \Session::flash('flash_message', 'Flag Created Successfully!');
+        flash('Flag created successfully!','success');
 
         return redirect('users/'.$user->id);
     }

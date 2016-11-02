@@ -32,7 +32,7 @@ class FlagsController extends Controller
     public function update(Flag $flag, FlagRequest $request)
     {
         $flag->update($request->all());
-        \Session::flash('flash_message', 'Flag Updated Successfully!');
+       flash('Flag updated successfully!', 'success');
         return redirect('/flags/' . $flag->id);
     }
 
@@ -41,14 +41,14 @@ class FlagsController extends Controller
         $flag->archived = '1';
         $flag->save();
 
-        \Session::flash('flash_message', 'Flag Deleted');
+        flash('Flag Deleted' ,'success');
         return redirect('/flags');
     }
 
     public function resolve(Flag $flag)
     {
         $flag->update(['resolved' => '1']);
-        \Session::flash('flask_message', 'Flag Resolved');
+        flash('Flag Resolved','success');
         return redirect('flags');
     }
 }

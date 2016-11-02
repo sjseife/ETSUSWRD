@@ -63,7 +63,7 @@
                                 <div>
 
                                     <!-- Flag this provider as incorrect -->
-                                    <a  href="{{ URL::to('contacts/' . $contact->id. '/flag') }}">Report a problem with this contact.</a>
+                                    <a  href="{{ URL::to('contacts/' . $contact->id. '/flag') }}" class="btn btn-danger">Report a problem with this contact</a>
                                 </div>
                             </div>
 

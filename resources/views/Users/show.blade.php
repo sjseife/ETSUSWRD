@@ -33,8 +33,7 @@
                     <div class="col-md-offset-2">
                         <br/>
                         <br/>
-                        <!-- Flag this user as incorrect -->
-                        <a class="btn btn-lg btn-link" href="{{ URL::to('users/' . $user->id. '/flag') }}">Report a problem with this user.</a>
+
                         <br/>
                         <br/>
                         <div class="col-md-offset-2">
@@ -45,6 +44,8 @@
                         <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#deleteModal">Delete</button>
                         <br/>
                         <br/>
+                            <!-- Flag this user as incorrect -->
+                            <a href="{{ URL::to('users/' . $user->id. '/flag') }}" class="btn btn-danger">Report a problem with this user</a>
                         </div>
                     </div>
                 </div>

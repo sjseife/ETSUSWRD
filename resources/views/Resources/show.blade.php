@@ -146,7 +146,7 @@
                             <div>
 
                                 <!-- Flag this resource as incorrect -->
-                                <a  href="{{ URL::to('resources/' . $resource->id. '/flag') }}" class="btn btn-danger">Report a problem with this resource.</a>
+                                <a  href="{{ URL::to('resources/' . $resource->id. '/flag') }}" class="btn btn-danger">Report a problem with this resource</a>
                                 </div>
                             </div>
                         </div>

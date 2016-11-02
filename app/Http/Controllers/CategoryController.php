@@ -43,7 +43,7 @@ class CategoryController extends Controller
         $categories->resources()->attach($request->input('resource_list'));
         $categories->events()->attach($request->input('event_list'));
 
-        \Session::flash('flash_message', 'Categories Created Successfully!');
+        flash( $categories->name . ' created successfully!', 'success');
 
         return redirect('categories');
     }
@@ -76,7 +76,7 @@ class CategoryController extends Controller
         {
             $category->events()->sync([]);
         }
-        \Session::flash('flash_message', 'Category Updated Successfully!');
+        flash( $category->name . ' updated successfully!', 'success');
         return redirect('/categories/' . $category->id);
     }
     
@@ -85,7 +85,7 @@ class CategoryController extends Controller
         $category->archived = '1';
         $category->save();
 
-        \Session::flash('flash_message', 'Category Deleted');
+        flash( $category->name . ' deleted.', 'success');
         return redirect('/categories');
 
     }

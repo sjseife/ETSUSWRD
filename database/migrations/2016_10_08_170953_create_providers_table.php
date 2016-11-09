@@ -12,17 +12,7 @@ class CreateProvidersTable extends Migration
      */
     public function up()
     {
-        Schema::create('providers', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name', 150);
-            $table->string('publicPhoneNumber', 30)->nullable();
-            $table->string('publicEmail')->nullable();
-            $table->string('website')->nullable();
-            $table->text('description');
-            $table->text('comments');
-            $table->timestamps();
-            $table->tinyInteger('archived')->default(0);
-        });
+
     }
 
     /**
@@ -32,6 +22,5 @@ class CreateProvidersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('providers');
     }
 }

@@ -42,9 +42,18 @@ class Contact extends Model
      * Get a list of resource ids associated with the current resource
      * @return array
      */
-    public function getProviderListAttribute()
+    public function getResourceListAttribute()
     {
-        return $this->providers->lists('id')->all();
+        return $this->resources->lists('id')->all();
+    }
+
+    /**
+     * Get a list of event ids associated with the current resource
+     * @return array
+     */
+    public function getEventListAttribute()
+    {
+        return $this->events->lists('id')->all();
     }
 
     /**

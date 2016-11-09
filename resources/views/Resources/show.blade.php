@@ -110,6 +110,14 @@
                                 <li>Email: {{ $resource->publicEmail }} @if($resource->publicEmail == null) N/A @endif </li>
                                 <li>Website: {{ $resource->website }} @if($resource->website == null) N/A @endif </li>
                             </ul>
+                            @if(Auth::user()->role == 'Admin' || Auth::user()->role == 'GA')
+                                <p><b>Private Contacts:</b></p>
+                                <ul>
+                                    @foreach($resource->contacts as $contact)
+                                        <li><a href="{{ URL::to('contacts/' . $contact->id) }}"></a></li>
+                                    @endforeach
+                                </ul>
+                            @endif
                             <h5 class="list-heading"><b>Categories:</b></h5>
                             <ul style="list-style:none;">
                                 @foreach ($resource->categories as $category)

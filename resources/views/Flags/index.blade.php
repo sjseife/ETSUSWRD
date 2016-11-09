@@ -39,9 +39,6 @@
                         @elseif(isset($flag->event))
                             <td>Event</td>
                             <td>{{ $flag->event->name }}</td>
-                        @elseif(isset($flag->provider))
-                            <td>Provider</td>
-                            <td>{{ $flag->provider->name }}</td>
                         @endif
 
                         <td>{{ $flag->level }}</td>

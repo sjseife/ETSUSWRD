@@ -23,9 +23,15 @@
     </div>
 </div>
 <div class="form-group">
-    {!! Form::label('provider_list', 'Providers:', ['class' => 'col-md-2 control-label']) !!}
+    {!! Form::label('resource_list', 'Resources:', ['class' => 'col-md-2 control-label']) !!}
     <div class="col-md-4">
-        {!! Form::select('provider_list[]', $providerList, null, ['id' => 'provider_list', 'class' => 'form-control', 'multiple']) !!}
+        {!! Form::select('resource_list[]', $resourceList, null, ['id' => 'resource_list', 'class' => 'form-control', 'multiple']) !!}
+    </div>
+</div>
+<div class="form-group">
+    {!! Form::label('event_list', 'Events:', ['class' => 'col-md-2 control-label']) !!}
+    <div class="col-md-4">
+        {!! Form::select('event_list[]', $eventList, null, ['id' => 'event_list', 'class' => 'form-control', 'multiple']) !!}
     </div>
 </div>
 <div class="form-group">
@@ -37,8 +43,11 @@
 </div>
 @push('scripts')
     <script>
-        $('#provider_list').select2({
-            placeholder: 'Choose a Provider',
+        $('#resource_list').select2({
+            placeholder: 'Choose a Resource',
+        });
+        $('#event_list').select2({
+            placeholder: 'Choose an Event',
         });
     </script>
 @endpush

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Flag;
 use App\DailyHours;
-use App\Provider;
 use App\Http\Requests\FlagRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -40,15 +39,15 @@ class ResourcesController extends Controller
     public function create()
     {
         $categoryList = Category::lists('name', 'id');
-        $providerList = Provider::lists('name', 'id');
-        return view('resources.create', compact('categoryList', 'providerList'));
+        $contactList = Contact::lists('name', 'id');
+        return view('resources.create', compact('categoryList', 'contactList'));
     }
 
     public function store(ResourceRequest $request)
     {
         $resource = new Resource($request->all());
-        $resource->provider_id = $request->provider;
         $resource->save();
+        $resource->contacts()->attach($request->input('contact_list'));
 
         //categories
         if(!is_null($request->input('category_list')))
@@ -83,13 +82,22 @@ class ResourcesController extends Controller
     public function edit(Resource $resource)
     {
         $categoryList = Category::lists('name', 'id');
-        $providerList = Provider::lists('name', 'id');
-        return view('resources.edit', compact('resource', 'categoryList', 'providerList'));
+        $contactList = Contact::lists('name', 'id');
+        return view('resources.edit', compact('resource', 'categoryList', 'contactList'));
     }
 
     public function update(Resource $resource, ResourceRequest $request)
     {
         $resource->update($request->all());
+
+        if(!is_null($request->input('contact_list')))
+        {
+            $resource->contacts()->sync($request->input('contact_list'));
+        }
+        else
+        {
+            $resource->contacts()->sync([]);
+        }
 
         //daily hours
         DB::table('daily_hours')->where('resource_id', '=', $resource->id)->delete();//dump the old ones

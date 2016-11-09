@@ -29,9 +29,6 @@ class CreateFlagsTable extends Migration
             $table->integer('contact_id')
                     ->unsigned()
                     ->nullable();
-            $table->integer('provider_id')
-                ->unsigned()
-                ->nullable();
             $table->integer('event_id')
                 ->unsigned()
                 ->nullable();
@@ -55,10 +52,6 @@ class CreateFlagsTable extends Migration
             $table->foreign('contact_id')
                 ->references('id')
                 ->on('contacts')
-                ->onDelete('cascade');
-            $table->foreign('provider_id')
-                ->references('id')
-                ->on('providers')
                 ->onDelete('cascade');
             $table->foreign('event_id')
                 ->references('id')

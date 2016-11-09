@@ -16,17 +16,31 @@
                         {{ $contact->protectedPhoneNumber }}
                     </div>
                     <div class="col-md-4">
-                        <p><strong>Providers:</strong></p>
-                        @if(!$contact->providers->isEmpty())
-                            @foreach($contact->providers as $provider)
+                        <p><strong>Resources:</strong></p>
+                        @if(!$contact->resources->isEmpty())
+                            @foreach($contact->resources as $resource)
                                 <p>
-                                    <a href="{{ URL::to('providers/' . $provider->id) }}">
-                                        {{ $provider->name }}
+                                    <a href="{{ URL::to('resources/' . $resource->id) }}">
+                                        {{ $resource->name }}
                                     </a>
                                 </p>
                             @endforeach
                         @else
-                            <p>N/A</p>
+                            <p>None</p>
+                        @endif
+                    </div>
+                    <div class="col-md-4">
+                        <p><strong>Events:</strong></p>
+                        @if(!$contact->events->isEmpty())
+                            @foreach($contact->events as $event)
+                                <p>
+                                    <a href="{{ URL::to('events/' . $event->id) }}">
+                                        {{ $event->name }}
+                                    </a>
+                                </p>
+                            @endforeach
+                        @else
+                            <p>None</p>
                         @endif
                     </div>
                     <div class="col-md-10">

@@ -64,15 +64,6 @@ class Flag extends Model
     }
 
     /**
-     * Gets the provider associated with the current flag
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function provider()
-    {
-        return $this->belongsTo('App\Provider');
-    }
-
-    /**
      * Allows for the use of Flag->userIdNumber
      * @return null if not set
      * @return integer if set

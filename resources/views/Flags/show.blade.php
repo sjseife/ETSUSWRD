@@ -23,9 +23,6 @@
                         @elseif(isset($flag->user))
                             <dt>User Email</dt>
                             <dd>{{ $flag->user->email }}</dd>
-                        @elseif(isset($flag->provider))
-                            <dt>Provider</dt>
-                            <dd>{{ $flag->provider->name }}</dd>
                         @elseif(isset($flag->event))
                             <dt>Event Name</dt>
                             <dd>{{ $flag->event->name }}</dd>
@@ -55,8 +52,6 @@
                             @include('Contacts._flagShow', ['contact' => $flag->contact])
                         @elseif(isset($flag->user))
                             @include('Users._flagShow', ['user' => $flag->user])
-                        @elseif(isset($flag->provider))
-                            @include('Providers._flagShow', ['provider' => $flag->provider])
                         @elseif(isset($flag->event))
                             @include('Events._flagShow', ['event' => $flag->event])
                         @endif

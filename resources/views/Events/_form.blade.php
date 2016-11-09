@@ -115,9 +115,9 @@
     </div>
 </div>
 <div class="form-group">
-    {!! Form::label('provider', 'Provider:', ['class' => 'col-md-2 control-label']) !!}
+    {!! Form::label('contact_list', 'Contacts:', ['class' => 'col-md-2 control-label']) !!}
     <div class="col-md-4">
-        {!! Form::select('provider', $providerList, null, ['id'=>'provider', 'class'=>'form-control']) !!}
+        {!! Form::select('contact_list[]', $contactList, null, ['id' => 'contact_list', 'class' => 'form-control', 'multiple']) !!}
     </div>
 </div>
 <div class="form-group">
@@ -143,8 +143,8 @@
             placeholder: 'Choose a Category',
             tags: true
         });
-        $('#provider').select2({
-            placeholder: 'Choose a Provider'
+        $('#contact_list').select2({
+            placeholder: 'Choose a Contact'
         });
     });
 

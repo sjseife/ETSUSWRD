@@ -92,6 +92,14 @@
             <li>Email: {{ $event->publicEmail }} @if($event->publicEmail == null) N/A @endif </li>
             <li>Website: {{ $event->website }} @if($event->website == null) N/A @endif </li>
         </ul>
+        @if(Auth::user()->role == 'Admin' || Auth::user()->role == 'GA')
+            <p><b>Private Contacts:</b></p>
+            <ul>
+                @foreach($event->contacts as $contact)
+                    <li><a href="{{ URL::to('contacts/' . $contact->id) }}"></a></li>
+                @endforeach
+            </ul>
+        @endif
         <h5 class="list-heading"><b>Categories:</b></h5>
         <ul>
             @foreach ($event->categories as $category)

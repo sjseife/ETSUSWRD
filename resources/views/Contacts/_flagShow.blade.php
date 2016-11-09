@@ -12,15 +12,31 @@
         <hr>
     </div>
     <div class="col-md-10">
-        <p><strong>Providers</strong></p>
-        @foreach($contact->providers as $provider)
-            <p>
-                <a href="{{ URL::to('providers/' . $provider->id) }}">
-                    {{ $provider->name }}
-                </a>
-            </p>
-        @endforeach
+        <p><strong>Resources:</strong></p>
+        @if(!$contact->resources->isEmpty())
+            @foreach($contact->resources as $resource)
+                <p>
+                    <a href="{{ URL::to('resources/' . $resource->id) }}">
+                        {{ $resource->name }}
+                    </a>
+                </p>
+            @endforeach
+        @else
+            <p>None</p>
+        @endif
         <hr>
+        <p><strong>Events:</strong></p>
+        @if(!$contact->events->isEmpty())
+            @foreach($contact->events as $event)
+                <p>
+                    <a href="{{ URL::to('events/' . $event->id) }}">
+                        {{ $event->name }}
+                    </a>
+                </p>
+            @endforeach
+        @else
+            <p>None</p>
+        @endif
     </div>=
     <div class="col-md-10">
         <br/>

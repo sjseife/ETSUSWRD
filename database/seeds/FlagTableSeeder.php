@@ -41,15 +41,6 @@ class FlagTableSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         DB::table('flags')->insert([
-            'level' => 'Admin',
-            'comments' => 'Provider went bankrupt and no longer provides services. :(',
-            'resolved' => '0',
-            'submitted_by' => '3',
-            'provider_id' => '6',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
-        DB::table('flags')->insert([
             'level' => 'GA',
             'comments' => 'Event is cancelled due to inbound hurricane! :(',
             'resolved' => '0',

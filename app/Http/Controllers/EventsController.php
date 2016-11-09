@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use App\Category;
-use App\Provider;
+use App\Contact;
 use App\DailyHours;
 use App\Flag;
 use App\Http\Requests\EventRequest;
@@ -38,16 +38,16 @@ class EventsController extends Controller
     public function create()
     {
         $categoryList = Category::lists('name', 'id');
-        $providerList = Provider::lists('name', 'id');
-        return view('events.create', compact('categoryList', 'providerList'));
+        $contactList = Contact::lists('name', 'id');
+        return view('events.create', compact('categoryList', 'contactList'));
     }
 
     public function store(EventRequest $request)
     {
 
         $event = new Event($request->all());
-        $event->provider_id = $request->provider;
         $event->save();
+        $event->contacts()->attach($request->input('contact_list'));
 
         //categories
         if(!is_null($request->input('category_list')))
@@ -82,13 +82,22 @@ class EventsController extends Controller
     public function edit(Event $event)
     {
         $categoryList = Category::lists('name', 'id');
-        $providerList = Provider::lists('name', 'id');
-        return view('events.edit', compact('event', 'categoryList', 'providerList'));
+        $contactList = Contact::lists('name', 'id');
+        return view('events.edit', compact('event', 'categoryList', 'contactList'));
     }
     
     public function update(Event $event, EventRequest $request)
     {
         $event->update($request->all());
+
+        if(!is_null($request->input('contact_list')))
+        {
+            $event->contacts()->sync($request->input('contact_list'));
+        }
+        else
+        {
+            $event->contacts()->sync([]);
+        }
 
         //daily hours
         DB::table('daily_hours')->where('event_id', '=', $event->id)->delete(); //dump the old ones

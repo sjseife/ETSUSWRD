@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Requests\ContactRequest;
 use App\Contact;
-use App\Provider;
+use App\Resource;
+use App\Event;
 use Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -28,8 +29,9 @@ class ContactsController extends Controller
     }
     public function create()
     {
-        $providerList = Provider::lists('name', 'id');
-        return view('contacts.create', compact('providerList'));
+        $eventList = Event::lists('name', 'id');
+        $resourceList = Resource::lists('name', 'id');
+        return view('contacts.create', compact('eventList', 'resourceList'));
     }
 
     public function store(ContactRequest $request)
@@ -39,7 +41,8 @@ class ContactsController extends Controller
             ['email' => 'unique:contacts']);
         $contact= new Contact($request->all());
         $contact->save();
-        $contact->providers()->attach($request->input('provider_list'));
+        $contact->events()->attach($request->input('event_list'));
+        $contact->resources()->attach($request->input('resource_list'));
 
         flash($contact->full_name . ' created successfully!', 'success');
 
@@ -48,7 +51,8 @@ class ContactsController extends Controller
 
     /*
      * THIS function is not longer in operation, and should be combined with a single store function if it is needed again
-     * Was updated for the provider change anyway 10/10/2016 William Kubenka
+     * Was updated for the provider change anyway. 10/10/2016 -William Kubenka
+     * Was updated once again for the provider removal. 11/08/2016 -William Kubenka
      *
      * Same as regular store, except it returns JSON. For some reason I would get tokenmismatch exceptions if I left
      * the data input as ContactRequest. As a result, data validation now happens entirely within the method.
@@ -63,15 +67,17 @@ class ContactsController extends Controller
             'protectedPhoneNumber' => 'required']);
         $contact= new Contact($request->all());
         $contact->save();
-        $contact->providers()->attach($request->input('provider_list'));
+        $contact->events()->attach($request->input('event_list'));
+        $contact->resources()->attach($request->input('resource_list'));
 
         return response()->json($contact);
     }
 
     public function edit(Contact $contact)
     {
-        $providerList = Provider::lists('name', 'id');
-        return view('contacts.edit', compact('contact', 'providerList'));
+        $eventList = Event::lists('name', 'id');
+        $resourceList = Resource::lists('name', 'id');
+        return view('contacts.edit', compact('contact', 'eventList', 'resourceList'));
     }
 
     public function update(Contact $contact, ContactRequest $request)
@@ -80,13 +86,21 @@ class ContactsController extends Controller
         $this->validate($request,
             ['email' => 'unique:contacts,email,'.$contact->id]);
         $contact->update($request->all());
-        if(!is_null($request->input('provider_list')))
+        if(!is_null($request->input('event_list')))
         {
-            $contact->providers()->sync($request->input('provider_list'));
+            $contact->events()->sync($request->input('event_list'));
         }
         else
         {
-            $contact->providers()->sync([]);
+            $contact->events()->sync([]);
+        }
+        if(!is_null($request->input('resource_list')))
+        {
+            $contact->resources()->sync($request->input('resource_list'));
+        }
+        else
+        {
+            $contact->resources()->sync([]);
         }
         flash($contact->full_name . ' updated successfully!', 'success');
         return redirect('/contacts/' . $contact->id);

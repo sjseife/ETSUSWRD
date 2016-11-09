@@ -28,8 +28,6 @@ class CreateEventsTable extends Migration
             $table->string('website')->nullable();
             $table->text('description');
             $table->text('comments');
-            $table->integer('provider_id')->unsigned()->index();
-            $table->foreign('provider_id')->references('id')->on('providers')->onDelete('cascade');
             $table->timestamps();
             $table->tinyInteger('archived')->default(0);
         });

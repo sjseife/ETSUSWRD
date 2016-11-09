@@ -41,12 +41,22 @@ class Event extends Model
     }
 
     /**
-     * Get the provider associated with the event
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * get the contacts associated with the current resource through
+     * the provider they are both associated with
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function provider()
+    public function contacts()
     {
-        return $this->belongsTo('App\Provider');
+        return $this->belongsToMany('App\Contact')->withTimestamps();
+    }
+
+    /**
+     * Get a list of contact ids associated with the current resource
+     * @return array
+     */
+    public function getContactListAttribute()
+    {
+        return $this->contacts->lists('id')->all();
     }
 
     /**

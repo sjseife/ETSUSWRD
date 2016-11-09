@@ -36,7 +36,7 @@ class Resource extends Model
      */
     public function contacts()
     {
-        return $this->hasManyThrough('App\Contact', 'App\Provider');
+        return $this->belongsToMany('App\Contact')->withTimestamps();
     }
 
     /**

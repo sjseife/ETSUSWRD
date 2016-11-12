@@ -80,11 +80,10 @@
                         <th data-priority="2">City</th> {{--8--}}
                         <th data-priority="1">State</th> {{--9--}}
                         <th data-priority="2">Zip Code</th> {{--10--}}
-                        <th data-priority="3">Provider</th> {{--11--}}
-                        <th data-priority="3">Description</th> {{--12--}}
-                        <th data-priority="3">Comments</th> {{--13--}}
-                        <th class="all">Action</th> {{--14--}}
-                        <th data-priority="4">View Resource:</th>{{--15--}}
+                        <th data-priority="3">Description</th> {{--11 Formerly 12--}}
+                        <th data-priority="3">Comments</th> {{--12--}}
+                        <th class="all">Action</th> {{--13--}}
+                        <th data-priority="4">View Resource:</th>{{--14--}}
                     </tr>
                 </thead>
                 <tfoot>
@@ -101,7 +100,6 @@
                         <th></th>
                         <th></th>
                         <th><label>State:&nbsp;&nbsp; </label></th>
-                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -236,7 +234,6 @@
                         <td>{{ $resource->city }}</td>
                         <td>{{ $resource->state }}</td>
                         <td>{{ $resource->zipCode }}</td>
-                        <td>{{ $resource->provider->name }}</td>
                         <td><div width="50%"><span style="white-space: normal;">{{ $resource->description }}</span></div></td>
                         <td><div width="50%"><span style="white-space: normal;">{{ $resource->comments }}</span></div></td>
                         <td class="text-center">
@@ -259,25 +256,6 @@
 
                     </tr>
                 @endforeach
-           {{--     <tr>
-                    <td>Name</td> --}}{{--0--}}{{--
-                    <td>County</td> --}}{{--1--}}{{--
-                    <td>Category</td> --}}{{--2--}}{{--
-                    <td>Hours of Operation</td> --}}{{--3--}}{{--
-                    <td>Phone</td> --}}{{--4--}}{{--
-                    <td>Email</td> --}}{{--5--}}{{--
-                    <td>Website</td> --}}{{--6--}}{{--
-                    <td>Street Address</td> --}}{{--7--}}{{--
-                    <td></td> --}}{{--7--}}{{--
-                    <td>City</td> --}}{{--8--}}{{--
-                    <td>State</td> --}}{{--9--}}{{--
-                    <td>Zip Code</td> --}}{{--10--}}{{--
-                    <td>Provider</td> --}}{{--11--}}{{--
-                    <td>Description</td> --}}{{--12--}}{{--
-                    <td>Comments</td> --}}{{--13--}}{{--
-                    <td>Action</td> --}}{{--14--}}{{--
-                    <td>View Resource:</td>--}}{{--15--}}{{--
-                </tr>--}}
                 </tbody>
             </table>
         </div>
@@ -308,7 +286,7 @@
         $('#ResourceTable').dataTable( {
             orderCellsTop: true,
             initComplete: function () {
-                this.api().columns([1,8,9,10,11]).every( function () {
+                this.api().columns([1,8,9,10]).every( function () {
                     var column = this;
                     var select = $('<select><option value=""></option></select>')
                             .appendTo( $(column.footer()))

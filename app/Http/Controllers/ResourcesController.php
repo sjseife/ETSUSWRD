@@ -39,7 +39,7 @@ class ResourcesController extends Controller
     public function create()
     {
         $categoryList = Category::lists('name', 'id');
-        $contactList = Contact::lists('name', 'id');
+        $contactList = $this->getAllContactsFullName();
         return view('resources.create', compact('categoryList', 'contactList'));
     }
 
@@ -82,7 +82,7 @@ class ResourcesController extends Controller
     public function edit(Resource $resource)
     {
         $categoryList = Category::lists('name', 'id');
-        $contactList = Contact::lists('name', 'id');
+        $contactList = $this->getAllContactsFullName();
         return view('resources.edit', compact('resource', 'categoryList', 'contactList'));
     }
 
@@ -213,5 +213,17 @@ class ResourcesController extends Controller
         flash('Flag Created Successfully!', 'success');
 
         return redirect('resources/'.$resource->id);
+    }
+
+    public function getAllContactsFullName()
+    {
+        $allContacts = Contact::all();
+        $passedContacts = array();
+        foreach($allContacts as $contact)
+        {
+            $fullname = $contact->full_name;
+            $passedContacts[$contact->id] = $fullname;
+        }
+        return $passedContacts;
     }
 }

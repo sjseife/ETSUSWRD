@@ -26,8 +26,7 @@ class ResourceTableSeeder extends Seeder
             'publicEmail' => 'test@email.com',
             'website' => 'test.com',
             'description' => file_get_contents('http://loripsum.net/api/2/plaintext'),
-            'Comments' => file_get_contents('http://loripsum.net/api/1/short/plaintext'),
-            'provider_id' => '1'
+            'Comments' => file_get_contents('http://loripsum.net/api/1/short/plaintext')
         ]);
         DB::table('resources')->insert([
             'name' => 'Test1',
@@ -39,8 +38,7 @@ class ResourceTableSeeder extends Seeder
             'publicPhoneNumber' => '423-234-3944',
             'publicEmail' => 'test1@email.com',
             'website' => 'test.com',
-            'description' => file_get_contents('http://loripsum.net/api/3/plaintext'),
-            'provider_id' => '2'
+            'description' => file_get_contents('http://loripsum.net/api/3/plaintext')
         ]);
         DB::table('resources')->insert([
             'name' => 'Test2',
@@ -54,8 +52,7 @@ class ResourceTableSeeder extends Seeder
             'publicEmail' => 'test2@email.com',
             'website' => 'test.com',
             'description' => file_get_contents('http://loripsum.net/api/4/plaintext'),
-            'comments' => file_get_contents('http://loripsum.net/api/1/short/plaintext'),
-            'provider_id' => '3'
+            'comments' => file_get_contents('http://loripsum.net/api/1/short/plaintext')
         ]);
         factory(App\Resource::class, 50)->create();
     }

@@ -24,8 +24,7 @@ class EventTableSeeder extends Seeder
             'publicEmail' => 'test@email.com',
             'website' => 'test.com',
             'description' => file_get_contents('http://loripsum.net/api/2/plaintext'),
-            'Comments' => file_get_contents('http://loripsum.net/api/1/short/plaintext'),
-            'provider_id' => '1'
+            'Comments' => file_get_contents('http://loripsum.net/api/1/short/plaintext')
         ]);
 
         DB::table('events')->insert([
@@ -40,8 +39,7 @@ class EventTableSeeder extends Seeder
             'publicPhoneNumber' => '423-954-3042',
             'publicEmail' => 'test1@email.com',
             'website' => 'test1.com',
-            'description' => file_get_contents('http://loripsum.net/api/3/plaintext'),
-            'provider_id' => '2'
+            'description' => file_get_contents('http://loripsum.net/api/3/plaintext')
         ]);
 
         DB::table('events')->insert([
@@ -57,8 +55,7 @@ class EventTableSeeder extends Seeder
             'publicEmail' => 'test2@email.com',
             'website' => 'test2.com',
             'description' => file_get_contents('http://loripsum.net/api/4/plaintext'),
-            'Comments' => file_get_contents('http://loripsum.net/api/1/short/plaintext'),
-            'provider_id' => '3'
+            'Comments' => file_get_contents('http://loripsum.net/api/1/short/plaintext')
         ]);
         for($x = 1; $x < 4; $x++)
         {

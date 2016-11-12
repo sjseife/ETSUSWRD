@@ -40,8 +40,7 @@ function variableChanger($i, $j){
             'publicPhoneNumber' => $faker->phoneNumber,
             'publicEmail' => $faker->safeEmail,
             'description' => file_get_contents('http://loripsum.net/api/2/plaintext'),
-            'Comments' => file_get_contents('http://loripsum.net/api/1/short/plaintext'),
-            'provider_id' => rand(1, 21)
+            'Comments' => file_get_contents('http://loripsum.net/api/1/short/plaintext')
         ];
     });
 

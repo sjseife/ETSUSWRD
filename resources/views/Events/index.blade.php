@@ -82,11 +82,10 @@
                 <th data-priority="2">City</th> {{--9--}}
                 <th data-priority="1">State</th> {{--10--}}
                 <th data-priority="2">Zip Code</th> {{--11--}}
-                <th data-priority="3">Provider</th> {{--12--}}
-                <th data-priority="3">Description</th> {{--13--}}
-                <th data-priority="3">Comments</th> {{--14--}}
-                <th class="all">Action</th> {{--15--}}
-                <th data-priority="4">View Event:</th>{{--16--}}
+                <th data-priority="3">Description</th> {{--12 formerly 13--}}
+                <th data-priority="3">Comments</th> {{--13--}}
+                <th class="all">Action</th> {{--14--}}
+                <th data-priority="4">View Event:</th>{{--15--}}
             </tr>
             </thead>
             <tfoot>
@@ -103,7 +102,6 @@
                 <th></th>
                 <th></th>
                 <th><label>State:&nbsp;&nbsp; </label></th>
-                <th></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -229,11 +227,10 @@
                     <td>{{ $event->publicEmail }}</td>
                     <td>{{ $event->website }}</td>
                     <td>{{ $event->streetAddress }}</td>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $event->streetAddress2 }}</td>
+                    <td>{{ $event->streetAddress2 }}</td>
                     <td>{{ $event->city }}</td>
                     <td>{{ $event->state }}</td>
                     <td>{{ $event->zipCode }}</td>
-                    <td>{{ $event->provider->name }}</td>
                     <td><div width="50%"><span style="white-space: normal;">{{ $event->description }}</span></div></td>
                     <td><div width="50%"><span style="white-space: normal;">{{ $event->comments }}</span></div></td>
                     <td class="text-center col-md-3">
@@ -277,7 +274,7 @@ $(document).ready(function()
 
         $('#EventsTable').dataTable({
             initComplete: function () {
-                this.api().columns([1,5,9,10,11,12]).every( function () {
+                this.api().columns([1,5,9,10,11]).every( function () {
                     var column = this;
                     var select = $('<select><option value=""></option></select>')
                             .appendTo( $(column.footer()))

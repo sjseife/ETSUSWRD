@@ -20,18 +20,18 @@ class PivotTableSeeder extends Seeder
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
-            DB::table('contact_provider')->insert([
+            DB::table('contact_resource')->insert([
                 'contact_id' => '1',
-                'provider_id' => $x,
+                'resource_id' => $x,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
         }
         for($x = 5; $x <15; $x++)
         {
-            DB::table('contact_provider')->insert([
+            DB::table('contact_resource')->insert([
                 'contact_id' => '2',
-                'provider_id' => $x,
+                'resource_id' => $x,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
@@ -47,9 +47,9 @@ class PivotTableSeeder extends Seeder
         }
         for($x = 10; $x < 20; $x++)
         {
-            DB::table('contact_provider')->insert([
+            DB::table('contact_resource')->insert([
                 'contact_id' => '3',
-                'provider_id' => $x,
+                'resource_id' => $x,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
@@ -67,6 +67,12 @@ class PivotTableSeeder extends Seeder
         {
             DB::table('category_event')->insert([
                 'category_id' => $x,
+                'event_id' => $x,
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ]);
+            DB::table('contact_event')->insert([
+                'contact_id' => $x,
                 'event_id' => $x,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')

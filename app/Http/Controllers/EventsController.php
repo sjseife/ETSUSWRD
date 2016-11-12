@@ -38,7 +38,7 @@ class EventsController extends Controller
     public function create()
     {
         $categoryList = Category::lists('name', 'id');
-        $contactList = Contact::lists('name', 'id');
+        $contactList = $this->getAllContactsFullName();
         return view('events.create', compact('categoryList', 'contactList'));
     }
 
@@ -82,7 +82,7 @@ class EventsController extends Controller
     public function edit(Event $event)
     {
         $categoryList = Category::lists('name', 'id');
-        $contactList = Contact::lists('name', 'id');
+        $contactList = $this->getAllContactsFullName();
         return view('events.edit', compact('event', 'categoryList', 'contactList'));
     }
     
@@ -213,5 +213,16 @@ class EventsController extends Controller
         flash('Thank you for reporting the problem!', 'success');
 
         return redirect('events/'.$event->id);
+    }
+    public function getAllContactsFullName()
+    {
+        $allContacts = Contact::all();
+        $passedContacts = array();
+        foreach($allContacts as $contact)
+        {
+            $fullname = $contact->full_name;
+            $passedContacts[$contact->id] = $fullname;
+        }
+        return $passedContacts;
     }
 }

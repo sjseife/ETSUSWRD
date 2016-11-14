@@ -198,7 +198,7 @@
                 var index = button.attr("name");
                 var remove = $(this).hasClass("removeReport");
                 var add = $(this).hasClass("addReport");
-                var resourceName = "{!! $resource->name !!}";
+                var resourceName = "{!! $event->name !!}";
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -214,7 +214,7 @@
                             //alerts users to successful button pushing.
                             /* html = '<div class="alert alert-success">' + resourceNames[index] + ' Added to Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
                              $('#successOrFailure').html(html);*/
-                            toastr["success"]( resourceName + " successfully added to the report", "Resource Added to Report");
+                            toastr["success"]( resourceName + " successfully added to the report", "Event Added to Report");
                             button.css({"background-color": "#c9302c", "color": "white", "border-color": "#ac2925"});
                             button.addClass('removeReport').removeClass('addReport');
                             button.text(function (i, text) {
@@ -255,7 +255,7 @@
                             //alerts users to successful button pushing.
                             /* html = '<div class="alert alert-danger">' + resourceNames[index] + ' Removed from Report!<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>';
                              $('#successOrFailure').html(html);*/
-                            toastr["success"]("You have successfully removed the resource from the report", "Resource Removed from Report");
+                            toastr["success"]("You have successfully removed the event from the report", "Event Removed from Report");
                             button.css({"background-color": "#337ab7", "color": "white", "border-color": "#2e6da4"});
                             button.addClass('addReport').removeClass('removeReport');
                             button.text(function (i, text) {

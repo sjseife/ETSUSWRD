@@ -18,6 +18,7 @@ class AdminAccessMiddleware
     {
         try
         {
+            return $next($request);/*
             if($request->user()->role == 'Admin')
             {
                 return $next($request);
@@ -25,7 +26,7 @@ class AdminAccessMiddleware
             else
             {
                 return redirect()->action('HomeController@errorAdmin');
-            }
+            }*/
         }
         catch(\Exception $e)
         {

@@ -48,7 +48,7 @@ function variableChanger($i, $j){
         return [
             'name' => $faker->name,
             'email' => $faker->safeEmail,
-            'role' => 'User',
+            'role_id' => '3',
             'password' => bcrypt(str_random(10)),
         ];
     });

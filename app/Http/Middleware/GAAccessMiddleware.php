@@ -19,6 +19,7 @@ class GAAccessMiddleware
     {
         try
         {
+            return $next($request);/*
             if($request->user()->role == 'GA' || $request->user()->role == 'Admin')
             {
                 return $next($request);
@@ -26,7 +27,7 @@ class GAAccessMiddleware
             else
             {
                 return redirect()->action('HomeController@errorGA');
-            }
+            }*/
         }
         catch(\Exception $e)
         {

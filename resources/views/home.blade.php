@@ -211,7 +211,7 @@
 
                             <?php
 
-                            if (empty($tempDay))
+                            if(empty($tempDay))
                             {
                                 $tempDay[] = $day->day;
                                 $key = array_search($day->day, $days); // returns key of matching day in array
@@ -311,21 +311,24 @@
 
                 <div class="panel-body w3-panel w3-blue w3-round-xlarge">
 
-                    <div class="row">
+                    @if(Auth::user()->role->base == '1')
+                        <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/events"><img src="\images\EventsImg.jpg" alt="Events" class="imglink"  ></a><h3 class="footerlink"><a  href="/events">Events</a></h3></div>
                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/resources"><img src="\images\lightbulb.ico" alt="Resources" class="imglink"  ></a><h3 class="footerlink"><a  href="/resources">Resources</a></h3></div>
-                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/contacts"><img src="\images\contacts2.png" alt="Contacts" class="imglink"  ></a><h3 class="footerlink"><a  href="/contacts">Contacts</a></h3></div>
-
-                    @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
-                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"><a href="/categories"><img src="\images\CategoriesImg.png" alt="Categories" class="imglink" ></a> <h3 class="footerlink"><a  href="/categories">Categories</a></h3></div>
-                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"><a href="/flags"><img src="\images\waving-flag.jpg" alt="Flags" class="imglink2" ></a> <h3 class="footerlink"><a  href="/flags">Flags</a></h3></div>
-                        @endif
-
                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/worklist/generateReport"><img src="\images\report-icon-2.png" alt="Report" class="imglink"  ></a><h3 class="footerlink"><a  href="/resources/generateReport">Report</a></h3></div>
-                        @if (Auth::user()->role == 'Admin')
-                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/users"><img src="\images\usersimg.png" alt="Users" class="imglink"  ></a><h3 class="footerlink"><a  href="/users">Users</a></h3></div>
-                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/archive"><img src="\images\archive-icon.png" alt="Users" class="imglink"  ></a><h3 class="footerlink"><a  href="/archive">Archive</a></h3></div>
-                        @endif
+                    @endif
+                    @if(Auth::user()->role->extended == '1')
+                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/contacts"><img src="\images\contacts2.png" alt="Contacts" class="imglink"  ></a><h3 class="footerlink"><a  href="/contacts">Contacts</a></h3></div>
+                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"><a href="/categories"><img src="\images\CategoriesImg.png" alt="Categories" class="imglink" ></a> <h3 class="footerlink"><a  href="/categories">Categories</a></h3></div>
+                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"><a href="/flags"><img src="\images\waving-flag.jpg" alt="Flags" class="imglink2" ></a> <h3 class="footerlink"><a  href="/flags">Flags</a></h3></div>
+                    @endif
+                    @if(Auth::user()->role->users == '1')
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/users"><img src="\images\usersimg.png" alt="Users" class="imglink"  ></a><h3 class="footerlink"><a  href="/users">Users</a></h3></div>
+                    @endif
+                    @if(Auth::user()->role->archive == '1')
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/archive"><img src="\images\archive-icon.png" alt="Users" class="imglink"  ></a><h3 class="footerlink"><a  href="/archive">Archive</a></h3></div>
+                    @endif
+
                     </div>
 
                 </div>
@@ -354,5 +357,4 @@
     });
 
 </script>
-</head>
 @endpush

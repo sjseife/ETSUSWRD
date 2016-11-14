@@ -365,7 +365,7 @@ $(document).ready(function()
                     dataType: 'json',
                     success: function (data) {
                         toastr["success"]( eventNames[index] + " successfully added to the report", "Event Added to Report");
-                        $('#successOrFailure').html(html);
+                       /* $('#successOrFailure').html(html);*/
                         button.css({"background-color": "#c9302c", "color": "white", "border-color": "#ac2925"});
                         document.activeElement.blur();
                         button.addClass('removeReport').removeClass('addReport');
@@ -405,7 +405,7 @@ $(document).ready(function()
                     dataType: 'json',
                     success: function (data) {
                         toastr["success"](eventNames[index] + " successfully removed from the report", "Event Removed from Report");
-                        $('#successOrFailure').html(html);
+                        /*$('#successOrFailure').html(html);*/
                         button.css({"background-color": "#337ab7", "color": "white", "border-color": "#2e6da4"});
                         document.activeElement.blur();
                         button.addClass('addReport').removeClass('removeReport');

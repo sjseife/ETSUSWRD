@@ -604,7 +604,6 @@ return array(
     'Page_Frame_Reflower' => $vendorDir . '/dompdf/dompdf/include/page_frame_reflower.cls.php',
     'PivotTableSeeder' => $baseDir . '/database/seeds/PivotTableSeeder.php',
     'Positioner' => $vendorDir . '/dompdf/dompdf/include/positioner.cls.php',
-    'ProviderTableSeeder' => $baseDir . '/database/seeds/ProviderTableSeeder.php',
     'Renderer' => $vendorDir . '/dompdf/dompdf/include/renderer.cls.php',
     'ResourceTableSeeder' => $baseDir . '/database/seeds/ResourceTableSeeder.php',
     'SebastianBergmann\\Comparator\\ArrayComparator' => $vendorDir . '/sebastian/comparator/src/ArrayComparator.php',

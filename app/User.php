@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role', 'archived'
+        'name', 'email', 'password', 'archived'
     ];
 
     /**
@@ -61,4 +61,14 @@ class User extends Authenticatable
     {
         return $this->BelongsToMany('App\Event')->withTimestamps();
     }
+
+    /**
+     * Get a list of roles associated with the current user.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function role()
+    {
+        return $this->belongsTo('App\Role');
+    }
+
 }

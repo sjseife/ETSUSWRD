@@ -154,12 +154,14 @@
                     @else
                         addReport" name="{{$event->id}}">Add To Report</button>
                     @endif
-                    @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
+                    @if (Auth::user()->role->create_update == '1')
                     <!-- edit this resource (uses the edit method found at GET /resource/edit/{id} -->
-                        | <a class="btn btn-md btn-info" href="{{ URL::to('events/' . $event->id. '/edit') }}">Edit</a> |
+                        | <a class="btn btn-md btn-info" href="{{ URL::to('events/' . $event->id. '/edit') }}">Edit</a>
+                    @endif
+                    @if(Auth::user()->role->delete == '1')
                         <!-- delete the resource -->
                         <!-- Trigger the modal with a button -->
-                        <button type="button" class="btn btn-warning btn-md" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                        | <button type="button" class="btn btn-warning btn-md" data-toggle="modal" data-target="#deleteModal">Delete</button>
                     @endif
                     <div class=""><br/><br/>
                         <div>

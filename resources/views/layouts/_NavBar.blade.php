@@ -18,17 +18,24 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li><a href="{{ url('/events') }}">Events</a></li>
-                <li><a href="{{ url('/resources') }}">Resources</a></li>
-                <li><a href="{{ url('/contacts') }}">Contacts</a></li>
-                @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
+                @if (Auth::user()->role->base == '1')
+                    <li><a href="{{ url('/events') }}">Events</a></li>
+                    <li><a href="{{ url('/resources') }}">Resources</a></li>
+                    <li><a href="{{ url('/worklist/generateReport') }}">Work List</a></li>
+                @endif
+                @if (Auth::user()->role->extended == '1')
+                    <li><a href="{{ url('/contacts') }}">Contacts</a></li>
                     <li><a href="{{ url('/categories') }}">Categories</a></li>
                     <li><a href="{{ url('/flags') }}">Flags <span class="badge badge-danger">{{$flagCount}}</span></a></li>
                 @endif
-                <li><a href="{{ url('/worklist/generateReport') }}">Report</a></li>
-                @if (Auth::user()->role == 'Admin')
+                @if (Auth::user()->role->users == '1')
                     <li><a href="{{ url('/users') }}">Users</a></li>
+                @endif
+                @if (Auth::user()->role->archive == '1')
                     <li><a href="{{ url('/archive') }}">Archive</a></li>
+                @endif
+                @if (Auth::user()->role->roles == '1')
+                    <li><a href="{{ url('/roles') }}">Roles</a></li>
                 @endif
 
 

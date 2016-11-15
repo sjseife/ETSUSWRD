@@ -56,7 +56,7 @@
 @section('content')
     <div class="text-center"><h1 class="page-header">All Resources</h1></div>
     <div id="successOrFailure"></div>
-    @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
+    @if (Auth::user()->role->create_update == '1')
         <!-- create a new resource (uses the create method found at GET /resource/create -->
         <a class="btn btn-md btn-primary pull-right" href="{{ URL::to('resources/create') }}" style="margin-bottom: 20px;">Create New Resource</a>
         @endif

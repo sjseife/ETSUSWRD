@@ -11,7 +11,7 @@
     <div class="form-group">
         {!! Form::label('level', 'Level:', ['class' => 'col-md-2 control-label']) !!}
         <div class="col-md-4">
-            {!! Form::select('level', ['Admin'=>'Admin','GA'=>'GA','test'=>'Should Fail'], null, ['id' => 'resource_list', 'class' => 'form-control']) !!}
+            {!! Form::select('level', $options, null, ['id' => 'resource_list', 'class' => 'form-control']) !!}
         </div>
     </div>
     <div class="form-group">

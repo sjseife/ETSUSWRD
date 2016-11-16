@@ -29,7 +29,7 @@
                     <tr>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->role }}</td>
+                        <td>{{ $user->role->name }}</td>
                         <td>{{ $user->created_at }}</td>
                         <td class="text-center">
 

@@ -196,8 +196,13 @@ class ResourcesController extends Controller
      */
     public function flag(Resource $resource)
     {
+        $options = ['Unselected' => 'Please Select a Reason.',
+                'Update'=>'Resource information incorrect.',
+                'Delete'=>'Resource has closed.',
+                'test'=>'Should Fail'];
         return view('flags.create')->with('url', 'resources/flag/' . $resource->id)
-                                   ->with('name', $resource->name);
+                                   ->with('name', $resource->name)
+                                   ->with('options', $options);
     }
 
     public function storeFlag(Resource $resource, FlagRequest $request)

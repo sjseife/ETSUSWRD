@@ -20,9 +20,6 @@ class CreateFlagsTable extends Migration
             $table->integer('submitted_by')
                     ->unsigned()
                     ->default(NULL);
-            $table->integer('user_id')
-                    ->unsigned()
-                    ->nullable();
             $table->integer('resource_id')
                     ->unsigned()
                     ->nullable();
@@ -38,10 +35,6 @@ class CreateFlagsTable extends Migration
 
         Schema::table('flags', function(Blueprint $table){
             $table->foreign('submitted_by')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
-            $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');

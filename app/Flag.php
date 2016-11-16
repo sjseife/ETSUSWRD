@@ -13,7 +13,7 @@ class Flag extends Model
      */
     protected $fillable = [
         'date', 'level', 'comments', 'resolved', 'submitted_by',
-        'user_id', 'resource_id', 'contact_id', 'event_id', 'provider_id', 'archived'
+        'resource_id', 'contact_id', 'event_id', 'archived'
     ];
 
     /**
@@ -35,16 +35,6 @@ class Flag extends Model
     }
 
     /**
-     * Get the user associated with the current flag
-     * NOTE: This is the user that is being flagged
-     * @return array
-     */
-    public function user()
-    {
-        return $this->belongsTo('App\User');
-    }
-
-    /**
      * Gets the user associated with the current flag
      * NOTE: This is the user that submitted the flag
      * @return array
@@ -61,20 +51,6 @@ class Flag extends Model
     public function event()
     {
         return $this->belongsTo('App\Event');
-    }
-
-    /**
-     * Allows for the use of Flag->userIdNumber
-     * @return null if not set
-     * @return integer if set
-     */
-    public function getUserIdNumberAttribute()
-    {
-        if(!isSet($this->user))
-        {
-            return Null;
-        }
-        return $this->user->id;
     }
 
     /**
@@ -117,19 +93,5 @@ class Flag extends Model
             return Null;
         }
         return $this->event->id;
-    }
-
-    /**
-     * Allows for the use of Flag->providerIdNumber
-     * @return null if not set
-     * @return integer if set
-     */
-    public function getProviderIdNumberAttribute()
-    {
-        if(!isSet($this->provider))
-        {
-            return Null;
-        }
-        return $this->provider->id;
     }
 }

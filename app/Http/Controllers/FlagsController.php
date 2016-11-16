@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Flag;
 use App\Http\Requests\FlagRequest;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,16 @@ class FlagsController extends Controller
 {
     public function index()
     {
-        $flags = Flag::where('resolved','=','0')->get();
+        if(Auth::user()->role->create_update == '1' && Auth::user()->role->delete == '1')
+        {
+            $flags = Flag::where('resolved', '=', '0')->get();
+        }
+        elseif(Auth::user()->role->create_update == '1')
+        {
+            $flags = Flag::where('resolved', '=', '0')
+                         ->where('level', '=', 'Update')
+                         ->get();
+        }
 
         return view('flags.index', compact('flags'));
     }

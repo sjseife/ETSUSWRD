@@ -25,16 +25,6 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get a list of flags associated with the current user
-     * NOTE: These are the flags on the user
-     * @return array
-     */
-    public function flags()
-    {
-        return $this->hasMany('App\Flag');
-    }
-
-    /**
      * Get a list of flag associated with the current user
      * NOTE: These are the flags that the user has submitted.
      * @return array

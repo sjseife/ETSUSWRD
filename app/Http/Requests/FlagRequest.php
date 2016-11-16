@@ -24,7 +24,7 @@ class FlagRequest extends Request
     public function rules()
     {
         return [
-            'level' => 'required | In:Admin,GA',
+            'level' => 'required | In:Update,Delete',
             'comments' => 'required'
         ];
     }

@@ -196,8 +196,13 @@ class EventsController extends Controller
      */
     public function flag(Event $event)
     {
+        $options = ['Unselected' => 'Please Select a Reason.',
+            'Update'=>'Event information incorrect.',
+            'Delete'=>'Event has been cancelled.',
+            'test'=>'Should Fail'];
         return view('flags.create')->with('url', 'events/flag/' . $event->id)
-            ->with('name', $event->name);
+                                    ->with('name', $event->name)
+                                    ->with('options', $options);
     }
 
     public function storeFlag(Event $event, FlagRequest $request)

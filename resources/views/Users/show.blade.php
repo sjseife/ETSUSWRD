@@ -13,43 +13,22 @@
                     </div>
                     <div class="col-md-4">
                         <p><b>Role:</b></p>
-                        {{ $user->role }}
-                    </div>
-                    <div class="col-md-10">
-                        <hr/>
-                    </div>
-                    <div class="col-md-10">
-                        <p><b>Reported Problems:</b></p>
-                        @if(!$user->flags->isEmpty())
-                            @foreach($user->flags as $flag)
-                                @if(!$flag->resolved)
-                                    <p>{{ $flag->comments }}</p>
-                                @endif
-                            @endforeach
-                        @else
-                            <p>No problems reported</p>
-                        @endif
+                        {{ $user->role->name }}
                     </div>
                     <div class="col-md-10">
                         <hr/>
                     </div>
                     <div class="col-md-10 col-md-offset-4">
                         <br/>
-                    @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
+
                         <!-- edit this contact (uses the edit method found at GET /resource/edit/{id} -->
                             <a class="btn btn-md btn-info" href="{{ URL::to('users/' . $user->id. '/edit') }}">Edit</a> |
                             <!-- delete the contact -->
                             <!-- Trigger the modal with a button -->
                             <button type="button" class="btn btn-warning btn-md" data-toggle="modal" data-target="#deleteModal">Delete</button>
-                        @endif
+
                         <br/>
                         <br/>
-                        <div class=""><br/><br/>
-                            <div>
-                                <!-- Flag this contact as incorrect -->
-                                <a  href="{{ URL::to('users/' . $user->id. '/flag') }}" class="btn btn-danger">Report a problem with this user.</a>
-                            </div>
-                        </div>
                     </div>
                     <br/>
                     <br/>

@@ -17,7 +17,6 @@
                     <tr>
                         <th class="all">Type</th>
                         <th>Item Name</th>
-                        <th>Flagged For</th>
                         <th>Submitted By</th>
                         <th>Submitted At</th>
                         <th class="all">View</th>
@@ -33,15 +32,10 @@
                         @elseif(isset($flag->contact))
                             <td>Contact</td>
                             <td>{{ $flag->contact->full_name }}</td>
-                        @elseif(isset($flag->user))
-                            <td>User</td>
-                         <td>{{ $flag->user->email }}</td>
                         @elseif(isset($flag->event))
                             <td>Event</td>
                             <td>{{ $flag->event->name }}</td>
                         @endif
-
-                        <td>{{ $flag->level }}</td>
                             <td>{{ $flag->submitter->name }}</td>
                             <td>{{ $flag->created_at }}</td>
 

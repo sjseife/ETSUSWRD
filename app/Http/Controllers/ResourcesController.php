@@ -202,7 +202,7 @@ class ResourcesController extends Controller
                 'test'=>'Should Fail'];
         return view('flags.create')->with('url', 'resources/flag/' . $resource->id)
                                    ->with('name', $resource->name)
-                                   ->with('options') ;
+                                   ->with('options', $options);
     }
 
     public function storeFlag(Resource $resource, FlagRequest $request)

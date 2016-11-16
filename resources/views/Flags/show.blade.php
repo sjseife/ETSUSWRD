@@ -20,9 +20,6 @@
                         @elseif(isset($flag->contact))
                             <dt>Contact Name</dt>
                             <dd>{{ $flag->contact->full_name }}</dd>
-                        @elseif(isset($flag->user))
-                            <dt>User Email</dt>
-                            <dd>{{ $flag->user->email }}</dd>
                         @elseif(isset($flag->event))
                             <dt>Event Name</dt>
                             <dd>{{ $flag->event->name }}</dd>

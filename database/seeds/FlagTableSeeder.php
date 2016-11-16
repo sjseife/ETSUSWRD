@@ -14,16 +14,7 @@ class FlagTableSeeder extends Seeder
     public function run()
     {
         DB::table('flags')->insert([
-            'level' => 'Admin',
-            'comments' => 'User is a stupid idiot! >:(',
-            'resolved' => '0',
-            'submitted_by' => '4',
-            'user_id' => '6',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
-        DB::table('flags')->insert([
-            'level' => 'Admin',
+            'level' => 'Delete',
             'comments' => 'Resource went bankrupt and no longer provides services. :(',
             'resolved' => '0',
             'submitted_by' => '3',
@@ -32,7 +23,7 @@ class FlagTableSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         DB::table('flags')->insert([
-            'level' => 'GA',
+            'level' => 'Update',
             'comments' => 'Contact got Married! Last name is now Fitzgerald. :)',
             'resolved' => '0',
             'submitted_by' => '3',
@@ -41,7 +32,7 @@ class FlagTableSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         DB::table('flags')->insert([
-            'level' => 'GA',
+            'level' => 'Delete',
             'comments' => 'Event is cancelled due to inbound hurricane! :(',
             'resolved' => '0',
             'submitted_by' => '3',

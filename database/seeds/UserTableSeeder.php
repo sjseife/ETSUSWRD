@@ -37,8 +37,8 @@ class UserTableSeeder extends Seeder
             'base' => '1',
             'extended' => '1',
             'create_update' => '1',
-            'delete' => '1',
-            'archive' => '1',
+            'delete' => '0',
+            'archive' => '0',
             'users' => '0',
             'roles' => '0'
         ]);

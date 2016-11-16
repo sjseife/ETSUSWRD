@@ -64,30 +64,6 @@ class UsersController extends Controller
 
         flash($user->name . ' deleted.', 'success');
         return redirect('/users');
-
     }
 
-    /*
-     * This method takes in a user, compacts it into a "common flag format" and sends it to the flag.create view
-     */
-    public function flag(User $user)
-    {
-        return view('flags.create')->with('url', 'users/flag/' . $user->id)
-            ->with('name', $user->name);
-    }
-
-    public function storeFlag(User $user, FlagRequest $request)
-    {
-        $flagData = ['level' => $request->level,
-            'comments' => $request->comments,
-            'resolved' => '0',
-            'user_id' => $user->id,
-            'submitted_by' => Auth::id()];
-        $flag = new Flag($flagData);
-        $flag->save();
-
-        flash('Flag created successfully!','success');
-
-        return redirect('users/'.$user->id);
-    }
 }

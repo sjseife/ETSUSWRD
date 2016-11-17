@@ -198,8 +198,7 @@ class ResourcesController extends Controller
     {
         $options = ['Unselected' => 'Please Select a Reason.',
                 'Update'=>'Resource information incorrect.',
-                'Delete'=>'Resource has closed.',
-                'test'=>'Should Fail'];
+                'Delete'=>'Resource has closed.'];
         return view('flags.create')->with('url', 'resources/flag/' . $resource->id)
                                    ->with('name', $resource->name)
                                    ->with('options', $options);

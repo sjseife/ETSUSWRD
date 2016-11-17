@@ -26,7 +26,7 @@
                 @if (Auth::user()->role->extended == '1')
                     <li><a href="{{ url('/contacts') }}">Contacts</a></li>
                     <li><a href="{{ url('/categories') }}">Categories</a></li>
-                    <li><a href="{{ url('/flags') }}">Flags <span class="badge badge-danger">{{$flagCount}}</span></a></li>
+                    <li><a href="{{ url('/flags') }}">Flags <span class="badge badge-danger" id="flagCount"></span></a></li>
                 @endif
                 @if (Auth::user()->role->users == '1')
                     <li><a href="{{ url('/users') }}">Users</a></li>
@@ -63,3 +63,36 @@
         </div>
     </div>
 </nav>
+
+@push('scripts')
+
+    @if(Auth::user()->role->extended == '1')
+        <script>
+            $(document).ready(function(){
+                var worker = function(){
+                    $.ajax({
+                        type: "GET",
+                        url: 'flags/count',
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log(data);
+                            if(data == 0) {
+                                $("#flagCount").text("");
+                            }
+                            else{
+                                $("#flagCount").text(data);
+                            }
+                        },
+                        complete: function() {
+                            // Schedule the next request when the current one's complete
+                            setTimeout(worker, 5000);
+                        }
+                    });
+                };
+
+                worker();
+            });
+        </script>
+    @endif
+
+@endpush

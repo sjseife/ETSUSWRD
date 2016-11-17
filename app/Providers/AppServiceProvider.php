@@ -20,11 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
-        view()->composer('layouts._NavBar', function($view) {
-            $flagCount = Flag::where('resolved', '=', '0')->count();
-            $view->with('flagCount', $flagCount);
-        });
+        //
     }
 
     /**

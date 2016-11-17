@@ -198,8 +198,7 @@ class EventsController extends Controller
     {
         $options = ['Unselected' => 'Please Select a Reason.',
             'Update'=>'Event information incorrect.',
-            'Delete'=>'Event has been cancelled.',
-            'test'=>'Should Fail'];
+            'Delete'=>'Event has been cancelled.'];
         return view('flags.create')->with('url', 'events/flag/' . $event->id)
                                     ->with('name', $event->name)
                                     ->with('options', $options);

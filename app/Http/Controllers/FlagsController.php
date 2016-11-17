@@ -61,4 +61,20 @@ class FlagsController extends Controller
         flash('Flag Resolved','success');
         return redirect('flags');
     }
+    
+    public function count()
+    {
+        $flagCount = 0;
+        if(Auth::user()->role->create_update == '1' && Auth::user()->role->delete == '1')
+        {
+            $flagCount = Flag::where('resolved', '=', '0')->count();
+        }
+        elseif(Auth::user()->role->create_update == '1')
+        {
+            $flagCount = Flag::where('resolved', '=', '0')
+                                ->where('level', '=', 'Update')
+                                ->count();
+        }
+        return response()->json($flagCount);
+    }
 }

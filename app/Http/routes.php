@@ -18,6 +18,7 @@ Route::get('/', function () {
     }
 });
 
+
 Route::group(['middleware' => 'App\Http\Middleware\CreateUpdateMiddleware'], function()
 {
     //event
@@ -86,6 +87,7 @@ Route::group(['middleware' => 'App\Http\Middleware\ExtendedMiddleware'], functio
     Route::delete('categories/{category}', 'CategoryController@destroy');
 
     //flags
+    Route::get('/flags/count', 'FlagsController@count');
     Route::get('flags', 'FlagsController@index');
     Route::get('flags/{flag}', 'FlagsController@show');
     Route::get('flags/{flag}/edit', 'FlagsController@edit');
@@ -173,5 +175,4 @@ Route::auth();
 Route::get('/home/errorAdmin', 'HomeController@errorAdmin');
 Route::get('/home/errorGA', 'HomeController@errorGA');
 Route::get('/home', 'HomeController@index');
-
 Route::get('/', 'HomeController@index');

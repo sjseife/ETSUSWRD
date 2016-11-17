@@ -123,8 +123,7 @@ class ContactsController extends Controller
     {
         $options = ['Unselected' => 'Please Select a Reason.',
             'Update'=>'Contact information incorrect.',
-            'Delete'=>'Contact has been cancelled.',
-            'test'=>'Should Fail'];
+            'Delete'=>'Contact has been cancelled.'];
         return view('flags.create')->with('url', 'contacts/flag/' . $contact->id)
                                 ->with('name', $contact->full_name)
                                 ->with('options', $options);

@@ -6,10 +6,9 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">View Flag</div>
                 <div class="panel-body">
+                    <a class="btn btn-default" href="{{ URL::to('archive_flags') }}">Back</a>
+                    <!-- edit this flag (uses the edit method found at GET /flag/{id}/edit/ -->
                     <div class="col-md-offset-2"><br/><br/>
-                        <div>
-                            <a href="{{'/flags'}}">Back to Flags</a></br></br>
-                        </div>
                     </div>
                     <dl class="dl-horizontal">
 
@@ -19,12 +18,6 @@
                         @elseif(isset($flag->contact))
                             <dt>Contact Name</dt>
                             <dd>{{ $flag->contact->full_name }}</dd>
-                        @elseif(isset($flag->user))
-                            <dt>User Email</dt>
-                            <dd>{{ $flag->user->email }}</dd>
-                        @elseif(isset($flag->provider))
-                            <dt>Provider</dt>
-                            <dd>{{ $flag->provider->name }}</dd>
                         @elseif(isset($flag->event))
                             <dt>Event Name</dt>
                             <dd>{{ $flag->event->name }}</dd>
@@ -35,19 +28,32 @@
                         <dd>{{ $flag->level }}</dd>
                         <dt>Submitted At</dt>
                         <dd>{{ $flag->created_at }}</dd>
-                            <dt>Status</dt>
-                            @if($flag->resolved)
-                                <dd>Resolved</dd>
-                            @else
-                                <dd>Unresolved</dd>
-                            @endif
+                        <dt>Status</dt>
+                        @if($flag->resolved)
+                            <dd>Resolved</dd>
+                        @else
+                            <dd>Unresolved</dd>
+                        @endif
 
                         <dt>Description of Issue</dt>
                         <dd>{{ $flag->comments }}</dd>
                     </dl>
+                    <hr />
+
+                    <div>
+                        @if(isset($flag->resource))
+                            @include('resources._flagShow', ['resource' => $flag->resource])
+                        @elseif(isset($flag->contact))
+                            @include('contacts._flagShow', ['contact' => $flag->contact])
+                        @elseif(isset($flag->user))
+                            @include('users._flagShow', ['user' => $flag->user])
+                        @elseif(isset($flag->event))
+                            @include('events._flagShow', ['event' => $flag->event])
+                        @endif
+                    </div>
                     <div class="col-md-offset-3">
                         <br/>
-                        @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
+                        @if(Auth::user()->role->delete == '1')
                             <br>
                             <br>
                             <!-- edit this event (uses the edit method found at GET /event/edit/{id} -->
@@ -65,7 +71,6 @@
     </div>
 
     <!-- Delete Modal -->
-    @include('Flags._deleteModal')
 
     @if(!$flag->resolved)
         <!-- Resolve Modal -->

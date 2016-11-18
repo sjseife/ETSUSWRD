@@ -6,6 +6,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">View Resource</div>
                 <div class="panel-body ">
+                    <a href="{{ url('/archive_resources') }}" class="btn btn-default">Back</a>
                     <h2><em>{{ $resource->name }}</em></h2>
                     <div class="col-md-4">
                         <p><b>Address:</b></p>
@@ -134,7 +135,7 @@
                         <br/>
                         <br/>
                         <br/>
-                    @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
+                    @if(Auth::user()->role->delete == '1')
 
                         <!-- edit this event (uses the edit method found at GET /event/edit/{id} -->
                             <a class="btn btn-lg btn-info" href="{{ URL::to('archive_resources/showrestore/' . $resource->id) }}">Restore</a>

@@ -77,8 +77,8 @@ Route::group(['middleware' => 'App\Http\Middleware\ExtendedMiddleware'], functio
     //contacts
     Route::get('contacts', 'ContactsController@index');
     Route::get('contacts/{contact}', 'ContactsController@show');
-    Route::get('contacts/{contact}/flag', 'contactsController@flag');
-    Route::post('contacts/flag/{contact}', 'contactsController@storeFlag');
+    Route::get('contacts/{contact}/flag', 'ContactsController@flag');
+    Route::post('contacts/flag/{contact}', 'ContactsController@storeFlag');
 
     //categories
     Route::get('categories', 'CategoryController@index');

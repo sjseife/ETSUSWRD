@@ -240,9 +240,9 @@
                         {{--<a class="btn btn-sm btn-success" href="{{ URL::to('events/' . $event->id) }}">View</a>--}}
                         <button type="button" class="btn btn-sm report
                                     @if(Auth::user()->events->contains($event))
-                               removeReport" name="{{$event->id}}">Remove Event</button>
+                               removeReport" name="{{$event->id}}">Remove from PDF</button>
                                 @else
-                                addReport" name="{{$event->id}}">Add Event</button>
+                                addReport" name="{{$event->id}}">Add to PDF</button>
                                 @endif
                         {{-- <a class="btn btn-sm btn-primary" href="{{ URL::to('events/addAjax/'. $event->id) }}">Add to Report</a>--}}
 
@@ -370,7 +370,7 @@ $(document).ready(function()
                         document.activeElement.blur();
                         button.addClass('removeReport').removeClass('addReport');
                         button.text(function (i, text) {
-                            return "Remove Event";
+                            return "Remove from PDF";
                         })
 
                     },
@@ -410,7 +410,7 @@ $(document).ready(function()
                         document.activeElement.blur();
                         button.addClass('addReport').removeClass('removeReport');
                         button.text(function (i, text) {
-                            return "Add Event";
+                            return "Add to PDF";
                         })
 
                     },

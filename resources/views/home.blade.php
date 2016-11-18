@@ -9,11 +9,15 @@
 
         }
         .imglink2 {
-            width: 95%;
+            width: 93%;
             margin: 0 auto;
             margin-bottom: 18px;
-            padding-left: 15px;
+            padding-left: 10px;
 
+        }
+
+        .long-link{
+            font-size:91%;
         }
         .tableText{
             margin-top:0px;
@@ -176,7 +180,6 @@
                 <th data-priority="3" class="purple-text">Email:</th> {{--6--}}
                 <th data-priority="3" class="purple-text">Website:</th> {{--7--}}
                 <th data-priority="1" class="purple-text">Category</th> {{--2--}}
-                <th data-priority="3" class="purple-text">Provider:</th> {{--13--}}
                 <th data-priority="3" class="purple-text">Description:</th> {{--14--}}
                 <th data-priority="3" class="purple-text">Comments:</th> {{--15--}}
                 <th data-priority="3" class="purple-text">View Event:</th>
@@ -294,7 +297,6 @@
                             {{ $category->name }}
                         @endforeach
                     </td>
-                    <td>{{ $event->provider->name }}</td>
                     <td><div width="50%"><span style="white-space: normal;">{{ $event->description }}</span></div></td>
                     <td><div width="50%"><span style="white-space: normal;">{{ $event->comments }}</span></div></td>
                     <td class="text-center col-md-3">
@@ -313,20 +315,20 @@
 
                     @if(Auth::user()->role->base == '1')
                         <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/events"><img src="\images\EventsImg.jpg" alt="Events" class="imglink"  ></a><h3 class="footerlink"><a  href="/events">Events</a></h3></div>
-                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/resources"><img src="\images\lightbulb.ico" alt="Resources" class="imglink"  ></a><h3 class="footerlink"><a  href="/resources">Resources</a></h3></div>
-                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/worklist/generateReport"><img src="\images\report-icon-2.png" alt="Report" class="imglink"  ></a><h3 class="footerlink"><a  href="/resources/generateReport">Report</a></h3></div>
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="{{ url('/events') }}"><img src="{{ asset('images\EventsImg.jpg') }}" alt="Events" class="imglink"  ></a><h3 class="footerlink"><a  href="{{ url('/events') }}">Events</a></h3></div>
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="{{ url('/resources') }}"><img src="{{ asset('images\lightbulb.ico') }}" alt="Resources" class="imglink"  ></a><h3 class="footerlink"><a  href="{{ url('/resources') }}">Resources</a></h3></div>
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="{{ url('/worklist/generateReport') }}"><img src="{{ asset('images\report-icon-2.png') }}" alt="PDF Report" class="imglink"  ></a><h3 class="footerlink"><a  class="long-link" href="{{ url('/worklist/generateReport') }}">PDF Report</a></h3></div>
                     @endif
                     @if(Auth::user()->role->extended == '1')
-                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/contacts"><img src="\images\contacts2.png" alt="Contacts" class="imglink"  ></a><h3 class="footerlink"><a  href="/contacts">Contacts</a></h3></div>
-                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"><a href="/categories"><img src="\images\CategoriesImg.png" alt="Categories" class="imglink" ></a> <h3 class="footerlink"><a  href="/categories">Categories</a></h3></div>
-                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"><a href="/flags"><img src="\images\waving-flag.jpg" alt="Flags" class="imglink2" ></a> <h3 class="footerlink"><a  href="/flags">Flags</a></h3></div>
+                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="{{ url('/contacts') }}"><img src="{{ asset('images\contacts2.png') }}" alt="Contacts" class="imglink"  ></a><h3 class="footerlink"><a  href="{{ url('/contacts') }}">Contacts</a></h3></div>
+                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"><a href="{{ url('/categories') }}"><img src="{{ asset('images\CategoriesImg.png') }}" alt="Categories" class="imglink" ></a> <h3 class="footerlink"><a  href="{{ url('/categories') }}">Categories</a></h3></div>
+                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"><a href="{{ url('/flags') }}"><img src="{{ asset('images\waving-flag.jpg') }}" alt="Flags" class="imglink2" ></a> <h3 class="footerlink"><a  href="{{ url('/flags') }}">Flags</a></h3></div>
                     @endif
                     @if(Auth::user()->role->users == '1')
-                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/users"><img src="\images\usersimg.png" alt="Users" class="imglink"  ></a><h3 class="footerlink"><a  href="/users">Users</a></h3></div>
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="{{ url('/users') }}"><img src="{{ asset('images\usersimg.png') }}" alt="Users" class="imglink"  ></a><h3 class="footerlink"><a  href="{{ url('/users') }}">Users</a></h3></div>
                     @endif
                     @if(Auth::user()->role->archive == '1')
-                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="/archive"><img src="\images\archive-icon.png" alt="Users" class="imglink"  ></a><h3 class="footerlink"><a  href="/archive">Archive</a></h3></div>
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="{{ url('/archive') }}"><img src="{{ asset('images\archive-icon.png') }}" alt="Users" class="imglink"  ></a><h3 class="footerlink"><a  href="{{ url('/archive') }}">Archive</a></h3></div>
                     @endif
 
                     </div>

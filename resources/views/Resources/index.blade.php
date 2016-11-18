@@ -243,9 +243,9 @@
                             {{--<a class="btn btn-sm btn-success" href="{{ URL::to('resources/' . $resource->id) }}">View</a>--}}
                             <button type="button" class="btn btn-sm report
                                     @if(Auth::user()->resources->contains($resource))
-                                    removeReport" name="{{$resource->id}}">Remove Resource</button>
+                                    removeReport" name="{{$resource->id}}">Remove from PDF</button>
                                     @else
-                                    addReport" name="{{$resource->id}}">Add Resource</button>
+                                    addReport" name="{{$resource->id}}">Add to PDF</button>
                                     @endif
                            {{-- <a class="btn btn-sm btn-primary" href="{{ URL::to('resources/addAjax/'. $resource->id) }}">Add to Report</a>--}}
 
@@ -381,7 +381,7 @@
                         button.css({"background-color": "#c9302c", "color": "white", "border-color": "#ac2925"});
                         button.addClass('removeReport').removeClass('addReport');
                         button.text(function (i, text) {
-                            return "Remove Resource";
+                            return "Remove from PDF";
                         })
 
                     },
@@ -422,7 +422,7 @@
                         button.css({"background-color": "#337ab7", "color": "white", "border-color": "#2e6da4"});
                         button.addClass('addReport').removeClass('removeReport');
                         button.text(function (i, text) {
-                            return "Add Resource";
+                            return "Add to PDF";
                         })
 
                     },

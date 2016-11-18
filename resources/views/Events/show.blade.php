@@ -6,7 +6,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">View Event</div>
                 <div class="panel-body">
-                    <a href="{{ '/events' }}" class="btn btn-default">Back</a>
+                    <a href="{{ url('/events') }}" class="btn btn-default">Back</a>
 
                     <h2><em>{{ $event->name }}</em></h2>
             <div class="col-md-4">

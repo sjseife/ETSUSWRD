@@ -36,7 +36,6 @@
                 <th data-priority="2">City</th> {{--8--}}
                 <th data-priority="1">State</th> {{--9--}}
                 <th data-priority="2">Zip Code</th> {{--10--}}
-                <th data-priority="3">Provider</th> {{--11--}}
                 <th data-priority="3">Description</th> {{--12--}}
                 <th data-priority="3">Comments</th> {{--13--}}
                 <th class="all">Action</th> {{--14--}}
@@ -56,7 +55,6 @@
                 <th></th>
                 <th></th>
                 <th><label>State:&nbsp;&nbsp; </label></th>
-                <th></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -191,14 +189,13 @@
                     <td>{{ $resource->city }}</td>
                     <td>{{ $resource->state }}</td>
                     <td>{{ $resource->zipCode }}</td>
-                    <td>{{ $resource->provider->name }}</td>
                     <td><div width="50%"><span style="white-space: normal;">{{ $resource->description }}</span></div></td>
                     <td><div width="50%"><span style="white-space: normal;">{{ $resource->comments }}</span></div></td>
                     <td class="text-center">
                         <button type="button" class="btn btn-sm btn-primary report addReport" name="{{$resource->id}}">Restore</button>
                     </td>
                     <td class="text-center col-md-3">
-                        <a class="btn btn-sm btn-success" href="{{ URL::to('resources/' . $resource->id) }}">View</a>
+                        <a class="btn btn-sm btn-success" href="{{ URL::to('archive_resources/' . $resource->id) }}">View</a>
                     </td>
 
                 </tr>

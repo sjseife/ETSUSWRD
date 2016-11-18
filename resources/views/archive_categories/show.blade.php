@@ -6,10 +6,9 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">View Category</div>
                 <div class="panel-body">
+                    <a href="{{ url('/flags') }}">Back</a></br></br>
                     <div class="col-md-offset-2"><br/><br/>
-                        <div>
-                            <a href="{{'/categories'}}">Back to Categories</a></br></br>
-                        </div>
+
                     </div>
                     <dl class="dl-horizontal">
                         <dt>Name</dt>
@@ -32,7 +31,7 @@
                         @endforeach
                     </dl>
                     <div class="col-md-offset-4">
-                    @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
+                        @if(Auth::user()->role->delete == '1')
                             <br>
                             <br>
                         <!-- edit this event (uses the edit method found at GET /event/edit/{id} -->

@@ -11,7 +11,7 @@
 
             <!-- Branding Image -->
             <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="/images/header_logo_2014.png" style="width:190px;">
+                <img src="{{ asset('images/header_logo_2014.png') }}" style="width:190px;">
             </a>
         </div>
 
@@ -21,7 +21,7 @@
                 @if (Auth::user()->role->base == '1')
                     <li><a href="{{ url('/events') }}">Events</a></li>
                     <li><a href="{{ url('/resources') }}">Resources</a></li>
-                    <li><a href="{{ url('/worklist/generateReport') }}">Work List</a></li>
+                    <li><a href="{{ url('/worklist/generateReport') }}">PDF Report</a></li>
                 @endif
                 @if (Auth::user()->role->extended == '1')
                     <li><a href="{{ url('/contacts') }}">Contacts</a></li>

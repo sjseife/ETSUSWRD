@@ -5,7 +5,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">View Contact</div>
                 <div class="panel-body ">
-                    <a href="{{ '/contacts' }}" class="btn btn-default">Back</a>
+                    <a href="{{ url('/contacts') }}" class="btn btn-default">Back</a>
                     <h2><em>{{ $contact->firstName}}&nbsp; {{$contact->lastName }}</em></h2>
                     <div class="col-md-4">
                         <p><b>Email:</b></p>
@@ -13,7 +13,11 @@
                     </div>
                     <div class="col-md-4">
                         <p><b>Phone Number:</b></p>
-                        {{ $contact->protectedPhoneNumber }}
+                        <?php
+                            include (public_path() . '/php/functions.php');
+                            echo phoneFormat($contact->protectedPhoneNumber);
+                        ?>
+
                     </div>
                     <div class="col-md-4">
                         <p><strong>Resources:</strong></p>
@@ -63,7 +67,7 @@
                     </div>
                     <div class="col-md-10 col-md-offset-4">
                         <br/>
-                        @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
+                        @if(Auth::user()->role->delete == '1')
                         <!-- edit this contact (uses the edit method found at GET /resource/edit/{id} -->
                             <a class="btn btn-md btn-info" href="{{ URL::to('contacts/' . $contact->id. '/edit') }}">Edit</a> |
                             <!-- delete the contact -->

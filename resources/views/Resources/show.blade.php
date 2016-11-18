@@ -18,7 +18,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">View Resource</div>
                 <div class="panel-body ">
-                    <a href="{{ '/resources' }}" class="btn btn-default">Back</a>
+                    <a href="{{ url('/resources') }}" class="btn btn-default">Back</a>
                     <h2><em>{{ $resource->name }}</em></h2>
                          <div class="col-md-4">
                             <p><b>Address:</b></p>

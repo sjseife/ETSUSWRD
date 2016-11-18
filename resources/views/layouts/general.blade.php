@@ -13,10 +13,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
 
     <!-- Styles -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
-    <link href="/css/toastr.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="/css/style.css">
+    <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <!--Select2-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
@@ -60,7 +61,7 @@
 
     <!-- Footer -->
     <div class="container_24">
-        <img src="/images/mountains.png" alt="Image of Mountains" class="img-responsive center-block">
+        <img src="{{ asset('images/mountains.png') }}" alt="Image of Mountains" class="img-responsive center-block">
     </div>
     <aside id="asidelinks">
         <div id="linksblock" class="container_24">
@@ -98,7 +99,7 @@
         <article class="grid_6 privacy">
             <div class="col-md-offset-4"><span>East Tennessee State University</span>&nbsp;<span id="directedit">
                 <!-- com.omniupdate.ob --><a id="de" href="http://a.cms.omniupdate.com/10?skin=etsu&amp;account=east-tennessee-state&amp;site=ETSU_Web_Linux&amp;action=de&amp;path=/coe/chs/humanservices/default.pcf" style="text-decoration:none;">©</a><!-- /com.omniupdate.ob -->
-             </span>&nbsp; <span id="year">2016</span>&nbsp; All Rights Reserved &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; <a href="/etsuhome/documents/webprivacystatement.pdf">Privacy Policy</a>
+             </span>&nbsp; <span id="year">2016</span>&nbsp; All Rights Reserved &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; <a href="http://www.etsu.edu/etsuhome/documents/webprivacystatement.pdf">Privacy Policy</a>
             </div>
         </article>
         <div id="hidden"></div>
@@ -109,7 +110,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-    <script src="/js/toastr.min.js"></script>
+    <script src="{{ asset('js/toastr.min.js') }}"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
     @stack('scripts')
 

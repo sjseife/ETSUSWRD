@@ -38,11 +38,7 @@
                         @elseif(isset($flag->event))
                             <td>Event</td>
                             <td>{{ $flag->event->name }}</td>
-                        @elseif(isset($flag->provider))
-                            <td>Provider</td>
-                            <td>{{ $flag->provider->name }}</td>
                         @endif
-
                         <td>{{ $flag->level }}</td>
                         <td>{{ $flag->submitter->name }}</td>
                         <td>{{ $flag->created_at }}</td>

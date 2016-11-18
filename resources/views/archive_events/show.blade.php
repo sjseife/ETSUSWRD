@@ -6,7 +6,8 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">View Event</div>
                 <div class="panel-body">
-            <h2><em>{{ $event->name }}</em></h2>
+                    <a href="{{ url('/archive_events') }}" class="btn btn-default">Back</a>
+                    <h2><em>{{ $event->name }}</em></h2>
             <div class="col-md-4">
                 <p><b>Address:</b></p>
                 {{--If there is a street 2, display. Else do not--}}
@@ -138,7 +139,7 @@
                     <br/>
                     <br/>
                     <br/>
-                @if (Auth::user()->role == 'GA' || Auth::user()->role == 'Admin')
+                @if(Auth::user()->role->delete == '1')
 
                     <!-- edit this event (uses the edit method found at GET /event/edit/{id} -->
                     <a class="btn btn-lg btn-info" href="{{ URL::to('archive_events/showrestore/' . $event->id) }}">Restore</a>
@@ -148,11 +149,6 @@
                     <!-- Trigger the modal with a button -->
                     @endif
                     <div class=""><br/><br/>
-                        <div>
-                            <a href="{{'/events'}}">Back to Events</a></br>
-
-                            <!-- Flag this event as incorrect -->
-                        </div>
                         </div>
                     </div>
                     <br/>

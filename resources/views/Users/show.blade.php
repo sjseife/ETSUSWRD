@@ -1,24 +1,25 @@
 @extends('layouts.dataTables')
 @section('content')
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-4 col-md-offset-4">
             <div class="panel panel-primary">
                 <div class="panel-heading">View User</div>
                 <div class="panel-body ">
-                    <a href="{{ '/users' }}" class="btn btn-default">Back</a>
+                    <a href="{{ url('/users') }}" class="btn btn-default">Back</a>
                     <h2><em> {{ $user->name }}</em></h2>
-                    <div class="col-md-4">
+                    </br>
+                    <div class="col-md-4 ">
                         <p><b>Email:</b></p>
                         {{ $user->email }}
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-md-offset-4">
                         <p><b>Role:</b></p>
                         {{ $user->role->name }}
                     </div>
-                    <div class="col-md-10">
+                    <div class="col-md-12">
                         <hr/>
                     </div>
-                    <div class="col-md-10 col-md-offset-4">
+                    <div class="col-md-6 col-md-offset-3">
                         <br/>
 
                         <!-- edit this contact (uses the edit method found at GET /resource/edit/{id} -->

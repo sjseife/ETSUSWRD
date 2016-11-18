@@ -44,13 +44,13 @@
 
                     <div>
                         @if(isset($flag->resource))
-                            @include('Resources._flagShow', ['resource' => $flag->resource])
+                            @include('resources._flagShow', ['resource' => $flag->resource])
                         @elseif(isset($flag->contact))
-                            @include('Contacts._flagShow', ['contact' => $flag->contact])
+                            @include('contacts._flagShow', ['contact' => $flag->contact])
                         @elseif(isset($flag->user))
-                            @include('Users._flagShow', ['user' => $flag->user])
+                            @include('users._flagShow', ['user' => $flag->user])
                         @elseif(isset($flag->event))
-                            @include('Events._flagShow', ['event' => $flag->event])
+                            @include('events._flagShow', ['event' => $flag->event])
                         @endif
                     </div>
                     <div class="col-md-offset-3">

@@ -145,15 +145,15 @@
                     <div class="panel-body w3-panel w3-blue w3-round-xlarge">
 
                         <div class="row">
-                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 "><a href="/archive_events"><img src="\images\archive-events-y.png" alt="Archived Events" class="imglink"  ></a><h3 class="footerlink"><a  href="/archive_events">Archived Events</a></h3></div>
+                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 "><a href="{{ url('/archive_events') }}"><img src="{{ asset('images\archive-events-y.png') }}" alt="Archived Events" class="imglink"  ></a><h3 class="footerlink"><a  href="{{ url('/archive_events') }}">Archived Events</a></h3></div>
 
-                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 "><a href="/archive_resources"><img src="\images\archive-resources-b.png" alt="Archived Resources" class="imglink"  ></a><h3 class="footerlink"><a  href="/archive_resources">Archived Resources</a></h3></div>
+                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 "><a href="{{ url('/archive_resources') }}"><img src="{{ asset('images\archive-resources-b.png') }}" alt="Archived Resources" class="imglink"  ></a><h3 class="footerlink"><a  href="{{ url('/archive_resources') }}">Archived Resources</a></h3></div>
 
-                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 "><a href="/archive_contacts"><img src="\images\archive-contacts-y.png" alt="Archived Contacts" class="imglink"  ></a><h3 class="footerlink"><a  href="/archive_contacts">Archived Contacts</a></h3></div>
-                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4"><a href="/archive_categories"><img src="\images\archive-categories-b.png" alt="Archived Categories" class="imglink" ></a> <h3 class="footerlink"><a  href="/archive_categories">Archived Categories</a></h3></div>
-                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4"><a href="/archive_flags"><img src="\images\archive-flags-y.png" alt="Archived Flags" class="imglink" ></a> <h3 class="footerlink"><a  href="/archive_flags">Archived Flags</a></h3></div>
+                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 "><a href="{{ url('/archive_contacts') }}"><img src="{{ asset('images\archive-contacts-y.png') }}" alt="Archived Contacts" class="imglink"  ></a><h3 class="footerlink"><a  href="{{ url('/archive_contacts') }}">Archived Contacts</a></h3></div>
+                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4"><a href="{{ url('/archive_categories') }}"><img src="{{ asset('images\archive-categories-b.png') }}" alt="Archived Categories" class="imglink" ></a> <h3 class="footerlink"><a  href="{{ url('/archive_categories') }}">Archived Categories</a></h3></div>
+                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4"><a href="{{ url('/archive_flags') }}"><img src="{{ asset('images\archive-flags-y.png') }}" alt="Archived Flags" class="imglink" ></a> <h3 class="footerlink"><a  href="{{ url('/archive_flags') }}">Archived Flags</a></h3></div>
 
-                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 "><a href="/archive_users"><img src="\images\archive-users-b.png" alt="Archived Users" class="imglink"  ></a><h3 class="footerlink"><a  href="/archive_users">Archived Users</a></h3></div>
+                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 "><a href="{{ url('/archive_users') }}"><img src="{{ asset('images\archive-users-b.png') }}" alt="Archived Users" class="imglink"  ></a><h3 class="footerlink"><a  href="{{ url('/archive_users') }}">Archived Users</a></h3></div>
 
                         </div>
 

@@ -12,12 +12,12 @@
             <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="UsersTable">
                 <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>User Since</th>
-                    <th></th>
-                    <th>Action</th>
+                    <th class="all">Name</th>
+                    <th data-priority="2">Email</th>
+                    <th data-priority="2">Role</th>
+                    <th data-priority="3">User Since</th>
+                    <th data-priority="3"></th>
+                    <th class="all">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -25,7 +25,7 @@
                     <tr>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->role }}</td>
+                        <td>{{ $user->role->name }}</td>
                         <td>{{ $user->created_at }}</td>
                         <td class="text-center">
 

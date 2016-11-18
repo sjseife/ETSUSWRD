@@ -130,6 +130,7 @@
     <div class="col-md-2"></div>
     <div class="col-md-4">
         {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary', 'name' => 'event']) !!}
+        <a href="{{ url('/events') }}" class="btn btn-danger"  style="margin-left:10%">Cancel</a>
     </div>
 </div>
 

@@ -38,7 +38,7 @@
     <div class="col-md-2"></div>
     <div class="col-md-4">
         {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
-        <a href="{{ '/contacts' }}" class="btn btn-danger"  style="margin-left:10%">Cancel</a>
+        <a href="{{ url('/contacts') }}" class="btn btn-danger"  style="margin-left:10%">Cancel</a>
     </div>
 </div>
 @push('scripts')

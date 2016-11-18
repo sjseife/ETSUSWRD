@@ -6,7 +6,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">View Category</div>
                 <div class="panel-body">
-                    <a href="{{ url('/flags') }}">Back</a></br></br>
+                    <a href="{{ url('/archive_categories') }}" class="btn btn-default">Back</a>
                     <div class="col-md-offset-2"><br/><br/>
 
                     </div>

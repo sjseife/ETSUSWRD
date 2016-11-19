@@ -9,7 +9,7 @@
     <hr/>
 
     {!! Form::open(array('class'=>'form-horizontal', 'url' => 'resources', 'name' => 'resource')) !!}
-        @include('resources._form', ['submitButtonText' => 'Create Resource'])
+        @include('resources._form', ['submitButtonText' => 'Create Resource', 'defaultState' => 'TN'])
     {!! Form::close() !!}
 
     {{--If user does not enter required field.--}}

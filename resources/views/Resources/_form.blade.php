@@ -54,7 +54,7 @@
                         'SD' => 'South Dakota', 'TN' => 'Tennessee', 'TX' => 'Texas', 'UT' => 'Utah',
                         'VT' => 'Vermont', 'VA' => 'Virginia', 'WA' => 'Washington', 'WV' => 'West Virginia',
                         'WI' => 'Wisconsin', 'WY' => 'Wyoming'],
-                        null, ['class'=>'form-control input-md', 'required'=>'required']) !!}
+                        $defaultState, ['class'=>'form-control input-md', 'required'=>'required']) !!}
     </div>
 </div>
 <div class="form-group">

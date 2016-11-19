@@ -9,7 +9,8 @@
     <hr/>
 
     {!! Form::open(array('class'=>'form-horizontal', 'url' => 'events', 'name' => 'event')) !!}
-    @include('events._form', ['submitButtonText' => 'Create Event'])
+    @include('events._form', ['submitButtonText' => 'Create Event', 'defaultState' => 'TN'])
+
     {!! Form::close() !!}
 
     {{--If user does not enter required field.--}}

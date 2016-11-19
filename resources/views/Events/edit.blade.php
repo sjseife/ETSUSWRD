@@ -8,7 +8,7 @@
     <hr/>
 
     {!! Form::model($event, [ 'method' => 'PATCH', 'class'=>'form-horizontal', 'url' => 'events/' . $event->id]) !!}
-    @include('events._form', ['submitButtonText' => 'Update Event'])
+    @include('events._form', ['submitButtonText' => 'Update Event', 'defaultState' => null])
     {!! Form::close() !!}
 
     {{--If user does not enter required field.--}}

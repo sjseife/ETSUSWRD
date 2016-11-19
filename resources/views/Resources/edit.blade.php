@@ -8,7 +8,7 @@
     <hr/>
 
     {!! Form::model($resource, [ 'method' => 'PATCH', 'class'=>'form-horizontal', 'url' => 'resources/' . $resource->id]) !!}
-        @include('resources._form', ['submitButtonText' => 'Update Resource'])
+        @include('resources._form', ['submitButtonText' => 'Update Resource', 'defaultState' => null])
     {!! Form::close() !!}
 
     {{--If user does not enter required field.--}}

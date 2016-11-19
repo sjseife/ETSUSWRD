@@ -317,7 +317,7 @@
                         <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="{{ url('/events') }}"><img src="{{ asset('images\EventsImg.jpg') }}" alt="Events" class="imglink"  ></a><h3 class="footerlink"><a  href="{{ url('/events') }}">Events</a></h3></div>
                         <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="{{ url('/resources') }}"><img src="{{ asset('images\lightbulb.ico') }}" alt="Resources" class="imglink"  ></a><h3 class="footerlink"><a  href="{{ url('/resources') }}">Resources</a></h3></div>
-                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="{{ url('/worklist/generateReport') }}"><img src="{{ asset('images\report-icon-2.png') }}" alt="PDF Report" class="imglink"  ></a><h3 class="footerlink"><a  class="long-link" href="{{ url('/worklist/generateReport') }}">PDF Report</a></h3></div>
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="{{ url('/worklist/generateReport') }}"><img src="{{ asset('images\report-icon-2.png') }}" alt="PDF Report" class="imglink"  ></a><h3 class="footerlink"><a  class="long-link" href="{{ url('/worklist/generateReport') }}">Report</a></h3></div>
                     @endif
                     @if(Auth::user()->role->extended == '1')
                          <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 "><a href="{{ url('/contacts') }}"><img src="{{ asset('images\contacts2.png') }}" alt="Contacts" class="imglink"  ></a><h3 class="footerlink"><a  href="{{ url('/contacts') }}">Contacts</a></h3></div>

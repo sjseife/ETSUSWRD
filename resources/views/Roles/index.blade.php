@@ -63,6 +63,10 @@
     $(document).ready(function() {
 
         var rolesArray = {!! json_encode($roles->toArray()) !!};
+        var rolePermissionsArray = {!! json_encode($rolePermissions) !!};
+        rolesArray.forEach(function(role){
+            updateSilder(role.id, rolePermissionsArray[role.id]);
+        });
 
         $( "#newRole" ).click(function() {
             var new_add2 = '<div class="form-inline role">' +
@@ -80,7 +84,7 @@
                     '<input class="form-control input-md" name="role[]" type="text" value="New Role">' +
                     '</td>' +
                     '<td class="padsome">' +
-                    'Testing...' +
+                    '<span id="rolepermissions"></span>' +
                     '</td>' +
                     '</tr>' +
                     '<tr>' +

@@ -25,7 +25,7 @@
                                         </td>
                                         <td class="padsome">
                                             <!-- Javascript updates role permissions -->
-                                            <span id="rolepermissions"></span>
+                                            <span id="rolepermissions{{$role->id}}"></span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -63,9 +63,7 @@
     $(document).ready(function() {
 
         var rolesArray = {!! json_encode($roles->toArray()) !!};
-        rolesArray.forEach(function(role) {
-            updateSilder(role.id);
-        });
+
         $( "#newRole" ).click(function() {
             var new_add2 = '<div class="form-inline role">' +
                     '<div class="form-group">' +
@@ -112,34 +110,34 @@
     //detect value change on slider
     function updateSilder(roleIdIn, valueIn) {
         var rolesArray = {!! json_encode($roles->toArray()) !!};
-        var updatePermissions;
 
-        //testing in console
-        console.log("Value: " + valueIn);
-        console.log("Role:" + roleIdIn);
         rolesArray.forEach(function(role){
+            var output = '';
             if(role.id = roleIdIn){
-                updatePermissions = '';
-                if(role.base == '1'){
-                    updatePermissions += '<img src="images/check_mark.png"> Base';
+                if(valueIn >= 1){
+                    output += '<img src="images/check_mark.png"> Base ';
                 }
-                if(role.extended == '1'){
-                    updatePermissions += '<img src="images/check_mark.png"> Extended';
+                if(valueIn > 1){
+                    output += '<img src="images/check_mark.png"> Extended ';
                 }
-                if(role.create_update == '1'){
-                    updatePermissions += '<img src="images/check_mark.png"> Create/Update';
+                if(valueIn > 2){
+                    output += '<img src="images/check_mark.png"> Create/Update ';
                 }
-                if(role.delete == '1'){
-                    updatePermissions += '<img src="images/check_mark.png"> Delete';
+                if(valueIn > 3){
+                    output += '<img src="images/check_mark.png"> Delete ';
                 }
-                if(role.archive == '1'){
-                    updatePermissions += '<img src="images/check_mark.png"> Archive';
+                if(valueIn > 4){
+                    output += '<img src="images/check_mark.png"> Archive ';
                 }
+                if(valueIn > 5){
+                    output += '<img src="images/check_mark.png"> Users ';
+                }
+                if(valueIn > 6){
+                    output += '<img src="images/check_mark.png"> Roles ';
+                }
+                document.getElementById("rolepermissions"+role.id).innerHTML = output;
             }
         });
-
-        //update visual permission levels
-        document.getElementById("rolepermissions").innerHTML = updatePermissions;
     }
 </script>
 @endpush

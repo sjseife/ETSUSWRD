@@ -24,17 +24,13 @@
                                             {!! Form::text('role['.$role->id.']', $role->name, ['class'=>'form-control input-md']) !!}
                                         </td>
                                         <td class="padsome">
-                                            <p id="rolepermissions"></p>
-                                            @if($role->base == '1') <img src="{{ asset('images\check_mark.png') }}"> Base @endif
-                                            @if($role->extended == '1') <img src="{{ asset('images\check_mark.png') }}"> Extended @endif
-                                            @if($role->create_update == '1') <img src="{{ asset('images\check_mark.png') }}"> Create/Update @endif
-                                            @if($role->delete == '1') <img src="{{ asset('images\check_mark.png') }}"> Delete @endif
-                                            @if($role->archive == '1') <img src="{{ asset('images\check_mark.png') }}"> Archive @endif
+                                            <!-- Javascript updates role permissions -->
+                                            <span id="rolepermissions"></span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="range" name="range[{{ $role->id }}]" class="rangeInput" min="0" max="7" value="{{ $rolePermissions[$role->id] }}" onchange="updateSilder(this.value)" />
+                                            <input type="range" name="range[{{ $role->id }}]" class="rangeInput" min="0" max="7" value="{{ $rolePermissions[$role->id] }}" onchange="updateSilder({{ $role->id }}, this.value)" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -66,6 +62,10 @@
 <script>
     $(document).ready(function() {
 
+        var rolesArray = {!! json_encode($roles->toArray()) !!};
+        rolesArray.forEach(function(role) {
+            updateSilder(role.id);
+        });
         $( "#newRole" ).click(function() {
             var new_add2 = '<div class="form-inline role">' +
                     '<div class="form-group">' +
@@ -110,11 +110,36 @@
     });
 
     //detect value change on slider
-    function updateSilder(valueIn) {
+    function updateSilder(roleIdIn, valueIn) {
+        var rolesArray = {!! json_encode($roles->toArray()) !!};
+        var updatePermissions;
+
+        //testing in console
+        console.log("Value: " + valueIn);
+        console.log("Role:" + roleIdIn);
+        rolesArray.forEach(function(role){
+            if(role.id = roleIdIn){
+                updatePermissions = '';
+                if(role.base == '1'){
+                    updatePermissions += '<img src="images/check_mark.png"> Base';
+                }
+                if(role.extended == '1'){
+                    updatePermissions += '<img src="images/check_mark.png"> Extended';
+                }
+                if(role.create_update == '1'){
+                    updatePermissions += '<img src="images/check_mark.png"> Create/Update';
+                }
+                if(role.delete == '1'){
+                    updatePermissions += '<img src="images/check_mark.png"> Delete';
+                }
+                if(role.archive == '1'){
+                    updatePermissions += '<img src="images/check_mark.png"> Archive';
+                }
+            }
+        });
+
         //update visual permission levels
-        console.log("Moved!");
-        document.getElementById("rolepermissions").innerHTML =
-                "Test!!!!!!!!";
+        document.getElementById("rolepermissions").innerHTML = updatePermissions;
     }
 </script>
 @endpush

@@ -26,7 +26,7 @@ class ContactRequest extends Request
         return [
             'firstName' => 'required',
             'lastName' => 'required',
-            'protectedEmail' => 'required_without_all:protectedPhoneNumber|email',
+            'protectedEmail' => 'required_without:protectedPhoneNumber|email',
         ];
     }
 
@@ -36,7 +36,7 @@ class ContactRequest extends Request
      */
     public function messages()
     {
-        $messages = ['protectedEmail.required_without_all' => 'The email or phone number field is required.'];
+        $messages = ['protectedEmail.required_without' => 'The email or phone number field is required.'];
         return $messages;
     }
 }

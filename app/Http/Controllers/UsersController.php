@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\User;
+use App\Role;
 use App\Http\Requests;
 use Auth;
 use Illuminate\Support\Facades\DB;
@@ -44,7 +45,8 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        $roles = Role::where('id', '>', '2')->lists('name');
+        return view('users.edit', compact('user' , 'roles'));
     }
 
     public function update(User $user, UserRequest $request)

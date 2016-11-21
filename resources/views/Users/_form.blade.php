@@ -25,7 +25,7 @@
 <div class="form-group">
     {!! Form::label('role', 'Role:', ['class' => 'col-md-2 control-label']) !!}
     <div class="col-md-4">
-        {!! Form::select('role', ['User'=>'User', 'GA'=>'GA', 'Admin'=>'Admin'], null, ['id' => 'resource_list', 'class' => 'form-control', 'multiple']) !!}
+        {!! Form::select('role', $roles, null, ['id' => 'resource_list', 'class' => 'form-control', 'multiple']) !!}
     </div>
 </div>
 <div class="form-group">

@@ -20,55 +20,58 @@ class RolesController extends Controller
 
     public function store(RoleRequest $request)
     {
+        $roles = Role::where('name', '!=', 'System')
+            ->where('name', '!=', 'Admin')
+            ->get();
+        foreach($roles as $role)
+        {
+            if(is_null($request->get('role')[$role->id]))
+            {
+                Role::where('id', '=', $role->id)->delete();
+            }
+        }
         foreach ($request->get('role') as $rk => $rv){
             $theRole = Role::where('id', '=', $rk)->first();
-            if(!is_null($theRole))
-            {
-                $rangev = $request->get('range')[$rk];
-                $base = '0';
-                $extended = '0';
-                $createupdate = '0';
-                $delete = '0';
-                $archive = '0';
-                $users = '0';
-                $roles = '0';
-                if((int)$rangev >= 1){
-                    $base = '1';
-                }
-                if((int)$rangev > 1){
-                    $extended = '1';
-                }
-                if((int)$rangev > 2){
-                    $createupdate = '1';
-                }
-                if((int)$rangev > 3){
-                    $delete = '1';
-                }
-                if((int)$rangev > 4){
-                    $archive = '1';
-                }
-                if((int)$rangev > 5){
-                    $users = '1';
-                }
-                if((int)$rangev > 6){
-                    $roles = '1';
-                }
-                Role::where('id', $theRole->id)
-                    ->update([
-                        'name' => $rv,
-                        'base' => $base,
-                        'extended' => $extended,
-                        'create_update' => $createupdate,
-                        'delete' => $delete,
-                        'archive' => $archive,
-                        'users' => $users,
-                        'roles' => $roles
-                    ]);
+            $rangev = $request->get('range')[$rk];
+            $base = '0';
+            $extended = '0';
+            $createupdate = '0';
+            $delete = '0';
+            $archive = '0';
+            $users = '0';
+            $roles = '0';
+            if((int)$rangev >= 1){
+                $base = '1';
             }
-            elseif (is_null($theRole)){
-                Role::where('name', '!=', 'System')
-                    ->where('name', '!=', 'Admin')->where('id', '=', $theRole->id)->delete();
+            if((int)$rangev > 1){
+                $extended = '1';
             }
+            if((int)$rangev > 2){
+                $createupdate = '1';
+            }
+            if((int)$rangev > 3){
+                $delete = '1';
+            }
+            if((int)$rangev > 4){
+                $archive = '1';
+            }
+            if((int)$rangev > 5){
+                $users = '1';
+            }
+            if((int)$rangev > 6){
+                $roles = '1';
+            }
+            Role::where('id', $theRole->id)
+                ->update([
+                    'name' => $rv,
+                    'base' => $base,
+                    'extended' => $extended,
+                    'create_update' => $createupdate,
+                    'delete' => $delete,
+                    'archive' => $archive,
+                    'users' => $users,
+                    'roles' => $roles
+                ]);
         }
         flash('Roles Updated Successfully!', 'success');
         $roles = Role::where('name', '!=', 'System')

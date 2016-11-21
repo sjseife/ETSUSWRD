@@ -61,4 +61,19 @@ class RolesController extends Controller
         }
         return $rolePermissions;
     }
+
+    public function createNew(Request $request)
+    {
+        $roleProperties = ['name' => $request->name,
+                            'base' => '0',
+                            'extended' => '0',
+                            'create_update' => '0',
+                            'delete' => '0',
+                            'archive' => '0',
+                            'users' => '0',
+                            'roles' => '0'];
+        $role = new Role($roleProperties);
+        $role->save();
+        return response()->json(['id'=>$role->id]);
+    }
 }

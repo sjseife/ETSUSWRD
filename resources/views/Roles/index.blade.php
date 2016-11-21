@@ -41,7 +41,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="range" name="range[{{ $role->id }}]" class="rangeInput" min="0" max="7" value="{{ $rolePermissions[$role->id] }}" onchange="updateSilder({{ $role->id }}, this.value)" />
+                                            <input type="range" name="range[{{ $role->id }}]" class="rangeInput" min="0" max="7" value="{{ $rolePermissions[$role->id] }}" onchange="updateSlider({{ $role->id }}, this.value)" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -54,7 +54,7 @@
                         </div>
                     @endforeach
                 @endif
-                <button type="button" class="btn btn-warning btn-md" data-toggle="modal" data-target="#createRoleModal" id="newRole">New Role</button>
+                <button type="button" class="btn btn-link btn-md" data-toggle="modal" data-target="#createRoleModal" id="newRole">New Role</button>
             </div>
         </div>
         <div class="form-group">
@@ -77,7 +77,7 @@
         var rolesArray = {!! json_encode($roles->toArray()) !!};
         var rolePermissionsArray = {!! json_encode($rolePermissions) !!};
         rolesArray.forEach(function(role){
-            updateSilder(role.id, rolePermissionsArray[role.id]);
+            updateSlider(role.id, rolePermissionsArray[role.id]);
         });
 
         /*$( "#newRole" ).click(function() {
@@ -125,7 +125,7 @@
     });
 
     //detect value change on slider
-    function updateSilder(roleIdIn, valueIn) {
+    function updateSlider(roleIdIn, valueIn) {
         var rolesArray = {!! json_encode($roles->toArray()) !!};
 
         rolesArray.forEach(function(role){

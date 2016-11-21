@@ -45,20 +45,42 @@
                 dataType: 'json',
                 success: function(data){
                     console.log(data.id);
+                    var new_add = '<div class="form-inline role">' +
+                            '<div class="form-group">' +
+                            '<table style="border: none;">' +
+                            '<tr>' +
+                            '<td>' +
+                            '<input class="form-control input-md" name="role[]" type="text" value="' + data.name +'">' +
+                            '</td>' +
+                            '<td class="padsome">' +
+                            '<span id="rolepermissions'+data.id+'"></span>' +
+                            '</td>' +
+                            '</tr>' +
+                            '<tr>' +
+                            '<td>' +
+                            '<input type="range" name="range['+data.id+']" class="rangeInput" min="0" max="7" value="0" onchange="updateSlider('+data.id+', this.value)" />' +
+                            '</td>' +
+                            '</tr>' +
+                            '<tr>' +
+                            '<td>' +
+                            '<button type=button class="btn btn-link btn-small addedRemoveRole">Remove</button>' +
+                            '</td>' +
+                            '</tr>' +
+                            '</table>' +
+                            '</div>' +
+                            '</div>';
+                    $( "#newRole" ).before(new_add);
 
-                    /*//alerts users to successful creation of role.
-                    html = '<div class="alert alert-success"><ul><li>role created succesfully!</li></ul></div>';
-                    $( '#form-success').html( html );
+                    $( ".addedRemoveRole" ).click(function() {
+                        $(this).closest('.role').remove();
+                    });
 
-                    //Automatically add new role to select box, and select them
-                    var newOption = new Option(data.firstName + ' ' + data.lastName, data.id, false, true);
-                    $("#role_list").append(newOption).trigger('change');
 
                     //Finally, Reset new role form and close modal
 
                     $('#name').val("");
 
-                    $('#createRoleModal').modal('toggle');*/
+                    $('#createRoleModal').modal('toggle');
 
 
                 },

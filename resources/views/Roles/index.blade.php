@@ -9,7 +9,6 @@
     </br>
     </br>
     </br>
-    </br>
     {!! Form::open(array('class'=>'form-horizontal', 'url' => 'roles', 'name' => 'roles')) !!}
             <div class="col-md-12 col-md-offset-2">
                 @if(isset($roles))

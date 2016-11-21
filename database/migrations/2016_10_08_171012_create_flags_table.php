@@ -39,8 +39,8 @@ class CreateFlagsTable extends Migration
                 ->on('users')
                 ->onDelete('cascade');
             $table->foreign('resource_id')
-                ->references('Id')
-                ->on('Resources')
+                ->references('id')
+                ->on('resources')
                 ->onDelete('cascade');
             $table->foreign('contact_id')
                 ->references('id')

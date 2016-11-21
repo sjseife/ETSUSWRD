@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDailyhoursTable extends Migration
+class CreateDailyHoursTable extends Migration
 {
     /**
      * Run the migrations.

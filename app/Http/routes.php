@@ -168,6 +168,7 @@ Route::group(['middleware' => 'App\Http\Middleware\UsersMiddleware'], function()
 Route::group(['middleware' => 'App\Http\Middleware\RolesMiddleware'], function()
 {
     Route::get('roles', 'RolesController@index');
+    Route::post('roles/createNew', 'RolesController@createNew');
     Route::post('roles', 'RolesController@store');
 });
 

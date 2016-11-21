@@ -1,5 +1,7 @@
 @extends('layouts.general')
 @section('content')
+    <!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-warning btn-md" data-toggle="modal" data-target="#createRoleModal">New Role</button>
     <!--suppress ALL -->
     <div class="container">
         <div id="form-success"></div>
@@ -52,7 +54,7 @@
                         </div>
                     @endforeach
                 @endif
-                <button type=button class="btn btn-link btn-small" id="newRole">New Role</button>
+                <button type="button" class="btn btn-warning btn-md" data-toggle="modal" data-target="#createRoleModal" id="newRole">New Role</button>
             </div>
         </div>
         <div class="form-group">
@@ -64,6 +66,7 @@
         </div>
     {!! Form::close() !!}
 
+    @include('roles._createForm')
     {{--If user does not enter required field.--}}
     @include('errors.list')
 @stop
@@ -77,7 +80,7 @@
             updateSilder(role.id, rolePermissionsArray[role.id]);
         });
 
-        $( "#newRole" ).click(function() {
+        /*$( "#newRole" ).click(function() {
             var new_add2 = '<div class="form-inline role">' +
                     '<div class="form-group">' +
                     '<input class="form-control input-md" name="role[]" type="text" value="New Role">'+
@@ -114,7 +117,7 @@
             $( ".addedRemoveRole" ).click(function() {
                 $(this).closest('.role').remove();
             });
-        });
+        });*/
 
         $( ".removeRole" ).click(function() {
             $(this).closest('.role').remove();

@@ -25,7 +25,7 @@ class RolesController extends Controller
             ->get();
         foreach($roles as $role)
         {
-            if(isset($request->get('role')[$role->id]))
+            if(!isset($request->get('role')[$role->id]))
             {
                 Role::where('id', '=', $role->id)->delete();
             }

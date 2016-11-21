@@ -25,7 +25,7 @@ class RolesController extends Controller
             ->get();
         foreach($roles as $role)
         {
-            if(isset($request->get('role')[$role->id]))
+            if(!isset($request->get('role')[$role->id]))
             {
                 Role::where('id', '=', $role->id)->delete();
             }
@@ -61,7 +61,7 @@ class RolesController extends Controller
             if((int)$rangev > 6){
                 $roles = '1';
             }
-            $theRole->update([
+            Role::where('id', '=', $theRole->id)->update([
                     'name' => $rv,
                     'base' => $base,
                     'extended' => $extended,

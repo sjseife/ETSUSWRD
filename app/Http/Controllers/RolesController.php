@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Role;
-use App\Http\Requests;
+use App\Http\Requests\RoleRequest;
 use App\Http\Controllers\Controller;
 
 class RolesController extends Controller
@@ -18,7 +18,7 @@ class RolesController extends Controller
         return view('roles.index', compact('roles', 'rolePermissions'));
     }
 
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
         foreach ($request->get('role') as $rk => $rv){
             $theRole = Role::where('id', '=', $rk)->first();

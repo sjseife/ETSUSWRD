@@ -26,8 +26,17 @@ class ContactRequest extends Request
         return [
             'firstName' => 'required',
             'lastName' => 'required',
-            'protectedEmail' => 'required|email',
-            'protectedPhoneNumber' => 'required'
+            'protectedEmail' => 'required_without_all:protectedPhoneNumber|email',
         ];
+    }
+
+    /**
+     * Custom Error Message
+     * @return array
+     */
+    public function messages()
+    {
+        $messages = ['protectedEmail.required_without_all' => 'The email or phone number field is required.'];
+        return $messages;
     }
 }

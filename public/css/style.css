@@ -252,7 +252,7 @@ table thead th{
     .sw-heading{
         height: 85px!important;
         padding: 0!important;
-        background-image: url("/images/header_logo.png");
+        background-image: url("../images/header_logo.png");
         background-position: 2% 50%;
         background-repeat: no-repeat;
 

@@ -5,7 +5,16 @@
         <div id="form-success"></div>
         <h1>Roles</h1>
     </div>
-
+    <h3>Explanation of Permissions:</h3>
+    <p>
+        <strong>Base:</strong> The bare bones requirement to use the site. Includes viewing Events, Resources, and creating PDF Reports. This permission allows for the creation of flags.<br />
+        <strong>Extended:</strong> Allows viewing of Contacts, Categories, and Flags. <br />
+        <strong>Create/Update:</strong> Allows for the creation and editing of Events, Resources, Contacts, and Categories. Additionally allows for the resolution of appropriate flags.<br />
+        <strong>Delete:</strong> Allows for the deleting (archiving) of Events, Resources, Contacts, and Categories. Additionally allows for the resolution of appropriate flags.<br />
+        <strong>Archive:</strong> Allows for access of the archive.<br />
+        <strong>Users:</strong> Allows for the creating, editing, and deleting of users.<br />
+        <strong>Roles:</strong> Allows for the creation, editing, and deleting of user roles.<br />
+    </p>
     <hr/>
 
     {!! Form::open(array('class'=>'form-horizontal', 'url' => 'roles', 'name' => 'roles')) !!}
@@ -94,13 +103,14 @@
                     '</tr>' +
                     '<tr>' +
                     '<td>' +
-                    '<button type=button class="btn btn-link btn-small removeRole">Remove</button>' +
+                    '<button type=button class="btn btn-link btn-small addedRemoveRole">Remove</button>' +
                     '</td>' +
                     '</tr>' +
                     '</table>' +
                     '</div>' +
                     '</div>';
             $(this).before(new_add);
+
             $( ".addedRemoveRole" ).click(function() {
                 $(this).closest('.role').remove();
             });

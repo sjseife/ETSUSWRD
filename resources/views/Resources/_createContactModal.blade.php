@@ -8,7 +8,6 @@
                 <h4 class="modal-title">Create New Contact</h4>
             </div>
             <div class="modal-body">
-                <p>Note that you will not be able to select the resource you are currently creating.</p>
                 {!! Form::open(array('class'=>'form-horizontal', 'name' => 'contact', 'id' => 'contact')) !!}
                 @include('resources._createContactform')
                 <div id="form-errors"></div>
@@ -37,12 +36,12 @@
             $.ajax({
                 type:"POST",
                 url:'/contactsJSON',
-                data:$('#firstName, #lastName, #email, #phoneNumber, #resource_list').serialize(),
+                data:$('#firstName, #lastName, #email, #phoneNumber').serialize(),
                 dataType: 'json',
                 success: function(data){
                     //alerts users to successful creation of contact.
-                    html = '<div class="alert alert-success"><ul><li>Contact created succesfully!</li></ul></div>';
-                    $( '#form-success').html( html );
+                    /*html = '<div class="alert alert-success"><ul><li>Contact created succesfully!</li></ul></div>';
+                    $( '#form-success').html( html );*/
 
                     //Automatically add new contact to select box, and select them
                     var newOption = new Option(data.firstName + ' ' + data.lastName, data.id, false, true);
@@ -54,11 +53,7 @@
                     $('#lastName').val("");
                     $('#email').val("");
                     $('#phoneNumber').val("");
-                    $('#resource_list > option').each(function(){
-                       $(this).removeAttr("selected");
-                    });
 
-                    $('#resource_list').trigger('change');
                     $('#createContactModal').modal('toggle');
 
 

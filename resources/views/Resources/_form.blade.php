@@ -116,6 +116,9 @@
     <div class="col-md-4">
         {!! Form::select('contact_list[]', $contactList, null, ['id' => 'contact_list', 'class' => 'form-control', 'multiple']) !!}
     </div>
+    <div class="col-md-1">
+        <button type="button" class="btn btn-link btn-lg" data-toggle="modal" data-target="#createContactModal">New</button>
+    </div>
 </div>
 <div class="form-group">
     {!! Form::label('category_list', 'Categories:', ['class' => 'col-md-2 control-label']) !!}
@@ -133,7 +136,7 @@
 </div>
 
 <!-- Modal -->
-{{--@include('Resources._createContactModal')--}}
+@include('Resources._createContactModal')
 
 @push('scripts')
     <script>

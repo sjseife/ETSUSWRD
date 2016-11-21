@@ -53,18 +53,16 @@ class ContactsController extends Controller
      * THIS function is not longer in operation, and should be combined with a single store function if it is needed again
      * Was updated for the provider change anyway. 10/10/2016 -William Kubenka
      * Was updated once again for the provider removal. 11/08/2016 -William Kubenka
+     * Is back in operation! Actually I'm gonna delete and move it to an if statement in the regular store method. 11/21/2016 -William Kubenka
      *
      * Same as regular store, except it returns JSON. For some reason I would get tokenmismatch exceptions if I left
      * the data input as ContactRequest. As a result, data validation now happens entirely within the method.
      * This is planned to be used when creating a new resource so that the contact can be created from the same page using aJax
      */
-    public function storeJSON(Request $request)
+    public function storeJSON(ContactRequest $request)
     {
         $this->validate($request,
-            ['firstName' => 'required',
-            'lastName' => 'required',
-            'protectedEmail' => 'required|email|unique:contacts',
-            'protectedPhoneNumber' => 'required']);
+            ['protectedEmail' => 'unique:contacts']);
         $contact= new Contact($request->all());
         $contact->save();
         $contact->events()->attach($request->input('event_list'));

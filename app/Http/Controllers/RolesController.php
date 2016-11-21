@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Role;
-use App\Http\Requests;
+use App\Http\Requests\RoleRequest;
 use App\Http\Controllers\Controller;
 
 class RolesController extends Controller
@@ -18,23 +18,68 @@ class RolesController extends Controller
         return view('roles.index', compact('roles', 'rolePermissions'));
     }
 
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
-        //get old roles and Permissions
-        $oldRoles = Role::where('name', '!=', 'System')
+        $roles = Role::where('name', '!=', 'System')
             ->where('name', '!=', 'Admin')
             ->get();
-        $oldRolePermissions = $this->getRolesPermissionsNumber($oldRoles);
-        $oldRoleNames = array();
-        foreach($oldRoles as $role)
+        foreach($roles as $role)
         {
-            $oldRoleNames[$role->id] = $role->name;
+            if(!isset($request->get('role')[$role->id]))
+            {
+                Role::where('id', '=', $role->id)->delete();
+            }
+        }
+        foreach ($request->get('role') as $rk => $rv){
+            $theRole = Role::where('id', '=', $rk)->first();
+            $rangev = $request->get('range')[$rk];
+            $base = '0';
+            $extended = '0';
+            $createupdate = '0';
+            $delete = '0';
+            $archive = '0';
+            $users = '0';
+            $roles = '0';
+            if((int)$rangev >= 1){
+                $base = '1';
+            }
+            if((int)$rangev > 1){
+                $extended = '1';
+            }
+            if((int)$rangev > 2){
+                $createupdate = '1';
+            }
+            if((int)$rangev > 3){
+                $delete = '1';
+            }
+            if((int)$rangev > 4){
+                $archive = '1';
+            }
+            if((int)$rangev > 5){
+                $users = '1';
+            }
+            if((int)$rangev > 6){
+                $roles = '1';
+            }
+            Role::where('id', '=', $theRole->id)->update([
+                    'name' => $rv,
+                    'base' => $base,
+                    'extended' => $extended,
+                    'create_update' => $createupdate,
+                    'delete' => $delete,
+                    'archive' => $archive,
+                    'users' => $users,
+                    'roles' => $roles
+                ]);
         }
 
-        //detect new and deleted
-        $deletedAndChangedRoles = array_diff($oldRoleNames, $request->role);
-        $newRoles = array_diff($request->range, $oldRolePermissions);
-        dd($newRoles, $deletedAndChangedRoles);
+        $roles = Role::where('name', '!=', 'System')
+            ->where('name', '!=', 'Admin')
+            ->get();
+        $rolePermissions = $this->getRolesPermissionsNumber($roles);
+
+        flash('Roles Updated Successfully!', 'success');
+        return view('roles.index', compact('roles', 'rolePermissions'));
      }
 
     public function getRolesPermissionsNumber($roles)
@@ -60,5 +105,23 @@ class RolesController extends Controller
                 $rolePermissions[$role->id] = 0;
         }
         return $rolePermissions;
+    }
+
+    public function createNew(Request $request)
+    {
+        $this->validate($request, [
+           'name' => 'unique:roles'
+        ]);
+        $roleProperties = ['name' => $request->name,
+                            'base' => '0',
+                            'extended' => '0',
+                            'create_update' => '0',
+                            'delete' => '0',
+                            'archive' => '0',
+                            'users' => '0',
+                            'roles' => '0'];
+        $role = new Role($roleProperties);
+        $role->save();
+        return response()->json(['id'=>$role->id, 'name'=>$role->name]);
     }
 }

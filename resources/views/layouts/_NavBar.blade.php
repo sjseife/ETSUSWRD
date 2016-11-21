@@ -75,7 +75,6 @@
                         url: 'flags/count',
                         dataType: 'json',
                         success: function (data) {
-                            console.log(data);
                             if(data == 0) {
                                 $("#flagCount").text("");
                             }

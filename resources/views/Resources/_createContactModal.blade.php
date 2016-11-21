@@ -61,23 +61,6 @@
                     $('#resource_list').trigger('change');
                     $('#createContactModal').modal('toggle');
 
-                    //Here lies fallen Javascript attempts. RIP buddies. RIP.
-
-                    //document.getElementById('contact').reset();
-
-                    //$('#contact')[0].reset();
-
-                    //$('#contact').trigger('reset');
-
-                    //$('#resource_list option').prop("selected", false);
-
-                    /*$(':input', '#contact') //all input tags in the contact form
-                            .not(':button, :submit, :reset, :hidden') //deselecting these. They stay the same
-                            .removeAttr('checked')  //uncheck everything (currently useless, but just in case this form changes)
-                            .removeAttr('selected') //deselect any selected options
-                            .not('‌​:checkbox, :radio, select') //more deselecting. don't want to wipe all of our select options
-                            .val(''); //clearing the values from the remaining inputs.*/
-
 
                 },
                 error :function( data ) {

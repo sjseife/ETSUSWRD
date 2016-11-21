@@ -39,7 +39,7 @@
 
             $.ajax({
                 type:"POST",
-                url:'roles/createNew',
+                url: 'roles/createNew',
                 data:$('#name').serialize(),
                 dataType: 'json',
                 success: function(data){

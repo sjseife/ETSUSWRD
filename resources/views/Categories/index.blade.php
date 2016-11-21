@@ -20,6 +20,8 @@
                     <th>View</th>
                 </tr>
                 </thead>
+                <tfoot>
+                </tfoot>
                 <tbody>
                 @foreach($categories as $key => $category)
                     <?php $link = false; ?>
@@ -52,7 +54,67 @@
     @endif
 @endif
     $(document).ready(function() {
-        $('#CategoryTable').DataTable();
-    });
+
+        $('#CategoryTable').dataTable({
+            orderCellsTop: true,
+            initComplete: function () {
+                this.api().columns([1, 8, 9, 10]).every(function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()))
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                );
+
+                                column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                            });
+
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                });
+                this.api().columns([0]).every(function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()))
+                            .on('change', function () {
+                                var val = $(this).val();
+                                column //Only the name column
+                                        .search(val ? '^' + $(this).val() : val, true, false)
+                                        .draw();
+                            });
+                    var letter = 'A';
+                    for (y = 0; y < 26; y++) {
+                        letter = String.fromCharCode('A'.charCodeAt() + y);
+                        select.append('<option value="' + letter + '">' + letter + '</option>');
+                    }
+
+                });
+                this.api().columns([2]).every(function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()))
+                            .on('change', function () {
+                                var val = $(this).val();
+                                column //Only the name column
+                                        .search(val ? $(this).val() : val, true, false)
+                                        .draw();
+                            });
+                    var categories = <?php echo json_encode($categories); ?>;
+                    for (y = 0; y < categories.length; y++) {
+                        select.append('<option value="' + categories[y] + '">' + categories[y] + '</option>');
+                    }
+                });
+
+            },
+            "fnDrawCallback": function () {
+                $(this).show();
+            }
+
+        });
+    } );
 </script>
 @endpush

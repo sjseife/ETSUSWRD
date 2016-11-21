@@ -1,7 +1,5 @@
 @extends('layouts.general')
 @section('content')
-    <!-- Trigger the modal with a button -->
-    <button type="button" class="btn btn-warning btn-md" data-toggle="modal" data-target="#createRoleModal">New Role</button>
     <!--suppress ALL -->
     <div class="container">
         <div id="form-success"></div>
@@ -23,6 +21,7 @@
         <div class="form-group">
             <div class="col-md-12 centered-div"><br><br>
                 @if(isset($roles))
+                    <button type="button" class="btn btn-link btn-md" data-toggle="modal" data-target="#createRoleModal" id="newRole">New Role</button>
                     <div class="form-group" style="margin-left: 17%"><b>Permissions</b></div>
                     @foreach($roles as $role)
                         <div class="form-inline role">
@@ -54,7 +53,7 @@
                         </div>
                     @endforeach
                 @endif
-                <button type="button" class="btn btn-link btn-md" data-toggle="modal" data-target="#createRoleModal" id="newRole">New Role</button>
+
             </div>
         </div>
         <div class="form-group">

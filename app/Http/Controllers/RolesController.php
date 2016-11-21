@@ -72,11 +72,13 @@ class RolesController extends Controller
                     'roles' => $roles
                 ]);
         }
-        flash('Roles Updated Successfully!', 'success');
+
         $roles = Role::where('name', '!=', 'System')
             ->where('name', '!=', 'Admin')
             ->get();
         $rolePermissions = $this->getRolesPermissionsNumber($roles);
+
+        flash('Roles Updated Successfully!', 'success');
         return view('roles.index', compact('roles', 'rolePermissions'));
      }
 

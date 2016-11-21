@@ -19,7 +19,6 @@
             </div>
 
             <div class="modal-footer">
-                {!! Form::reset('Clear Form') !!}
                 <button type="button" class="btn btn-primary", name="roleSubmit", id="roleSubmit">Create Role</button>
                 {!! Form::close() !!}
             </div>
@@ -45,34 +44,33 @@
                 dataType: 'json',
                 success: function(data){
                     console.log(data.id);
-                    var new_add = '<div class="form-inline role">' +
-                            '<div class="form-group">' +
-                            '<table style="border: none;">' +
+                    var new_add =
                             '<tr>' +
-                            '<td>' +
-                            '<input class="form-control input-md" name="role[]" type="text" value="' + data.name +'">' +
-                            '</td>' +
-                            '<td class="padsome">' +
-                            '<span id="rolepermissions'+data.id+'"></span>' +
-                            '</td>' +
+                                '<td style="padding-right: 5px;">' +
+                                    '<input class="form-control input-md" name="role['+data.id+']" type="text" value="' + data.name +'">' +
+                                '</td>' +
+                                '<td class="padsome">' +
+                                    '<span id="rolepermissions'+data.id+'"></span>' +
+                                '</td>' +
+                                '<td>' +
+                                    '<button type=button class="btn btn-link btn-small addedRemoveRole">Remove</button>' +
+                                '</td>' +
                             '</tr>' +
                             '<tr>' +
-                            '<td>' +
-                            '<input type="range" name="range['+data.id+']" class="rangeInput" min="0" max="7" value="0" onchange="updateSlider('+data.id+', this.value)" />' +
-                            '</td>' +
+                                '<td>' +
+                                '</td>' +
+                                '<td style="padding: 0px 5px;">' +
+                                    '<input type="range" name="range['+data.id+']" class="rangeInput" min="0" max="7" value="0" onchange="updateSlider('+data.id+', this.value)" />' +
+                                '</td>' +
+                                '<td>' +
+                                '</td>' +
                             '</tr>' +
-                            '<tr>' +
-                            '<td>' +
-                            '<button type=button class="btn btn-link btn-small addedRemoveRole">Remove</button>' +
-                            '</td>' +
-                            '</tr>' +
-                            '</table>' +
-                            '</div>' +
-                            '</div>';
-                    $( "#newRole" ).before(new_add);
+                            '</table>';
+                    $ ('#roleTable tr:last').after(new_add);
 
                     $( ".addedRemoveRole" ).click(function() {
-                        $(this).closest('.role').remove();
+                        $( this ).parent().parent().next().remove();
+                        $( this ).parent().parent().remove();
                     });
 
 

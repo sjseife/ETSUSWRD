@@ -12,50 +12,58 @@
         <strong>Create/Update:</strong> Allows for the creation and editing of Events, Resources, Contacts, and Categories. Additionally allows for the resolution of appropriate flags.<br />
         <strong>Delete:</strong> Allows for the deleting (archiving) of Events, Resources, Contacts, and Categories. Additionally allows for the resolution of appropriate flags.<br />
         <strong>Archive:</strong> Allows for access of the archive.<br />
-        <strong>Users:</strong> Allows for the creating, editing, and deleting of users.<br />
-        <strong>Roles:</strong> Allows for the creation, editing, and deleting of user roles.<br />
+        <strong>Users:</strong> Allows for the viewing, creating, editing, and deleting of users.<br />
+        <strong>Roles:</strong> Allows for the viewing, creating, editing, and deleting of user roles.<br />
     </p>
     <hr/>
 
     {!! Form::open(array('class'=>'form-horizontal', 'url' => 'roles', 'name' => 'roles')) !!}
-        <div class="form-group">
-            <div class="col-md-12 centered-div"><br><br>
+            <div class="col-md-12 centered-div">
                 @if(isset($roles))
-                    <button type="button" class="btn btn-link btn-md" data-toggle="modal" data-target="#createRoleModal" id="newRole">New Role</button>
-                    <div class="form-group" style="margin-left: 17%"><b>Permissions</b></div>
+                    <table style="border: none;" id="roleTable">
+                        <tr>
+                            <td><b>Name</b></td>
+                            <td align="center"><b>Permissions</b></td>
+                            <td></td>
+                        </tr>
+                        <tr style="border-bottom: solid;">
+                            <td></td>
+                            <td class="padsome"><img src="images/check_mark.png"> Base
+                                <img src="images/check_mark.png"> Extended
+                                <img src="images/check_mark.png"> Create/Update
+                                <img src="images/check_mark.png"> Delete
+                                <img src="images/check_mark.png"> Archive
+                                <img src="images/check_mark.png"> Users
+                                <img src="images/check_mark.png"> Roles
+                            </td>
+                            <td></td>
+                        </tr>
                     @foreach($roles as $role)
-                        <div class="form-inline role">
-                            <div class="form-group">
-                                <table style="border: none;">
-                                    <tr>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            {!! Form::text('role['.$role->id.']', $role->name, ['class'=>'form-control input-md']) !!}
-                                        </td>
-                                        <td class="padsome">
-                                            <!-- Javascript updates role permissions -->
-                                            <span id="rolepermissions{{$role->id}}"></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="range" name="range[{{ $role->id }}]" class="rangeInput" min="0" max="7" value="{{ $rolePermissions[$role->id] }}" onchange="updateSlider({{ $role->id }}, this.value)" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <button type=button class="btn btn-link btn-small removeRole">Remove</button>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
+                                        <tr>
+                                            <td style="padding-right: 5px;">
+                                                {!! Form::text('role['.$role->id.']', $role->name, ['class'=>'form-control input-md']) !!}
+                                            </td>
+                                            <td class="padsome">
+                                                <!-- Javascript updates role permissions -->
+                                                <span id="rolepermissions{{$role->id}}"></span>
+                                            </td>
+                                            <td>
+                                                <button type=button class="btn btn-link btn-small removeRole">Remove</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td style="padding: 0px 5px;">
+                                                <input type="range" name="range[{{ $role->id }}]" class="rangeInput" min="0" max="7" value="{{ $rolePermissions[$role->id] }}" onchange="updateSlider({{ $role->id }}, this.value)" />
+                                            </td>
+                                            <td></td>
+                                        </tr>
                     @endforeach
+                    </table>
                 @endif
+                <button type="button" class="btn btn-link btn-md" data-toggle="modal" data-target="#createRoleModal" id="newRole">New Role</button>
 
             </div>
-        </div>
         <div class="form-group">
             <div class="col-md-12">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary', 'name' => 'resource']) !!}
@@ -79,47 +87,9 @@
             updateSlider(role.id, rolePermissionsArray[role.id]);
         });
 
-        /*$( "#newRole" ).click(function() {
-            var new_add2 = '<div class="form-inline role">' +
-                    '<div class="form-group">' +
-                    '<input class="form-control input-md" name="role[]" type="text" value="New Role">'+
-                    '<input type="range" name="range[]" class="rangeInput" min="0" max="7" value="0" />'+
-                    '<button type=button class="btn btn-link btn-small addedRemoveRole">Remove</button>'+
-                    '</div>'+
-                    '</div>';
-            var new_add = '<div class="form-inline role">' +
-                    '<div class="form-group">' +
-                    '<table style="border: none;">' +
-                    '<tr>' +
-                    '<td>' +
-                    '<input class="form-control input-md" name="role[]" type="text" value="New Role">' +
-                    '</td>' +
-                    '<td class="padsome">' +
-                    '<span id="rolepermissions"></span>' +
-                    '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td>' +
-                    '<input type="range" name="range[]" class="rangeInput" min="0" max="7" value="0" onchange="updateSilder(this.value)" />' +
-                    '</td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td>' +
-                    '<button type=button class="btn btn-link btn-small addedRemoveRole">Remove</button>' +
-                    '</td>' +
-                    '</tr>' +
-                    '</table>' +
-                    '</div>' +
-                    '</div>';
-            $(this).before(new_add);
-
-            $( ".addedRemoveRole" ).click(function() {
-                $(this).closest('.role').remove();
-            });
-        });*/
-
         $( ".removeRole" ).click(function() {
-            $(this).closest('.role').remove();
+            $( this ).parent().parent().next().remove();
+            $( this ).parent().parent().remove();
         });
     });
 

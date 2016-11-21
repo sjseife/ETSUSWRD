@@ -109,6 +109,9 @@ class RolesController extends Controller
 
     public function createNew(Request $request)
     {
+        $this->validate($request, [
+           'name' => 'unique:roles'
+        ]);
         $roleProperties = ['name' => $request->name,
                             'base' => '0',
                             'extended' => '0',

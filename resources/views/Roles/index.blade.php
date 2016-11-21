@@ -101,25 +101,25 @@
             var output = '';
             if(role.id = roleIdIn){
                 if(valueIn >= 1){
-                    output += '<img src="images/check_mark.png"> Base ';
+                    output += '<img src="{{ asset('images/check_mark.png') }}"> Base ';
                 }
                 if(valueIn > 1){
-                    output += '<img src="images/check_mark.png"> Extended ';
+                    output += '<img src="{{ asset('images/check_mark.png') }}"> Extended ';
                 }
                 if(valueIn > 2){
-                    output += '<img src="images/check_mark.png"> Create/Update ';
+                    output += '<img src="{{ asset('images/check_mark.png') }}"> Create/Update ';
                 }
                 if(valueIn > 3){
-                    output += '<img src="images/check_mark.png"> Delete ';
+                    output += '<img src="{{ asset('images/check_mark.png') }}"> Delete ';
                 }
                 if(valueIn > 4){
-                    output += '<img src="images/check_mark.png"> Archive ';
+                    output += '<img src="{{ asset('images/check_mark.png') }}"> Archive ';
                 }
                 if(valueIn > 5){
-                    output += '<img src="images/check_mark.png"> Users ';
+                    output += '<img src="{{ asset('images/check_mark.png') }}"> Users ';
                 }
                 if(valueIn > 6){
-                    output += '<img src="images/check_mark.png"> Roles ';
+                    output += '<img src="{{ asset('images/check_mark.png') }}"> Roles ';
                 }
                 document.getElementById("rolepermissions"+role.id).innerHTML = output;
             }

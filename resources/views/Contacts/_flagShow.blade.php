@@ -7,7 +7,12 @@
 
         <p>&nbsp;&nbsp;Email: &nbsp; {{ $contact->protectedEmail }}</p>
 
-        <p>&nbsp;&nbsp;Phone: &nbsp; {{ $contact->protectedPhoneNumber }}</p>
+        <p>&nbsp;&nbsp;Phone: &nbsp;  <?php
+            if(!function_exists('phoneFormat')){
+                include (public_path() . '/php/functions.php');
+            }
+            echo phoneFormat($contact->protectedPhoneNumber);
+            ?></p>
 
         <hr>
     </div>

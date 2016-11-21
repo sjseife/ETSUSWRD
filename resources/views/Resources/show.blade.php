@@ -106,7 +106,12 @@
                         <div class="col-md-4">
                             <h5 class="list-heading"><b>Contact Methods:</b></h5>
                             <ul style="list-style:none;">
-                                <li>Phone: {{ $resource->publicPhoneNumber }} @if($resource->publicPhoneNumber == null) N/A @endif </li>
+                                <li>Phone:  <?php
+                                    if(!function_exists('phoneFormat')){
+                                        include (public_path() . '/php/functions.php');
+                                    }
+                                    echo phoneFormat($resource->publicPhoneNumber);
+                                    ?></li>
                                 <li>Email: {{ $resource->publicEmail }} @if($resource->publicEmail == null) N/A @endif </li>
                                 <li>Website: {{ $resource->website }} @if($resource->website == null) N/A @endif </li>
                             </ul>

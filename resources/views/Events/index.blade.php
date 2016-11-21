@@ -115,7 +115,22 @@
                 $link = false;
                 ?>
                 <tr>
-                    <td><div width="50%"><span class="wrapcell">{{ $event->name }}</span></div></td>
+                    <td><div width="50%"><span class="wrapcell">{{ $event->name }}
+                                <?php
+                                $count = 0;
+                                foreach ($event->flags as $key=>$value) {
+                                    if ($value ['resolved'] == '0') {
+                                        $count++;
+                                    }
+                                }
+                                if($count != 0)
+                                {
+                                ?>
+                                <a class="btn btn-xs btn-danger" style="border-radius: 12px;" href="{{ URL::to('events/' . $event->id) }}">{{ $count }}</a>
+                                <?php
+                                }
+                                ?>
+                            </span></div></td>
                     <td>{{ $event->county }}</td>
                     <td>
                         @foreach ($event->categories as $category)
@@ -203,27 +218,14 @@
                         </ul>
 
                     </td>
-                    <td><?php
-                            if(strlen($event->publicPhoneNumber) > 0)
-                            {
-                                $tempPhoneNumber = $event->publicPhoneNumber;
-                                $tempPhoneNumber = preg_replace("/[^0-9,x]/", "", $tempPhoneNumber );
-                                if(strlen($tempPhoneNumber) > 10)
-                                {
-                                    $tempPhoneNumber = preg_replace("/^[1]/", "", $tempPhoneNumber );
-                                }
-                                $tempPhoneNumber = '(' . substr($tempPhoneNumber,0, 3) . ') '
-                                        . substr($tempPhoneNumber, 3, 3) . '-'
-                                        . substr($tempPhoneNumber, 6, 4) . ' '
-                                        . substr($tempPhoneNumber, 10, (strlen($tempPhoneNumber) - 10));
-                                echo $tempPhoneNumber;
-                            }
-                            else
-                            {
-                                echo "Not Provided";
+                    <td>
+                        <?php
+                        if(!function_exists('phoneFormat')){
+                            include (public_path() . '/php/functions.php');
                         }
-
-                        ?></td>
+                        echo phoneFormat($event->publicPhoneNumber);
+                        ?>
+                    </td>
                     <td>{{ $event->publicEmail }}</td>
                     <td>{{ $event->website }}</td>
                     <td>{{ $event->streetAddress }}</td>

@@ -28,23 +28,33 @@
                 @foreach($contacts as $key => $contact)
                     <?php $link = false; ?>
                     <tr>
-                        <td>{{ $contact->firstName }}</td>
+                        <td>
+                            {{ $contact->firstName }}
+                            <?php
+                            $count = 0;
+                            foreach ($contact->flags as $key=>$value) {
+                                if ($value ['resolved'] == '0') {
+                                    $count++;
+                                }
+                            }
+                            if($count != 0)
+                            {
+                            ?>
+                            <a class="btn btn-xs btn-danger" style="border-radius: 12px;" href="{{ URL::to('contacts/' . $contact->id) }}">{{ $count }}</a>
+                            <?php
+                            }
+                            ?>
+                        </td>
                         <td>{{ $contact->lastName }}</td>
                         <td>{{ $contact->protectedEmail }}</td>
-                        <td><?php
-                            $tempPhoneNumber = $contact->protectedPhoneNumber;
-                            $tempPhoneNumber = preg_replace("/[^0-9,x]/", "", $tempPhoneNumber );
-                            if(strlen($tempPhoneNumber) > 10)
-                            {
-                                $tempPhoneNumber = preg_replace("/^[1]/", "", $tempPhoneNumber );
-                            }
-                            $tempPhoneNumber = '(' . substr($tempPhoneNumber,0, 3) . ') '
-                                    . substr($tempPhoneNumber, 3, 3) . '-'
-                                    . substr($tempPhoneNumber, 6, 4) . ' '
-                                    . substr($tempPhoneNumber, 10, (strlen($tempPhoneNumber) - 10));
-                            echo $tempPhoneNumber;
-
-                            ?></td>
+                        <td>
+                            <?php
+                                if(!function_exists('phoneFormat')){
+                                    include (public_path() . '/php/functions.php');
+                                }
+                                echo phoneFormat($contact->protectedPhoneNumber);
+                            ?>
+                        </td>
                         <td class="text-center">
 
                             <!-- show the contact (uses the show method found at GET /contacts/{id} -->

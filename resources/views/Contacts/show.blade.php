@@ -14,7 +14,9 @@
                     <div class="col-md-4">
                         <p><b>Phone Number:</b></p>
                         <?php
-                            include (public_path() . '/php/functions.php');
+                            if(!function_exists('phoneFormat')){
+                                include (public_path() . '/php/functions.php');
+                            }
                             echo phoneFormat($contact->protectedPhoneNumber);
                         ?>
 

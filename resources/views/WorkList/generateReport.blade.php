@@ -57,7 +57,7 @@
                                     <?php
                                     if ( $detect->isMobile() ) { ?>
                                         <td class="text-center col-small-3">
-                                            <a href="/events/removeReport/{{$event->id}}" role="button" class="btn-link btn-sm removeReport
+                                            <a href="{{ url('/events/removeReport/' . $event->id ) }}" role="button" class="btn-link btn-sm removeReport
                                             @if(!Auth::user()->events->contains($event))
                                                     disabled
                                                 @endif
@@ -66,7 +66,7 @@
                                     <?php }
                                     else{ ?>
                                         <td class="text-center col-small-3">
-                                            <a href="/events/removeReport/{{$event->id}}" role="button" class="btn-link btn-sm removeReport
+                                            <a href="{{ url('/events/removeReport/' . $event->id ) }}" role="button" class="btn-link btn-sm removeReport
                                             @if(!Auth::user()->events->contains($event))
                                                     disabled
                                                 @endif
@@ -92,7 +92,7 @@
                                     <?php
                                     if ( $detect->isMobile() ) { ?>
                                     <td class="text-center col-small-3">
-                                        <a href="/resources/removeReport/{{$resource->id}}" role="button" class="btn-link btn-sm removeReport
+                                        <a href="{{ url('/resources/removeReport/' . $resource->id ) }}" role="button" class="btn-link btn-sm removeReport
                                             @if(!Auth::user()->resources->contains($resource))
                                                 disabled
                                             @endif
@@ -101,7 +101,7 @@
                                     <?php }
                                     else{ ?>
                                     <td class="text-center col-small-3">
-                                        <a href="/resources/removeReport/{{$resource->id}}" role="button" class="btn-link btn-sm removeReport
+                                        <a href="{{ url('/resources/removeReport/'. $resource->id ) }}" role="button" class="btn-link btn-sm removeReport
                                             @if(!Auth::user()->resources->contains($resource))
                                                 disabled
                                             @endif
@@ -130,7 +130,7 @@
         <div class="container">
             <h3>
                 Report is empty!<br><br>
-                Try adding <a href="/resources">resources</a> or <a href="/events">events</a> to the report and come back...<br><br>
+                Try adding <a href="{{ url('/resources') }}">resources</a> or <a href="{{ url('/events') }}">events</a> to the report and come back...<br><br>
             </h3>
         </div>
     @endif

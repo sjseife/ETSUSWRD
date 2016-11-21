@@ -114,20 +114,20 @@
                     ?>
                     <tr>
                         <td><div width="50%"><span class="wrapcell">{{ $resource->name }}
-                        <?php
-                            $count = 0;
-                            foreach ($resource->flags as $key=>$value) {
-                                if ($value ['resolved'] == '0') {
-                                    $count++;
-                                }
-                            }
-                            if($count != 0)
-                            {
-                            ?>
-                                <a class="btn btn-xs btn-danger" style="border-radius: 12px;" href="{{ URL::to('resources/' . $resource->id) }}">{{ $count }}</a>
-                            <?php
-                            }
-                        ?>
+                                    <?php
+                                    $count = 0;
+                                    foreach ($resource->flags as $key=>$value) {
+                                        if ($value ['resolved'] == '0') {
+                                            $count++;
+                                        }
+                                    }
+                                    if($count != 0)
+                                    {
+                                    ?>
+                                    <a class="btn btn-xs btn-danger" style="border-radius: 12px;" href="{{ URL::to('resources/' . $resource->id) }}">{{ $count }}</a>
+                                    <?php
+                                    }
+                                    ?>
                        </span></div></td>
                         <td class="alignRight">{{ $resource->county }}</td>
                         <td>
@@ -206,27 +206,14 @@
                             ?>
                            </ul>
                         </td>
-                        <td><?php
-                                    if(strlen($resource->publicPhoneNumber) > 0)
-                                    {
-                                        $tempPhoneNumber = $resource->publicPhoneNumber;
-                                        $tempPhoneNumber = preg_replace("/[^0-9,x]/", "", $tempPhoneNumber );
-                                            if(strlen($tempPhoneNumber) > 10)
-                                            {
-                                                $tempPhoneNumber = preg_replace("/^[1]/", "", $tempPhoneNumber );
-                                            }
-                                        $tempPhoneNumber = '(' . substr($tempPhoneNumber,0, 3) . ') '
-                                                            . substr($tempPhoneNumber, 3, 3) . '-'
-                                                            . substr($tempPhoneNumber, 6, 4) . ' '
-                                                            . substr($tempPhoneNumber, 10, (strlen($tempPhoneNumber) - 10));
-                                        echo $tempPhoneNumber;
-                                    }
-                                    else
-                                    {
-                                        echo "Not Provided";
-                                    }
-
-                            ?></td>
+                        <td>
+                            <?php
+                            if(!function_exists('phoneFormat')){
+                                include (public_path() . '/php/functions.php');
+                            }
+                            echo phoneFormat($resource->publicPhoneNumber);
+                            ?>
+                        </td>
                         <td>{{ $resource->publicEmail }}</td>
                         <td>{{ $resource->website }}</td>
                         <td>{{ $resource->streetAddress }}</td>

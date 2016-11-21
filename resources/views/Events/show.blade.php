@@ -97,7 +97,12 @@
             <div class="col-md-4">
                 <h5 class="list-heading"><b>Contact Methods:</b></h5>
                 <ul>
-                    <li>Phone Number: {{ $event->publicPhoneNumber }} @if($event->publicPhoneNumber == null) N/A @endif </li>
+                    <li>Phone Number:  <?php
+                        if(!function_exists('phoneFormat')){
+                            include (public_path() . '/php/functions.php');
+                        }
+                        echo phoneFormat($event->publicPhoneNumber);
+                        ?> </li>
                     <li>Email: {{ $event->publicEmail }} @if($event->publicEmail == null) N/A @endif </li>
                     <li>Website: {{ $event->website }} @if($event->website == null) N/A @endif </li>
                 </ul>
@@ -132,7 +137,7 @@
             </div>
             <div class="col-md-10">
                 <p><b>Reported Problems:</b></p>
-                @if($event->flags == null)
+                @if($event->flags != null)
                     @foreach($event->flags as $flag)
                         @if(!$flag->resolved)
                             <p>{{ $flag->comments }}</p>

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Requests\Request;
+//use App\Http\Requests\Request;
 use App\User;
 use Validator;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -81,11 +83,11 @@ class AuthController extends Controller
      * with your exact ETSU credentials, or you will not be able to login.
      */
 
-    /*public function login(Request $request)
+    public function login(Request $request)
     {
         //Validate credentials
         $this->validate($request, [
-            'username' => 'required',
+            'email' => 'required',
             'password' => 'required',
         ]);
 
@@ -94,19 +96,20 @@ class AuthController extends Controller
 
         if($ldap)
         {
-            $status = @ldap_bind($ldap, $request->get('username') . "@ETSU", $request->get('password'));
+            $status = @ldap_bind($ldap, $request->get('email') . "@ETSU", $request->get('password'));
 
             if($status)
             {
                 ldap_unbind($ldap);
-                $user = User::where('email', $request->get('username'))->first();
+                $user = User::where('email', $request->get('email') . '@etsu.edu')->first();
+
                 if($user)
                 {
                     Auth::login($user);
                 }
                 else
                 {
-                    return redirect()->back->withErrors(
+                    return redirect()->back()->withErrors(
                         'Username and/or Password are not matching!'
                     );
                 }
@@ -115,7 +118,7 @@ class AuthController extends Controller
             }
             else
             {
-                return redirect()->back->withErrors(
+                return redirect()->back()->withErrors(
                         'Username and/or Password are not matching!'
                     );
             }
@@ -130,5 +133,5 @@ class AuthController extends Controller
         return redirect()->back()->withErrors(
             'Username and/or Password are not matching!'
         );
-    }*/
+    }
 }

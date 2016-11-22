@@ -38,7 +38,6 @@ Route::group(['middleware' => 'App\Http\Middleware\CreateUpdateMiddleware'], fun
     Route::get('contacts/{contact}/edit', 'ContactsController@edit');
     Route::post('contacts', 'ContactsController@store');
     Route::patch('contacts/{contact}', 'ContactsController@update');
-    Route::post('contactsJSON', 'ContactsController@storeJSON');
 
     //categories
     Route::get('categories/create', 'CategoryController@create');

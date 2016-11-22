@@ -41,7 +41,7 @@ class UsersController extends Controller
         $this->validate($request,
             ['email' => 'unique:users']);
         $user = new User($request->all());
-        $user->password = Hash::make($request->Password);
+        $user->password = bcrypt($request->get('password'));
         $user->role_id = $request->get('role_id');
         $user->save();
 
@@ -69,7 +69,7 @@ class UsersController extends Controller
             $user->save();
         }else{
             $user->update($request->all());
-            $user->password = Hash::make($request->Password);
+            $user->password = bcrypt($request->get('password'));
             $user->role_id = $request->get('role_id');
             $user->save();
         }

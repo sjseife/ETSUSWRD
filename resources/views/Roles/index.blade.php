@@ -3,31 +3,23 @@
     <!--suppress ALL -->
     <div class="container">
         <div id="form-success"></div>
-        <h1>Roles</h1>
+        <div class="text-center"><h1 class="page-header">Roles</h1></div>
     </div>
-    <h3>Explanation of Permissions:</h3>
-    <p>
-        <strong>Base:</strong> The bare bones requirement to use the site. Includes viewing Events, Resources, and creating PDF Reports. This permission allows for the creation of flags.<br />
-        <strong>Extended:</strong> Allows viewing of Contacts, Categories, and Flags. <br />
-        <strong>Create/Update:</strong> Allows for the creation and editing of Events, Resources, Contacts, and Categories. Additionally allows for the resolution of appropriate flags.<br />
-        <strong>Delete:</strong> Allows for the deleting (archiving) of Events, Resources, Contacts, and Categories. Additionally allows for the resolution of appropriate flags.<br />
-        <strong>Archive:</strong> Allows for access of the archive.<br />
-        <strong>Users:</strong> Allows for the viewing, creating, editing, and deleting of users.<br />
-        <strong>Roles:</strong> Allows for the viewing, creating, editing, and deleting of user roles.<br />
-    </p>
-    <hr/>
 
+    </br>
+    </br>
+    </br>
     {!! Form::open(array('class'=>'form-horizontal', 'url' => 'roles', 'name' => 'roles')) !!}
-            <div class="col-md-12 centered-div">
+            <div class="col-md-12 col-md-offset-2">
                 @if(isset($roles))
                     <table style="border: none;" id="roleTable">
                         <tr>
-                            <td><b>Name</b></td>
+                            <td></td>
                             <td align="center"><b>Permissions</b></td>
                             <td></td>
                         </tr>
                         <tr style="border-bottom: solid;">
-                            <td></td>
+                            <td><b>Name</b></td>
                             <td class="padsome"><img src="images/check_mark.png"> Base
                                 <img src="images/check_mark.png"> Extended
                                 <img src="images/check_mark.png"> Create/Update
@@ -40,7 +32,7 @@
                         </tr>
                     @foreach($roles as $role)
                                         <tr>
-                                            <td style="padding-right: 5px;">
+                                            <td style="padding-right: 5px; padding-top: 5px;">
                                                 {!! Form::text('role['.$role->id.']', $role->name, ['class'=>'form-control input-md']) !!}
                                             </td>
                                             <td class="padsome">
@@ -65,14 +57,28 @@
 
             </div>
         <div class="form-group">
-            <div class="col-md-12">
+            <div class="col-md-12 col-md-offset-5">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary', 'name' => 'resource']) !!}
                 <a href="{{ url('/resources') }}" class="btn btn-danger"  style="margin-left:10%">Cancel</a>
 
             </div>
         </div>
     {!! Form::close() !!}
-
+    </br>
+    <div class="col-md-10 col-md-offset-1">
+        <hr/>
+        <h3>Explanation of Permissions:</h3><br/>
+        <p>
+            <strong>Base:</strong> The bare bones requirement to use the site. Includes viewing Events, Resources, and creating PDF Reports. This permission allows for the creation of flags.<br /><br />
+            <strong>Extended:</strong> Allows viewing of Contacts, Categories, and Flags. <br /><br />
+            <strong>Create/Update:</strong> Allows for the creation and editing of Events, Resources, Contacts, and Categories. Additionally allows for the resolution of appropriate flags.<br /><br />
+            <strong>Delete:</strong> Allows for the deleting (archiving) of Events, Resources, Contacts, and Categories. Additionally allows for the resolution of appropriate flags.<br /><br />
+            <strong>Archive:</strong> Allows for access of the archive.<br /><br />
+            <strong>Users:</strong> Allows for the viewing, creating, editing, and deleting of users.<br /><br />
+            <strong>Roles:</strong> Allows for the viewing, creating, editing, and deleting of user roles.<br />
+        </p>
+        <hr/>
+    </div>
     @include('roles._createForm')
     {{--If user does not enter required field.--}}
     @include('errors.list')

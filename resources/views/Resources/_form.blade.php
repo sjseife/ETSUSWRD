@@ -136,7 +136,7 @@
 </div>
 
 <!-- Modal -->
-@include('Resources._createContactModal')
+@include('Contacts._createContactModal')
 
 @push('scripts')
     <script>

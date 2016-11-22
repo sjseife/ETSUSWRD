@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 {!! Form::open(array('class'=>'form-horizontal', 'name' => 'contact', 'id' => 'contact')) !!}
-                @include('resources._createContactform')
+                @include('Contacts._createContactform')
                 <div id="form-errors"></div>
             </div>
 
@@ -35,7 +35,7 @@
 
             $.ajax({
                 type:"POST",
-                url:'/contactsJSON',
+                url:'/contacts',
                 data:$('#firstName, #lastName, #email, #phoneNumber').serialize(),
                 dataType: 'json',
                 success: function(data){

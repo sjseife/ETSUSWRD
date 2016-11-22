@@ -46,6 +46,10 @@ class ContactsController extends Controller
 
         flash($contact->full_name . ' created successfully!', 'success');
 
+        if($request->ajax())
+        {
+            return response()->json($contact);
+        }
         return redirect('contacts');
     }
 
@@ -59,7 +63,7 @@ class ContactsController extends Controller
      * the data input as ContactRequest. As a result, data validation now happens entirely within the method.
      * This is planned to be used when creating a new resource so that the contact can be created from the same page using aJax
      */
-    public function storeJSON(ContactRequest $request)
+    /*public function storeJSON(ContactRequest $request)
     {
         $this->validate($request,
             ['protectedEmail' => 'unique:contacts']);
@@ -69,7 +73,7 @@ class ContactsController extends Controller
         $contact->resources()->attach($request->input('resource_list'));
 
         return response()->json($contact);
-    }
+    }*/
 
     public function edit(Contact $contact)
     {

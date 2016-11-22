@@ -72,7 +72,7 @@
                 var worker = function(){
                     $.ajax({
                         type: "GET",
-                        url: 'flags/count',
+                        url: '{{ url('/flags/count') }}',
                         dataType: 'json',
                         success: function (data) {
                             if(data == 0) {

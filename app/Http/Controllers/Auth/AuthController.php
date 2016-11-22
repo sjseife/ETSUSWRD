@@ -54,7 +54,6 @@ class AuthController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
         ]);
     }
 
@@ -66,11 +65,12 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        $this->redirectTo = '/logout';
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
         ]);
+
     }
 
     /*
@@ -83,7 +83,7 @@ class AuthController extends Controller
      * with your exact ETSU credentials, or you will not be able to login.
      */
 
-    public function login(Request $request)
+   /* public function login(Request $request)
     {
         //Validate credentials
         $this->validate($request, [
@@ -133,5 +133,5 @@ class AuthController extends Controller
         return redirect()->back()->withErrors(
             'Username and/or Password are not matching!'
         );
-    }
+    }*/
 }
